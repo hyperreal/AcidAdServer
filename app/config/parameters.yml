@@ -1,0 +1,15 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     localhost
+    database_port:     ~
+    database_name:     hyperads
+    database_user:     hyperads
+    database_password: r3kl4my
+
+    mailer_transport:  smtp
+    mailer_host:       localhost
+    mailer_user:       ~
+    mailer_password:   ~
+
+    locale:            pl
+    secret:            0724ebb222af8866b7d7a2524451219b

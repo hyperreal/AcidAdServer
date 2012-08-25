@@ -1,0 +1,6 @@
+/.idea/
+/app/cache/*
+/web/bundles/*
+/app/logs/*
+/vendor/
+composer.phar
