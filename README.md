@@ -9,6 +9,10 @@ http://getcomposer.org/ or just run the following command:
 
     curl -s http://getcomposer.org/installer | php
 
-Then, use the `create-project` command to generate a new Symfony application:
+Then, use the `install` command to download needed vendors:
 
     php composer.phar install
+
+Next, adjust database settings in `app/config/parameters.yml` file and run following command from project root dir:
+
+    ./app/console doctrine:schema:update --force
