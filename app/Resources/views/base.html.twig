@@ -8,16 +8,44 @@
     </head>
     <body>
 
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-            <a href="{{ path('fos_user_security_logout') }}">
-                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-            </a>
-        {% else %}
-            <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+        <div id="header">
+            <div id="login-bar">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                <a href="{{ path('fos_user_security_logout') }}">
+                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                </a>
+                {% else %}
+                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                {% endif %}
+            </div>
+            <h1 id="logo">
+                <a href="{{ path('_welcome') }}">
+                    <img src="{{ asset('images/hyperreal.png') }}" alt="logo" />
+                </a>
+            </h1>
+        </div>
+
+        {% if is_granted('ROLE_ADMIN') %}
+        <div id="menu">
+            <ul>
+                <li>
+                    <a href="{{ path('admin_advertiser') }}">{{ 'advertisers'|trans({}, 'HyperAdsBundle') }}</a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_page') }}">{{ 'pages'|trans({}, 'HyperAdsBundle') }}</a>
+                </li>
+            </ul>
+        </div>
         {% endif %}
 
-        {% block body %}{% endblock %}
+        <div id="content">
+            {% block body %}{% endblock %}
+        </div>
+
+        <div id="footer">
+            {{ 'powered.by.acid'|trans({}, 'HyperAdsBundle') }} | <a href="https://github.com/fajka/AcidAdServer" class="github-fork">fork on github</a>
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
