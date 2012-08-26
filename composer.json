@@ -1,6 +1,6 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "name": "fajka/AcidAdServer",
+    "description": "AcidAdServer. Ad serving software",
     "autoload": {
         "psr-0": { "": "src/" }
     },
