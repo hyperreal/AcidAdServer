@@ -3,22 +3,19 @@
 {{ 'list.banner'|trans({}, 'HyperAdsBundle') }}
 {% endblock %}
 {% block body %}
-<h1>Banner list</h1>
+<h1>{{ 'list.banner'|trans({}, 'HyperAdsBundle') }}</h1>
 
+{% if entities|length > 0 %}
 <table class="records_list">
     <thead>
         <tr>
-            <th>Id</th>
+            <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
             <th>File</th>
             <th>Extension</th>
             <th>Width</th>
             <th>Height</th>
             <th>Type</th>
-            <th>Title</th>
-            <th>Linktitle</th>
-            <th>Url</th>
-            <th>Description</th>
-            <th>Actions</th>
+            <th>{{ 'actions'|trans({}, 'HyperAdsBundle') }}</th>
         </tr>
     </thead>
     <tbody>
@@ -30,17 +27,17 @@
             <td>{{ entity.width }}</td>
             <td>{{ entity.height }}</td>
             <td>{{ entity.type }}</td>
-            <td>{{ entity.title }}</td>
-            <td>{{ entity.linkTitle }}</td>
-            <td>{{ entity.url }}</td>
-            <td>{{ entity.description }}</td>
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('admin_banner_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('admin_banner_show', { 'id': entity.id }) }}">
+                            {{ '__show'|trans({}, 'HyperAdsBundle') }}
+                        </a>
                     </li>
                     <li>
-                        <a href="{{ path('admin_banner_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('admin_banner_edit', { 'id': entity.id }) }}">
+                            {{ '__edit'|trans({}, 'HyperAdsBundle') }}
+                        </a>
                     </li>
                 </ul>
             </td>
@@ -48,11 +45,13 @@
     {% endfor %}
     </tbody>
 </table>
-
+{% else %}
+<div class="message">{{ 'no.entities'|trans({}, 'HyperAdsBundle') }}</div>
+{% endif %}
 <ul>
     <li>
         <a href="{{ path('admin_banner_new') }}">
-            Create a new entry
+            {{ 'create.new.entry'|trans({}, 'HyperAdsBundle') }}
         </a>
     </li>
 </ul>

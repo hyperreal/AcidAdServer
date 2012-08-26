@@ -3,18 +3,19 @@
 {{ 'list.zone'|trans({}, 'HyperAdsBundle') }}
 {% endblock %}
 {% block body %}
-<h1>Zone list</h1>
+<h1>{{ 'list.zone'|trans({}, 'HyperAdsBundle') }}</h1>
 
+{% if entities|length > 0 %}
 <table class="records_list">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Name</th>
+            <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
+            <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
             <th>Enabled</th>
             <th>Maxwidth</th>
             <th>Maxheight</th>
             <th>Type</th>
-            <th>Actions</th>
+            <th>{{ 'actions'|trans({}, 'HyperAdsBundle') }}</th>
         </tr>
     </thead>
     <tbody>
@@ -29,10 +30,14 @@
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('admin_zone_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('admin_zone_show', { 'id': entity.id }) }}">
+                            {{ '__show'|trans({}, 'HyperAdsBundle') }}
+                        </a>
                     </li>
                     <li>
-                        <a href="{{ path('admin_zone_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('admin_zone_edit', { 'id': entity.id }) }}">
+                            {{ '__edit'|trans({}, 'HyperAdsBundle') }}
+                        </a>
                     </li>
                 </ul>
             </td>
@@ -40,11 +45,13 @@
     {% endfor %}
     </tbody>
 </table>
-
+{% else %}
+<div class="message">{{ 'no.entities'|trans({}, 'HyperAdsBundle') }}</div>
+{% endif %}
 <ul>
     <li>
         <a href="{{ path('admin_zone_new') }}">
-            Create a new entry
+            {{ 'create.new.entry'|trans({}, 'HyperAdsBundle') }}
         </a>
     </li>
 </ul>

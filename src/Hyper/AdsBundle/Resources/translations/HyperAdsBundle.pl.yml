@@ -1,4 +1,3 @@
-advertiser.list: 'Lista reklamodawców'
 id: ID
 name: Nazwa
 email: E-mail
@@ -16,6 +15,8 @@ __banners: Bannery
 __zones: Strefy
 __advertisers: Reklamodawcy
 __pages: Strony
+__show: Pokaż
+__edit: Edytuj
 list:
     advertiser: Lista reklamodawców
     banner: Lista bannerów

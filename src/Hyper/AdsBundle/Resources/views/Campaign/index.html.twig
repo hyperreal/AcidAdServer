@@ -6,16 +6,18 @@
 {% if advertiser is defined %}
     <h1>{{ 'campaigns.of'|trans({'advertiserName': advertiser.name}, 'HyperAdsBundle') }}</h1>
 {% else %}
-    <h1>{{ 'campaigns.list'|trans({}, 'HyperAdsBundle') }}</h1>
+    <h1>{{ 'list.campaign'|trans({}, 'HyperAdsBundle') }}</h1>
 {% endif %}
+
+{% if entities|length > 0 %}
 <table class="records_list">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Name</th>
+            <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
+            <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
             <th>Startdate</th>
             <th>Expiredate</th>
-            <th>Actions</th>
+            <th>{{ 'actions'|trans({}, 'HyperAdsBundle') }}</th>
         </tr>
     </thead>
     <tbody>
@@ -28,10 +30,14 @@
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('admin_campaign_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('admin_campaign_show', { 'id': entity.id }) }}">
+                            {{ '__show'|trans({}, 'HyperAdsBundle') }}
+                        </a>
                     </li>
                     <li>
-                        <a href="{{ path('admin_campaign_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('admin_campaign_edit', { 'id': entity.id }) }}">
+                            {{ '__edit'|trans({}, 'HyperAdsBundle') }}
+                        </a>
                     </li>
                 </ul>
             </td>
@@ -39,11 +45,13 @@
     {% endfor %}
     </tbody>
 </table>
-
+{% else %}
+<div class="message">{{ 'no.entities'|trans({}, 'HyperAdsBundle') }}</div>
+{% endif %}
 <ul>
     <li>
         <a href="{{ path('admin_campaign_new') }}">
-            Create a new entry
+            {{ 'create.new.entry'|trans({}, 'HyperAdsBundle') }}
         </a>
     </li>
 </ul>

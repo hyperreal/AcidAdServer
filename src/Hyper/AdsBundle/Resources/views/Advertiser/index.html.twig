@@ -3,7 +3,7 @@
 {{ 'list.advertiser'|trans({}, 'HyperAdsBundle') }}
 {% endblock %}
 {% block body %}
-<h1>{{ 'advertiser.list'|trans({}, 'HyperAdsBundle') }}</h1>
+<h1>{{ 'list.advertiser'|trans({}, 'HyperAdsBundle') }}</h1>
 
 {% if entities|length > 0 %}
 <table class="records_list">
@@ -26,16 +26,20 @@
                 {{ entity.campaigns|length }}
                 <br />
                 <a href="{{ path('admin_campaign', {'advertiserId': entity.id }) }}">
-                    {{ 'show'|trans({}, 'HyperAdsBundle') }}
+                    {{ '__show'|trans({}, 'HyperAdsBundle') }}
                 </a>
             </td>
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('admin_advertiser_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('admin_advertiser_show', { 'id': entity.id }) }}">
+                            {{ '__show'|trans({}, 'HyperAdsBundle') }}
+                        </a>
                     </li>
                     <li>
-                        <a href="{{ path('admin_advertiser_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('admin_advertiser_edit', { 'id': entity.id }) }}">
+                            {{ '__edit'|trans({}, 'HyperAdsBundle') }}
+                        </a>
                     </li>
                 </ul>
             </td>
