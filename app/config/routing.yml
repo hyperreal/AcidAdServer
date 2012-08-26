@@ -31,3 +31,8 @@ admin_page:
     resource: "@HyperAdsBundle/Controller/PageController.php"
     prefix: /admin/page
     type: annotation
+
+admin_campaign:
+    resource: "@HyperAdsBundle/Controller/CampaignController.php"
+    prefix: /admin/campaign
+    type: annotation

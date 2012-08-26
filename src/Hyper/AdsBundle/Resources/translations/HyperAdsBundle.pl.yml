@@ -10,3 +10,8 @@ id: ID
 advertiser.list: Lista reklamodawców
 create.new.entry: Dodaj
 no.entities: Brak wpisów
+show: Pokaż
+campaigns: Kampanie
+campaigns:
+    of: Kampanie: advertiserName
+    list: Lista kampanii

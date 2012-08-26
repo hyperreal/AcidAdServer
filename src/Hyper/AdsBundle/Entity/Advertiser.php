@@ -114,4 +114,9 @@ class Advertiser
     {
         return $this->lastName;
     }
+
+    public function __toString()
+    {
+        return $this->getName() . ' (' . $this->getId() .')';
+    }
 }
