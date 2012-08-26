@@ -32,20 +32,27 @@
             </h1>
         </div>
 
-
-
         {% if is_granted('ROLE_ADMIN') %}
         <div id="menu" class="span-4">
             <ul>
                 <li>
-                    <a href="{{ path('admin_advertiser') }}">{{ 'advertisers'|trans({}, 'HyperAdsBundle') }}</a>
-                </li>
-                <li>
-                    <a href="{{ path('admin_page') }}">{{ 'pages'|trans({}, 'HyperAdsBundle') }}</a>
+                    <a href="{{ path('admin_advertiser') }}">{{ '__advertisers'|trans({}, 'HyperAdsBundle') }}</a>
                 </li>
                 <li>
                     <a href="{{ path('admin_campaign') }}">{{ '__campaigns'|trans({}, 'HyperAdsBundle') }}</a>
                 </li>
+
+                <li>
+                    <a href="{{ path('admin_page') }}">{{ '__pages'|trans({}, 'HyperAdsBundle') }}</a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_zone') }}">{{ '__zones'|trans({}, 'HyperAdsBundle') }}</a>
+                </li>
+
+                <li>
+                    <a href="{{ path('admin_banner') }}">{{ '__banners'|trans({}, 'HyperAdsBundle') }}</a>
+                </li>
+
             </ul>
         </div>
         {% endif %}
@@ -54,9 +61,7 @@
             {% block body %}{% endblock %}
         </div>
 
-
-
-        <div id="footer">
+        <div id="footer" class="span-24">
             {{ 'powered.by.acid'|trans({}, 'HyperAdsBundle') }} | <a href="https://github.com/fajka/AcidAdServer" class="github-fork">fork on github</a>
         </div>
 

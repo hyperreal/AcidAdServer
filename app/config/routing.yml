@@ -36,3 +36,13 @@ admin_campaign:
     resource: "@HyperAdsBundle/Controller/CampaignController.php"
     prefix: /admin/campaign
     type: annotation
+
+admin_zone:
+    resource: "@HyperAdsBundle/Controller/ZoneController.php"
+    prefix: /admin/zone
+    type: annotation
+
+admin_banner:
+    resource: "@HyperAdsBundle/Controller/BannerController.php"
+    prefix: /admin/banner
+    type: annotation

@@ -1,0 +1,68 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+<h1>Banner</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>File</th>
+            <td>{{ entity.file }}</td>
+        </tr>
+        <tr>
+            <th>Extension</th>
+            <td>{{ entity.extension }}</td>
+        </tr>
+        <tr>
+            <th>Width</th>
+            <td>{{ entity.width }}</td>
+        </tr>
+        <tr>
+            <th>Height</th>
+            <td>{{ entity.height }}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ entity.type }}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ entity.title }}</td>
+        </tr>
+        <tr>
+            <th>Linktitle</th>
+            <td>{{ entity.linkTitle }}</td>
+        </tr>
+        <tr>
+            <th>Url</th>
+            <td>{{ entity.url }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ entity.description }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_banner') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin_banner_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('admin_banner_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

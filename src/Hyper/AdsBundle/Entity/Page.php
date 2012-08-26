@@ -81,4 +81,9 @@ class Page
     {
         return $this->zones;
     }
+
+    public function __toString()
+    {
+        return $this->getName() . ' (' . $this->getId() . ')';
+    }
 }

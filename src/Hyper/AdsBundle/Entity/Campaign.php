@@ -114,4 +114,9 @@ class Campaign
     {
         return $this->startDate;
     }
+
+    public function __toString()
+    {
+        return $this->getName() . ' (' . $this->getId() . ')';
+    }
 }

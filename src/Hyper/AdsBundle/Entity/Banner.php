@@ -212,4 +212,9 @@ class Banner
     {
         $this->zones->add($zone);
     }
+
+    public function __toString()
+    {
+        return $this->getId();
+    }
 }
