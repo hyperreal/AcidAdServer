@@ -58,6 +58,11 @@ class Zone
      */
     protected $maxHeight;
 
+    /**
+     * @ORM\Column(type="zonetype")
+     */
+    protected $type = 'desktop';
+
     public function setId($id)
     {
         $this->id = $id;

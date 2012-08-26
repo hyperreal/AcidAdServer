@@ -47,6 +47,7 @@ doctrine:
         charset:  UTF8
         types:
             bannertype: Hyper\AdsBundle\DBAL\BannerType
+            zonetype: Hyper\AdsBundle\DBAL\ZoneType
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
