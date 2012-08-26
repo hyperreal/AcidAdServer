@@ -1,4 +1,7 @@
 {% extends "::base.html.twig" %}
+{% block title %}
+{{ 'show.page'|trans({'pageName': entity.name}, 'HyperAdsBundle') }}
+{% endblock %}
 {% block body %}
 <h1>Page</h1>
 

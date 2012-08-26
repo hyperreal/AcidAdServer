@@ -1,4 +1,7 @@
 {% extends "::base.html.twig" %}
+{% block title %}
+{{ '__welcome'|trans({}, 'HyperAdsBundle') }}
+{% endblock %}
 {% block body %}
 Hello {{ name }}!
 {% endblock %}

@@ -1,5 +1,8 @@
 {% extends "::base.html.twig" %}
 {% block body %}
+{% block title %}
+{{ 'show.advertiser'|trans({'advertiserName': entity.name}, 'HyperAdsBundle') }}
+{% endblock %}
 <h1>Advertiser</h1>
 
 <table class="record_properties">

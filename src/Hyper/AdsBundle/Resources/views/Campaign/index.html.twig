@@ -1,4 +1,7 @@
 {% extends "::base.html.twig" %}
+{% block title %}
+{{ 'list.campaign'|trans({}, 'HyperAdsBundle') }}
+{% endblock %}
 {% block body %}
 {% if advertiser is defined %}
     <h1>{{ 'campaigns.of'|trans({'advertiserName': advertiser.name}, 'HyperAdsBundle') }}</h1>

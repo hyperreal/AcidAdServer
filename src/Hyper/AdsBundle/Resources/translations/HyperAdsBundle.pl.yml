@@ -16,3 +16,28 @@ __banners: Bannery
 __zones: Strefy
 __advertisers: Reklamodawcy
 __pages: Strony
+list:
+    advertiser: Lista reklamodawców
+    banner: Lista bannerów
+    campaign: Lista kampanii
+    page: Lista stron
+    zone: Lista stref
+new:
+    advertiser: Nowy reklamodawca
+    banner: Nowy banner
+    campaign: Nowa kampania
+    page: Nowa strona
+    zone: Nowa strefa
+show:
+    advertiser: Reklamodawca advertiserName
+    banner: Banner
+    campaign: Kampania campaignName
+    page: Strona pageName
+    zone: Strefa zoneName
+edit:
+    advertiser: Edytuj reklamodawcę advertiserName
+    banner: Edytuj banner
+    campaign: Edytuj kampanię campaignName
+    page: Edytuj stronę pageName
+    zone: Edytuj strefę zoneName
+

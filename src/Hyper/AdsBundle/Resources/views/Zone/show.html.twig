@@ -1,4 +1,7 @@
 {% extends "::base.html.twig" %}
+{% block title %}
+{{ 'show.zone'|trans({'zoneName': entity.name}, 'HyperAdsBundle') }}
+{% endblock %}
 {% block body %}
 <h1>Zone</h1>
 

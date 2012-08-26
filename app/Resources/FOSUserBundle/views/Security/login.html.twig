@@ -1,5 +1,7 @@
 {% extends "::base.html.twig" %}
-
+{% block title %}
+    {{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}
+{% endblock %}
 {% block body %}
 {% if error %}
     <div>{{ error|trans({}, 'FOSUserBundle') }}</div>

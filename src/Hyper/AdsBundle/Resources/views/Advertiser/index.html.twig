@@ -1,4 +1,7 @@
 {% extends "::base.html.twig" %}
+{% block title %}
+{{ 'list.advertiser'|trans({}, 'HyperAdsBundle') }}
+{% endblock %}
 {% block body %}
 <h1>{{ 'advertiser.list'|trans({}, 'HyperAdsBundle') }}</h1>
 
@@ -41,7 +44,9 @@
     </tbody>
 </table>
 {% else %}
-<div class="message">{{ 'no.entities'|trans({}, 'HyperAdsBundle') }}</div>
+    <div class="message">{{ 'no.entities'|trans({}, 'HyperAdsBundle') }}</div>
+{% endif %}
+
 <ul>
     <li>
         <a href="{{ path('admin_advertiser_new') }}">
@@ -49,5 +54,5 @@
         </a>
     </li>
 </ul>
-{% endif %}
+
 {% endblock %}
