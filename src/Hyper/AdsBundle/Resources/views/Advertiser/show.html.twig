@@ -3,29 +3,38 @@
 {% block title %}
 {{ 'show.advertiser'|trans({'advertiserName': entity.name}, 'HyperAdsBundle') }}
 {% endblock %}
-<h1>Advertiser</h1>
+<h1>{{ 'show.advertiser'|trans({'advertiserName': entity.name}, 'HyperAdsBundle') }}</h1>
 
 <table class="record_properties">
     <tbody>
         <tr>
-            <th>Id</th>
+            <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.id }}</td>
         </tr>
         <tr>
-            <th>Name</th>
+            <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.name }}</td>
         </tr>
         <tr>
-            <th>Email</th>
+            <th>{{ 'email'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.email }}</td>
         </tr>
         <tr>
-            <th>Firstname</th>
+            <th>{{ 'firstname'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.firstName }}</td>
         </tr>
         <tr>
-            <th>Lastname</th>
+            <th>{{ 'lastname'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.lastName }}</td>
+        </tr>
+        <tr>
+            <th>{{ '__campaigns'|trans({}, 'HyperAdsBundle') }}</th>
+            <td>
+                {{ entity.campaigns|length }}<br />
+                <a href="{{ path('admin_campaign', {'advertiserId': entity.id }) }}">
+                    {{ '__show'|trans({}, 'HyperAdsBundle') }}
+                </a>
+            </td>
         </tr>
     </tbody>
 </table>
@@ -33,18 +42,18 @@
 <ul class="record_actions">
     <li>
         <a href="{{ path('admin_advertiser') }}">
-            Back to the list
+            {{ 'back.to.the.list'|trans({}, 'HyperAdsBundle') }}
         </a>
     </li>
     <li>
         <a href="{{ path('admin_advertiser_edit', { 'id': entity.id }) }}">
-            Edit
+            {{ '__edit'|trans({}, 'HyperAdsBundle') }}
         </a>
     </li>
     <li>
         <form action="{{ path('admin_advertiser_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <button type="submit">{{ '__delete'|trans({}, 'HyperAdsBundle') }}</button>
         </form>
     </li>
 </ul>

@@ -3,20 +3,20 @@
 {{ 'show.page'|trans({'pageName': entity.name}, 'HyperAdsBundle') }}
 {% endblock %}
 {% block body %}
-<h1>Page</h1>
+<h1>{{ 'show.page'|trans({'pageName': entity.name}, 'HyperAdsBundle') }}</h1>
 
 <table class="record_properties">
     <tbody>
         <tr>
-            <th>Id</th>
+            <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.id }}</td>
         </tr>
         <tr>
-            <th>Name</th>
+            <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.name }}</td>
         </tr>
         <tr>
-            <th>Url</th>
+            <th>{{ 'url'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.url }}</td>
         </tr>
     </tbody>
@@ -25,18 +25,18 @@
 <ul class="record_actions">
     <li>
         <a href="{{ path('admin_page') }}">
-            Back to the list
+            {{ 'back.to.the.list'|trans({}, 'HyperAdsBundle') }}
         </a>
     </li>
     <li>
         <a href="{{ path('admin_page_edit', { 'id': entity.id }) }}">
-            Edit
+            {{ '__edit'|trans({}, 'HyperAdsBundle') }}
         </a>
     </li>
     <li>
         <form action="{{ path('admin_page_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <button type="submit">{{ '__delete'|trans({}, 'HyperAdsBundle') }}</button>
         </form>
     </li>
 </ul>

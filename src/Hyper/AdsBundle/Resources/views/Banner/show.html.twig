@@ -8,43 +8,43 @@
 <table class="record_properties">
     <tbody>
         <tr>
-            <th>Id</th>
+            <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.id }}</td>
         </tr>
         <tr>
-            <th>File</th>
+            <th>{{ 'file'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.file }}</td>
         </tr>
         <tr>
-            <th>Extension</th>
+            <th>{{ 'extension'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.extension }}</td>
         </tr>
         <tr>
-            <th>Width</th>
+            <th>{{ 'width'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.width }}</td>
         </tr>
         <tr>
-            <th>Height</th>
+            <th>{{ 'height'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.height }}</td>
         </tr>
         <tr>
-            <th>Type</th>
+            <th>{{ 'type'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.type }}</td>
         </tr>
         <tr>
-            <th>Title</th>
+            <th>{{ 'title'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.title }}</td>
         </tr>
         <tr>
-            <th>Linktitle</th>
+            <th>{{ 'linktitle'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.linkTitle }}</td>
         </tr>
         <tr>
-            <th>Url</th>
+            <th>{{ 'url'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.url }}</td>
         </tr>
         <tr>
-            <th>Description</th>
+            <th>{{ 'description'|trans({}, 'HyperAdsBundle') }}</th>
             <td>{{ entity.description }}</td>
         </tr>
     </tbody>
@@ -53,18 +53,18 @@
 <ul class="record_actions">
     <li>
         <a href="{{ path('admin_banner') }}">
-            Back to the list
+            {{ 'back.to.the.list'|trans({}, 'HyperAdsBundle') }}
         </a>
     </li>
     <li>
         <a href="{{ path('admin_banner_edit', { 'id': entity.id }) }}">
-            Edit
+            {{ '__edit'|trans({}, 'HyperAdsBundle') }}
         </a>
     </li>
     <li>
         <form action="{{ path('admin_banner_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <button type="submit">{{ '__delete'|trans({}, 'HyperAdsBundle') }}</button>
         </form>
     </li>
 </ul>

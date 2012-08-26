@@ -1,0 +1,58 @@
+edit.advertiser: "Edit advertiser advertiserName"
+__edit: Edit
+back.to.the.list: Back to the list
+__delete: Delete
+new.advertiser: "New advertiser"
+create: Create
+show.advertiser: "Advertiser advertiserName"
+id: ID
+name: Name
+email: Email
+firstname: Firstname
+lastname: Lastname
+__campaigns: Campaigns
+__show: Show
+list.advertiser: "List of advertisers"
+actions: Actions
+no.entities: "No records found"
+create.new.entry: "Create new"
+edit.banner: "Edit banner"
+new.banner: "New banner"
+show.banner: "Banner"
+file: File
+extension: Extension
+width: Width
+height: Height
+type: Type
+title: Title
+linktitle: Link text
+url: URL
+description: Description
+list.banner: "List of banners"
+__welcome: "Welcome to AcidAdServer"
+edit.zone: "Edit zone zoneName"
+new.zone: "New zone"
+show.zone: "Zone zoneName"
+max.width: "Max. width"
+max.height: "Max. height"
+list.zone: "List of zones"
+enabled: Enabled
+edit.campaign: "Edit campaign campaignName"
+new.campaign: "New campaign"
+show.campaign: "Show campaign campaignName"
+date.start: "Start date"
+date.expire: "Expire date"
+list.campaign: "List of campaigns"
+campaigns.of: "Campaigns of advertiserName"
+edit.page: "Edit page pageName"
+new.page: "New page"
+show.page: "Page pageName"
+list.page: "List of pages"
+campaigns.list: 'List of campaigns'
+powered.by.acid: 'Powered by AcidAdServer'
+advertisers: "Advertisers"
+pages: Pages
+__banners: Banners
+__zones: Zones
+__advertisers: Advertisers
+__pages: Pages

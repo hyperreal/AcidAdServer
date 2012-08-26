@@ -1,47 +1,53 @@
 edit.advertiser: 'Edytuj reklamodawcę advertiserName'
+__edit: Edytuj
+back.to.the.list: 'Wróć do listy'
+__delete: Usuń
 new.advertiser: 'Nowy reklamodawca'
+create: Dodaj
 show.advertiser: 'Reklamodawca advertiserName'
-list.advertiser: 'Lista reklamodawców'
 id: ID
 name: Nazwa
 email: E-mail
+firstname: Imię
+lastname: Nazwisko
 __campaigns: Kampanie
-actions: Akcje
 __show: Pokaż
-__edit: Edytuj
-__delete: Usuń
-create: Dodaj
+list.advertiser: 'Lista reklamodawców'
+actions: Akcje
 no.entities: 'Brak wpisów'
 create.new.entry: Dodaj
 edit.banner: 'Edytuj banner'
 new.banner: 'Nowy banner'
 show.banner: Banner
-list.banner: 'Lista bannerów'
 file: Plik
 extension: Rozszerzenie
 width: Szerokość
 height: Wysokość
 type: Typ
-__welcome: Witaj w AcidAdServer
+title: Tytuł
+linktitle: Treść linku
+url: URL
+description: Opis
+list.banner: 'Lista bannerów'
+__welcome: 'Witaj w AcidAdServer'
 edit.zone: 'Edytuj strefę zoneName'
 new.zone: 'Nowa strefa'
 show.zone: 'Strefa zoneName'
+max.width: 'Maksymalna szerokość'
+max.height: 'Maksymalna wysokość'
 list.zone: 'Lista stref'
 enabled: Włączony
-max.width: Maksymalna szerokość
-max.height: Maksymalna wysokość
 edit.campaign: 'Edytuj kampanię campaignName'
 new.campaign: 'Nowa kampania'
 show.campaign: 'Kampania campaignName'
+date.start: 'Data rozpoczęcia'
+date.expire: 'Data zakończenia'
 list.campaign: 'Lista kampanii'
 campaigns.of: 'Kampanie: advertiserName'
-date.start: Data rozpoczęcia
-date.expire: Data zakończenia
 edit.page: 'Edytuj stronę pageName'
 new.page: 'Nowa strona'
 show.page: 'Strona pageName'
 list.page: 'Lista stron'
-url: URL
 campaigns.list: 'Lista kampanii'
 powered.by.acid: 'Strona wspierana przez AcidAdServer'
 advertisers: Reklamodawcy
@@ -50,4 +56,3 @@ __banners: Bannery
 __zones: Strefy
 __advertisers: Reklamodawcy
 __pages: Strony
-back.to.the.list: "Wróć do listy"
