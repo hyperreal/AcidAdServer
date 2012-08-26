@@ -5,11 +5,17 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/screen.css') }}" media="screen,projection" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}" media="print" />
+        <!--[if lt IE 8]>
+            <link rel="stylesheet" href="{{ asset('css/ie.css') }}" type="text/css" media="screen, projection">
+        <![endif]-->
     </head>
     <body>
 
-        <div id="header">
-            <div id="login-bar">
+    <div class="container prepend-top">
+        <div id="header" class="clearfix">
+            <div id="login-bar" class="span-21">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
                 <a href="{{ path('fos_user_security_logout') }}">
@@ -19,15 +25,17 @@
                 <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
                 {% endif %}
             </div>
-            <h1 id="logo">
+            <h1 id="logo" class="span-3 last">
                 <a href="{{ path('_welcome') }}">
                     <img src="{{ asset('images/hyperreal.png') }}" alt="logo" />
                 </a>
             </h1>
         </div>
 
+
+
         {% if is_granted('ROLE_ADMIN') %}
-        <div id="menu">
+        <div id="menu" class="span-4">
             <ul>
                 <li>
                     <a href="{{ path('admin_advertiser') }}">{{ 'advertisers'|trans({}, 'HyperAdsBundle') }}</a>
@@ -35,17 +43,25 @@
                 <li>
                     <a href="{{ path('admin_page') }}">{{ 'pages'|trans({}, 'HyperAdsBundle') }}</a>
                 </li>
+                <li>
+                    <a href="{{ path('admin_campaign') }}">{{ '__campaigns'|trans({}, 'HyperAdsBundle') }}</a>
+                </li>
             </ul>
         </div>
         {% endif %}
 
-        <div id="content">
+        <div id="content" {% if is_granted("ROLE_ADMIN") %}class="span-20 last"{% endif %}>
             {% block body %}{% endblock %}
         </div>
+
+
 
         <div id="footer">
             {{ 'powered.by.acid'|trans({}, 'HyperAdsBundle') }} | <a href="https://github.com/fajka/AcidAdServer" class="github-fork">fork on github</a>
         </div>
+
+    </div>
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>

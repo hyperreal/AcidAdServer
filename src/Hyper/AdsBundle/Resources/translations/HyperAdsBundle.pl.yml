@@ -1,17 +1,14 @@
+advertiser.list: 'Lista reklamodawców'
+id: ID
+name: Nazwa
+email: E-mail
+actions: Akcje
+show: Pokaż
+no.entities: 'Brak wpisów'
+create.new.entry: Dodaj
+campaigns.of: 'Kampanie: advertiserName'
+campaigns.list: 'Lista kampanii'
 powered.by.acid: 'Strona wspierana przez AcidAdServer'
-
 advertisers: Reklamodawcy
 pages: Strony
-campaigns: Kampanie
-actions: Akcje
-email: E-mail
-name: Nazwa
-id: ID
-advertiser.list: Lista reklamodawców
-create.new.entry: Dodaj
-no.entities: Brak wpisów
-show: Pokaż
-campaigns: Kampanie
-campaigns:
-    of: Kampanie: advertiserName
-    list: Lista kampanii
+__campaigns: Kampanie

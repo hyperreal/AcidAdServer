@@ -19,7 +19,7 @@ class AdvertiserController extends Controller
      * Lists all Advertiser entities.
      *
      * @Route("/", name="admin_advertiser")
-     * @Template()
+     * @Template()`
      */
     public function indexAction()
     {
