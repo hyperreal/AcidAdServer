@@ -3,6 +3,10 @@
 #    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
 #    prefix:   /_internal
 
+_welcome:
+    pattern:  /
+    defaults: { _controller: HyperAdsBundle:Default:index }
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

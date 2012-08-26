@@ -3,19 +3,19 @@
 {{ 'new.campaign'|trans({}, 'HyperAdsBundle') }}
 {% endblock %}
 {% block body %}
-<h1>Campaign creation</h1>
+<h1>{{ 'new.campaign'|trans({}, 'HyperAdsBundle') }}</h1>
 
 <form action="{{ path('admin_campaign_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <p>
-        <button type="submit">Create</button>
+        <button type="submit">{{ 'create'|trans({}, 'HyperAdsBundle') }}</button>
     </p>
 </form>
 
 <ul class="record_actions">
     <li>
         <a href="{{ path('admin_campaign') }}">
-            Back to the list
+            {{ 'back.to.the.list'|trans({}, 'HyperAdsBundle') }}
         </a>
     </li>
 </ul>

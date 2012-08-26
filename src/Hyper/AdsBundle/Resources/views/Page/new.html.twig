@@ -3,19 +3,19 @@
 {{ 'new.page'|trans({}, 'HyperAdsBundle') }}
 {% endblock %}
 {% block body %}
-<h1>Page creation</h1>
+<h1>{{ 'new.page'|trans({}, 'HyperAdsBundle') }}</h1>
 
 <form action="{{ path('admin_page_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <p>
-        <button type="submit">Create</button>
+        <button type="submit">{{ 'create'|trans({}, 'HyperAdsBundle') }}</button>
     </p>
 </form>
 
 <ul class="record_actions">
     <li>
         <a href="{{ path('admin_page') }}">
-            Back to the list
+            {{ 'back.to.the.list'|trans({}, 'HyperAdsBundle') }}
         </a>
     </li>
 </ul>

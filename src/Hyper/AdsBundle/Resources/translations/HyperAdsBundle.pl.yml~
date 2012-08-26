@@ -1,17 +1,44 @@
+id: ID
+name: Nazwa
+email: E-mail
+actions: Akcje
+show: Pokaż
+no.entities: 'Brak wpisów'
+create.new.entry: Dodaj
+campaigns.of: 'Kampanie: advertiserName'
+campaigns.list: 'Lista kampanii'
 powered.by.acid: 'Strona wspierana przez AcidAdServer'
-
 advertisers: Reklamodawcy
 pages: Strony
-campaigns: Kampanie
-actions: Akcje
-email: E-mail
-name: Nazwa
-id: ID
-advertiser.list: Lista reklamodawców
-create.new.entry: Dodaj
-no.entities: Brak wpisów
-show: Pokaż
-campaigns: Kampanie
-campaigns:
-    of: Kampanie: advertiserName
-    list: Lista kampanii
+__campaigns: Kampanie
+__banners: Bannery
+__zones: Strefy
+__advertisers: Reklamodawcy
+__pages: Strony
+__show: Pokaż
+__edit: Edytuj
+list:
+    advertiser: Lista reklamodawców
+    banner: Lista bannerów
+    campaign: Lista kampanii
+    page: Lista stron
+    zone: Lista stref
+new:
+    advertiser: Nowy reklamodawca
+    banner: Nowy banner
+    campaign: Nowa kampania
+    page: Nowa strona
+    zone: Nowa strefa
+show:
+    advertiser: Reklamodawca advertiserName
+    banner: Banner
+    campaign: Kampania campaignName
+    page: Strona pageName
+    zone: Strefa zoneName
+edit:
+    advertiser: Edytuj reklamodawcę advertiserName
+    banner: Edytuj banner
+    campaign: Edytuj kampanię campaignName
+    page: Edytuj stronę pageName
+    zone: Edytuj strefę zoneName
+

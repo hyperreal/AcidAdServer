@@ -3,19 +3,19 @@
 {{ 'new.banner'|trans({}, 'HyperAdsBundle') }}
 {% endblock %}
 {% block body %}
-<h1>Banner creation</h1>
+<h1>{{ 'new.banner'|trans({}, 'HyperAdsBundle') }}</h1>
 
 <form action="{{ path('admin_banner_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <p>
-        <button type="submit">Create</button>
+        <button type="submit">{{ 'create'|trans({}, 'HyperAdsBundle') }}</button>
     </p>
 </form>
 
 <ul class="record_actions">
     <li>
         <a href="{{ path('admin_banner') }}">
-            Back to the list
+            {{ 'back.to.the.list'|trans({}, 'HyperAdsBundle') }}
         </a>
     </li>
 </ul>
