@@ -16,3 +16,6 @@ Then, use the `install` command to download needed vendors:
 Next, adjust database settings in `app/config/parameters.yml` file and run following command from project root dir:
 
     ./app/console doctrine:schema:update --force
+
+Look that your virtual host document root must point to `web` directory (recommended) *or* you must access front controller
+starting with `web` path: `http://example.com/web/admin`
