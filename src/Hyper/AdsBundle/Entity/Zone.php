@@ -13,6 +13,8 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Hyper\AdsBundle\DBAL\BannerType;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="zone")
@@ -60,6 +62,7 @@ class Zone
 
     /**
      * @ORM\Column(type="zonetype")
+     * @Assert\Choice(callback="getZoneTypes")
      */
     protected $type = 'desktop';
 
@@ -146,5 +149,10 @@ class Zone
     public function __toString()
     {
         return sprintf('%s @%s (%s)', $this->getName(), $this->getPage()->getName(), $this->getType());
+    }
+
+    public static function getZoneTypes()
+    {
+        return ZoneType::getValidTypes();
     }
 }

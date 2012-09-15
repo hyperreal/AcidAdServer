@@ -12,23 +12,21 @@ class BannerType extends AbstractType
     {
         $builder
             ->add('file')
-            ->add('extension')
-            ->add('width')
-            ->add('height')
             ->add('type')
             ->add('title')
             ->add('linkTitle')
             ->add('url')
             ->add('description')
-            ->add('campaign')
-        ;
+            ->add('campaign');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Hyper\AdsBundle\Entity\Banner'
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Hyper\AdsBundle\Entity\Banner'
+            )
+        );
     }
 
     public function getName()

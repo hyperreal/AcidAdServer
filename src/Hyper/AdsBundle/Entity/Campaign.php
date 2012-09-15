@@ -38,13 +38,13 @@ class Campaign
     protected $advertiser;
 
     /**
-     * @ORM\Column(type="datetime", name="start_date")
+     * @ORM\Column(type="date", name="start_date")
      * @var \DateTime
      */
     protected $startDate;
 
     /**
-     * @ORM\Column(type="datetime", name="expire_date")
+     * @ORM\Column(type="date", name="expire_date")
      * @var \DateTime
      */
     protected $expireDate;

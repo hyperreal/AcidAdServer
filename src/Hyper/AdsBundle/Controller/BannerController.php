@@ -88,6 +88,7 @@ class BannerController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->upload();
             $em->persist($entity);
             $em->flush();
 

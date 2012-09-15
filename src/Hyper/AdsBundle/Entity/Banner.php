@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Hyper\AdsBundle\DBAL\BannerType;
 
 /**
  * @ORM\Entity
@@ -19,6 +21,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Banner
 {
+    const RAND_MIN = 10000000;
+    const RAND_MAX = 99999999;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -33,10 +38,15 @@ class Banner
     protected $campaign;
 
     /**
-     * @ORM\Column(type="string")
      * @Assert\File()
+     * @var \Symfony\Component\HttpFoundation\File\UploadedFile
      */
     protected $file;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $path;
 
     /**
      * @ORM\Column(type="string", length=8)
@@ -55,9 +65,9 @@ class Banner
 
     /**
      * @ORM\Column(type="bannertype")
-     * @Assert\Choice(callback={"BannerType", "getValidTypes"})
+     * @Assert\Choice(callback="getBannerTypes")
      */
-    protected $type; //scyscrapper/popup/popunder/banner
+    protected $type;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -198,6 +208,16 @@ class Banner
         return $this->width;
     }
 
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    public function setPath($path)
+    {
+        $this->path = $path;
+    }
+
     public function setZones($zones)
     {
         $this->zones = $zones;
@@ -216,5 +236,45 @@ class Banner
     public function __toString()
     {
         return $this->getId();
+    }
+
+    public static function getBannerTypes()
+    {
+        return BannerType::getValidTypes();
+    }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->path ? null : $this->getUploadRootDir() . '/' . $this->path;
+    }
+
+    public function getUploadRootDir()
+    {
+        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+    }
+
+    public function getUploadDir()
+    {
+        return 'uploads';
+    }
+
+    public function upload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+
+        $info = pathinfo($this->file->getClientOriginalName());
+        $filename = md5(mt_rand(self::RAND_MIN, self::RAND_MAX) . $info['filename']) . '.' . $info['extension'];
+        $absolutePath = $this->getUploadRootDir() . DIRECTORY_SEPARATOR . $filename;
+
+        $this->file->move($this->getUploadRootDir(), $filename);
+        list($width, $height, ) = getimagesize($absolutePath);
+
+        $this->width        = $width;
+        $this->height       = $height;
+        $this->extension    = $info['extension'];
+        $this->path         = $filename;
+        $this->file         = null;
     }
 }
