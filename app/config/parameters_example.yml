@@ -2,9 +2,9 @@ parameters:
     database_driver:   pdo_mysql
     database_host:     localhost
     database_port:     ~
-    database_name:     hyperads
-    database_user:     hyperads
-    database_password: r3kl4my
+    database_name:     albert
+    database_user:     hofmann
+    database_password: bicycle1943
 
     mailer_transport:  smtp
     mailer_host:       localhost
