@@ -35,7 +35,7 @@ class Zone
     protected $page;
 
     /**
-     * @ORM   \Column(type="string")
+     * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
     protected $name;
@@ -61,7 +61,7 @@ class Zone
     protected $maxHeight;
 
     /**
-     * @ORM   \Column(type="zonetype")
+     * @ORM\Column(type="zonetype")
      * @Assert\Choice(callback="getZoneTypes")
      */
     protected $type = 'desktop';

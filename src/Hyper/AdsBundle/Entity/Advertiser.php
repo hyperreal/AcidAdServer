@@ -26,13 +26,13 @@ class Advertiser
     protected $id;
 
     /**
-     * @ORM   \Column(type="string")
+     * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
     protected $name;
 
     /**
-     * @ORM   \Column(type="string")
+     * @ORM\Column(type="string")
      * @Assert\Email(
      *        message="The email {{ email }} is not a valid e-mail address.",
      *        checkMX = false

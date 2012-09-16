@@ -26,13 +26,13 @@ class Page
     protected $id;
 
     /**
-     * @ORM   \Column(type="string")
+     * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
     protected $name;
 
     /**
-     * @ORM   \Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\Url(message="URL {{ url }} is not a valid URL.")
      */
     protected $url;

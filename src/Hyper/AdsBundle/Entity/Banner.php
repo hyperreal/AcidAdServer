@@ -32,7 +32,7 @@ class Banner
     protected $id;
 
     /**
-     * @ManyToOne (targetEntity="Campaign", inversedBy="banners")
+     * @ManyToOne(targetEntity="Campaign", inversedBy="banners")
      * @JoinColumn(name="banner_id", referencedColumnName="id")
      */
     protected $campaign;
@@ -64,7 +64,7 @@ class Banner
     protected $height;
 
     /**
-     * @ORM   \Column(type="bannertype")
+     * @ORM\Column(type="bannertype")
      * @Assert\Choice(callback="getBannerTypes")
      */
     protected $type;
@@ -80,7 +80,7 @@ class Banner
     protected $linkTitle;
 
     /**
-     * @ORM   \Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\Url()
      */
     protected $url;
