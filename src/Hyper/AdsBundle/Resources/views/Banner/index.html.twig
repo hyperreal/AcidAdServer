@@ -8,40 +8,40 @@
 {% if entities|length > 0 %}
 <table class="records_list">
     <thead>
-        <tr>
-            <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'file'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'extension'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'width'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'height'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'type'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'actions'|trans({}, 'HyperAdsBundle') }}</th>
-        </tr>
+    <tr>
+        <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'file'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'extension'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'width'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'height'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'type'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'actions'|trans({}, 'HyperAdsBundle') }}</th>
+    </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('admin_banner_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.file }}</td>
-            <td>{{ entity.extension }}</td>
-            <td>{{ entity.width }}</td>
-            <td>{{ entity.height }}</td>
-            <td>{{ entity.type }}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('admin_banner_show', { 'id': entity.id }) }}">
-                            {{ '__show'|trans({}, 'HyperAdsBundle') }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ path('admin_banner_edit', { 'id': entity.id }) }}">
-                            {{ '__edit'|trans({}, 'HyperAdsBundle') }}
-                        </a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
+    <tr>
+        <td><a href="{{ path('admin_banner_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+        <td>{{ entity.file }}</td>
+        <td>{{ entity.extension }}</td>
+        <td>{{ entity.width }}</td>
+        <td>{{ entity.height }}</td>
+        <td>{{ entity.type }}</td>
+        <td>
+            <ul>
+                <li>
+                    <a href="{{ path('admin_banner_show', { 'id': entity.id }) }}">
+                        {{ '__show'|trans({}, 'HyperAdsBundle') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_banner_edit', { 'id': entity.id }) }}">
+                        {{ '__edit'|trans({}, 'HyperAdsBundle') }}
+                    </a>
+                </li>
+            </ul>
+        </td>
+    </tr>
     {% endfor %}
     </tbody>
 </table>

@@ -8,47 +8,47 @@
 {% if entities|length > 0 %}
 <table class="records_list">
     <thead>
-        <tr>
-            <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'email'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ '__campaigns'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'actions'|trans({}, 'HyperAdsBundle') }}</th>
-        </tr>
+    <tr>
+        <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'email'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ '__campaigns'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'actions'|trans({}, 'HyperAdsBundle') }}</th>
+    </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('admin_advertiser_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.name }}</td>
-            <td>{{ entity.email }}</td>
-            <td>
-                {{ entity.campaigns|length }}
-                <br />
-                <a href="{{ path('admin_campaign', {'advertiserId': entity.id }) }}">
-                    {{ '__show'|trans({}, 'HyperAdsBundle') }}
-                </a>
-            </td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('admin_advertiser_show', { 'id': entity.id }) }}">
-                            {{ '__show'|trans({}, 'HyperAdsBundle') }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ path('admin_advertiser_edit', { 'id': entity.id }) }}">
-                            {{ '__edit'|trans({}, 'HyperAdsBundle') }}
-                        </a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
+    <tr>
+        <td><a href="{{ path('admin_advertiser_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+        <td>{{ entity.name }}</td>
+        <td>{{ entity.email }}</td>
+        <td>
+            {{ entity.campaigns|length }}
+            <br/>
+            <a href="{{ path('admin_campaign', {'advertiserId': entity.id }) }}">
+                {{ '__show'|trans({}, 'HyperAdsBundle') }}
+            </a>
+        </td>
+        <td>
+            <ul>
+                <li>
+                    <a href="{{ path('admin_advertiser_show', { 'id': entity.id }) }}">
+                        {{ '__show'|trans({}, 'HyperAdsBundle') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_advertiser_edit', { 'id': entity.id }) }}">
+                        {{ '__edit'|trans({}, 'HyperAdsBundle') }}
+                    </a>
+                </li>
+            </ul>
+        </td>
+    </tr>
     {% endfor %}
     </tbody>
 </table>
 {% else %}
-    <div class="message">{{ 'no.entities'|trans({}, 'HyperAdsBundle') }}</div>
+<div class="message">{{ 'no.entities'|trans({}, 'HyperAdsBundle') }}</div>
 {% endif %}
 
 <ul>

@@ -12,15 +12,16 @@ class PageType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('url')
-        ;
+            ->add('url');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Hyper\AdsBundle\Entity\Page'
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Hyper\AdsBundle\Entity\Page'
+            )
+        );
     }
 
     public function getName()

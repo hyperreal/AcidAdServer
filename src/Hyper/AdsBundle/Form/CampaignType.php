@@ -14,21 +14,26 @@ class CampaignType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('startDate', 'date', array(
+            ->add(
+            'startDate', 'date', array(
                 'data' => new \DateTime(),
-            ))
-            ->add('expireDate', 'date', array(
+            )
+        )
+            ->add(
+            'expireDate', 'date', array(
                 'data' => new \DateTime('+1 month'),
-            ))
-            ->add('advertiser')
-        ;
+            )
+        )
+            ->add('advertiser');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Hyper\AdsBundle\Entity\Campaign'
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Hyper\AdsBundle\Entity\Campaign'
+            )
+        );
     }
 
     public function getName()

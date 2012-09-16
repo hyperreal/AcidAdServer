@@ -32,7 +32,7 @@ class Banner
     protected $id;
 
     /**
-     * @ManyToOne(targetEntity="Campaign", inversedBy="banners")
+     * @ManyToOne (targetEntity="Campaign", inversedBy="banners")
      * @JoinColumn(name="banner_id", referencedColumnName="id")
      */
     protected $campaign;
@@ -64,7 +64,7 @@ class Banner
     protected $height;
 
     /**
-     * @ORM\Column(type="bannertype")
+     * @ORM   \Column(type="bannertype")
      * @Assert\Choice(callback="getBannerTypes")
      */
     protected $type;
@@ -80,7 +80,7 @@ class Banner
     protected $linkTitle;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM   \Column(type="string", nullable=true)
      * @Assert\Url()
      */
     protected $url;
@@ -264,17 +264,17 @@ class Banner
             return;
         }
 
-        $info = pathinfo($this->file->getClientOriginalName());
-        $filename = md5(mt_rand(self::RAND_MIN, self::RAND_MAX) . $info['filename']) . '.' . $info['extension'];
+        $info         = pathinfo($this->file->getClientOriginalName());
+        $filename     = md5(mt_rand(self::RAND_MIN, self::RAND_MAX) . $info['filename']) . '.' . $info['extension'];
         $absolutePath = $this->getUploadRootDir() . DIRECTORY_SEPARATOR . $filename;
 
         $this->file->move($this->getUploadRootDir(), $filename);
-        list($width, $height, ) = getimagesize($absolutePath);
+        list($width, $height,) = getimagesize($absolutePath);
 
-        $this->width        = $width;
-        $this->height       = $height;
-        $this->extension    = $info['extension'];
-        $this->path         = $filename;
-        $this->file         = null;
+        $this->width     = $width;
+        $this->height    = $height;
+        $this->extension = $info['extension'];
+        $this->path      = $filename;
+        $this->file      = null;
     }
 }

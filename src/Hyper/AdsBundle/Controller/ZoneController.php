@@ -18,7 +18,7 @@ class ZoneController extends Controller
     /**
      * Lists all Zone entities.
      *
-     * @Route("/", name="admin_zone")
+     * @Route   ("/", name="admin_zone")
      * @Template()
      */
     public function indexAction()
@@ -35,7 +35,7 @@ class ZoneController extends Controller
     /**
      * Finds and displays a Zone entity.
      *
-     * @Route("/{id}/show", name="admin_zone_show")
+     * @Route   ("/{id}/show", name="admin_zone_show")
      * @Template()
      */
     public function showAction($id)
@@ -59,7 +59,7 @@ class ZoneController extends Controller
     /**
      * Displays a form to create a new Zone entity.
      *
-     * @Route("/new", name="admin_zone_new")
+     * @Route   ("/new", name="admin_zone_new")
      * @Template()
      */
     public function newAction()
@@ -76,14 +76,14 @@ class ZoneController extends Controller
     /**
      * Creates a new Zone entity.
      *
-     * @Route("/create", name="admin_zone_create")
-     * @Method("POST")
+     * @Route   ("/create", name="admin_zone_create")
+     * @Method  ("POST")
      * @Template("HyperAdsBundle:Zone:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity  = new Zone();
-        $form = $this->createForm(new ZoneType(), $entity);
+        $entity = new Zone();
+        $form   = $this->createForm(new ZoneType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -103,7 +103,7 @@ class ZoneController extends Controller
     /**
      * Displays a form to edit an existing Zone entity.
      *
-     * @Route("/{id}/edit", name="admin_zone_edit")
+     * @Route   ("/{id}/edit", name="admin_zone_edit")
      * @Template()
      */
     public function editAction($id)
@@ -116,7 +116,7 @@ class ZoneController extends Controller
             throw $this->createNotFoundException('Unable to find Zone entity.');
         }
 
-        $editForm = $this->createForm(new ZoneType(), $entity);
+        $editForm   = $this->createForm(new ZoneType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -129,8 +129,8 @@ class ZoneController extends Controller
     /**
      * Edits an existing Zone entity.
      *
-     * @Route("/{id}/update", name="admin_zone_update")
-     * @Method("POST")
+     * @Route   ("/{id}/update", name="admin_zone_update")
+     * @Method  ("POST")
      * @Template("HyperAdsBundle:Zone:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -144,7 +144,7 @@ class ZoneController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new ZoneType(), $entity);
+        $editForm   = $this->createForm(new ZoneType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -164,7 +164,7 @@ class ZoneController extends Controller
     /**
      * Deletes a Zone entity.
      *
-     * @Route("/{id}/delete", name="admin_zone_delete")
+     * @Route ("/{id}/delete", name="admin_zone_delete")
      * @Method("POST")
      */
     public function deleteAction(Request $request, $id)
@@ -173,7 +173,7 @@ class ZoneController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em     = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('HyperAdsBundle:Zone')->find($id);
 
             if (!$entity) {
@@ -191,7 +191,6 @@ class ZoneController extends Controller
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

@@ -1,0 +1,62 @@
+(function() {
+    var root = this;
+    var previousAcid = root.Acid;
+
+    var Acid;
+    Acid = root.Acid = {};
+
+    Acid.cookie = Math.round(Math.random() * 1000);
+    Acid.flashEnabled = isFlashEnabled();
+    Acid.dataCollectors = new Array();
+
+    Acid.showZone = function(id, width, height) {
+        var params = '';
+        params += 'sr=' + encodeURIComponent(document.referrer) + '&';
+        params += 'uf=' + encodeURIComponent(this.flashEnabled.toString()) + '&';
+        params += 'ref' + encodeURIComponent(document.URL) + '&';
+
+        for (var col in Acid.dataCollectors) {
+            var hash = Acid.dataCollectors[col]()
+            for (key in hash) {
+                params += key + '=' + encodeURIComponent(hash[key]);
+            }
+        }
+
+        var srv = "{{ server }}";
+        var path = 'http://' + srv + '/frame/' + id + '?' + params;
+        var iframe = '<iframe src="' + path + '" width="' + width + '" height="' + height + '" scrolling="no" allowtransparency="true" style="background-color: transparent;" frameborder="0"></iframe>';
+        document.write(iframe);
+    };
+
+    Acid.addDataCollector = function(func) {
+        if (typeof(func) == 'function') {
+            Acid.dataCollectors.push(func);
+        }
+    }
+
+    function isFlashEnabled() {
+        if (navigator.plugins && navigator.plugins.length > 0) {
+            if (navigator.plugins['Shockwave Flash'] || navigator.plugins['Showckwave Flash 2.0']) {
+                return true;
+            }
+        } else if (navigator.mimeTypes && navigator.mimeTypes.length > 0) {
+            var x = navigator.mimeTypes['application/x-shockwave-flash'];
+            if (x && x.enabledPlugin) {
+                return true;
+            }
+        } else if (navigator.userAgent && navigator.userAgent.indexOf('MSIE') >= 0 && navigator.appVersion.indexOf('Win') != -1) {
+            try {
+                for (i = 3; i <= 12; i++) {
+                    var x = new ActiveXObject("ShockwaveFlash.ShockwaveFlash." + i.toString());
+                    if (x) {
+                        return true;
+                    }
+                }
+            } catch (e) {}
+        }
+
+        return false;
+    };
+
+
+}).call(this);

@@ -16,15 +16,16 @@ class ZoneType extends AbstractType
             ->add('maxWidth')
             ->add('maxHeight')
             ->add('type')
-            ->add('page')
-        ;
+            ->add('page');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Hyper\AdsBundle\Entity\Zone'
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Hyper\AdsBundle\Entity\Zone'
+            )
+        );
     }
 
     public function getName()

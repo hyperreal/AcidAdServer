@@ -26,13 +26,13 @@ class BannerZoneReference
     protected $id;
 
     /**
-     * @ManyToOne(targetEntity="Banner", inversedBy="zones")
+     * @ManyToOne (targetEntity="Banner", inversedBy="zones")
      * @JoinColumn(name="banner_id", referencedColumnName="id")
      */
     protected $banner;
 
     /**
-     * @ManyToOne(targetEntity="Zone", inversedBy="banners")
+     * @ManyToOne (targetEntity="Zone", inversedBy="banners")
      * @JoinColumn(name="zone_id", referencedColumnName="id")
      */
     protected $zone;

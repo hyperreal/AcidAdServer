@@ -18,7 +18,7 @@ class PageController extends Controller
     /**
      * Lists all Page entities.
      *
-     * @Route("/", name="admin_page")
+     * @Route   ("/", name="admin_page")
      * @Template()
      */
     public function indexAction()
@@ -35,7 +35,7 @@ class PageController extends Controller
     /**
      * Finds and displays a Page entity.
      *
-     * @Route("/{id}/show", name="admin_page_show")
+     * @Route   ("/{id}/show", name="admin_page_show")
      * @Template()
      */
     public function showAction($id)
@@ -59,7 +59,7 @@ class PageController extends Controller
     /**
      * Displays a form to create a new Page entity.
      *
-     * @Route("/new", name="admin_page_new")
+     * @Route   ("/new", name="admin_page_new")
      * @Template()
      */
     public function newAction()
@@ -76,14 +76,14 @@ class PageController extends Controller
     /**
      * Creates a new Page entity.
      *
-     * @Route("/create", name="admin_page_create")
-     * @Method("POST")
+     * @Route   ("/create", name="admin_page_create")
+     * @Method  ("POST")
      * @Template("HyperAdsBundle:Page:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity  = new Page();
-        $form = $this->createForm(new PageType(), $entity);
+        $entity = new Page();
+        $form   = $this->createForm(new PageType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -103,7 +103,7 @@ class PageController extends Controller
     /**
      * Displays a form to edit an existing Page entity.
      *
-     * @Route("/{id}/edit", name="admin_page_edit")
+     * @Route   ("/{id}/edit", name="admin_page_edit")
      * @Template()
      */
     public function editAction($id)
@@ -116,7 +116,7 @@ class PageController extends Controller
             throw $this->createNotFoundException('Unable to find Page entity.');
         }
 
-        $editForm = $this->createForm(new PageType(), $entity);
+        $editForm   = $this->createForm(new PageType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -129,8 +129,8 @@ class PageController extends Controller
     /**
      * Edits an existing Page entity.
      *
-     * @Route("/{id}/update", name="admin_page_update")
-     * @Method("POST")
+     * @Route   ("/{id}/update", name="admin_page_update")
+     * @Method  ("POST")
      * @Template("HyperAdsBundle:Page:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -144,7 +144,7 @@ class PageController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new PageType(), $entity);
+        $editForm   = $this->createForm(new PageType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -164,7 +164,7 @@ class PageController extends Controller
     /**
      * Deletes a Page entity.
      *
-     * @Route("/{id}/delete", name="admin_page_delete")
+     * @Route ("/{id}/delete", name="admin_page_delete")
      * @Method("POST")
      */
     public function deleteAction(Request $request, $id)
@@ -173,7 +173,7 @@ class PageController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em     = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('HyperAdsBundle:Page')->find($id);
 
             if (!$entity) {
@@ -191,7 +191,6 @@ class PageController extends Controller
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

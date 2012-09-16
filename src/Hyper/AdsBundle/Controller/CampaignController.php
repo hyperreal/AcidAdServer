@@ -18,7 +18,7 @@ class CampaignController extends Controller
     /**
      * Lists all Campaign entities.
      *
-     * @Route("/{advertiserId}", name="admin_campaign", requirements={"advertiserId" = "\d+"}, defaults={"advertiserId" = 0})
+     * @Route   ("/{advertiserId}", name="admin_campaign", requirements={"advertiserId" = "\d+"}, defaults={"advertiserId" = 0})
      * @Template()
      */
     public function indexAction($advertiserId = 0)
@@ -39,9 +39,11 @@ class CampaignController extends Controller
                 throw $this->createNotFoundException('Advertiser not found.');
             }
 
-            $entities = $em->getRepository('HyperAdsBundle:Campaign')->findBy(array(
+            $entities = $em->getRepository('HyperAdsBundle:Campaign')->findBy(
+                array(
                     'advertiser' => $advertiser,
-                ));
+                )
+            );
 
             return array(
                 'entities'      => $entities,
@@ -53,7 +55,7 @@ class CampaignController extends Controller
     /**
      * Finds and displays a Campaign entity.
      *
-     * @Route("/{id}/show", name="admin_campaign_show")
+     * @Route   ("/{id}/show", name="admin_campaign_show")
      * @Template()
      */
     public function showAction($id)
@@ -77,7 +79,7 @@ class CampaignController extends Controller
     /**
      * Displays a form to create a new Campaign entity.
      *
-     * @Route("/new", name="admin_campaign_new")
+     * @Route   ("/new", name="admin_campaign_new")
      * @Template()
      */
     public function newAction()
@@ -94,14 +96,14 @@ class CampaignController extends Controller
     /**
      * Creates a new Campaign entity.
      *
-     * @Route("/create", name="admin_campaign_create")
-     * @Method("POST")
+     * @Route   ("/create", name="admin_campaign_create")
+     * @Method  ("POST")
      * @Template("HyperAdsBundle:Campaign:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity  = new Campaign();
-        $form = $this->createForm(new CampaignType(), $entity);
+        $entity = new Campaign();
+        $form   = $this->createForm(new CampaignType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -121,7 +123,7 @@ class CampaignController extends Controller
     /**
      * Displays a form to edit an existing Campaign entity.
      *
-     * @Route("/{id}/edit", name="admin_campaign_edit")
+     * @Route   ("/{id}/edit", name="admin_campaign_edit")
      * @Template()
      */
     public function editAction($id)
@@ -134,7 +136,7 @@ class CampaignController extends Controller
             throw $this->createNotFoundException('Unable to find Campaign entity.');
         }
 
-        $editForm = $this->createForm(new CampaignType(), $entity);
+        $editForm   = $this->createForm(new CampaignType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -147,8 +149,8 @@ class CampaignController extends Controller
     /**
      * Edits an existing Campaign entity.
      *
-     * @Route("/{id}/update", name="admin_campaign_update")
-     * @Method("POST")
+     * @Route   ("/{id}/update", name="admin_campaign_update")
+     * @Method  ("POST")
      * @Template("HyperAdsBundle:Campaign:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -162,7 +164,7 @@ class CampaignController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new CampaignType(), $entity);
+        $editForm   = $this->createForm(new CampaignType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -182,7 +184,7 @@ class CampaignController extends Controller
     /**
      * Deletes a Campaign entity.
      *
-     * @Route("/{id}/delete", name="admin_campaign_delete")
+     * @Route ("/{id}/delete", name="admin_campaign_delete")
      * @Method("POST")
      */
     public function deleteAction(Request $request, $id)
@@ -191,7 +193,7 @@ class CampaignController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em     = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('HyperAdsBundle:Campaign')->find($id);
 
             if (!$entity) {
@@ -209,7 +211,6 @@ class CampaignController extends Controller
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

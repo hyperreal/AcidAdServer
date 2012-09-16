@@ -18,7 +18,7 @@ class BannerController extends Controller
     /**
      * Lists all Banner entities.
      *
-     * @Route("/", name="admin_banner")
+     * @Route   ("/", name="admin_banner")
      * @Template()
      */
     public function indexAction()
@@ -35,7 +35,7 @@ class BannerController extends Controller
     /**
      * Finds and displays a Banner entity.
      *
-     * @Route("/{id}/show", name="admin_banner_show")
+     * @Route   ("/{id}/show", name="admin_banner_show")
      * @Template()
      */
     public function showAction($id)
@@ -59,7 +59,7 @@ class BannerController extends Controller
     /**
      * Displays a form to create a new Banner entity.
      *
-     * @Route("/new", name="admin_banner_new")
+     * @Route   ("/new", name="admin_banner_new")
      * @Template()
      */
     public function newAction()
@@ -76,14 +76,14 @@ class BannerController extends Controller
     /**
      * Creates a new Banner entity.
      *
-     * @Route("/create", name="admin_banner_create")
-     * @Method("POST")
+     * @Route   ("/create", name="admin_banner_create")
+     * @Method  ("POST")
      * @Template("HyperAdsBundle:Banner:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity  = new Banner();
-        $form = $this->createForm(new BannerType(), $entity);
+        $entity = new Banner();
+        $form   = $this->createForm(new BannerType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -104,7 +104,7 @@ class BannerController extends Controller
     /**
      * Displays a form to edit an existing Banner entity.
      *
-     * @Route("/{id}/edit", name="admin_banner_edit")
+     * @Route   ("/{id}/edit", name="admin_banner_edit")
      * @Template()
      */
     public function editAction($id)
@@ -117,7 +117,7 @@ class BannerController extends Controller
             throw $this->createNotFoundException('Unable to find Banner entity.');
         }
 
-        $editForm = $this->createForm(new BannerType(), $entity);
+        $editForm   = $this->createForm(new BannerType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -130,8 +130,8 @@ class BannerController extends Controller
     /**
      * Edits an existing Banner entity.
      *
-     * @Route("/{id}/update", name="admin_banner_update")
-     * @Method("POST")
+     * @Route   ("/{id}/update", name="admin_banner_update")
+     * @Method  ("POST")
      * @Template("HyperAdsBundle:Banner:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -145,7 +145,7 @@ class BannerController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new BannerType(), $entity);
+        $editForm   = $this->createForm(new BannerType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -165,7 +165,7 @@ class BannerController extends Controller
     /**
      * Deletes a Banner entity.
      *
-     * @Route("/{id}/delete", name="admin_banner_delete")
+     * @Route ("/{id}/delete", name="admin_banner_delete")
      * @Method("POST")
      */
     public function deleteAction(Request $request, $id)
@@ -174,7 +174,7 @@ class BannerController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em     = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('HyperAdsBundle:Banner')->find($id);
 
             if (!$entity) {
@@ -192,7 +192,6 @@ class BannerController extends Controller
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

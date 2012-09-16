@@ -26,16 +26,16 @@ class Advertiser
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM   \Column(type="string")
      * @Assert\NotBlank()
      */
     protected $name;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM   \Column(type="string")
      * @Assert\Email(
-     *      message="The email {{ email }} is not a valid e-mail address.",
-     *      checkMX = false
+     *        message="The email {{ email }} is not a valid e-mail address.",
+     *        checkMX = false
      * )
      */
     protected $email;
@@ -62,7 +62,7 @@ class Advertiser
 
     public function getId()
     {
-         return $this->id;
+        return $this->id;
     }
 
     public function setName($name)
@@ -117,6 +117,6 @@ class Advertiser
 
     public function __toString()
     {
-        return $this->getName() . ' (' . $this->getId() .')';
+        return $this->getName() . ' (' . $this->getId() . ')';
     }
 }

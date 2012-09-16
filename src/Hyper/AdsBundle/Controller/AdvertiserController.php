@@ -18,7 +18,7 @@ class AdvertiserController extends Controller
     /**
      * Lists all Advertiser entities.
      *
-     * @Route("/", name="admin_advertiser")
+     * @Route   ("/", name="admin_advertiser")
      * @Template()`
      */
     public function indexAction()
@@ -35,7 +35,7 @@ class AdvertiserController extends Controller
     /**
      * Finds and displays a Advertiser entity.
      *
-     * @Route("/{id}/show", name="admin_advertiser_show")
+     * @Route   ("/{id}/show", name="admin_advertiser_show")
      * @Template()
      */
     public function showAction($id)
@@ -59,7 +59,7 @@ class AdvertiserController extends Controller
     /**
      * Displays a form to create a new Advertiser entity.
      *
-     * @Route("/new", name="admin_advertiser_new")
+     * @Route   ("/new", name="admin_advertiser_new")
      * @Template()
      */
     public function newAction()
@@ -76,14 +76,14 @@ class AdvertiserController extends Controller
     /**
      * Creates a new Advertiser entity.
      *
-     * @Route("/create", name="admin_advertiser_create")
-     * @Method("POST")
+     * @Route   ("/create", name="admin_advertiser_create")
+     * @Method  ("POST")
      * @Template("HyperAdsBundle:Advertiser:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity  = new Advertiser();
-        $form = $this->createForm(new AdvertiserType(), $entity);
+        $entity = new Advertiser();
+        $form   = $this->createForm(new AdvertiserType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -103,7 +103,7 @@ class AdvertiserController extends Controller
     /**
      * Displays a form to edit an existing Advertiser entity.
      *
-     * @Route("/{id}/edit", name="admin_advertiser_edit")
+     * @Route   ("/{id}/edit", name="admin_advertiser_edit")
      * @Template()
      */
     public function editAction($id)
@@ -116,7 +116,7 @@ class AdvertiserController extends Controller
             throw $this->createNotFoundException('Unable to find Advertiser entity.');
         }
 
-        $editForm = $this->createForm(new AdvertiserType(), $entity);
+        $editForm   = $this->createForm(new AdvertiserType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -129,8 +129,8 @@ class AdvertiserController extends Controller
     /**
      * Edits an existing Advertiser entity.
      *
-     * @Route("/{id}/update", name="admin_advertiser_update")
-     * @Method("POST")
+     * @Route   ("/{id}/update", name="admin_advertiser_update")
+     * @Method  ("POST")
      * @Template("HyperAdsBundle:Advertiser:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -144,7 +144,7 @@ class AdvertiserController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new AdvertiserType(), $entity);
+        $editForm   = $this->createForm(new AdvertiserType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -164,7 +164,7 @@ class AdvertiserController extends Controller
     /**
      * Deletes a Advertiser entity.
      *
-     * @Route("/{id}/delete", name="admin_advertiser_delete")
+     * @Route ("/{id}/delete", name="admin_advertiser_delete")
      * @Method("POST")
      */
     public function deleteAction(Request $request, $id)
@@ -173,7 +173,7 @@ class AdvertiserController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em     = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('HyperAdsBundle:Advertiser')->find($id);
 
             if (!$entity) {
@@ -191,7 +191,6 @@ class AdvertiserController extends Controller
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

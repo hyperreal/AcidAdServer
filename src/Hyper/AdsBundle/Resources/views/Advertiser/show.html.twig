@@ -7,35 +7,35 @@
 
 <table class="record_properties">
     <tbody>
-        <tr>
-            <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
-            <td>{{ entity.name }}</td>
-        </tr>
-        <tr>
-            <th>{{ 'email'|trans({}, 'HyperAdsBundle') }}</th>
-            <td>{{ entity.email }}</td>
-        </tr>
-        <tr>
-            <th>{{ 'firstname'|trans({}, 'HyperAdsBundle') }}</th>
-            <td>{{ entity.firstName }}</td>
-        </tr>
-        <tr>
-            <th>{{ 'lastname'|trans({}, 'HyperAdsBundle') }}</th>
-            <td>{{ entity.lastName }}</td>
-        </tr>
-        <tr>
-            <th>{{ '__campaigns'|trans({}, 'HyperAdsBundle') }}</th>
-            <td>
-                {{ entity.campaigns|length }}<br />
-                <a href="{{ path('admin_campaign', {'advertiserId': entity.id }) }}">
-                    {{ '__show'|trans({}, 'HyperAdsBundle') }}
-                </a>
-            </td>
-        </tr>
+    <tr>
+        <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
+        <td>{{ entity.id }}</td>
+    </tr>
+    <tr>
+        <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
+        <td>{{ entity.name }}</td>
+    </tr>
+    <tr>
+        <th>{{ 'email'|trans({}, 'HyperAdsBundle') }}</th>
+        <td>{{ entity.email }}</td>
+    </tr>
+    <tr>
+        <th>{{ 'firstname'|trans({}, 'HyperAdsBundle') }}</th>
+        <td>{{ entity.firstName }}</td>
+    </tr>
+    <tr>
+        <th>{{ 'lastname'|trans({}, 'HyperAdsBundle') }}</th>
+        <td>{{ entity.lastName }}</td>
+    </tr>
+    <tr>
+        <th>{{ '__campaigns'|trans({}, 'HyperAdsBundle') }}</th>
+        <td>
+            {{ entity.campaigns|length }}<br/>
+            <a href="{{ path('admin_campaign', {'advertiserId': entity.id }) }}">
+                {{ '__show'|trans({}, 'HyperAdsBundle') }}
+            </a>
+        </td>
+    </tr>
     </tbody>
 </table>
 

@@ -14,15 +14,16 @@ class AdvertiserType extends AbstractType
             ->add('name')
             ->add('email')
             ->add('firstName')
-            ->add('lastName')
-        ;
+            ->add('lastName');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Hyper\AdsBundle\Entity\Advertiser'
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Hyper\AdsBundle\Entity\Advertiser'
+            )
+        );
     }
 
     public function getName()

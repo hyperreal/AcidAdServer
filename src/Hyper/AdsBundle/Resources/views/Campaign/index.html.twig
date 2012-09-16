@@ -4,44 +4,44 @@
 {% endblock %}
 {% block body %}
 {% if advertiser is defined %}
-    <h1>{{ 'campaigns.of'|trans({'advertiserName': advertiser.name}, 'HyperAdsBundle') }}</h1>
+<h1>{{ 'campaigns.of'|trans({'advertiserName': advertiser.name}, 'HyperAdsBundle') }}</h1>
 {% else %}
-    <h1>{{ 'list.campaign'|trans({}, 'HyperAdsBundle') }}</h1>
+<h1>{{ 'list.campaign'|trans({}, 'HyperAdsBundle') }}</h1>
 {% endif %}
 
 {% if entities|length > 0 %}
 <table class="records_list">
     <thead>
-        <tr>
-            <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'date.start'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'date.expire'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'actions'|trans({}, 'HyperAdsBundle') }}</th>
-        </tr>
+    <tr>
+        <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'date.start'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'date.expire'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'actions'|trans({}, 'HyperAdsBundle') }}</th>
+    </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('admin_campaign_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.name }}</td>
-            <td>{% if entity.startDate %}{{ entity.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{% if entity.expireDate %}{{ entity.expireDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('admin_campaign_show', { 'id': entity.id }) }}">
-                            {{ '__show'|trans({}, 'HyperAdsBundle') }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ path('admin_campaign_edit', { 'id': entity.id }) }}">
-                            {{ '__edit'|trans({}, 'HyperAdsBundle') }}
-                        </a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
+    <tr>
+        <td><a href="{{ path('admin_campaign_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+        <td>{{ entity.name }}</td>
+        <td>{% if entity.startDate %}{{ entity.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+        <td>{% if entity.expireDate %}{{ entity.expireDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+        <td>
+            <ul>
+                <li>
+                    <a href="{{ path('admin_campaign_show', { 'id': entity.id }) }}">
+                        {{ '__show'|trans({}, 'HyperAdsBundle') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_campaign_edit', { 'id': entity.id }) }}">
+                        {{ '__edit'|trans({}, 'HyperAdsBundle') }}
+                    </a>
+                </li>
+            </ul>
+        </td>
+    </tr>
     {% endfor %}
     </tbody>
 </table>

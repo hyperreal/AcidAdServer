@@ -32,7 +32,7 @@ class Campaign
     protected $name;
 
     /**
-     * @ManyToOne(targetEntity="Advertiser", inversedBy="campaigns")
+     * @ManyToOne (targetEntity="Advertiser", inversedBy="campaigns")
      * @JoinColumn(name="advertiser_id", referencedColumnName="id")
      */
     protected $advertiser;
