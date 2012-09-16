@@ -6,3 +6,8 @@ label {
     border-style: dotted;
     border-color: #CCCCCC;
 }
+
+.login-form label {
+    float: none;
+    border: 0;
+}
