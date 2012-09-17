@@ -68,6 +68,9 @@ class BannerZoneReference
         $this->banner = $banner;
     }
 
+    /**
+     * @return Hyper/AdsBundle/Entity/Banner
+     */
     public function getBanner()
     {
         return $this->banner;
@@ -108,6 +111,9 @@ class BannerZoneReference
         $this->zone = $zone;
     }
 
+    /**
+     * @return Hyper/AdsBundle/Entity/Zone
+     */
     public function getZone()
     {
         return $this->zone;

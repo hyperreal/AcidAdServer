@@ -56,3 +56,6 @@ __banners: Bannery
 __zones: Strefy
 __advertisers: Reklamodawcy
 __pages: Strony
+zone.not.exists: "Strefa nie isnieje"
+edit.banners.in.zone: "Bannery w strefie zoneName"
+zones.associated.with.banner: "Strefy powiązane z bannerem bannerName"

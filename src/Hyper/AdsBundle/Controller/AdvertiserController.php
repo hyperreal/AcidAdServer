@@ -35,7 +35,7 @@ class AdvertiserController extends Controller
     /**
      * Finds and displays a Advertiser entity.
      *
-     * @Route   ("/{id}/show", name="admin_advertiser_show")
+     * @Route("/{id}/show", name="admin_advertiser_show")
      * @Template()
      */
     public function showAction($id)
@@ -59,7 +59,7 @@ class AdvertiserController extends Controller
     /**
      * Displays a form to create a new Advertiser entity.
      *
-     * @Route   ("/new", name="admin_advertiser_new")
+     * @Route("/new", name="admin_advertiser_new")
      * @Template()
      */
     public function newAction()

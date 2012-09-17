@@ -50,6 +50,11 @@ admin_zone:
     prefix: /admin/zone
     type: annotation
 
+admin_banner_config:
+    resource: "@HyperAdsBundle/Controller/BannerConfigController.php"
+    prefix: /admin/banner-config
+    type: annotation
+
 admin_banner:
     resource: "@HyperAdsBundle/Controller/BannerController.php"
     prefix: /admin/banner

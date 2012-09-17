@@ -56,3 +56,6 @@ __banners: Banners
 __zones: Zones
 __advertisers: Advertisers
 __pages: Pages
+zone.not.exists: "Zone not exists"
+edit.banners.in.zone: "Banners in zone zoneName"
+zones.associated.with.banner: "Zones associated with bannerName"
