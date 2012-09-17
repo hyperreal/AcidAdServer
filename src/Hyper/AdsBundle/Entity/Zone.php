@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Hyper\AdsBundle\DBAL\BannerType;
+use Hyper\AdsBundle\DBAL\ZoneType;
 
 /**
  * @ORM\Entity
