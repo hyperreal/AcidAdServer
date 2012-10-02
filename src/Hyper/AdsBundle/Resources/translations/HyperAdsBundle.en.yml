@@ -59,3 +59,14 @@ __pages: Pages
 zone.not.exists: "Zone not exists"
 edit.banners.in.zone: "Banners in zone zoneName"
 zones.associated.with.banner: "Zones associated with bannerName"
+zone.name: "Zone zoneName"
+add.banner.to.zone: "Add banner to zone"
+page: Page
+save: Save
+banner.id: Banner ID
+banner.title: "Banner title"
+banner.size: "Banner size"
+campaign: Campaign
+use.in.zone: "Use in zone?"
+probability: Probability
+show.banners: "Show banners"

@@ -1,0 +1,48 @@
+{% extends "::base.html.twig" %}
+{% block title %}
+{{ 'edit.banners.in.zone'|trans({'zoneName': zone.name}, 'HyperAdsBundle') }}
+{% endblock %}
+{% block body %}
+
+<h2>{{ 'zone.name'|trans({'zoneName': zone.name}, 'HyperAdsBundle') }}</h2>
+
+<form action="{{ path('banner_config_save') }}" method="post">
+    <p>
+        <table>
+            <thead>
+                <tr>
+                    <th>{{ 'banner.id'|trans({}, 'HyperAdsBundle') }}</th>
+                    <th>{{ 'banner.title'|trans({}, 'HyperAdsBundle') }}</th>
+                    <th>{{ 'banner.size'|trans({}, 'HyperAdsBundle') }}</th>
+                    <th>{{ 'campaign'|trans({}, 'HyperAdsBundle') }}</th>
+                    <th>{{ 'use.in.zone'|trans({}, 'HyperAdsBundle') }}</th>
+                    <th>{{ 'probability'|trans({}, 'HyperAdsBundle') }}</th>
+                </tr>
+            </thead>
+            {% for banner in allBanners %}
+                <tr>
+                    <td>{{ banner.id }}</td>
+                    <td>
+                        <a href="{{ path('admin_banner_show', {'id': banner.id}) }}">
+                            {{ banner.title }}
+                        </a>
+                    </td>
+                    <td>{{ banner.width }}x{{ banner.height }}</td>
+                    <td>{{ banner.campaign.name }}</td>
+                    <td>
+                        <input type="checkbox" name="newBanners[{{ banner.id }}]" value="{{ banner.id }}"
+                            {% if banner.id in usedBannerIds %} checked="checked"{% endif %} />
+                    </td>
+                    <td>
+                        <input type="number" name="probability[{{ banner.id }}]" size="3"
+                               value="{% if banner.id in usedBannerIds %}{{ banner.getReferenceInZone(zone.id).probability }}{% else %}1{% endif %}" />
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <input type="hidden" name="zoneId" value="{{ zone.id }}" />
+        <input type="submit" class="button" value="{{ 'save'|trans({}, 'HyperAdsBundle') }}">
+    </p>
+</form>
+
+{% endblock %}

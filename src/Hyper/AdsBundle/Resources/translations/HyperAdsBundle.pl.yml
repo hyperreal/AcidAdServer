@@ -59,3 +59,14 @@ __pages: Strony
 zone.not.exists: "Strefa nie isnieje"
 edit.banners.in.zone: "Bannery w strefie zoneName"
 zones.associated.with.banner: "Strefy powiązane z bannerem bannerName"
+zone.name: "Strefa zoneName"
+add.banner.to.zone: "Dodaj banner do strefy"
+page: Strona
+save: Zapisz
+banner.id: ID bannera
+banner.title: "Tytuł bannera"
+banner.size: Wymiary
+campaign: Kampania
+use.in.zone: "Użyć w strefie?"
+probability: Prawdopodobieństwo
+show.banners: "Pokaż bannery"

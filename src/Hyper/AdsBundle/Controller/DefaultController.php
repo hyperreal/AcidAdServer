@@ -36,7 +36,7 @@ class DefaultController extends Controller
         $resp->headers->set('Content-type', 'text/javascript');
         $resp->headers->set('Cache-control', 'max-age=172800, public, must-revalidate');
 
-        $resp->setContent($this->renderView('HyperAdsBundle:Default:head.html.twig', array(
+        $resp->setContent($this->renderView('HyperAdsBundle:Default:head.js.twig', array(
             'server' => $this->getRequest()->getHttpHost(),
         )));
 

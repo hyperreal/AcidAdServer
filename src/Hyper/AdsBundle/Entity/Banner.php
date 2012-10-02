@@ -23,6 +23,7 @@ class Banner
 {
     const RAND_MIN = 10000000;
     const RAND_MAX = 99999999;
+    const DEFAULT_PROBABILITY = 1;
 
     /**
      * @ORM\Id
@@ -33,7 +34,7 @@ class Banner
 
     /**
      * @ManyToOne(targetEntity="Campaign", inversedBy="banners")
-     * @JoinColumn(name="banner_id", referencedColumnName="id")
+     * @JoinColumn(name="campaign_id", referencedColumnName="id")
      */
     protected $campaign;
 
@@ -91,7 +92,7 @@ class Banner
     protected $description;
 
     /**
-     * @OneToMany(targetEntity="BannerZoneReference", mappedBy="zone")
+     * @OneToMany(targetEntity="BannerZoneReference", mappedBy="banner")
      *
      * @var \Doctrine\Common\Collections\ArrayCollection
      */
@@ -241,6 +242,23 @@ class Banner
     public static function getBannerTypes()
     {
         return BannerType::getValidTypes();
+    }
+
+    /**
+     * @param $zoneId
+     *
+     * @return \Hyper\AdsBundle\Entity\BannerZoneReference|null
+     */
+    public function getReferenceInZone($zoneId)
+    {
+        foreach ($this->zones as $zoneRef) {
+            /** @var $zoneRef \Hyper\AdsBundle\Entity\BannerZoneReference */
+            if ($zoneId == $zoneRef->getZone()->getId()) {
+                return $zoneRef;
+            }
+        }
+
+        return null;
     }
 
     public function getAbsolutePath()

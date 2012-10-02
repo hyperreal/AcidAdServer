@@ -11,6 +11,7 @@
     <tr>
         <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
         <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'page'|trans({}, 'HyperAdsBundle') }}</th>
         <th>{{ 'enabled'|trans({}, 'HyperAdsBundle') }}</th>
         <th>{{ 'max.width'|trans({}, 'HyperAdsBundle') }}</th>
         <th>{{ 'max.height'|trans({}, 'HyperAdsBundle') }}</th>
@@ -21,8 +22,15 @@
     <tbody>
     {% for entity in entities %}
     <tr>
-        <td><a href="{{ path('admin_zone_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-        <td>{{ entity.name }}</td>
+        <td>
+            <a href="{{ path('admin_zone_show', { 'id': entity.id }) }}">{{ entity.id }}</a>
+        </td>
+        <td>
+            {{ entity.name }}
+            <br />
+            <a href="{{ path('banner_config_zone', {'zoneId': entity.id}) }}">{{ 'show.banners'|trans({}, 'HyperAdsBundle') }}</a>
+        </td>
+        <td>{{ entity.page.name }}</td>
         <td>{{ entity.enabled }}</td>
         <td>{{ entity.maxWidth }}</td>
         <td>{{ entity.maxHeight }}</td>

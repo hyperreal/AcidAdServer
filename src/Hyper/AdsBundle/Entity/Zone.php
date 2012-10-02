@@ -41,7 +41,7 @@ class Zone
     protected $name;
 
     /**
-     * @OneToMany(targetEntity="BannerZoneReference", mappedBy="banner")
+     * @OneToMany(targetEntity="BannerZoneReference", mappedBy="zone")
      */
     protected $banners;
 

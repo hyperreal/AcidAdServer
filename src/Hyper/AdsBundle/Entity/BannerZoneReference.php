@@ -37,17 +37,6 @@ class BannerZoneReference
      */
     protected $zone;
 
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
     /**
      * @ORM\Column(type="smallint")
      */
@@ -62,6 +51,16 @@ class BannerZoneReference
      * @ORM\Column(type="integer")
      */
     protected $views = 0;
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function setBanner($banner)
     {
