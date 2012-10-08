@@ -1,0 +1,10 @@
+{% macro bannerWidget(banner) %}
+{% if banner.type == 'text' %}
+
+{% elseif banner.type == 'flash' %}
+{% elseif banner.type == 'image' %}
+        <a href="http://hyperreal.info/todo" title="{{ banner.linkTitle }}">
+            <img src="{{ asset(banner.fileUrl) }}" alt="{{ banner.linkTitle }}" width="{{ banner.width }}" height="{{ banner.height }}">
+        </a>
+{% endif %}
+{% endmacro %}

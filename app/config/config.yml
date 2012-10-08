@@ -59,6 +59,10 @@ fos_user:
     firewall_name: main
     user_class: Hyper\AdsBundle\Entity\User
 
+services:
+    stats_collector:
+        class: "Hyper\AdsBundle\Helper\StatsCollector"
+        arguments: [@doctrine.orm.entity_manager]
 
 
 # Swiftmailer Configuration

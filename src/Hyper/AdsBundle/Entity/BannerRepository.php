@@ -11,7 +11,7 @@ class BannerRepository extends EntityRepository
         $em = $this->getEntityManager();
 
         $query = $em->createQuery(
-            'SELECT b
+            'SELECT b, bzr
             FROM Hyper\AdsBundle\Entity\Banner b
             JOIN b.zones bzr
             JOIN b.campaign c

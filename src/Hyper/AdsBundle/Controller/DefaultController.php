@@ -26,22 +26,26 @@ class DefaultController extends Controller
     {
         /** @var $em \Doctrine\ORM\EntityManager */
         $em = $this->get('doctrine.orm.entity_manager');
-        /** @var $bannerRepository \Hyper\AdsBundle\Entity\BannerRepository */
-        $bannerRepository = $em->getRepository('HyperAdsBundle:Banner');
-        $zoneRepository = $em->getRepository('HyperAdsBundle:Zone');
-
         /** @var $zone \Hyper\AdsBundle\Entity\Zone */
-        $zone = $zoneRepository->find($id);
+        $zone = $em->getRepository('HyperAdsBundle:Zone')->find($id);
 
         if (empty($zone)) {
             throw $this->createNotFoundException('Zone not found.');
         }
 
-        $banner = $bannerRepository->getRandomBannerInZone($zone);
+        /** @var $banner \Hyper\AdsBundle\Entity\Banner */
+        $banner = $em->getRepository('HyperAdsBundle:Banner')->getRandomBannerInZone($zone);
 
         if (empty($banner)) {
             throw $this->createNotFoundException('No banner found.');
         }
+
+        /** @var $banner \Hyper\AdsBundle\Entity\BannerZoneReference */
+        $reference = $banner->getReferenceInZone($id);
+
+        /** @var $statsCollector \Hyper\AdsBundle\Helper\StatsCollector */
+        $statsCollector = $this->get('stats_collector');
+        $statsCollector->collectView($reference);
 
         return array(
             'banner' => $banner,

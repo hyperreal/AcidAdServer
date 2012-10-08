@@ -1,1 +1,12 @@
-<img src="/{{ banner.fileUrl }}">
+{% import "::bannerWidgetMacro.html.twig" as widget %}
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+    <div id="banner">
+        {{ widget.bannerWidget(banner) }}
+    </div>
+</body>
+</html>
