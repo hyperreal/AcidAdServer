@@ -52,9 +52,11 @@ class BannerConfigController extends Controller
         $allBanners = $query->getResult();
 
         /** @var $bannersReference \Hyper\AdsBundle\Entity\BannerZoneReference[] */
-        $bannersReferences = $bannerZoneRepository->findBy(array(
-            'zone' => $zone,
-        ));
+        $bannersReferences = $bannerZoneRepository->findBy(
+            array(
+                'zone' => $zone,
+            )
+        );
 
         $usedBannerIds = array();
         foreach ($bannersReferences as $bannerReference) {

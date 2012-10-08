@@ -15,15 +15,37 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return array('name' => 'XXX');
+        return array();
     }
 
     /**
      * @Route("/show/{id}")
+     * @Template()
      */
-    public function showAction($zoneId)
+    public function showAction($id)
     {
-        return array();
+        /** @var $em \Doctrine\ORM\EntityManager */
+        $em = $this->get('doctrine.orm.entity_manager');
+        /** @var $bannerRepository \Hyper\AdsBundle\Entity\BannerRepository */
+        $bannerRepository = $em->getRepository('HyperAdsBundle:Banner');
+        $zoneRepository = $em->getRepository('HyperAdsBundle:Zone');
+
+        /** @var $zone \Hyper\AdsBundle\Entity\Zone */
+        $zone = $zoneRepository->find($id);
+
+        if (empty($zone)) {
+            throw $this->createNotFoundException('Zone not found.');
+        }
+
+        $banner = $bannerRepository->getRandomBannerInZone($zone);
+
+        if (empty($banner)) {
+            throw $this->createNotFoundException('No banner found.');
+        }
+
+        return array(
+            'banner' => $banner,
+        );
     }
 
     /**
@@ -36,9 +58,14 @@ class DefaultController extends Controller
         $resp->headers->set('Content-type', 'text/javascript');
         $resp->headers->set('Cache-control', 'max-age=172800, public, must-revalidate');
 
-        $resp->setContent($this->renderView('HyperAdsBundle:Default:head.js.twig', array(
-            'server' => $this->getRequest()->getHttpHost(),
-        )));
+        $resp->setContent(
+            $this->renderView(
+                'HyperAdsBundle:Default:head.js.twig',
+                array(
+                    'server' => $this->getRequest()->getHttpHost(),
+                )
+            )
+        );
 
         return $resp;
     }

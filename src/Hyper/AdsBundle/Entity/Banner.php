@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Hyper\AdsBundle\DBAL\BannerType;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\BannerRepository")
  * @ORM\Table(name="banner")
  */
 class Banner
@@ -274,6 +274,11 @@ class Banner
     public function getUploadDir()
     {
         return 'uploads';
+    }
+
+    public function getFileUrl()
+    {
+        return 'uploads/' . $this->getPath();
     }
 
     public function upload()
