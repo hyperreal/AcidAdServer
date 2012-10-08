@@ -19,10 +19,10 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/show/{id}")
+     * @Route("/frame/{id}")
      * @Template()
      */
-    public function showAction($id)
+    public function frameAction($id)
     {
         /** @var $em \Doctrine\ORM\EntityManager */
         $em = $this->get('doctrine.orm.entity_manager');
@@ -53,6 +53,28 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/click/{zoneId}/{bannerId}")
+     * @todo prevention from bots' clicks
+     */
+    public function clickAction($zoneId, $bannerId)
+    {
+        /** @var $bannerRepository \Hyper\AdsBundle\Entity\BannerRepository */
+        $bannerRepository = $this->get('doctrine.orm.entity_manager')->getRepository('HyperAdsBundle:Banner');
+
+        $reference = $bannerRepository->getBannerReference($bannerId, $zoneId);
+
+        if (empty($reference)) {
+            throw $this->createNotFoundException('Banner is not present in given zone');
+        }
+
+        /** @var $statsCollector \Hyper\AdsBundle\Helper\StatsCollector */
+        $statsCollector = $this->get('stats_collector');
+        $statsCollector->collectClick($reference);
+
+        return $this->redirect($reference->getBanner()->getUrl());
+    }
+
+    /**
      * @Route("/head")
      */
     public function headAction()
@@ -73,4 +95,5 @@ class DefaultController extends Controller
 
         return $resp;
     }
+
 }

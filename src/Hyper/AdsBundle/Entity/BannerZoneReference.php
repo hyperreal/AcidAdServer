@@ -68,7 +68,7 @@ class BannerZoneReference
     }
 
     /**
-     * @return Hyper/AdsBundle/Entity/Banner
+     * @return \Hyper\AdsBundle\Entity\Banner
      */
     public function getBanner()
     {
@@ -111,7 +111,7 @@ class BannerZoneReference
     }
 
     /**
-     * @return Hyper/AdsBundle/Entity/Zone
+     * @return \Hyper\AdsBundle\Entity\Zone
      */
     public function getZone()
     {

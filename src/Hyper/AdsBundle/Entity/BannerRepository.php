@@ -55,4 +55,29 @@ class BannerRepository extends EntityRepository
 
         return $bannersArray[$selectedBanner];
     }
+
+    /**
+     * @param     $bannerId
+     * @param     $zoneId
+     *
+     * @return \Hyper\AdsBundle\Entity\BannerZoneReference
+     */
+    public function getBannerReference($bannerId, $zoneId)
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT bzr, b
+            FROM Hyper\AdsBundle\Entity\BannerZoneReference bzr
+            JOIN bzr.banner b
+            JOIN bzr.zone z
+            WHERE b.id = ?1 AND z.id = ?2'
+        );
+
+        $query->setParameter(1, (int)$bannerId);
+        $query->setParameter(2, (int)$zoneId);
+
+        return $query->getOneOrNullResult();
+    }
+
 }
