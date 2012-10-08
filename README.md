@@ -1,3 +1,5 @@
+...work in progress...
+
 # AcidAdServer
 
 AcidAdServer is ad serving software based on Symfony 2 framework.
