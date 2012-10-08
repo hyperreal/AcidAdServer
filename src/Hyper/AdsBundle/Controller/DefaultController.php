@@ -75,7 +75,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/head")
+     * @Route("/head", name="default_head")
      */
     public function headAction()
     {
@@ -94,6 +94,15 @@ class DefaultController extends Controller
         );
 
         return $resp;
+    }
+
+    /**
+     * @Route("/demo")
+     * @Template()
+     */
+    public function demoAction()
+    {
+        return array();
     }
 
 }

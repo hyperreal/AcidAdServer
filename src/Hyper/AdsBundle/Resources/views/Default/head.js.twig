@@ -16,7 +16,7 @@
         params += 'ref' + encodeURIComponent(document.URL) + '&';
 
         for (var col in Acid.dataCollectors) {
-            var hash = Acid.dataCollectors[col]()
+            var hash = Acid.dataCollectors[col]();
             for (var key in hash) {
                 params += key + '=' + encodeURIComponent(hash[key]);
             }
