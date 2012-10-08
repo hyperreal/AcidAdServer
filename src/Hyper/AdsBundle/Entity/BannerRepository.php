@@ -38,11 +38,12 @@ class BannerRepository extends EntityRepository
         }
 
         $bannersArray = array();
+        $zoneId = $zone->getId();
 
         foreach ($allBannersInZone as $banner) {
             /** @var $banner \Hyper\AdsBundle\Entity\Banner */
             /** @var $reference \Hyper\AdsBundle\Entity\BannerZoneReference */
-            $reference = $banner->getReferenceInZone($id);
+            $reference = $banner->getReferenceInZone($zoneId);
 
             $probability = $reference->getProbability();
             for ($i=0; $i<$probability; $i++) {
