@@ -14,7 +14,7 @@ With Acid you can:
 
 If you have questions, feel free to e-mail me at *fajka at hyperreal dot info*
 
-# Why I should (or shouldn't) use Acid?
+# Why should I (or should not) use Acid?
 
 If you want your customers to manage their campaigns and banners, you should **not** use Acid. Every user see all
 campaigns, banners, etc. It is some lack of security for certain types of organizations.
