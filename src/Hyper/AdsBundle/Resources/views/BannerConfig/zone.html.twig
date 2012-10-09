@@ -20,6 +20,7 @@
                 </tr>
             </thead>
             {% for banner in allBanners %}
+                {% set reference = banner.getReferenceInZone(zone.id) %}
                 <tr>
                     <td>{{ banner.id }}</td>
                     <td>
@@ -31,11 +32,11 @@
                     <td>{{ banner.campaign.name }}</td>
                     <td>
                         <input type="checkbox" name="newBanners[{{ banner.id }}]" value="{{ banner.id }}"
-                            {% if banner.id in usedBannerIds %} checked="checked"{% endif %} />
+                            {% if banner.id in usedBannerIds and reference.active == 1 %} checked="checked"{% endif %} />
                     </td>
                     <td>
                         <input type="number" name="probability[{{ banner.id }}]" size="3"
-                               value="{% if banner.id in usedBannerIds %}{{ banner.getReferenceInZone(zone.id).probability }}{% else %}1{% endif %}" />
+                               value="{% if banner.id in usedBannerIds %}{{ reference.probability }}{% else %}1{% endif %}" />
                     </td>
                 </tr>
             {% endfor %}

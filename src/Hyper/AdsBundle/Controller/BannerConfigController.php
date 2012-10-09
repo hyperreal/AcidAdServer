@@ -32,7 +32,10 @@ class BannerConfigController extends Controller
         /** @var $tr \Symfony\Component\Translation\Translator */
         $tr = $this->get('translator');
 
+        /** @var $bannerZoneRepository \Hyper\AdsBundle\Entity\BannerZoneReferenceRepository */
         $bannerZoneRepository   = $em->getRepository('HyperAdsBundle:BannerZoneReference');
+        /** @var $bannerRepository \Hyper\AdsBundle\Entity\BannerRepository */
+        $bannerRepository       = $em->getRepository('HyperAdsBundle:Banner');
         $zoneRepository         = $em->getRepository('HyperAdsBundle:Zone');
 
         $zone = $zoneRepository->find($zoneId);
@@ -40,23 +43,8 @@ class BannerConfigController extends Controller
             throw $this->createNotFoundException($tr->trans('zone.not.exists', array(), 'HyperAdsBundle'));
         }
 
-        $query = $em->createQuery(
-            'SELECT b
-            FROM Hyper\AdsBundle\Entity\Banner b
-            JOIN b.campaign c
-            WHERE c.expireDate > ?1'
-        );
-
-        $query->setParameter(1, new \DateTime());
-        /** @var $allBanners \Hyper\AdsBundle\Entity\Banner[] */
-        $allBanners = $query->getResult();
-
-        /** @var $bannersReference \Hyper\AdsBundle\Entity\BannerZoneReference[] */
-        $bannersReferences = $bannerZoneRepository->findBy(
-            array(
-                'zone' => $zone,
-            )
-        );
+        $allBanners = $bannerRepository->getAllActiveBanners();
+        $bannersReferences = $bannerZoneRepository->getBannerReferencesByZone($zone);
 
         $usedBannerIds = array();
         foreach ($bannersReferences as $bannerReference) {
@@ -93,7 +81,10 @@ class BannerConfigController extends Controller
         $em = $this->get('doctrine.orm.entity_manager');
 
         $zonesRepository        = $em->getRepository('HyperAdsBundle:Zone');
+        /** @var $bannersRepository \Hyper\AdsBundle\Entity\BannerRepository */
         $bannersRepository      = $em->getRepository('HyperAdsBundle:Banner');
+        /** @var $bannersRefRepository \Hyper\AdsBundle\Entity\BannerZoneReferenceRepository */
+        $bannersRefRepository    = $em->getRepository('HyperAdsBundle:BannerZoneReference');
 
         /** @var $zone \Hyper\AdsBundle\Entity\Zone */
         $zone = $zonesRepository->find($zoneId);
@@ -102,33 +93,8 @@ class BannerConfigController extends Controller
         }
 
         /** @var $banners \Hyper\AdsBundle\Entity\Banner[] */
-        $banners = $bannersRepository->findBy(
-            array(
-                'id' => $newBannerIds,
-            )
-        );
-
-        foreach ($banners as $banner) {
-
-            if (!isset($probabilities[$banner->getId()])) {
-                continue;
-            }
-
-            $ref = $banner->getReferenceInZone($zoneId);
-
-            if (null === $ref) {
-                $ref = new BannerZoneReference();
-                $ref->setViews(0);
-                $ref->setClicks(0);
-                $ref->setBanner($banner);
-                $ref->setZone($zone);
-            }
-
-            $ref->setProbability($probabilities[$banner->getId()]);
-
-            $em->persist($ref);
-            $em->flush();
-        }
+        $banners = $bannersRepository->findBy(array('id' => $newBannerIds));
+        $bannersRefRepository->updateReferences($zone, $banners, $probabilities);
 
         return $this->redirect($this->generateUrl('admin_zone_show', array('id' => $zoneId)));
     }

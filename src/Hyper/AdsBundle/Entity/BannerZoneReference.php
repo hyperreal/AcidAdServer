@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\BannerZoneReferenceRepository")
  * @ORM\Table(name="banner_zone")
  */
 class BannerZoneReference
@@ -51,6 +51,11 @@ class BannerZoneReference
      * @ORM\Column(type="integer")
      */
     protected $views = 0;
+
+    /**
+     * @ORM\Column(type="smallint", nullable=false)
+     */
+    protected $active = 1;
 
     public function setId($id)
     {
@@ -103,6 +108,16 @@ class BannerZoneReference
     public function getViews()
     {
         return $this->views;
+    }
+
+    public function setActive($active)
+    {
+        $this->active = $active;
+    }
+
+    public function getActive()
+    {
+        return $this->active;
     }
 
     public function setZone($zone)

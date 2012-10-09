@@ -12,10 +12,10 @@ class BannerRepository extends EntityRepository
 
         $query = $em->createQuery(
             'SELECT b, bzr
-            FROM Hyper\AdsBundle\Entity\Banner b
-            JOIN b.zones bzr
-            JOIN b.campaign c
-            WHERE c.expireDate > ?1 AND bzr.zone = ?2'
+             FROM Hyper\AdsBundle\Entity\Banner b
+             JOIN b.zones bzr
+             JOIN b.campaign c
+             WHERE c.expireDate > ?1 AND bzr.zone = ?2'
         );
 
         $query->setParameter(1, new \DateTime());
@@ -25,9 +25,28 @@ class BannerRepository extends EntityRepository
     }
 
     /**
+     * @return \Hyper\AdsBundle\Entity\Banner[]
+     */
+    public function getAllActiveBanners()
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT b, bzr
+             FROM Hyper\AdsBundle\Entity\Banner b
+             JOIN b.campaign c
+             LEFT JOIN b.zones bzr
+             WHERE c.expireDate > ?1'
+        );
+
+        $query->setParameter(1, new \DateTime());
+        return $query->getResult();
+    }
+
+    /**
      * @param Zone $zone
      *
-     * @return Hyper\AdsBundle\Entity\Banner|null
+     * @return \Hyper\AdsBundle\Entity\Banner|null
      */
     public function getRandomBannerInZone(Zone $zone)
     {
@@ -68,10 +87,10 @@ class BannerRepository extends EntityRepository
 
         $query = $em->createQuery(
             'SELECT bzr, b
-            FROM Hyper\AdsBundle\Entity\BannerZoneReference bzr
-            JOIN bzr.banner b
-            JOIN bzr.zone z
-            WHERE b.id = ?1 AND z.id = ?2'
+             FROM Hyper\AdsBundle\Entity\BannerZoneReference bzr
+             JOIN bzr.banner b
+             JOIN bzr.zone z
+             WHERE b.id = ?1 AND z.id = ?2'
         );
 
         $query->setParameter(1, (int)$bannerId);
