@@ -24,6 +24,7 @@ class Banner
     const RAND_MIN = 10000000;
     const RAND_MAX = 99999999;
     const DEFAULT_PROBABILITY = 1;
+    const UPLOAD_DIR = 'uploads';
 
     /**
      * @ORM\Id
@@ -98,6 +99,10 @@ class Banner
      */
     protected $zones;
 
+    public function __construct()
+    {
+        $this->zones = new ArrayCollection();
+    }
 
     public function setId($id)
     {
@@ -109,7 +114,7 @@ class Banner
         return $this->id;
     }
 
-    public function setCampaign($campaign)
+    public function setCampaign(Campaign $campaign)
     {
         $this->campaign = $campaign;
     }
@@ -273,12 +278,12 @@ class Banner
 
     public function getUploadDir()
     {
-        return 'uploads';
+        return self::UPLOAD_DIR;
     }
 
     public function getFileUrl()
     {
-        return 'uploads/' . $this->getPath();
+        return self::UPLOAD_DIR . '/' . $this->getPath();
     }
 
     public function upload()
