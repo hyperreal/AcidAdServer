@@ -7,7 +7,7 @@ AcidAdServer is ad serving web application based on Symfony 2 framework.
 With Acid you can:
 
  * Manage campaigns of your customers
- * Create zones in your sites' profiles (`zone` is a place on your site, where you want to place some banner(s))
+ * Create zones in your sites' profiles (`zone` is a place on your site, where you probably want to put some banner(s))
  * Upload banners like images and swf's
  * Assign banners to zones (one banner can be assigned to multiple zones and one zone can contain multiple banners)
  * View statistics of clicks and views of your banners
@@ -23,7 +23,7 @@ Otherwise - clone, install, and use :-)
 
 # Benefits
 
- * Acid is fast. When you view zone it performs only two `SELECT`'s AND one `UPDATE`.
+ * Acid is fast. When you view zone it performs only two `SELECT`'s and one `UPDATE`.
  * Code is very simple, especially for Symfony2 users. If you're tired of adapting OpenX, OrbitOpenAdServer or other
    open source adservers, you'll be in heaven.
 
