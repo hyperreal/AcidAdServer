@@ -49,11 +49,12 @@ class DefaultController extends Controller
 
         return array(
             'banner' => $banner,
+            'zone' => $zone
         );
     }
 
     /**
-     * @Route("/click/{zoneId}/{bannerId}")
+     * @Route("/click/{zoneId}/{bannerId}", name="banner_click")
      * @todo prevention from bots' clicks
      */
     public function clickAction($zoneId, $bannerId)
