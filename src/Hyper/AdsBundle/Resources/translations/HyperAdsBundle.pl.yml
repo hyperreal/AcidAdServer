@@ -70,3 +70,5 @@ campaign: Kampania
 use.in.zone: "Użyć w strefie?"
 probability: Prawdopodobieństwo
 show.banners: "Pokaż bannery"
+mail.expiring.subject: "Temat maila"
+mail.expiring.content: "Treść maila"

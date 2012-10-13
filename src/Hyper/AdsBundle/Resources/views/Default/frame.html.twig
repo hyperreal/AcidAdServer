@@ -1,4 +1,13 @@
-{% import "::bannerWidgetMacro.html.twig" as widget %}
+{% macro bannerWidget(bnr) %}
+{% if bnr.type == 'text' %}
+
+{% elseif bnr.type == 'image' %}
+<a href="http://hyperreal.info/todo" title="{{ bnr.linkTitle }}">
+    <img src="{{ asset(bnr.fileUrl) }}" alt="{{ bnr.linkTitle }}" width="{{ bnr.width }}" height="{{ bnr.height }}">
+</a>
+{% endif %}
+{% endmacro %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +21,7 @@
 </head>
 <body>
     <div id="banner">
-        {{ widget.bannerWidget(banner) }}
+        {{ _self.bannerWidget(banner) }}
     </div>
 </body>
 </html>

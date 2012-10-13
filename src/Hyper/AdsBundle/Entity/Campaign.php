@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\CampaignRepository")
  * @ORM\Table(name="campaign")
  */
 class Campaign
@@ -65,11 +65,17 @@ class Campaign
         return $this->id;
     }
 
-    public function setAdvertiser($advertiser)
+    /**
+     * @param \Hyper\AdsBundle\Entity\Advertiser $advertiser
+     */
+    public function setAdvertiser(Advertiser $advertiser)
     {
         $this->advertiser = $advertiser;
     }
 
+    /**
+     * @return \Hyper\AdsBundle\Entity\Advertiser
+     */
     public function getAdvertiser()
     {
         return $this->advertiser;

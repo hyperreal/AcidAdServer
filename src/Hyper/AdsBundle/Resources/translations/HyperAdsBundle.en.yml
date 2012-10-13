@@ -70,3 +70,5 @@ campaign: Campaign
 use.in.zone: "Use in zone?"
 probability: Probability
 show.banners: "Show banners"
+mail.expiring.subject: "Mail subject"
+mail.expiring.content: "Mail content"
