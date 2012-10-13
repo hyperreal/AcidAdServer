@@ -10,6 +10,7 @@ parameters:
     mailer_host:       localhost
     mailer_user:       ~
     mailer_password:   ~
+    mailer_delivery:   me@example.com
 
     locale:            pl
     secret:            0724ebb222af8866b7d7a2524451219b
