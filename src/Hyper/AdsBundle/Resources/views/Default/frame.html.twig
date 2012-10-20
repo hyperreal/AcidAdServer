@@ -18,9 +18,10 @@
         swfobject.embedSWF("{{ asset(banner.fileUrl) }}", "banner", "{{ banner.width }}", "{{ banner.height }}", "9.0.0", "{{ asset('js/expressInstall.swf') }}")
     </script>
 {% endif %}
+    <style type="text/css">body{margin:0;}</style>
 </head>
 <body>
-    <div id="banner">
+    <div id="banner" style="text-align: center">
         {{ _self.bannerWidget(banner, zone) }}
     </div>
 </body>
