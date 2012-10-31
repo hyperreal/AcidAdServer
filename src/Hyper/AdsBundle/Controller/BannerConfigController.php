@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Hyper\AdsBundle\Entity\Banner;
 use Hyper\AdsBundle\Entity\BannerZoneReference;
+use Hyper\AdsBundle\Helper\ReferencesUpdater;
 
 class BannerConfigController extends Controller
 {
@@ -83,8 +84,6 @@ class BannerConfigController extends Controller
         $zonesRepository        = $em->getRepository('HyperAdsBundle:Zone');
         /** @var $bannersRepository \Hyper\AdsBundle\Entity\BannerRepository */
         $bannersRepository      = $em->getRepository('HyperAdsBundle:Banner');
-        /** @var $bannersRefRepository \Hyper\AdsBundle\Entity\BannerZoneReferenceRepository */
-        $bannersRefRepository    = $em->getRepository('HyperAdsBundle:BannerZoneReference');
 
         /** @var $zone \Hyper\AdsBundle\Entity\Zone */
         $zone = $zonesRepository->find($zoneId);
@@ -94,7 +93,12 @@ class BannerConfigController extends Controller
 
         /** @var $banners \Hyper\AdsBundle\Entity\Banner[] */
         $banners = $bannersRepository->findBy(array('id' => $newBannerIds));
-        $bannersRefRepository->updateReferences($zone, $banners, $probabilities);
+
+        $referenceUpdater = new ReferencesUpdater($em);
+        $referenceUpdater->setZone($zone);
+        $referenceUpdater->setProbabilities($probabilities);
+        $referenceUpdater->setBanners($banners);
+        $referenceUpdater->updateReferences();
 
         return $this->redirect($this->generateUrl('admin_zone_show', array('id' => $zoneId)));
     }

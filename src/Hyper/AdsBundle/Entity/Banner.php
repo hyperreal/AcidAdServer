@@ -88,6 +88,12 @@ class Banner
     protected $url;
 
     /**
+     * @ORM\Column(type="date", name="expire_date")
+     * @var \DateTime
+     */
+    private $expireDate;
+
+    /**
      * @ORM\Column(type="string", nullable=true)
      */
     protected $description;
@@ -202,6 +208,21 @@ class Banner
     public function getUrl()
     {
         return $this->url;
+    }
+
+    public function getExpireDate()
+    {
+        return $this->expireDate;
+    }
+
+    public function setExpireDate(\DateTime $date)
+    {
+        $this->expireDate = $date;
+    }
+
+    public function isExpired()
+    {
+        return $this->getExpireDate() < new \DateTime();
     }
 
     public function setWidth($width)
