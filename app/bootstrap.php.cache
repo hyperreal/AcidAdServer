@@ -24,6 +24,8 @@ namespace Symfony\Component\DependencyInjection
 {
 
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 
 interface ContainerInterface
@@ -209,6 +211,11 @@ class Container implements IntrospectableContainerInterface
                 $service = $this->$method();
             } catch (\Exception $e) {
                 unset($this->loading[$id]);
+
+                if (isset($this->services[$id])) {
+                    unset($this->services[$id]);
+                }
+
                 throw $e;
             }
 
@@ -502,10 +509,10 @@ abstract class Kernel implements KernelInterface, TerminableInterface
     protected $classes;
     protected $errorReportingLevel;
 
-    const VERSION         = '2.1.0-DEV';
+    const VERSION         = '2.2.0-DEV';
     const VERSION_ID      = '20100';
     const MAJOR_VERSION   = '2';
-    const MINOR_VERSION   = '1';
+    const MINOR_VERSION   = '2';
     const RELEASE_VERSION = '0';
     const EXTRA_VERSION   = 'DEV';
 
@@ -638,7 +645,7 @@ abstract class Kernel implements KernelInterface, TerminableInterface
     public function getBundle($name, $first = true)
     {
         if (!isset($this->bundleMap[$name])) {
-            throw new \InvalidArgumentException(sprintf('Bundle "%s" does not exist or it is not enabled. Maybe you forgot to add it in the registerBundles() function of your %s.php file?', $name, get_class($this)));
+            throw new \InvalidArgumentException(sprintf('Bundle "%s" does not exist or it is not enabled. Maybe you forgot to add it in the registerBundles() method of your %s.php file?', $name, get_class($this)));
         }
 
         if (true === $first) {
@@ -1326,7 +1333,7 @@ class ConfigCache
             throw new \RuntimeException(sprintf('Unable to write in the %s directory', $dir));
         }
 
-        $tmpFile = tempnam(dirname($this->file), basename($this->file));
+        $tmpFile = tempnam($dir, basename($this->file));
         if (false !== @file_put_contents($tmpFile, $content) && @rename($tmpFile, $this->file)) {
             @chmod($this->file, 0666 & ~umask());
         } else {
@@ -1335,7 +1342,7 @@ class ConfigCache
 
         if (null !== $metadata && true === $this->debug) {
             $file = $this->file.'.meta';
-            $tmpFile = tempnam(dirname($file), basename($file));
+            $tmpFile = tempnam($dir, basename($file));
             if (false !== @file_put_contents($tmpFile, serialize($metadata)) && @rename($tmpFile, $file)) {
                 @chmod($file, 0666 & ~umask());
             }
