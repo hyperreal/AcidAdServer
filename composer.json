@@ -1,5 +1,5 @@
 {
-    "name": "fajka/AcidAdServer",
+    "name": "hyperreal/AcidAdServer",
     "description": "AcidAdServer. Ad serving software",
     "autoload": {
         "psr-0": { "": "src/" }
