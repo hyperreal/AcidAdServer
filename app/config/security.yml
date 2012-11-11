@@ -15,6 +15,11 @@ security:
             id: fos_user.user_provider.username
 
     firewalls:
+        ads:
+            pattern: ^/(head|click|frame)
+            stateless: true
+            anonymous: true
+
         main:
             pattern: ^/
             form_login:
