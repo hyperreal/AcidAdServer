@@ -78,7 +78,7 @@ class ReferencesUpdater
      */
     public function updateReferences()
     {
-        $this->filterBannersWithNoProbabilityInfo();
+        $this->filterUnusedProbabilities();
         $this->validateParameters();
         $this->updateReferencesInTransaction();
     }
@@ -132,20 +132,22 @@ class ReferencesUpdater
 
         if (null === $ref) {
             $ref = $this->createNewReference($banner);
-            return $ref;
         }
+
         return $ref;
     }
 
-    private function filterBannersWithNoProbabilityInfo()
+    private function filterUnusedProbabilities()
     {
-        $probabilities = $this->probabilities;
-        $this->banners = array_filter(
-            $this->banners,
-            function (Banner $banner) use ($probabilities) {
-                return isset($probabilities[$banner->getId()]);
+        $probabilities = array();
+
+        foreach ($this->banners as $banner) {
+            if (isset($this->probabilities[$banner->getId()])) {
+                $probabilities[$banner->getId()] = $this->probabilities[$banner->getId()];
             }
-        );
+        }
+
+        $this->probabilities = $probabilities;
     }
 
     private function validateParameters()

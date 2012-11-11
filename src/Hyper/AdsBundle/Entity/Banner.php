@@ -19,19 +19,12 @@ use Hyper\AdsBundle\DBAL\BannerType;
  * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\BannerRepository")
  * @ORM\Table(name="banner")
  */
-class Banner
+class Banner extends Advertisement
 {
     const RAND_MIN = 10000000;
     const RAND_MAX = 99999999;
     const DEFAULT_PROBABILITY = 1;
     const UPLOAD_DIR = 'uploads';
-
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
 
     /**
      * @ManyToOne(targetEntity="Campaign", inversedBy="banners")
@@ -72,11 +65,6 @@ class Banner
     protected $type;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $title;
-
-    /**
      * @ORM\Column(type="string", name="link_title", nullable=true)
      */
     protected $linkTitle;
@@ -88,15 +76,14 @@ class Banner
     protected $url;
 
     /**
-     * @ORM\Column(type="date", name="expire_date")
-     * @var \DateTime
-     */
-    private $expireDate;
-
-    /**
      * @ORM\Column(type="string", nullable=true)
      */
     protected $description;
+
+    /**
+     * @ORM\Column(type="string", name="original_file_name")
+     */
+    protected $originalFileName;
 
     /**
      * @OneToMany(targetEntity="BannerZoneReference", mappedBy="banner")
@@ -105,19 +92,17 @@ class Banner
      */
     protected $zones;
 
+    /**
+     * @ManyToOne(targetEntity="Advertiser", inversedBy="banners")
+     * @JoinColumn(name="advertiser_id", referencedColumnName="id")
+     *
+     * @var \Hyper\AdsBundle\Entity\Advertiser
+     */
+    protected $advertiser;
+
     public function __construct()
     {
         $this->zones = new ArrayCollection();
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function getId()
-    {
-        return $this->id;
     }
 
     public function setCampaign(Campaign $campaign)
@@ -180,16 +165,6 @@ class Banner
         return $this->linkTitle;
     }
 
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
     public function setType($type)
     {
         $this->type = $type;
@@ -208,21 +183,6 @@ class Banner
     public function getUrl()
     {
         return $this->url;
-    }
-
-    public function getExpireDate()
-    {
-        return $this->expireDate;
-    }
-
-    public function setExpireDate(\DateTime $date)
-    {
-        $this->expireDate = $date;
-    }
-
-    public function isExpired()
-    {
-        return $this->getExpireDate() < new \DateTime();
     }
 
     public function setWidth($width)
@@ -260,6 +220,16 @@ class Banner
         $this->zones->add($zone);
     }
 
+    public function getOriginalFileName()
+    {
+        return $this->originalFileName;
+    }
+
+    public function setOriginalFileName($fileName)
+    {
+        $this->originalFileName = $fileName;
+    }
+
     public function __toString()
     {
         return $this->getId();
@@ -285,6 +255,16 @@ class Banner
         }
 
         return null;
+    }
+
+    public function getAdvertiser()
+    {
+        return $this->advertiser;
+    }
+
+    public function setAdvertiser(Advertiser $advertiser)
+    {
+        $this->advertiser = $advertiser;
     }
 
     public function getAbsolutePath()
@@ -314,16 +294,22 @@ class Banner
         }
 
         $info         = pathinfo($this->file->getClientOriginalName());
-        $filename     = md5(mt_rand(self::RAND_MIN, self::RAND_MAX) . $info['filename']) . '.' . $info['extension'];
-        $absolutePath = $this->getUploadRootDir() . DIRECTORY_SEPARATOR . $filename;
-
+        $filename     = $this->generateFileName($info);
         $this->file->move($this->getUploadRootDir(), $filename);
-        list($width, $height,) = getimagesize($absolutePath);
 
-        $this->width     = $width;
-        $this->height    = $height;
+        $absolutePath = $this->getUploadRootDir() . DIRECTORY_SEPARATOR . $filename;
+        list($width, $height,/*comma left intentionally*/) = getimagesize($absolutePath);
+
+        $this->width = $width;
+        $this->height = $height;
         $this->extension = $info['extension'];
-        $this->path      = $filename;
-        $this->file      = null;
+        $this->path = $filename;
+        $this->originalFileName = $info['basename'];
+        $this->file = null;
+    }
+
+    private function generateFileName(array $pathInfo)
+    {
+        return md5(mt_rand(self::RAND_MIN, self::RAND_MAX) . $pathInfo['filename']) . '.' . $pathInfo['extension'];
     }
 }

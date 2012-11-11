@@ -15,15 +15,21 @@ class CampaignType extends AbstractType
         $builder
             ->add('name')
             ->add(
-            'startDate', 'date', array(
-                'data' => new \DateTime(),
+                'startDate',
+                'date',
+                array(
+                    'data' => new \DateTime(),
+                    'label' => 'Start date',
+                )
             )
-        )
             ->add(
-            'expireDate', 'date', array(
-                'data' => new \DateTime('+1 month'),
+                'expireDate',
+                'date',
+                array(
+                    'data' => new \DateTime('+1 month'),
+                    'label' => 'Expire date',
+                )
             )
-        )
             ->add('advertiser');
     }
 

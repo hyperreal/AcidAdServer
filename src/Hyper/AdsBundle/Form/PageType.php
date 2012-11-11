@@ -12,7 +12,7 @@ class PageType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('url');
+            ->add('url', 'url', array('label' => 'URL'));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

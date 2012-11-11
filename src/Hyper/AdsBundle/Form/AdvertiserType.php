@@ -12,9 +12,9 @@ class AdvertiserType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('email')
-            ->add('firstName')
-            ->add('lastName');
+            ->add('email', 'email', array('label' => 'E-mail'))
+            ->add('firstName', 'text', array('label' => 'First name'))
+            ->add('lastName', 'text', array('label' => 'Last name'));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
