@@ -11,7 +11,6 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 class BannerType extends Type
 {
-
     const BANNER_TYPE = 'bannertype';
 
     const BANNER_TYPE_TEXT  = 'text';
@@ -30,7 +29,7 @@ class BannerType extends Type
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        if (!in_array($value, array(self::BANNER_TYPE_FLASH, self::BANNER_TYPE_IMAGE, self::BANNER_TYPE_TEXT))) {
+        if (!in_array($value, self::getValidTypes())) {
             throw new \InvalidArgumentException('Invalid banner type');
         }
 
@@ -48,6 +47,15 @@ class BannerType extends Type
             self::BANNER_TYPE_FLASH,
             self::BANNER_TYPE_IMAGE,
             self::BANNER_TYPE_TEXT,
+        );
+    }
+
+    public static function getValidTypesWithLabels()
+    {
+        return array(
+            self::BANNER_TYPE_FLASH => 'Flash movie',
+            self::BANNER_TYPE_IMAGE => 'Image',
+            self::BANNER_TYPE_TEXT => 'Text',
         );
     }
 }

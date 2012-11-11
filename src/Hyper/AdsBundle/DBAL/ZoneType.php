@@ -11,7 +11,6 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 class ZoneType extends Type
 {
-
     const ZONE_TYPE = 'zonetype';
 
     const ZONE_TYPE_MOBILE  = 'mobile';

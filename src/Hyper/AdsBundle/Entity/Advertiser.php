@@ -55,6 +55,18 @@ class Advertiser
      */
     protected $campaigns;
 
+    /**
+     * @var \Hyper\AdsBundle\Entity\Banner[]
+     *
+     * @OneToMany(targetEntity="Banner", mappedBy="advertiser")
+     */
+    protected $banners;
+
+    public function __construct()
+    {
+        $this->banners = new ArrayCollection();
+    }
+
     public function setId($id)
     {
         $this->id = $id;
@@ -113,6 +125,16 @@ class Advertiser
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    public function getBanners()
+    {
+        return $this->banners;
+    }
+
+    public function addBanner(Banner $banner)
+    {
+        $this->banners->add($banner);
     }
 
     public function __toString()

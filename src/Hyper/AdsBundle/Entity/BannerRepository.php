@@ -14,8 +14,7 @@ class BannerRepository extends EntityRepository
             'SELECT b, bzr
              FROM Hyper\AdsBundle\Entity\Banner b
              JOIN b.zones bzr
-             JOIN b.campaign c
-             WHERE c.expireDate > ?1 AND bzr.zone = ?2'
+             WHERE b.expireDate > ?1 AND bzr.zone = ?2'
         );
 
         $query->setParameter(1, new \DateTime());
@@ -34,9 +33,8 @@ class BannerRepository extends EntityRepository
         $query = $em->createQuery(
             'SELECT b, bzr
              FROM Hyper\AdsBundle\Entity\Banner b
-             JOIN b.campaign c
              LEFT JOIN b.zones bzr
-             WHERE c.expireDate > ?1'
+             WHERE b.expireDate > ?1'
         );
 
         $query->setParameter(1, new \DateTime());

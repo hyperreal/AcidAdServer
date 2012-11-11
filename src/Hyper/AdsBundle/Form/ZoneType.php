@@ -13,8 +13,8 @@ class ZoneType extends AbstractType
         $builder
             ->add('name')
             ->add('enabled')
-            ->add('maxWidth')
-            ->add('maxHeight')
+            ->add('maxWidth', 'number', array('label' => 'Max. width'))
+            ->add('maxHeight', 'number', array('label' => 'Max. height'))
             ->add('type')
             ->add('page');
     }

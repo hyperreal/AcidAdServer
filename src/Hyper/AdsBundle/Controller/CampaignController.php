@@ -18,7 +18,7 @@ class CampaignController extends Controller
     /**
      * Lists all Campaign entities.
      *
-     * @Route   ("/{advertiserId}", name="admin_campaign", requirements={"advertiserId" = "\d+"}, defaults={"advertiserId" = 0})
+     * @Route("/{advertiserId}",name="admin_campaign",requirements={"advertiserId"="\d+"},defaults={"advertiserId"=0})
      * @Template()
      */
     public function indexAction($advertiserId = 0)
@@ -32,24 +32,24 @@ class CampaignController extends Controller
             return array(
                 'entities' => $entities,
             );
-        } else {
-            $advertiser = $em->getRepository('HyperAdsBundle:Advertiser')->find($advertiserId);
-
-            if (empty($advertiser)) {
-                throw $this->createNotFoundException('Advertiser not found.');
-            }
-
-            $entities = $em->getRepository('HyperAdsBundle:Campaign')->findBy(
-                array(
-                    'advertiser' => $advertiser,
-                )
-            );
-
-            return array(
-                'entities'      => $entities,
-                'advertiser'    => $advertiser
-            );
         }
+
+        $advertiser = $em->getRepository('HyperAdsBundle:Advertiser')->find($advertiserId);
+
+        if (empty($advertiser)) {
+            throw $this->createNotFoundException('Advertiser not found.');
+        }
+
+        $entities = $em->getRepository('HyperAdsBundle:Campaign')->findBy(
+            array(
+                'advertiser' => $advertiser,
+            )
+        );
+
+        return array(
+            'entities'      => $entities,
+            'advertiser'    => $advertiser
+        );
     }
 
     /**
