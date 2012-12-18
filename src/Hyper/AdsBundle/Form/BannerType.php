@@ -11,25 +11,29 @@ class BannerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('file')
-            ->add('type', 'choice', array('choices' => BType::getValidTypesWithLabels()))
-            ->add('title')
+        $builder->add('file')
+            ->add(
+                'type',
+                'choice',
+                array(
+                    'choices' => BType::getValidTypesWithLabels(),
+                    'label' => 'type',
+                    'translation_domain' => 'HyperAdsBundle'
+                )
+            )
+            ->add('title', 'text', array('label' => 'title', 'translation_domain' => 'HyperAdsBundle'))
             ->add(
                 'expireDate',
                 'date',
                 array(
-                    'label' => 'Expire date',
+                    'label' => 'date.expire',
                     'data' => new \DateTime('+1 month'),
+                    'translation_domain' => 'HyperAdsBundle'
                 )
             )
-            ->add('linkTitle', 'text', array('label' => 'Link title'))
-            ->add('url', 'url', array('label' => 'URL'))
-            ->add('description', 'textarea');
-
-        if (false) {
-            $builder->add('campaign');
-        }
+            ->add('linkTitle', 'text', array('label' => 'linktitle', 'translation_domain' => 'HyperAdsBundle'))
+            ->add('url', 'url', array('label' => 'url', 'translation_domain' => 'HyperAdsBundle'))
+            ->add('description', 'textarea', array('label' => 'description', 'translation_domain' => 'HyperAdsBundle'));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

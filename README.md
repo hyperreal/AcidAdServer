@@ -1,4 +1,5 @@
-...work in progress...
+...work in progress... **please don't use on production environments** because huge changes will be made in workflow of
+adding and managing advertisements and banners.
 
 # AcidAdServer
 
@@ -6,20 +7,15 @@ AcidAdServer is ad serving web application based on Symfony 2 framework.
 
 With Acid you can:
 
- * Manage campaigns of your customers
+ * Manage banners and advertisements of your customers
+ * Allow users to manage their banners and advertisements (**work in progress**)
+ * Pay for banners in Bitcoins (**work in progress**)
  * Create zones in your sites' profiles (`zone` is a place on your site, where you probably want to put some banner(s))
  * Upload banners like images and swf's
  * Assign banners to zones (one banner can be assigned to multiple zones and one zone can contain multiple banners)
  * View statistics of clicks and views of your banners
 
 If you have questions, feel free to e-mail me at *fajka at hyperreal dot info*
-
-# Why should I (or should not) use Acid?
-
-If you want your customers to manage their campaigns and banners, you should **not** use Acid. Every user see all
-campaigns, banners, etc. It is some lack of security for certain types of organizations.
-
-Otherwise - clone, install, and use :-)
 
 # Benefits
 
@@ -29,13 +25,17 @@ Otherwise - clone, install, and use :-)
 
 # Plans
 
- * Text banners
- * Multiple banners in one zone at once (eg. you can place four small boxes in scyscrapper)
- * Counting clicks of swfs with `clickTAG`
- * Statistic reports
+These features are sorted by planned implementation-done time.
+
+ * Text banners (advertisements)
+ * API to retrieve text advertisements
  * Nagios monitoring URL
  * E-mail notifications
- * Performance and UI improvements
+ * UI improvements
+ * Multiple banners in one zone at once (e.g. you can place four small boxes in scyscrapper)
+ * Performance improvements
+ * Counting clicks of swfs with `clickTAG`
+ * Statistic reports
 
 # Installation using composer
 

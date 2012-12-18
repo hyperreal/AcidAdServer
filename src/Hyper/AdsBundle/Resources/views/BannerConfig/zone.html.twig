@@ -14,7 +14,6 @@
                     <th>{{ 'banner.id'|trans({}, 'HyperAdsBundle') }}</th>
                     <th>{{ 'banner.title'|trans({}, 'HyperAdsBundle') }}</th>
                     <th>{{ 'banner.size'|trans({}, 'HyperAdsBundle') }}</th>
-                    <th>{{ 'campaign'|trans({}, 'HyperAdsBundle') }}</th>
                     <th>{{ 'use.in.zone'|trans({}, 'HyperAdsBundle') }}</th>
                     <th>{{ 'probability'|trans({}, 'HyperAdsBundle') }}</th>
                 </tr>
@@ -29,7 +28,6 @@
                         </a>
                     </td>
                     <td>{{ banner.width }}x{{ banner.height }}</td>
-                    <td>{{ banner.campaign.name }}</td>
                     <td>
                         <input type="checkbox" name="newBanners[{{ banner.id }}]" value="{{ banner.id }}"
                             {% if banner.id in usedBannerIds and reference.active == 1 %} checked="checked"{% endif %} />

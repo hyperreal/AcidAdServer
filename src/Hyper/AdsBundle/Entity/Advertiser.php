@@ -10,12 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use FOS\UserBundle\Entity\User as BaseUser;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="advertiser")
  */
-class Advertiser
+class Advertiser extends BaseUser
 {
 
     /**
@@ -24,21 +25,6 @@ class Advertiser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
-     */
-    protected $name;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\Email(
-     *        message="The email {{ email }} is not a valid e-mail address.",
-     *        checkMX = false
-     * )
-     */
-    protected $email;
 
     /**
      * @ORM\Column(type="string", name="first_name", nullable=true)
@@ -51,11 +37,6 @@ class Advertiser
     protected $lastName;
 
     /**
-     * @OneToMany(targetEntity="Campaign", mappedBy="advertiser")
-     */
-    protected $campaigns;
-
-    /**
      * @var \Hyper\AdsBundle\Entity\Banner[]
      *
      * @OneToMany(targetEntity="Banner", mappedBy="advertiser")
@@ -64,6 +45,7 @@ class Advertiser
 
     public function __construct()
     {
+        parent::__construct();
         $this->banners = new ArrayCollection();
     }
 
@@ -75,26 +57,6 @@ class Advertiser
     public function getId()
     {
         return $this->id;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function setCampaigns($campaigns)
-    {
-        $this->campaigns = $campaigns;
-    }
-
-    public function getCampaigns()
-    {
-        return $this->campaigns;
     }
 
     public function setEmail($email)

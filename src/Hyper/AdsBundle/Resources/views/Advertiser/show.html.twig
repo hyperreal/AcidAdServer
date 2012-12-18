@@ -1,9 +1,9 @@
 {% extends "::base.html.twig" %}
 {% block body %}
 {% block title %}
-{{ 'show.advertiser'|trans({'advertiserName': entity.name}, 'HyperAdsBundle') }}
+{{ 'show.advertiser'|trans({'advertiserName': entity.username}, 'HyperAdsBundle') }}
 {% endblock %}
-<h1>{{ 'show.advertiser'|trans({'advertiserName': entity.name}, 'HyperAdsBundle') }}</h1>
+<h1>{{ 'show.advertiser'|trans({'advertiserName': entity.username}, 'HyperAdsBundle') }}</h1>
 
 <table class="record_properties">
     <tbody>
@@ -13,7 +13,7 @@
     </tr>
     <tr>
         <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
-        <td>{{ entity.name }}</td>
+        <td>{{ entity.username }}</td>
     </tr>
     <tr>
         <th>{{ 'email'|trans({}, 'HyperAdsBundle') }}</th>
@@ -26,15 +26,6 @@
     <tr>
         <th>{{ 'lastname'|trans({}, 'HyperAdsBundle') }}</th>
         <td>{{ entity.lastName }}</td>
-    </tr>
-    <tr>
-        <th>{{ '__campaigns'|trans({}, 'HyperAdsBundle') }}</th>
-        <td>
-            {{ entity.campaigns|length }}<br/>
-            <a href="{{ path('admin_campaign', {'advertiserId': entity.id }) }}">
-                {{ '__show'|trans({}, 'HyperAdsBundle') }}
-            </a>
-        </td>
     </tr>
     </tbody>
 </table>
