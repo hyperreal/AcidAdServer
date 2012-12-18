@@ -509,11 +509,11 @@ abstract class Kernel implements KernelInterface, TerminableInterface
     protected $classes;
     protected $errorReportingLevel;
 
-    const VERSION         = '2.2.0-DEV';
-    const VERSION_ID      = '20100';
+    const VERSION         = '2.1.5-DEV';
+    const VERSION_ID      = '20105';
     const MAJOR_VERSION   = '2';
-    const MINOR_VERSION   = '2';
-    const RELEASE_VERSION = '0';
+    const MINOR_VERSION   = '1';
+    const RELEASE_VERSION = '5';
     const EXTRA_VERSION   = 'DEV';
 
     
@@ -1247,7 +1247,7 @@ abstract class Bundle extends ContainerAware implements BundleInterface
     
     public function registerCommands(Application $application)
     {
-        if (!$dir = realpath($this->getPath().'/Command')) {
+        if (!is_dir($dir = $this->getPath().'/Command')) {
             return;
         }
 
@@ -1333,7 +1333,7 @@ class ConfigCache
             throw new \RuntimeException(sprintf('Unable to write in the %s directory', $dir));
         }
 
-        $tmpFile = tempnam($dir, basename($this->file));
+        $tmpFile = tempnam(dirname($this->file), basename($this->file));
         if (false !== @file_put_contents($tmpFile, $content) && @rename($tmpFile, $this->file)) {
             @chmod($this->file, 0666 & ~umask());
         } else {
@@ -1342,7 +1342,7 @@ class ConfigCache
 
         if (null !== $metadata && true === $this->debug) {
             $file = $this->file.'.meta';
-            $tmpFile = tempnam($dir, basename($file));
+            $tmpFile = tempnam(dirname($file), basename($file));
             if (false !== @file_put_contents($tmpFile, serialize($metadata)) && @rename($tmpFile, $file)) {
                 @chmod($file, 0666 & ~umask());
             }

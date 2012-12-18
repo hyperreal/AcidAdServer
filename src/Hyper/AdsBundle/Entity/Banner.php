@@ -27,12 +27,6 @@ class Banner extends Advertisement
     const UPLOAD_DIR = 'uploads';
 
     /**
-     * @ManyToOne(targetEntity="Campaign", inversedBy="banners")
-     * @JoinColumn(name="campaign_id", referencedColumnName="id")
-     */
-    protected $campaign;
-
-    /**
      * @Assert\File()
      * @var \Symfony\Component\HttpFoundation\File\UploadedFile
      */
@@ -103,16 +97,6 @@ class Banner extends Advertisement
     public function __construct()
     {
         $this->zones = new ArrayCollection();
-    }
-
-    public function setCampaign(Campaign $campaign)
-    {
-        $this->campaign = $campaign;
-    }
-
-    public function getCampaign()
-    {
-        return $this->campaign;
     }
 
     public function setDescription($description)

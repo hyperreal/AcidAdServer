@@ -11,8 +11,8 @@ class PageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('url', 'url', array('label' => 'URL'));
+            ->add('name', 'text', array('label' => 'name', 'translation_domain' => 'HyperAdsBundle'))
+            ->add('url', 'url', array('label' => 'url', 'translation_domain' => 'HyperAdsBundle'));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

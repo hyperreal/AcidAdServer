@@ -53,9 +53,9 @@ class BannerType extends Type
     public static function getValidTypesWithLabels()
     {
         return array(
-            self::BANNER_TYPE_FLASH => 'Flash movie',
-            self::BANNER_TYPE_IMAGE => 'Image',
-            self::BANNER_TYPE_TEXT => 'Text',
+            self::BANNER_TYPE_FLASH => 'flash.movie',
+            self::BANNER_TYPE_IMAGE => 'image',
+            self::BANNER_TYPE_TEXT => 'text',
         );
     }
 }

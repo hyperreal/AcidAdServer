@@ -88,12 +88,12 @@ class Zone
 
     public function setEnabled($enabled)
     {
-        $this->enabled = $enabled;
+        $this->enabled = (bool)$enabled;
     }
 
     public function getEnabled()
     {
-        return $this->enabled;
+        return (bool)$this->enabled;
     }
 
     public function setMaxHeight($maxHeight)

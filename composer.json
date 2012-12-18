@@ -1,6 +1,19 @@
 {
+    "description": "Acid Ad Server",
+    "type": "library",
+    "keywords": ["ads", "adserver"],
+    "authors": [
+        {
+            "name": "fajka",
+            "email": "fajka@hyperreal.info",
+            "homepage": "http://hyperreal.info/"
+        }
+    ],
+    "support": {
+        "email": "fajka@hyperreal.info"
+    },
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-0": { "Hyper": "src/" }
     },
     "require": {
         "php": ">=5.3.3",
@@ -16,7 +29,8 @@
         "sensio/generator-bundle": "2.1.*",
         "jms/security-extra-bundle": "1.2.*",
         "jms/di-extra-bundle": "1.1.*",
-        "friendsofsymfony/user-bundle": "*"
+        "jms/payment-core-bundle": "master-dev",
+        "friendsofsymfony/user-bundle": "2.0.*@dev"
     },
     "scripts": {
         "post-install-cmd": [

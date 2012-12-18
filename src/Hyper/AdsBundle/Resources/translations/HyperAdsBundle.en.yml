@@ -10,7 +10,6 @@ name: Name
 email: Email
 firstname: Firstname
 lastname: Lastname
-__campaigns: Campaigns
 __show: Show
 list.advertiser: "List of advertisers"
 actions: Actions
@@ -37,18 +36,12 @@ max.width: "Max. width"
 max.height: "Max. height"
 list.zone: "List of zones"
 enabled: Enabled
-edit.campaign: "Edit campaign campaignName"
-new.campaign: "New campaign"
-show.campaign: "Show campaign campaignName"
 date.start: "Start date"
 date.expire: "Expire date"
-list.campaign: "List of campaigns"
-campaigns.of: "Campaigns of advertiserName"
 edit.page: "Edit page pageName"
 new.page: "New page"
 show.page: "Page pageName"
 list.page: "List of pages"
-campaigns.list: 'List of campaigns'
 powered.by.acid: 'Powered by AcidAdServer'
 advertisers: "Advertisers"
 pages: Pages
@@ -66,9 +59,13 @@ save: Save
 banner.id: Banner ID
 banner.title: "Banner title"
 banner.size: "Banner size"
-campaign: Campaign
 use.in.zone: "Use in zone?"
 probability: Probability
 show.banners: "Show banners"
 mail.expiring.subject: "Mail subject"
 mail.expiring.content: "Mail content"
+flash.movie: "Flash movie"
+image: "Image"
+text: "Text"
+name.first: "Firstname"
+name.last: "Lastname"

@@ -47,4 +47,12 @@ class ZoneType extends Type
             self::ZONE_TYPE_MOBILE,
         );
     }
+
+    public static function getValidTypesWithLabels()
+    {
+        return array(
+            self::ZONE_TYPE_DESKTOP => 'desktop',
+            self::ZONE_TYPE_MOBILE => 'mobile',
+        );
+    }
 }

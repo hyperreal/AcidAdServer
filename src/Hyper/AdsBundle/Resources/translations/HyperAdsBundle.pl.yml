@@ -10,7 +10,6 @@ name: Nazwa
 email: E-mail
 firstname: Imię
 lastname: Nazwisko
-__campaigns: Kampanie
 __show: Pokaż
 list.advertiser: 'Lista reklamodawców'
 actions: Akcje
@@ -37,18 +36,12 @@ max.width: 'Maksymalna szerokość'
 max.height: 'Maksymalna wysokość'
 list.zone: 'Lista stref'
 enabled: Włączony
-edit.campaign: 'Edytuj kampanię campaignName'
-new.campaign: 'Nowa kampania'
-show.campaign: 'Kampania campaignName'
 date.start: 'Data rozpoczęcia'
 date.expire: 'Data zakończenia'
-list.campaign: 'Lista kampanii'
-campaigns.of: 'Kampanie: advertiserName'
 edit.page: 'Edytuj stronę pageName'
 new.page: 'Nowa strona'
 show.page: 'Strona pageName'
 list.page: 'Lista stron'
-campaigns.list: 'Lista kampanii'
 powered.by.acid: 'Strona wspierana przez AcidAdServer'
 advertisers: Reklamodawcy
 pages: Strony
@@ -66,9 +59,13 @@ save: Zapisz
 banner.id: ID bannera
 banner.title: "Tytuł bannera"
 banner.size: Wymiary
-campaign: Kampania
 use.in.zone: "Użyć w strefie?"
 probability: Prawdopodobieństwo
 show.banners: "Pokaż bannery"
 mail.expiring.subject: "Temat maila"
 mail.expiring.content: "Treść maila"
+flash.movie: "Klip Flash"
+image: "Grafika"
+text: "Tekst"
+name.first: "Imię"
+name.last: "Nazwisko"

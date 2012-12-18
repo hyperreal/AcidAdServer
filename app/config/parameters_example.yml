@@ -12,5 +12,7 @@ parameters:
     mailer_password:   ~
     mailer_delivery:   me@example.com
 
+    payments_secret:  som3S3cr37P4ssw0rd
+
     locale:            pl
     secret:            0724ebb222af8866b7d7a2524451219b
