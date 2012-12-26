@@ -18,7 +18,7 @@ class BannerController extends Controller
     /**
      * Lists all Banner entities.
      *
-     * @Route   ("/", name="admin_banner")
+     * @Route("/", name="admin_banner")
      * @Template()
      */
     public function indexAction()

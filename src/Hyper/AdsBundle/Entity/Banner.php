@@ -14,12 +14,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Hyper\AdsBundle\DBAL\BannerType;
+use Hyper\AdsBundle\DBAL\AnnouncementPaymentType;
 
 /**
  * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\BannerRepository")
- * @ORM\Table(name="banner")
  */
-class Banner extends Advertisement
+class Banner extends Announcement
 {
     const RAND_MIN = 10000000;
     const RAND_MAX = 99999999;
@@ -53,7 +53,7 @@ class Banner extends Advertisement
     protected $height;
 
     /**
-     * @ORM\Column(type="bannertype")
+     * @ORM\Column(type="bannertype", name="banner_type")
      * @Assert\Choice(callback="getBannerTypes")
      */
     protected $type;
@@ -68,11 +68,6 @@ class Banner extends Advertisement
      * @Assert\Url()
      */
     protected $url;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $description;
 
     /**
      * @ORM\Column(type="string", name="original_file_name")
@@ -97,6 +92,7 @@ class Banner extends Advertisement
     public function __construct()
     {
         $this->zones = new ArrayCollection();
+        $this->announcementPaymentType = AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_PREMIUM;
     }
 
     public function setDescription($description)

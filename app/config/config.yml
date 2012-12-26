@@ -2,6 +2,11 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
 
+wikp_payment_mtgox:
+    api_key: asasfd
+    api_secret: secret
+    debug: true
+
 framework:
     #esi:             ~
     translator:      { fallback: %locale% }
@@ -49,6 +54,7 @@ doctrine:
         types:
             bannertype: Hyper\AdsBundle\DBAL\BannerType
             zonetype: Hyper\AdsBundle\DBAL\ZoneType
+            announcement_payment_type: Hyper\AdsBundle\DBAL\AnnouncementPaymentType
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%

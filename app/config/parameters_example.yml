@@ -11,6 +11,8 @@ parameters:
     mailer_user:       ~
     mailer_password:   ~
     mailer_delivery:   me@example.com
+    mailer_from:       me@example.com
+    mailer_sender:     me@example.com
 
     payments_secret:  som3S3cr37P4ssw0rd
 

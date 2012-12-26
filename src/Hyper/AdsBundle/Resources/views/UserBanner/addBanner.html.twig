@@ -1,0 +1,10 @@
+{% extends "::base.html.twig" %}
+{% block title %}
+    {{ 'banner.buy'|trans({}, 'HyperAdsBundle') }}
+{% endblock %}
+{% block body %}
+<form action="{{ url('user_banner_create') }}" method="post" enctype="multipart/form-data">
+    {{ form_widget(form) }}
+    <input type="submit" value="{{ 'send'|trans({}, 'HyperAdsBundle') }}"/>
+</form>
+{% endblock %}

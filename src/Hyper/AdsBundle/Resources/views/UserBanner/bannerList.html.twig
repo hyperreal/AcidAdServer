@@ -1,0 +1,36 @@
+{% extends "::base.html.twig" %}
+{% block title %}
+    title
+{% endblock %}
+{% block body %}
+<h1>{{ 'your.banners'|trans({}, 'HyperAdsBundle') }}</h1>
+
+{% if banners|length > 0 %}
+<table class="records-list">
+    <thead>
+    <tr>
+        <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>Tytuł</th>
+        <th>Strona</th>
+        <th>Opłacony?</th>
+        <th>Akcja</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for banner in banners %}
+    <tr>
+        <td>{{ banner.id }}</td>
+        <td>{{ banner.title }}</td>
+        <td>TODO</td>
+        <td>{% if banner.paid %}Tak{% else %}Nie <a href="#todo">Opłać</a>{% endif%}</td>
+        <td><a href="#todo">Edytuj</a> | <a href="#todo">Pokaż</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <div class="notice message">Brak bannerów</div>
+    <div class="teaser"><a href="{{ url('user_banner_new') }}">Kup banner</a></div>
+
+{% endif %}
+{% endblock %}
