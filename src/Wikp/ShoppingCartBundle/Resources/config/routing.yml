@@ -1,0 +1,3 @@
+wikp_shopping_cart_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: WikpShoppingCartBundle:Default:index }

@@ -52,6 +52,14 @@
 
             </ul>
         </div>
+        {% elseif is_granted("ROLE_USER") %}
+        <div id="menu" class="span-4">
+            <ul>
+                <li>
+                    <a href="{{ path('user_banner_list') }}">{{ 'your.banners'|trans({}, 'HyperAdsBundle') }}</a>
+                </li>
+            </ul>
+        </div>
         {% endif %}
 
         <div id="content" {% if is_granted("ROLE_ADMIN") %}class="span-20 last"{% endif %}>

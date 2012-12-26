@@ -13,7 +13,10 @@
         "email": "fajka@hyperreal.info"
     },
     "autoload": {
-        "psr-0": { "Hyper": "src/" }
+        "psr-0": { 
+            "Hyper": "src/" ,
+            "Wikp": "src/"
+        }
     },
     "require": {
         "php": ">=5.3.3",

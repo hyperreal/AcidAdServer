@@ -1,0 +1,3 @@
+wikp_payment_mtgox_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: WikpPaymentMtgoxBundle:Default:index }

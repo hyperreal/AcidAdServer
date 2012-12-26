@@ -1,0 +1,12 @@
+parameters:
+    wikp_payment_mtgox.class: Wikp\PaymentMtgoxBundle\Mtgox\Client
+    wikp_payment_mtgox.api_key: ~
+    wikp_payment_mtgox.api_secret: ~
+    wikp_payment_mtgox.return_url: null
+    wikp_payment_mtgox.cancel_url: null
+    wikp_payment_mtgox.debug: true
+
+services:
+    wikp_payment_mtgox.client:
+        class: %wikp_payment_mtgox.class%
+        arguments: [%wikp_payment_mtgox.api_key%, %wikp_payment_mtgox.api_secret%]

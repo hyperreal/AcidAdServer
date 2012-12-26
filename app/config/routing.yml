@@ -1,3 +1,11 @@
+wikp_shopping_cart:
+    resource: "@WikpShoppingCartBundle/Resources/config/routing.yml"
+    prefix:   /
+
+wikp_payment_mtgox:
+    resource: "@WikpPaymentMtgoxBundle/Resources/config/routing.yml"
+    prefix:   /
+
 # Internal routing configuration to handle ESI
 #_internal:
 #    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
@@ -53,4 +61,9 @@ admin_banner_config:
 admin_banner:
     resource: "@HyperAdsBundle/Controller/BannerController.php"
     prefix: /admin/banner
+    type: annotation
+
+user_banner:
+    resource: "@HyperAdsBundle/Controller/UserBannerController.php"
+    prefix: /user/banner
     type: annotation
