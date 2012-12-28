@@ -37,16 +37,16 @@ class Advertiser extends BaseUser
     protected $lastName;
 
     /**
-     * @var \Hyper\AdsBundle\Entity\Banner[]
+     * @var \Hyper\AdsBundle\Entity\Announcement[]
      *
-     * @OneToMany(targetEntity="Banner", mappedBy="advertiser")
+     * @OneToMany(targetEntity="Announcement", mappedBy="advertiser")
      */
-    protected $banners;
+    protected $announcements;
 
     public function __construct()
     {
         parent::__construct();
-        $this->banners = new ArrayCollection();
+        $this->announcements = new ArrayCollection();
     }
 
     public function setId($id)
@@ -91,12 +91,22 @@ class Advertiser extends BaseUser
 
     public function getBanners()
     {
-        return $this->banners;
+        return $this->announcements;
     }
 
-    public function addBanner(Banner $banner)
+    public function addBanner(Announcement $announcement)
     {
-        $this->banners->add($banner);
+        $this->announcements->add($announcement);
+    }
+
+    public function getAnnouncements()
+    {
+        return $this->announcements;
+    }
+
+    public function addAnnouncement(Announcement $announcement)
+    {
+        $this->announcements->add($announcement);
     }
 
     public function __toString()

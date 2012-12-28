@@ -1,0 +1,45 @@
+{% extends "::base.html.twig" %}
+{% block title %}
+{{ 'payments.for.announcement'|trans({'%announcement%': announcement.title}, 'HyperAdsBundle') }}
+{% endblock %}
+{% block body %}
+<h2>{{ 'payments.for.announcement'|trans({'%announcement%': announcement.title}, 'HyperAdsBundle') }}</h2>
+
+{% if announcement.orders|length > 0 %}
+    <table class="records-list">
+        <thead>
+        <tr>
+            <th>{{ 'order.number'|trans({}, 'HyperAdsBundle') }}</th>
+            <th>{{ 'date.submission'|trans({}, 'HyperAdsBundle') }}</th>
+            <th>{{ 'pay.to'|trans({}, 'HyperAdsBundle') }}</th>
+            <th>{{ 'amount'|trans({}, 'HyperAdsBundle') }}</th>
+            <th>{{ 'is.paid'|trans({}, 'HyperAdsBundle') }}</th>
+            <th>{{ 'zone'|trans({}, 'HyperAdsBundle') }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in announcement.orders %}
+        <tr>
+            <td>{{ order.orderNumber }}</td>
+            <td>{{ order.paymentInstruction.createdAt|date('d. m. Y') }}r.</td>
+            <td>{{ order.paymentTo|date('d. m. Y') }}r.</td>
+            <td>{{ order.amount }} {{ order.paymentInstruction.currency }}</td>
+            <td>
+                {% if order.paymentInstruction.state == constant('JMS\\Payment\\CoreBundle\\Model\\FinancialTransactionInterface::STATE_SUCCESS') %}
+                    {{ 'yes'|trans({}, 'HyperAdsBundle') }}
+                {% else%}
+                    {{ 'no'|trans({}, 'HyperAdsBundle') }}
+                {% endif %}
+            </td>
+            <td>
+                <span{% if not order.zone.enabled %} class="disabled"{% endif %}>{{ order.zone }}</span>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <div class="notice message">{{ 'payments.empty'|trans({}, 'HyperAdsBundle') }}</div>
+{% endif %}
+
+{% endblock %}

@@ -28,11 +28,27 @@ class Order
     /** @ORM\Column(name="order_number", type="string", unique = true) */
     private $orderNumber;
 
-    /** @ORM\Column(type="decimal", precision = 5) */
+    /** @ORM\Column(type="decimal", precision = 5, nullable=true) */
     private $amount;
 
-    /** @ORM\OneToOne(targetEntity="Announcement") */
+    /**
+     * @ORM\ManyToOne(targetEntity="Announcement", inversedBy="orders")
+     * @ORM\JoinColumn(name="announcement_id", referencedColumnName="id")
+     */
     private $announcement;
+
+    /**
+     * @var Zone
+     * @ORM\ManyToOne(targetEntity="Zone", inversedBy="orders")
+     * @ORM\JoinColumn(name="zone_id", referencedColumnName="id", nullable=true)
+     */
+    private $zone;
+
+    /**
+     * @ORM\Column(type="date", name="payment_to", nullable=true)
+     * @var \DateTime
+     */
+    private $paymentTo;
 
     public function getId()
     {
@@ -78,4 +94,50 @@ class Order
     {
         $this->announcement = $announcement;
     }
+
+    public function setPaymentTo(\DateTime $to)
+    {
+        $this->paymentTo = $to;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getPaymentTo()
+    {
+        return $this->paymentTo;
+    }
+
+    /**
+     * @return Zone
+     */
+    public function getZone()
+    {
+        if (!($this->getAnnouncement() instanceof Banner)) {
+            return null;
+        }
+
+        return $this->zone;
+    }
+
+    public function setZone(Zone $zone)
+    {
+        if (!($this->getAnnouncement() instanceof Banner)) {
+            throw new \LogicException('You can assign zone only to order for banner');
+        }
+
+        $this->zone = $zone;
+    }
+
+    public function getBannerZoneReference()
+    {
+        /** @var $announcement Banner */
+        $announcement = $this->getAnnouncement();
+        if (!($announcement instanceof Banner)) {
+            return null;
+        }
+
+        return $announcement->getReferenceInZone($this->getZone()->getId());
+    }
+
 }

@@ -16,9 +16,9 @@
 
     <div class="container prepend-top">
         <div id="header" class="clearfix">
-            <div id="login-bar" class="span-21">
+            <div id="login-bar" class="span-18">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                <strong>{{ app.user.username }}</strong> |
                 <a href="{{ path('fos_user_security_logout') }}">
                     {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
                 </a>
@@ -26,8 +26,9 @@
                 <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
                 {% endif %}
             </div>
-            <h1 id="logo" class="span-3 last">
-                <a href="{{ path('_welcome') }}">
+            <h1 id="logo" class="span-6 last">
+                <div class="span-3">@acid</div>
+                <a href="{{ path('_welcome') }}" class="span-3 last">
                     <img src="{{ asset('images/hyperreal.png') }}" alt="logo" />
                 </a>
             </h1>
@@ -62,11 +63,26 @@
         </div>
         {% endif %}
 
-        <div id="content" {% if is_granted("ROLE_ADMIN") %}class="span-20 last"{% endif %}>
+        <div id="content" {% if is_granted("ROLE_USER") %}class="span-20 last"{% endif %}>
+            {% if app.session.hasFlash('error') %}
+            <div class="error">
+                {{ app.session.flash('error') }}
+            </div>
+            {% endif %}
+            {% if app.session.hasFlash('notice') %}
+            <div class="notice">
+                {{ app.session.flash('notice') }}
+            </div>
+            {% endif %}
+            {% if app.session.hasFlash('info') %}
+            <div class="info">
+                {{ app.session.flash('info') }}
+            </div>
+            {% endif %}
             {% block body %}{% endblock %}
         </div>
 
-        <div id="footer" class="span-24">
+        <div id="footer" class="span-24 prepend-top">
             {{ 'powered.by.acid'|trans({}, 'HyperAdsBundle') }} | <a href="https://github.com/hyperreal/AcidAdServer" class="github-fork">fork on github</a>
         </div>
 

@@ -10,6 +10,7 @@ use Wikp\PaymentMtgoxBundle\Mtgox\Client;
 class MtgoxPaymentPlugin extends AbstractPlugin
 {
     const SYSTEM_NAME = 'mtgox_instant_payment';
+    const CURRENCY_NAME = 'BTC';
 
     private $client;
 

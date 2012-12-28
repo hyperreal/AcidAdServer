@@ -15,9 +15,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Hyper\AdsBundle\DBAL\BannerType;
 use Hyper\AdsBundle\DBAL\AnnouncementPaymentType;
+use Hyper\AdsBundle\Helper\BannerTypeDeterminer;
 
 /**
- * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\BannerRepository")
+ * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\AnnouncementRepository")
  */
 class Banner extends Announcement
 {
@@ -81,18 +82,11 @@ class Banner extends Announcement
      */
     protected $zones;
 
-    /**
-     * @ManyToOne(targetEntity="Advertiser", inversedBy="banners")
-     * @JoinColumn(name="advertiser_id", referencedColumnName="id")
-     *
-     * @var \Hyper\AdsBundle\Entity\Advertiser
-     */
-    protected $advertiser;
-
     public function __construct()
     {
         $this->zones = new ArrayCollection();
         $this->announcementPaymentType = AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_PREMIUM;
+        $this->type = BannerType::BANNER_TYPE_TEXT;
     }
 
     public function setDescription($description)
@@ -210,11 +204,6 @@ class Banner extends Announcement
         $this->originalFileName = $fileName;
     }
 
-    public function __toString()
-    {
-        return $this->getId();
-    }
-
     public static function getBannerTypes()
     {
         return BannerType::getValidTypes();
@@ -237,14 +226,47 @@ class Banner extends Announcement
         return null;
     }
 
-    public function getAdvertiser()
+    /**
+     * @param Zone $zone
+     * @return Order[]
+     */
+    public function getOrdersInZone(Zone $zone)
     {
-        return $this->advertiser;
+        $ordersInZone = array();
+        foreach ($this->orders as $order) {
+            /** @var $order Order */
+            /** @var $orderZone Zone */
+            $orderZone = $order->getZone();
+            if (!empty($orderZone) && $orderZone->getId() == $zone->getId()) {
+                $ordersInZone[] = $order;
+            }
+        }
+
+        return $ordersInZone;
     }
 
-    public function setAdvertiser(Advertiser $advertiser)
+    public function getPaidToInZone(Zone $zone)
     {
-        $this->advertiser = $advertiser;
+        $orders = $this->getOrdersInZone($zone);
+
+        if (empty($orders)) {
+            return null;
+        }
+
+        $paidToDates = array_filter(
+            array_map(
+                function (Order $order) {
+                    return $order->getPaymentTo();
+                },
+                $orders
+            )
+        );
+
+        if (empty($paidToDates)) {
+            return null;
+        }
+
+        return max($paidToDates);
     }
 
     public function getAbsolutePath()
@@ -286,6 +308,14 @@ class Banner extends Announcement
         $this->path = $filename;
         $this->originalFileName = $info['basename'];
         $this->file = null;
+
+        $this->setBannerType();
+    }
+
+    private function setBannerType()
+    {
+        $determiner = new BannerTypeDeterminer($this);
+        $this->type = $determiner->getType();
     }
 
     private function generateFileName(array $pathInfo)

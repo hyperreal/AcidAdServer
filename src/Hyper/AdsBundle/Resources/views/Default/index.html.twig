@@ -3,24 +3,26 @@
 {{ '__welcome'|trans({}, 'HyperAdsBundle') }}
 {% endblock %}
 {% block body %}
-<div class="span-24 last">
+<div class="span-20 last">
     <blockquote class="push-2 span-7">Many a small thing has been made large by the right kind of advertising.
         <br/>
         <span class="right">&mdash; Mark Twain</span>
     </blockquote>
 </div>
 
-<div id="actions" class="prepend-top append-bottom span-7 last">
+<div id="actions" class="prepend-top append-bottom span-20 last">
 {% if is_granted("ROLE_USER") %}
-    <div class="span-10">
-        <a href="{{ url('user_banner_new') }}">{{ 'banner.buy'|trans({}, 'HyperAdsBundle') }}</a>
-    </div>
-    <div class="span-10">
-        <a href="{{ url('user_banner_new') }}">{{ 'announcement.buy'|trans({}, 'HyperAdsBundle') }}</a>
-    </div>
-    <div class="span-4 last">
-        <a href="{{ url('user_banner_new') }}">{{ 'announcement.free.add'|trans({}, 'HyperAdsBundle') }}</a>
-    </div>
+    <ul class="no-buttons">
+        <li>
+            <a class="span-7 box" href="{{ url('user_banner_new') }}">{{ 'banner.buy'|trans({}, 'HyperAdsBundle') }}</a>
+        </li>
+        <li>
+            <a class="span-6 box" href="{{ url('user_banner_new') }}">{{ 'announcement.buy'|trans({}, 'HyperAdsBundle') }}</a>
+        </li>
+        <li>
+            <a class="span-4 last box" href="{{ url('user_banner_new') }}">{{ 'announcement.free.add'|trans({}, 'HyperAdsBundle') }}</a>
+        </li>
+    </ul>
 {% elseif is_granted("ROLE_ADMIN") %}
     admin
 {% endif %}

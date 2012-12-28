@@ -1,7 +1,3 @@
-wikp_shopping_cart:
-    resource: "@WikpShoppingCartBundle/Resources/config/routing.yml"
-    prefix:   /
-
 wikp_payment_mtgox:
     resource: "@WikpPaymentMtgoxBundle/Resources/config/routing.yml"
     prefix:   /

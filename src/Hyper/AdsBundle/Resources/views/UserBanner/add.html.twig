@@ -5,6 +5,11 @@
 {% block body %}
 <form action="{{ url('user_banner_create') }}" method="post" enctype="multipart/form-data">
     {{ form_widget(form) }}
-    <input type="submit" value="{{ 'send'|trans({}, 'HyperAdsBundle') }}"/>
+    <input type="submit" value="{{ 'save'|trans({}, 'HyperAdsBundle') }}"/>
 </form>
+<ul>
+    <li>
+        <a href="{{ url('user_banner_list') }}">{{ 'back.to.the.list'|trans({}, 'HyperAdsBundle') }}</a>
+    </li>
+</ul>
 {% endblock %}
