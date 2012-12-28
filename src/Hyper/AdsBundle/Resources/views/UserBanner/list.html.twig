@@ -1,0 +1,47 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+{{ 'your.banners'|trans({}, 'HyperAdsBundle') }}
+{% endblock %}
+
+{% block body %}
+<h1>{{ 'your.banners'|trans({}, 'HyperAdsBundle') }}</h1>
+
+{% if banners|length > 0 %}
+<table class="records-list">
+    <thead>
+    <tr>
+        <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'title'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'enabled.in.zones'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'actions'|trans({}, 'HyperAdsBundle') }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for banner in banners %}
+    <tr>
+        <td>{{ banner.id }}</td>
+        <td>{{ banner.title }}</td>
+        <td>
+            {{ banner.zones|length }}
+            <br /><a href="{{ url('user_banner_zones', {'banner': banner.id }) }}">Sprawdź strefy</a>
+        </td>
+        <td>
+            <a href="{{ url('user_banner_edit', {'banner': banner.id }) }}}">Edytuj</a>
+            {% if banner.paid or banner.paidTo %}
+                <br /><a href="{{ url('user_banner_payments', {'bannerId': banner.id}) }}">Lista płatności</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <div class="notice message">Brak bannerów</div>
+{% endif %}
+
+<div class="additional-links">
+    <a href="{{ url('user_banner_new') }}">{{ 'add.banner'|trans({}, 'HyperAdsBundle') }}</a>
+</div>
+
+{% endblock %}

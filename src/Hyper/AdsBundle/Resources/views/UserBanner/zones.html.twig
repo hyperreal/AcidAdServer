@@ -1,0 +1,61 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+{{ 'zones.for.banner'|trans({'%banner%': banner.title}, 'HyperAdsBundle') }}
+{% endblock %}
+
+{% block body %}
+<h1>{{ 'zones.for.banner'|trans({'%banner%': banner.title}, 'HyperAdsBundle') }}</h1>
+
+{% if zones|length > 0 %}
+    <form action="{{ url('user_banner_zones_save', {'banner': banner.id }) }}" method="post">
+    <table class="records-list">
+        <thead>
+        <tr>
+            <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
+            <th>{{ 'banner.in.zone'|trans({}, 'HyperAdsBundle') }}</th>
+            <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
+            <th>{{ 'page'|trans({}, 'HyperAdsBundle') }}</th>
+            <th>{{ 'paid.to'|trans({}, 'HyperAdsBundle') }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for zone in zones %}
+            {% set reference = banner.getReferenceInZone(zone.id) %}
+            {% if reference and reference.id in zone.bannerReferencesIds and reference.active %}
+                {% set zoneActive = true %}
+            {% else %}
+                {% set zoneActive = false %}
+            {% endif %}
+            <tr>
+                <td>{{ zone.id }}</td>
+                <td>
+                    <input type="checkbox" name="use_in_zone[{{ zone.id }}]" value="1"{% if zoneActive %} checked="checked"{% endif %} />
+                </td>
+                <td>{{ zone.name }}</td>
+                <td>{{ zone.page.name }}</td>
+                <td>
+                    {% set paidToInZone = banner.getPaidToInZone(zone) %}
+                    {% if banner.orders|length > 0 and paidToInZone %}
+                        {{ 'paid.to.date'|trans({'%date%': paidToInZone|date('d. m. Y')}, 'HyperAdsBundle') }}
+                    {% else %}
+                        {{ 'not.paid'|trans({}, 'HyperAdsBundle') }}
+                        <br />
+                        <a href="{{ url('user_banner_pay_in_zone', {'bannerId': banner.id, 'zoneId': zone.id}) }}">
+                            {{ 'pay.banner.here'|trans({}, 'HyperAdsBundle') }}
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="buttons">
+        <input type="submit" value="{{ 'save'|trans({}, 'HyperAdsBundle') }}"
+    </div>
+    </form>
+{% else %}
+    <div class="notice">{{ 'no.zones.to.add.banner'|trans({}, 'HyperAdsBundle') }}</div>
+{% endif %}
+
+{% endblock %}

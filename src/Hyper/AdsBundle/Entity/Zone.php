@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Hyper\AdsBundle\DBAL\ZoneType;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\ZoneRepository")
  * @ORM\Table(name="zone")
  */
 class Zone
@@ -42,6 +42,7 @@ class Zone
 
     /**
      * @OneToMany(targetEntity="BannerZoneReference", mappedBy="zone")
+     * @var \Doctrine\Common\Collections\ArrayCollection
      */
     protected $banners;
 
@@ -65,6 +66,12 @@ class Zone
      * @Assert\Choice(callback="getZoneTypes")
      */
     protected $type = 'desktop';
+
+    /**
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="zone")
+     * @var Order[]
+     */
+    protected $orders;
 
     public function setId($id)
     {
@@ -146,9 +153,27 @@ class Zone
         return $this->type;
     }
 
+    public function getBannerReferencesIds()
+    {
+        return array_map(
+            function (BannerZoneReference $ref) {
+                return $ref->getId();
+            },
+            $this->banners->toArray()
+        );
+    }
+
     public function __toString()
     {
         return sprintf('%s @%s (%s)', $this->getName(), $this->getPage()->getName(), $this->getType());
+    }
+
+    /**
+     * @return Order[]
+     */
+    public function getOrders()
+    {
+        return $this->orders;
     }
 
     public static function getZoneTypes()

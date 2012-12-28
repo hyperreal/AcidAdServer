@@ -1,7 +1,0 @@
-parameters:
-#    wikp_shopping_cart.example.class: Wikp\ShoppingCartBundle\Example
-
-services:
-#    wikp_shopping_cart.example:
-#        class: %wikp_shopping_cart.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
