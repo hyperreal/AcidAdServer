@@ -17,6 +17,18 @@ class AnnouncementTest extends \PHPUnit_Framework_TestCase
         $this->ad = new Announcement();
     }
 
+    /**
+     * @covers \Hyper\AdsBundle\Entity\Announcement::__construct
+     */
+    public function testValidInitialization()
+    {
+        $this->assertAttributeInstanceOf('Doctrine\Common\Collections\Collection', 'orders', $this->ad);
+    }
+
+    /**
+     * @covers \Hyper\AdsBundle\Entity\Announcement::setId
+     * @covers \Hyper\AdsBundle\Entity\Announcement::getId
+     */
     public function testSetId()
     {
         $this->ad->setId(self::AD_ID);
@@ -24,40 +36,63 @@ class AnnouncementTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param \Hyper\AdsBundle\Entity\Announcement $announcement
-     *
-     * @dataProvider paymentNeededAnnouncementsProvider
+     * @covers \Hyper\AdsBundle\Entity\Announcement::setTitle
+     * @covers \Hyper\AdsBundle\Entity\Announcement::getTitle
      */
-    public function testIsPaidExpiredActive(Announcement $announcement)
+    public function testSetTitle()
     {
-        $expireDate = new \DateTime('now +2 months');
-        $expireDate2 = new \DateTime('now +3 months');
-
-        $announcement->setExpireDate($expireDate);
-        $this->assertFalse($announcement->isExpired());
-        $this->assertFalse($announcement->isPaid());
-        $this->assertFalse($announcement->isActive());
-
-        $announcement->setPaidTo($expireDate);
-        $this->assertFalse($announcement->isExpired());
-        $this->assertTrue($announcement->isPaid());
-        $this->assertTrue($announcement->isActive());
-
-        $announcement->setExpireDate($expireDate2);
-        $this->assertFalse($announcement->isExpired());
-        $this->assertFalse($announcement->isPaid());
-        $this->assertTrue($announcement->isActive());
+        $this->ad->setTitle('title');
+        $this->assertEquals('title', $this->ad->getTitle());
     }
 
-    public function paymentNeededAnnouncementsProvider()
+    /**
+     * @covers \Hyper\AdsBundle\Entity\Announcement::isActive
+     */
+    public function testIsActiveForStandardAd()
     {
-        $announcement = new Announcement();
-        $announcement->setAnnouncementPaymentType(AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_PREMIUM);
+        $this->ad->setAnnouncementPaymentType(AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_STANDARD);
+        $this->assertTrue($this->ad->isActive());
+    }
 
+    /**
+     * @covers \Hyper\AdsBundle\Entity\Announcement::setPaidTo
+     * @covers \Hyper\AdsBundle\Entity\Announcement::getPaidTo
+     * @covers \Hyper\AdsBundle\Entity\Announcement::isActive
+     */
+    public function testIsActiveForPremiumAd()
+    {
+        $this->ad->setAnnouncementPaymentType(AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_PREMIUM);
+        $this->ad->setPaidTo(new \DateTime('now - 1 month'));
+        $this->assertFalse($this->ad->isActive());
+        $this->ad->setPaidTo(new \DateTime('now + 1 month'));
+        $this->assertTrue($this->ad->isActive());
+    }
+
+    /**
+     * @dataProvider validAnnouncementPaymentTypesProvider
+     * @covers \Hyper\AdsBundle\Entity\Announcement::setAnnouncementPaymentType
+     */
+    public function testSetValidAnnouncementPaymentType($paymentType)
+    {
+        $this->ad->setAnnouncementPaymentType($paymentType);
+        $this->assertAttributeEquals($paymentType, 'announcementPaymentType', $this->ad);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Given announcement payment type is invalid
+     * @covers \Hyper\AdsBundle\Entity\Announcement::setAnnouncementPaymentType
+     */
+    public function testSetInvalidAnnouncementPaymentTypesProvider()
+    {
+        $this->ad->setAnnouncementPaymentType('invalid');
+    }
+
+    public function validAnnouncementPaymentTypesProvider()
+    {
         return array(
-            array(new Banner()),
-            array($announcement)
+            array(AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_PREMIUM),
+            array(AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_STANDARD),
         );
     }
-
 }

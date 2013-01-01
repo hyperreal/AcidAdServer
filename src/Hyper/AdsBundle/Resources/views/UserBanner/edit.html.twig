@@ -8,13 +8,13 @@
 </div>
 <form action="{{ url('user_banner_save', {'banner': banner.id}) }}" method="post" enctype="multipart/form-data">
     {{ form_widget(editForm) }}
-    <input type="submit" value="{{ '__edit'|trans({}, 'HyperAdsBundle') }}"/>
+    <input type="submit" value="{{ 'edit'|trans({}, 'HyperAdsBundle') }}"/>
 </form>
 <form action="{{ url('user_banner_remove', {'banner': banner.id}) }}" method="post">
     <ul>
         <li>
             {{ form_widget(deleteForm) }}
-            <input type="submit" value="{{ '__delete'|trans({}, 'HyperAdsBundle') }}"/>
+            <input type="submit" value="{{ 'delete'|trans({}, 'HyperAdsBundle') }}"/>
         </li>
         <li>
             <a href="{{ url('user_banner_list') }}">{{ 'back.to.the.list'|trans({}, 'HyperAdsBundle') }}</a>

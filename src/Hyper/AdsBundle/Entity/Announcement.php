@@ -92,9 +92,9 @@ class Announcement
     public function isActive()
     {
         if (AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_STANDARD == $this->announcementPaymentType) {
-            return !$this->isExpired();
+            return true;
         } else {
-            return $this->getPaidTo() > new \DateTime() && !$this->isExpired();
+            return $this->getPaidTo() > new \DateTime();
         }
     }
 
@@ -151,13 +151,6 @@ class Announcement
     public function setPaidTo(\DateTime $paidTo)
     {
         $this->paidTo = $paidTo;
-        if ($paidTo >= $this->getExpireDate()
-            && $paidTo->diff($this->getExpireDate())->days >= 0
-        ) {
-            $this->paid = true;
-        } else {
-            $this->paid = false;
-        }
     }
 
     /**

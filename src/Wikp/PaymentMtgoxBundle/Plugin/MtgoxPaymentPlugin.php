@@ -6,6 +6,7 @@ use JMS\Payment\CoreBundle\Plugin\AbstractPlugin;
 use JMS\Payment\CoreBundle\Model\FinancialTransactionInterface;
 use JMS\Payment\CoreBundle\Util\Number;
 use Wikp\PaymentMtgoxBundle\Mtgox\Client;
+use Wikp\PaymentMtgoxBundle\Mtgox\RequestType\MtgoxTransactionUrlRequest;
 
 class MtgoxPaymentPlugin extends AbstractPlugin
 {
@@ -37,5 +38,11 @@ class MtgoxPaymentPlugin extends AbstractPlugin
     public function processes($paymentSystemName)
     {
         return self::SYSTEM_NAME == $paymentSystemName;
+    }
+
+    public function getMtgoxTransactionUrl(MtgoxTransactionUrlRequest $request)
+    {
+        $response = $this->client->rawRequest($request->asRequest());
+        return $response->get('payment_url');
     }
 }

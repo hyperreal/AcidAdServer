@@ -8,7 +8,7 @@
 <form action="{{ path('admin_advertiser_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
     <p>
-        <button type="submit">{{ '__edit'|trans({}, 'HyperAdsBundle') }}</button>
+        <button type="submit">{{ 'edit'|trans({}, 'HyperAdsBundle') }}</button>
     </p>
 </form>
 
@@ -21,7 +21,7 @@
     <li>
         <form action="{{ path('admin_advertiser_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">{{ '__delete'|trans({}, 'HyperAdsBundle') }}</button>
+            <button type="submit">{{ 'delete'|trans({}, 'HyperAdsBundle') }}</button>
         </form>
     </li>
 </ul>

@@ -10,16 +10,10 @@ use Hyper\AdsBundle\DBAL\BannerType as BType;
 class BannerType extends AbstractType
 {
     private $addFileInput = true;
-    private $addExpireDateInput = true;
 
     public function disableFileInput()
     {
         $this->addFileInput = false;
-    }
-
-    public function disableExpireDateInput()
-    {
-        $this->addExpireDateInput = false;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -31,18 +25,6 @@ class BannerType extends AbstractType
 
         $builder
             ->add('title', 'text', array('label' => 'title', 'translation_domain' => 'HyperAdsBundle'));
-
-        if ($this->addExpireDateInput) {
-            $builder->add(
-                'expireDate',
-                'date',
-                array(
-                    'label' => 'date.expire',
-                    'data' => new \DateTime('+1 month'),
-                    'translation_domain' => 'HyperAdsBundle'
-                )
-            );
-        }
 
         $builder
             ->add('linkTitle', 'text', array('label' => 'linktitle', 'translation_domain' => 'HyperAdsBundle'))

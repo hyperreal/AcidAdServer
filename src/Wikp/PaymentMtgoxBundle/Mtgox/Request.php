@@ -21,13 +21,22 @@ class Request
         $this->parameters = $params;
     }
 
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
     /**
      * @return string
      */
     public function getParametersAsQueryString()
     {
+        $microTime = explode(' ', microtime());
+        $parametersArray = $this->parameters->all();
+        $parametersArray['nonce'] = $microTime[1] . substr($microTime[0], 2, 6);
+
         return http_build_query(
-            $this->parameters->all(),
+            $parametersArray,
             self::NUMERIC_PREFIX,
             self::ARG_SEPARATOR
         );

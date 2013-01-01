@@ -1,71 +1,98 @@
-edit.advertiser: "Edit advertiser advertiserName"
-__edit: Edit
-back.to.the.list: Back to the list
-__delete: Delete
-new.advertiser: "New advertiser"
-create: Create
-show.advertiser: "Advertiser advertiserName"
+edit.advertiser: 'Edit advertiser advertiserName'
+edit: Edit
+back.to.the.list: 'Back to the list'
+delete: Delete
+list.advertiser: 'List of advertisers'
 id: ID
 name: Name
 email: Email
+actions: Actions
+show: Show
+no.entities: 'No records found'
+create.new.entry: 'Create new'
+new.advertiser: 'New advertiser'
+create: Create
+show.advertiser: 'Advertiser advertiserName'
 firstname: Firstname
 lastname: Lastname
-__show: Show
-list.advertiser: "List of advertisers"
-actions: Actions
-no.entities: "No records found"
-create.new.entry: "Create new"
-edit.banner: "Edit banner"
-new.banner: "New banner"
-show.banner: "Banner"
+edit.banner: 'Edit banner'
+list.banner: 'List of banners'
 file: File
 extension: Extension
 width: Width
 height: Height
 type: Type
+new.banner: 'New banner'
+show.banner: Banner
 title: Title
-linktitle: Link text
+linktitle: 'Link text'
 url: URL
 description: Description
-list.banner: "List of banners"
-__welcome: "Welcome to AcidAdServer"
-edit.zone: "Edit zone zoneName"
-new.zone: "New zone"
-show.zone: "Zone zoneName"
-max.width: "Max. width"
-max.height: "Max. height"
-list.zone: "List of zones"
-enabled: Enabled
-date.start: "Start date"
-date.expire: "Expire date"
-edit.page: "Edit page pageName"
-new.page: "New page"
-show.page: "Page pageName"
-list.page: "List of pages"
-powered.by.acid: 'Powered by AcidAdServer'
-advertisers: "Advertisers"
-pages: Pages
-__banners: Banners
-__zones: Zones
-__advertisers: Advertisers
-__pages: Pages
-zone.not.exists: "Zone not exists"
-edit.banners.in.zone: "Banners in zone zoneName"
-zones.associated.with.banner: "Zones associated with bannerName"
-zone.name: "Zone zoneName"
-add.banner.to.zone: "Add banner to zone"
-page: Page
-save: Save
-banner.id: Banner ID
-banner.title: "Banner title"
-banner.size: "Banner size"
-use.in.zone: "Use in zone?"
+edit.banners.in.zone: 'Banners in zone zoneName'
+zone.name: 'Zone zoneName'
+banner.id: 'Banner ID'
+banner.title: 'Banner title'
+banner.size: 'Banner size'
+use.in.zone: 'Use in zone?'
 probability: Probability
-show.banners: "Show banners"
-mail.expiring.subject: "Mail subject"
-mail.expiring.content: "Mail content"
-flash.movie: "Flash movie"
-image: "Image"
-text: "Text"
-name.first: "Firstname"
-name.last: "Lastname"
+save: Save
+welcome: 'Welcome to AcidAdServer'
+banner.buy: __banner.buy
+announcement.buy: __announcement.buy
+announcement.free.add: __announcement.free.add
+edit.page: 'Edit page pageName'
+list.page: 'List of pages'
+new.page: 'New page'
+show.page: 'Page pageName'
+your.banners: __your.banners
+enabled.in.zones: __enabled.in.zones
+payments.list: __payments.list
+add.banner: __add.banner
+pay: __pay
+pay.for.banner.in.zone: __pay.for.banner.in.zone
+pay.for.banner: __pay.for.banner
+pay.for.banner.in.zone.info: __pay.for.banner.in.zone.info
+next: __next
+payments.for.announcement: __payments.for.announcement
+order.number: __order.number
+date.submission: __date.submission
+pay.to: __pay.to
+amount: __amount
+is.paid: __is.paid
+zone: __zone
+yes: __yes
+no: __no
+payments.empty: __payments.empty
+zones.for.banner: __zones.for.banner
+banner.in.zone: __banner.in.zone
+page: Page
+paid.to: __paid.to
+paid.to.date: __paid.to.date
+not.paid: __not.paid
+pay.banner.here: __pay.banner.here
+no.zones.to.add.banner: __no.zones.to.add.banner
+edit.zone: 'Edit zone zoneName'
+list.zone: 'List of zones'
+enabled: Enabled
+max.width: 'Max. width'
+max.height: 'Max. height'
+show.banners: 'Show banners'
+new.zone: 'New zone'
+show.zone: 'Zone zoneName'
+date.start: 'Start date'
+date.expire: 'Expire date'
+powered.by.acid: 'Powered by AcidAdServer'
+advertisers: Advertisers
+pages: Pages
+banners: Banners
+zones: Zones
+zone.not.exists: 'Zone not exists'
+zones.associated.with.banner: 'Zones associated with bannerName'
+add.banner.to.zone: 'Add banner to zone'
+mail.expiring.subject: 'Mail subject'
+mail.expiring.content: 'Mail content'
+flash.movie: 'Flash movie'
+image: Image
+text: Text
+name.first: Firstname
+name.last: Lastname

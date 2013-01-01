@@ -3,35 +3,27 @@
 namespace Hyper\AdsBundle\Tests\Entity;
 
 use Hyper\AdsBundle\Entity\Banner;
+use Hyper\AdsBundle\DBAL\AnnouncementPaymentType;
 
 class BannerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSetExpireDate()
+    /** @var \Hyper\AdsBundle\Entity\Banner */
+    private $banner;
+
+    public function setUp()
     {
-        $banner = new Banner();
-
-        $date = new \DateTime();
-        $banner->setExpireDate($date);
-
-        $this->assertEquals($date, $banner->getExpireDate());
+        $this->banner = new Banner();
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
-    public function testSetInvalidExpireDate()
+    public function testValidInitialization()
     {
-        $banner = new Banner();
-        $banner->setExpireDate('Something');
-    }
+        $this->assertAttributeEquals(
+            AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_PREMIUM,
+            'announcementPaymentType',
+            $this->banner
+        );
 
-    public function testBannerIsExpired()
-    {
-        $banner = new Banner();
-        $banner->setExpireDate(new \DateTime('now - 1 month'));
-        $this->assertTrue($banner->isExpired());
-
-        $banner->setExpireDate(new \DateTime('now + 1 month'));
-        $this->assertFalse($banner->isExpired());
+        $this->assertAttributeInstanceOf('Doctrine\Common\Collections\Collection', 'zones', $this->banner);
+        $this->assertAttributeEquals('text', 'type', $this->banner);
     }
 }
