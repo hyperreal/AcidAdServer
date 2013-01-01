@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
 use JMS\Payment\CoreBundle\Model\FinancialTransactionInterface;
 use Wikp\PaymentMtgoxBundle\Plugin\MtgoxPaymentPlugin;
+use Wikp\PaymentMtgoxBundle\Mtgox\RequestType\MtgoxTransactionUrlRequest;
 use Hyper\AdsBundle\Entity\Announcement;
 use Hyper\AdsBundle\Entity\Banner;
 use Hyper\AdsBundle\Entity\BannerZoneReference;
@@ -34,7 +35,6 @@ class UserBannerController extends Controller
         $banner = new Banner();
         $banner->setAdvertiser($this->getUser());
         $bannerType = new BannerType();
-        $bannerType->disableExpireDateInput();
         $form = $this->createForm($bannerType, $banner);
 
         return array(
@@ -55,7 +55,6 @@ class UserBannerController extends Controller
         $banner = new Banner();
         $banner->setAdvertiser($this->getUser());
         $bannerType = new BannerType();
-        $bannerType->disableExpireDateInput();
         $form = $this->createForm($bannerType, $banner);
         $form->bind($request);
 
@@ -247,11 +246,7 @@ class UserBannerController extends Controller
 
             /** @var $ppc \JMS\Payment\CoreBundle\PluginController\PluginController */
             $ppc = $this->get('payment.plugin_controller');
-            $ppc->addPlugin(new MtgoxPaymentPlugin(
-                'http://dupa.com',
-                'http://dupa.com',
-                $this->get('wikp_payment_mtgox.client')
-            ));
+            $ppc->addPlugin($this->get('wikp_payment_mtgox.plugin'));
 
             /** @var $calc \Hyper\AdsBundle\Helper\PricesCalculator */
             $calc = $this->get('hyper_ads.prices_calculator');
@@ -267,17 +262,32 @@ class UserBannerController extends Controller
 
             $interval = $payToDate->diff($payFromDate)->days;
 
+            $amount = $calc->getDayPriceForZone($zone) * $interval;
             $ppc->createPaymentInstruction($instruction = new PaymentInstruction(
-                $calc->getDayPriceForZone($zone) * $interval,
+                $amount,
                 'BTC',
                 MtgoxPaymentPlugin::SYSTEM_NAME
             ));
+
             //$banner->setPaidTo($payToDate);
             $order->setPaymentTo($payToDate);
+            $order->setAmount($amount);
             $order->setPaymentInstruction($instruction);
             $em->persist($order);
             $em->persist($banner);
             $em->flush();
+
+            if ($instruction->getState() == FinancialTransactionInterface::STATE_PENDING) {
+                $urlRequest = new MtgoxTransactionUrlRequest();
+                $urlRequest->setAmount($amount);
+                $urlRequest->setDescription(
+                    $this->get('translator')->trans('mtgox.info', array(), 'HyperAdsBundle')
+                );
+                $urlRequest->setCurrency('BTC');
+
+                $url = $this->get('wikp_payment_mtgox.plugin')->getMtgoxTransactionUrl($urlRequest);
+                die($url);
+            }
 
             return array(
                 'form' => $form->createView(),
@@ -325,7 +335,6 @@ class UserBannerController extends Controller
 
         $formType = new BannerType();
         $formType->disableFileInput();
-        $formType->disableExpireDateInput();
 
         $editForm = $this->createForm($formType, $banner);
         $deleteForm = $this->createDeleteForm($banner->getId());
@@ -347,7 +356,6 @@ class UserBannerController extends Controller
         $this->accessDeniedWhenInvalidUser($banner);
 
         $formType = new BannerType();
-        $formType->disableExpireDateInput();
         $formType->disableFileInput();
 
         $editForm = $this->createForm($formType, $banner);

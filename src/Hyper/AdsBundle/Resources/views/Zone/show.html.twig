@@ -42,13 +42,13 @@
     </li>
     <li>
         <a href="{{ path('admin_zone_edit', { 'id': entity.id }) }}">
-            {{ '__edit'|trans({}, 'HyperAdsBundle') }}
+            {{ 'edit'|trans({}, 'HyperAdsBundle') }}
         </a>
     </li>
     <li>
         <form action="{{ path('admin_zone_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">{{ '__delete'|trans({}, 'HyperAdsBundle') }}</button>
+            <button type="submit">{{ 'delete'|trans({}, 'HyperAdsBundle') }}</button>
         </form>
     </li>
 </ul>

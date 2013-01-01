@@ -8,7 +8,7 @@ use Wikp\PaymentMtgoxBundle\Mtgox\ApiCallException;
 
 class Client
 {
-    const API_URL = 'https://';
+    const API_URL = 'https://mtgox.com/api/1/%s';
 
     private $curl;
     private $apiKey;
@@ -25,12 +25,13 @@ class Client
     /**
      * Returns only valid responses.
      *
-     * @param $request
+     * @param Request $request
      * @return Response
      * @throws ApiCallException
      */
-    public function rawRequest($request)
+    public function rawRequest(Request $request)
     {
+        $this->initialize();
         $this->setHttpHeaders($request);
         $this->setCommonCurlHeaders($request);
         $this->execute();
@@ -43,7 +44,7 @@ class Client
         $response = new Response($this->rawResponse);
 
         if ($response->isError()) {
-            $exception = new ApiCallException();
+            $exception = new ApiCallException(var_export($this, true));
             $exception->setRequest($request);
             throw $exception;
         }
@@ -81,8 +82,10 @@ class Client
     protected function getHttpHeaders(Request $request)
     {
         return array(
-            'Rest-key: ' . $this->apiKey,
-            'Rest-sign: ' . $this->getRestSign($request)
+            'Rest-Key: ' . $this->apiKey,
+            'Rest-Sign: ' . $this->getRestSign($request),
+            'Content-type: application/x-www-form-urlencoded',
+            'Accept: application/json, text/javascript, */*; q=0.01'
         );
     }
 

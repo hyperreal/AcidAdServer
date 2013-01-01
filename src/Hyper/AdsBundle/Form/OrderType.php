@@ -40,6 +40,8 @@ class OrderType extends AbstractType
                 'class' => 'Hyper\AdsBundle\Entity\Announcement',
                 'data' => $this->announcement,
                 'read_only' => true,
+                'label' => 'announcement',
+                'translation_domain' => 'HyperAdsBundle',
             )
         );
 
@@ -54,6 +56,8 @@ class OrderType extends AbstractType
                 },
                 'class' => 'Hyper\AdsBundle\Entity\Zone',
                 'property_path' => false,
+                'label' => 'zone',
+                'translation_domain' => 'HyperAdsBundle',
             )
         );
 

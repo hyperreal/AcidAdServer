@@ -3,9 +3,9 @@ imports:
     - { resource: security.yml }
 
 wikp_payment_mtgox:
-    api_key: asasfd
-    api_secret: secret
-    debug: true
+    api_key: %mtgox_api_key%
+    api_secret: %mtgox_api_secret%
+    debug: %kernel.debug%
 
 framework:
     #esi:             ~
