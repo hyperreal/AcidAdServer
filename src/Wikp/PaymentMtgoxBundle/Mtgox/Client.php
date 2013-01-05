@@ -4,7 +4,7 @@ namespace Wikp\PaymentMtgoxBundle\Mtgox;
 
 use Wikp\PaymentMtgoxBundle\Mtgox\Request;
 use Wikp\PaymentMtgoxBundle\Mtgox\Response;
-use Wikp\PaymentMtgoxBundle\Mtgox\ApiCallException;
+use Wikp\PaymentMtgoxBundle\Exception\ApiCallException;
 
 class Client
 {
@@ -27,7 +27,7 @@ class Client
      *
      * @param Request $request
      * @return Response
-     * @throws ApiCallException
+     * @throws Wikp\PaymentMtgoxBundle\Exception\ApiCallException
      */
     public function rawRequest(Request $request)
     {
@@ -44,7 +44,7 @@ class Client
         $response = new Response($this->rawResponse);
 
         if ($response->isError()) {
-            $exception = new ApiCallException(var_export($this, true));
+            $exception = new ApiCallException($response->getErrorMessage());
             $exception->setRequest($request);
             throw $exception;
         }
@@ -64,7 +64,9 @@ class Client
 
     protected function setCommonCurlHeaders(Request $request)
     {
+        var_export($this->createRequestUrl($request->getMethod()));
         curl_setopt($this->curl, CURLOPT_URL, $this->createRequestUrl($request->getMethod()));
+        curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($this->curl, CURLOPT_POSTFIELDS, $request->getParametersAsQueryString());
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);
     }
@@ -76,16 +78,18 @@ class Client
 
     protected function setHttpHeaders(Request $request)
     {
+        var_export($this->getHttpHeaders($request));
         curl_setopt($this->curl, CURLOPT_HTTPHEADER, $this->getHttpHeaders($request));
     }
 
     protected function getHttpHeaders(Request $request)
     {
         return array(
+            //'Content-length: ' . strlen($request->getParametersAsQueryString()),
             'Rest-Key: ' . $this->apiKey,
             'Rest-Sign: ' . $this->getRestSign($request),
             'Content-type: application/x-www-form-urlencoded',
-            'Accept: application/json, text/javascript, */*; q=0.01'
+            'Accept: application/json, text/javascript, */*; q=0.01',
         );
     }
 
@@ -104,7 +108,7 @@ class Client
 
     private function getUserAgent()
     {
-        return 'Mozilla/4.0 (compatible; AcidAdServer MtGox Client; PHP/' . phpversion() . ')';
+        return 'Mozilla/4.0 (compatible; WikpPaymentMtgoxBundle; PHP/'.phpversion().')';
     }
 
     private function getRestSign(Request $request)

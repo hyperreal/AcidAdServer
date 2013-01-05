@@ -1,19 +1,8 @@
-label {
-    width: 150px;
-    float: left;
-    padding: 3px 0 0 5px;
-    border-width: 0 0 1px 1px;
-    border-style: dotted;
-    border-color: #CCCCCC;
-}
-
-.login-form label {
-    float: none;
-    border: 0;
-}
-
 ul.no-buttons {
     list-style-type: none;
+}
+
+menu, ul.no-buttons {
     margin: 0;
     padding: 0;
 }

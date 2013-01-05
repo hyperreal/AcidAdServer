@@ -26,46 +26,51 @@ class Zone
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @ManyToOne (targetEntity="Page", inversedBy="zones")
      * @JoinColumn(name="page_id", referencedColumnName="id")
      */
-    protected $page;
+    private $page;
 
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
-    protected $name;
+    private $name;
 
     /**
      * @OneToMany(targetEntity="BannerZoneReference", mappedBy="zone")
      * @var \Doctrine\Common\Collections\ArrayCollection
      */
-    protected $banners;
+    private $banners;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    protected $enabled = 1;
+    private $enabled = 1;
 
     /**
      * @ORM\Column(type="integer", name="max_width")
      */
-    protected $maxWidth;
+    private $maxWidth;
 
     /**
      * @ORM\Column(type="integer", name="max_height")
      */
-    protected $maxHeight;
+    private $maxHeight;
 
     /**
      * @ORM\Column(type="zonetype")
      * @Assert\Choice(callback="getZoneTypes")
      */
-    protected $type = 'desktop';
+    private $type = 'desktop';
+
+    /**
+     * @ORM\Column(type="decimal", name="daily_price", scale=2, nullable=true)
+     */
+    private $dailyPrice;
 
     /**
      * @ORM\OneToMany(targetEntity="Order", mappedBy="zone")
@@ -151,6 +156,16 @@ class Zone
     public function getType()
     {
         return $this->type;
+    }
+
+    public function getDailyPrice()
+    {
+        return $this->dailyPrice;
+    }
+
+    public function setDailyPrice($dailyPrice)
+    {
+        $this->dailyPrice = $dailyPrice;
     }
 
     public function getBannerReferencesIds()

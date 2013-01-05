@@ -15,6 +15,7 @@ class ZoneType extends AbstractType
         $builder
             ->add('name', 'text', array('label' => 'name', 'translation_domain' => 'HyperAdsBundle'))
             ->add('enabled', 'checkbox', array('label' => 'enabled', 'translation_domain' => 'HyperAdsBundle'))
+            ->add('dailyPrice', 'number', array('label' => 'daily.price', 'translation_domain' => 'HyperAdsBundle'))
             ->add('maxWidth', 'number', array('label' => 'max.width', 'translation_domain' => 'HyperAdsBundle'))
             ->add('maxHeight', 'number', array('label' => 'max.height', 'translation_domain' => 'HyperAdsBundle'))
             ->add(

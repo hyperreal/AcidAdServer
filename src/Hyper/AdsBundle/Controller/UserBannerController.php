@@ -4,7 +4,6 @@ namespace Hyper\AdsBundle\Controller;
 
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -155,7 +154,7 @@ class UserBannerController extends Controller
         $em->commit();
         $this->get('session')->setFlash(
             'info',
-            $this->get('translator')->trans('all.changes.saved', array(), 'HyperAdsBundle')
+            $this->trans('all.changes.saved')
         );
 
         return $this->redirect($this->generateUrl('user_banner_zones', array('banner' => $banner->getId())));
@@ -230,11 +229,13 @@ class UserBannerController extends Controller
 
         if (null === $order) {
             $order = new Order();
-            $order->setOrderNumber($this->get('hyper_ads.order_number_generator')->getBannerPaymentOrderNumber(
-                $banner,
-                $this->getUser(),
-                $zone
-            ));
+            $order->setOrderNumber(
+                $this->get('hyper_ads.order_number_generator')->getBannerPaymentOrderNumber(
+                    $banner,
+                    $this->getUser(),
+                    $zone
+                )
+            );
             $order->setAnnouncement($banner);
             $order->setZone($zone);
         }
@@ -263,11 +264,13 @@ class UserBannerController extends Controller
             $interval = $payToDate->diff($payFromDate)->days;
 
             $amount = $calc->getDayPriceForZone($zone) * $interval;
-            $ppc->createPaymentInstruction($instruction = new PaymentInstruction(
-                $amount,
-                'BTC',
-                MtgoxPaymentPlugin::SYSTEM_NAME
-            ));
+            $ppc->createPaymentInstruction(
+                $instruction = new PaymentInstruction(
+                    $amount,
+                    'BTC',
+                    MtgoxPaymentPlugin::SYSTEM_NAME
+                )
+            );
 
             //$banner->setPaidTo($payToDate);
             $order->setPaymentTo($payToDate);
@@ -279,14 +282,22 @@ class UserBannerController extends Controller
 
             if ($instruction->getState() == FinancialTransactionInterface::STATE_PENDING) {
                 $urlRequest = new MtgoxTransactionUrlRequest();
-                $urlRequest->setAmount($amount);
+                $urlRequest->setAmount('0.0001');
+                $urlRequest->setIpnUrl($this->generateUrl('wikp_payment_mtgox_ipn', array(), true));
                 $urlRequest->setDescription(
-                    $this->get('translator')->trans('mtgox.info', array(), 'HyperAdsBundle')
+                    $this->trans('mtgox.info')
                 );
                 $urlRequest->setCurrency('BTC');
+                $urlRequest->setReturnSuccess(
+                    $this->generateUrl('payment_successful', array('order' => $order->getId()), true)
+                );
+                $urlRequest->setReturnFailure(
+                    $this->generateUrl('payment_canceled', array('order' => $order->getId()), true)
+                );
 
                 $url = $this->get('wikp_payment_mtgox.plugin')->getMtgoxTransactionUrl($urlRequest);
-                die($url);
+
+                return $this->redirect($url);
             }
 
             return array(

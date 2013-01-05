@@ -28,8 +28,9 @@ class Configuration implements ConfigurationInterface
                 ->children()
                     ->scalarNode('api_key')->isRequired()->end()
                     ->scalarNode('api_secret')->isRequired()->end()
-                    ->scalarNode('return_url')->defaultNull()->end()
-                    ->scalarNode('cancel_url')->defaultNull()->end()
+                    ->scalarNode('order_repository_path')->isRequired()->end()
+                    ->scalarNode('return_url')->isRequired()->end()
+                    ->scalarNode('cancel_url')->isRequired()->end()
                     ->booleanNode('debug')->defaultValue('%kernel.debug%')->end()
                 ->end()
             ->end();

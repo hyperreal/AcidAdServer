@@ -100,3 +100,4 @@ name.first: Imię
 name.last: Nazwisko
 all.changes.saved: 'Wszystkie zmiany zostały zapisane'
 announcement-free.add: 'Dodaj ogłoszenie bezpłatne'
+daily.price: 'Cena/dzień emisji'

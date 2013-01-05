@@ -35,34 +35,37 @@
             </h1>
         </div>
 
-        {% if is_granted('ROLE_ADMIN') %}
-        <div id="menu" class="span-4">
-            <ul>
-                <li>
-                    <a href="{{ path('admin_advertiser') }}">{{ '__advertisers'|trans({}, 'HyperAdsBundle') }}</a>
-                </li>
-                <li>
-                    <a href="{{ path('admin_page') }}">{{ '__pages'|trans({}, 'HyperAdsBundle') }}</a>
-                </li>
-                <li>
-                    <a href="{{ path('admin_zone') }}">{{ '__zones'|trans({}, 'HyperAdsBundle') }}</a>
-                </li>
+        <aside class="span-4">
+            {% if is_granted('ROLE_ADMIN') %}
+            <menu class="admin">
+                <ul>
+                    <li>
+                        <a href="{{ path('admin_advertiser') }}">{{ 'advertisers'|trans({}, 'HyperAdsBundle') }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_page') }}">{{ 'pages'|trans({}, 'HyperAdsBundle') }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_zone') }}">{{ 'zones'|trans({}, 'HyperAdsBundle') }}</a>
+                    </li>
 
-                <li>
-                    <a href="{{ path('admin_banner') }}">{{ '__banners'|trans({}, 'HyperAdsBundle') }}</a>
-                </li>
+                    <li>
+                        <a href="{{ path('admin_banner') }}">{{ 'banners'|trans({}, 'HyperAdsBundle') }}</a>
+                    </li>
 
-            </ul>
-        </div>
-        {% elseif is_granted("ROLE_USER") %}
-        <div id="menu" class="span-4">
-            <ul>
-                <li>
-                    <a href="{{ path('user_banner_list') }}">{{ 'your.banners'|trans({}, 'HyperAdsBundle') }}</a>
-                </li>
-            </ul>
-        </div>
-        {% endif %}
+                </ul>
+            </menu>
+            {% endif %}
+            {% if is_granted("ROLE_USER") %}
+            <menu class="user">
+                <ul>
+                    <li>
+                        <a href="{{ path('user_banner_list') }}">{{ 'your.banners'|trans({}, 'HyperAdsBundle') }}</a>
+                    </li>
+                </ul>
+            </menu>
+            {% endif %}
+        </aside>
 
         <div id="content" {% if is_granted("ROLE_USER") %}class="span-20 last"{% endif %}>
             {% if app.session.hasFlash('error') %}

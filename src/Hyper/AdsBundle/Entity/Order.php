@@ -28,7 +28,7 @@ class Order
     /** @ORM\Column(name="order_number", type="string", unique = true) */
     private $orderNumber;
 
-    /** @ORM\Column(type="decimal", precision = 5, nullable=true) */
+    /** @ORM\Column(type="decimal", scale=2, nullable=true) */
     private $amount;
 
     /**
@@ -85,6 +85,9 @@ class Order
         $this->amount = (float)$amount;
     }
 
+    /**
+     * @return Hyper\AdsBundle\Entity\Announcement
+     */
     public function getAnnouncement()
     {
         return $this->announcement;

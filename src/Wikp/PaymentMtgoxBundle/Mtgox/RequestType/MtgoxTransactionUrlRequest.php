@@ -16,7 +16,7 @@ class MtgoxTransactionUrlRequest implements RequestTypeInterface
     private $returnFailure;
     private $description;
     private $sendEmail;
-    private $instantOnly = 1;
+    private $ipnUrl;
 
     /** @var \Symfony\Component\HttpFoundation\ParameterBag */
     private $parameters;
@@ -36,11 +36,6 @@ class MtgoxTransactionUrlRequest implements RequestTypeInterface
         $this->description = $description;
     }
 
-    public function setInstantOnly($instantOnly)
-    {
-        $this->instantOnly = $instantOnly;
-    }
-
     public function setReturnFailure($returnFailure)
     {
         $this->returnFailure = $returnFailure;
@@ -56,6 +51,11 @@ class MtgoxTransactionUrlRequest implements RequestTypeInterface
         $this->sendEmail = $sendEmail;
     }
 
+    public function setIpnUrl($ipnUrl)
+    {
+        $this->ipnUrl = $ipnUrl;
+    }
+
     /**
      * @return void|\Wikp\PaymentMtgoxBundle\Mtgox\Request
      */
@@ -69,10 +69,10 @@ class MtgoxTransactionUrlRequest implements RequestTypeInterface
     {
         $this->parameters = new ParameterBag();
         $this->parameters->set('currency', $this->currency);
-        $this->parameters->set('amount', $this->amount);
+        $this->parameters->set('amount', floatval($this->amount));
         $this->parameters->set('return_success', $this->returnSuccess);
         $this->parameters->set('return_failure', $this->returnFailure);
-        $this->parameters->set('instant_only', $this->instantOnly);
+        $this->parameters->set('ipn', $this->ipnUrl);
 
         if (!empty($this->description)) {
             $this->parameters->set('description', $this->description);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikp\PaymentMtgoxBundle\Mtgox;
+namespace Wikp\PaymentMtgoxBundle\Exception;
 
 use Wikp\PaymentMtgoxBundle\Mtgox\Request;
 
