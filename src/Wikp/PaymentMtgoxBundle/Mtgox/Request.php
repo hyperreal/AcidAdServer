@@ -15,10 +15,13 @@ class Request
     /** @var string */
     private $method;
 
+    private $nonce;
+
     public function __construct($method, ParameterBag $params)
     {
         $this->method = $method;
         $this->parameters = $params;
+
     }
 
     public function getMethod()
@@ -31,14 +34,23 @@ class Request
      */
     public function getParametersAsQueryString()
     {
-        $microTime = explode(' ', microtime());
         $parametersArray = $this->parameters->all();
-        $parametersArray['nonce'] = $microTime[1] . substr($microTime[0], 2, 6);
+        $parametersArray['nonce'] = $this->getNonce();
 
         return http_build_query(
             $parametersArray,
             self::NUMERIC_PREFIX,
             self::ARG_SEPARATOR
         );
+    }
+
+    private function getNonce()
+    {
+        if (empty($this->nonce)) {
+            $microTime = explode(' ', microtime());
+            $this->nonce = $microTime[1] . substr($microTime[0], 2, 6);
+        }
+
+        return $this->nonce;
     }
 }

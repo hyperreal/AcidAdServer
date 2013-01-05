@@ -19,6 +19,11 @@ class PaymentType extends AbstractType
 
     private function getOptions($label)
     {
-        return array('label' => $label, 'translation_domain' => 'HyperAdsBundle', 'property_path' => false);
+        return array(
+            'label' => $label,
+            'translation_domain' => 'HyperAdsBundle',
+            'property_path' => false,
+            'data' => new \DateTime('now +1 month')
+        );
     }
 }

@@ -1,8 +1,10 @@
 parameters:
     wikp_payment_mtgox.class: Wikp\PaymentMtgoxBundle\Mtgox\Client
     wikp_payment_mtgox.plugin.class: Wikp\PaymentMtgoxBundle\Plugin\MtgoxPaymentPlugin
+    wikp_payment_mtgox.order_repository.class: Wikp\PaymentMtgoxBundle\Plugin\OrderRepositoryFactory
     wikp_payment_mtgox.api_key: ~
     wikp_payment_mtgox.api_secret: ~
+    wikp_payment_mtgox.order_repository_path: ~
     wikp_payment_mtgox.return_url: null
     wikp_payment_mtgox.cancel_url: null
     wikp_payment_mtgox.debug: true
@@ -14,4 +16,20 @@ services:
 
     wikp_payment_mtgox.plugin:
         class: %wikp_payment_mtgox.plugin.class%
-        arguments: [%wikp_payment_mtgox.return_url%, %wikp_payment_mtgox.cancel_url%, @wikp_payment_mtgox.client]
+        arguments:
+            - %wikp_payment_mtgox.return_url%
+            - %wikp_payment_mtgox.cancel_url%
+            - @wikp_payment_mtgox.client
+
+    wikp_payment_mtgox.order_repository:
+        class: %wikp_payment_mtgox.order_repository.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+            - %wikp_payment_mtgox.order_repository_path%
+
+    wikp_payment_mtgox.form.type.ipn:
+        class: Wikp\PaymentMtgoxBundle\Form\MtgoxIpnType
+        arguments:
+            - %wikp_payment_mtgox.api_secret%
+        tags:
+            - { name: form.type, alias: mtgox_ipn }
