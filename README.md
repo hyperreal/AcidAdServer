@@ -48,9 +48,19 @@ Then, use the `install` command to download needed vendors:
 
     php composer.phar install
 
-Next, adjust database settings in `app/config/parameters.yml` file and run following command from project root dir:
+Next, adjust database settings in `app/config/parameters.yml` (copy an example file) file and run 
+following command from project root dir:
 
-    ./app/console doctrine:schema:update --force
+    ./app/console doctrine:schema:create --force
+    
+Next create admin user
+    
+    ./app/console fos:user:create --super admin
 
 Look that your virtual host document root must point to `web` directory (recommended) *or* you must access front
-controller starting with `web` path: `http://example.com/web/admin`
+controller starting with `web` path: `http://example.com/web/admin`. If you are using PHP 5.4, you can run
+
+    ./app/console server:run
+   
+instead of installing Apache or nginx.
+
