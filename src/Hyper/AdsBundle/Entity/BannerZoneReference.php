@@ -53,6 +53,13 @@ class BannerZoneReference
     protected $views = 0;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="pay_model", type="string", nullable=false)
+     */
+    private $payModel;
+
+    /**
      * @ORM\Column(type="smallint", nullable=false)
      */
     protected $active = 1;
@@ -131,5 +138,15 @@ class BannerZoneReference
     public function getZone()
     {
         return $this->zone;
+    }
+
+    public function getPayModel()
+    {
+        return $this->payModel;
+    }
+
+    public function setPayModel($payModel)
+    {
+        $this->payModel = $payModel;
     }
 }
