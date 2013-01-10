@@ -47,8 +47,8 @@ class MtgoxIpnType extends AbstractType
 
     private function addRequiredFields(FormBuilderInterface $builder)
     {
-        $builder->add('id', 'string', $this->getStandardOptionsRequired());
-        $builder->add('payment_id', 'string', $this->getStandardOptionsRequired());
+        $builder->add('id', 'text', $this->getStandardOptionsRequired());
+        $builder->add('payment_id', 'text', $this->getStandardOptionsRequired());
         $builder->add('data', 'integer', $this->getStandardOptionsRequired());
         $builder->add(
             'status',
@@ -66,7 +66,7 @@ class MtgoxIpnType extends AbstractType
         );
         $builder->add(
             'ipnRequestObject',
-            'string',
+            'text',
             $this->getStandardOptionsRequired(
                 array(
                     new IsValidIpnSign($this->apiSecret)
@@ -85,8 +85,8 @@ class MtgoxIpnType extends AbstractType
     private function addIfPaidFields(FormBuilderInterface $builder)
     {
         $builder->add('amount', 'integer', $this->getStandardOptionsNotRequired());
-        $builder->add('currency', 'string', $this->getStandardOptionsNotRequired());
-        $builder->add('method', 'string', $this->getStandardOptionsNotRequired());
+        $builder->add('currency', 'text', $this->getStandardOptionsNotRequired());
+        $builder->add('method', 'text', $this->getStandardOptionsNotRequired());
         $builder->add('date', 'datetime', $this->getStandardOptionsNotRequired());
     }
 
@@ -96,7 +96,7 @@ class MtgoxIpnType extends AbstractType
             return array('property_path' => false, 'required' => true);
         }
 
-        return array('property_path' => false, 'required' => true, array('constraints' => $constraints));
+        return array('property_path' => false, 'required' => true, 'constraints' => $constraints);
     }
 
     private function getStandardOptionsNotRequired(array $constraints = array())
@@ -105,6 +105,6 @@ class MtgoxIpnType extends AbstractType
             return array('property_path' => false, 'required' => false);
         }
 
-        return array('property_path' => false, 'required' => false, array('constraints' => $constraints));
+        return array('property_path' => false, 'required' => false, 'constraints' => $constraints);
     }
 }

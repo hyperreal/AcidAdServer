@@ -7,8 +7,6 @@ use JMS\Payment\CoreBundle\PluginController\Result;
 use JMS\Payment\CoreBundle\Plugin\Exception\ActionRequiredException;
 use JMS\Payment\CoreBundle\Plugin\Exception\Action\VisitUrl;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -29,26 +27,23 @@ class IpnController extends Controller
      */
     private $ppc;
 
-    /**
-     * @Method("POST")
-     * @Route("/", name="wikp_payment_mtgox_ipn")
-     */
     public function indexAction(Request $request)
     {
         $wholeRequest = $this->prepareRequestArray($request);
 
-        $form = $this->createForm('mtgox_ipn');
+        $form = $this->createForm('wikp_mtgox_ipn');
         $form->bind($wholeRequest);
 
         if (!$form->isValid()) {
-            throw new AccessDeniedException('Invalid data provided');
+            throw new AccessDeniedException($form->getErrorsAsString());
         }
 
         if ($form->get('status') === MtgoxIpnType::STATUS_PARTIAL) {
             return new Response('partial payments not supported');
         }
 
-        $order = $this->getOrderFromRepository((int)$form->get('id'));
+        $this->ppc->addPlugin($this->get('wikp_payment_mtgox.plugin'));
+        $order = $this->getOrderFromRepository($form->get('id')->getData());
         $paymentInstruction = $order->getPaymentInstruction();
 
         if (MtgoxIpnType::STATUS_CANCELLED === $form->get('status')) {
@@ -113,7 +108,7 @@ class IpnController extends Controller
         /** @var $order \Wikp\PaymentMtgoxBundle\Plugin\OrderInterface */
         $order = $orderRepository->find($orderId);
 
-        if (empty($order) || !($order instanceof OrderInterface)) {
+        if (empty($order) && !($order instanceof OrderInterface)) {
             throw $this->createNotFoundException('Order for given financial transaction ID does not exists');
         }
 

@@ -13,7 +13,7 @@
         var params = '';
         params += 'sr=' + encodeURIComponent(document.referrer) + '&';
         params += 'uf=' + encodeURIComponent(this.flashEnabled.toString()) + '&';
-        params += 'ref' + encodeURIComponent(document.URL) + '&';
+        params += 'ref=' + encodeURIComponent(document.URL) + '&';
 
         for (var col in Acid.dataCollectors) {
             var hash = Acid.dataCollectors[col]();

@@ -181,12 +181,16 @@ class UserBannerController extends Controller
         $orderRepository = $em->getRepository('HyperAdsBundle:Order');
 
         /** @var $potentialOrders \Hyper\AdsBundle\Entity\Order */
-        $order = $orderRepository->findOneBy(
+        /*$order = $orderRepository->findOneBy(
             array(
-                'announcement' => $banner,
+                    'announcement' => $banner,
                 'zone' => $zone
             )
-        );
+        );*/
+
+        $order = new Order();
+        $order->setAnnouncement($banner);
+        $order->setBannerZoneReference($banner->getReferenceInZone($zone));
 
         $form = $this->createForm(new PaymentType(), $order);
 
@@ -220,13 +224,14 @@ class UserBannerController extends Controller
         $orderRepository = $em->getRepository('HyperAdsBundle:Order');
 
         /** @var $potentialOrders \Hyper\AdsBundle\Entity\Order */
-        $order = $orderRepository->findOneBy(
+        /*$order = $orderRepository->findOneBy(
             array(
                 'announcement' => $banner,
                 'zone' => $zone
             )
-        );
+        );*/
 
+        $order = null;
         if (null === $order) {
             $order = new Order();
             $order->setOrderNumber(
@@ -236,8 +241,8 @@ class UserBannerController extends Controller
                     $zone
                 )
             );
-            $order->setAnnouncement($banner);
-            $order->setZone($zone);
+            //$order->setAnnouncement($banner);
+            $order->setBannerZoneReference($banner->getReferenceInZone($zone));
         }
 
         $form = $this->createForm(new PaymentType(), $order);
@@ -273,7 +278,7 @@ class UserBannerController extends Controller
             );
 
             //$banner->setPaidTo($payToDate);
-            $order->setPaymentTo($payToDate);
+            //$order->setPaymentTo($payToDate);
             $order->setAmount($amount);
             $order->setPaymentInstruction($instruction);
             $em->persist($order);

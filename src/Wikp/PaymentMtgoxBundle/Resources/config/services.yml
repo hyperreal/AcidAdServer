@@ -32,4 +32,4 @@ services:
         arguments:
             - %wikp_payment_mtgox.api_secret%
         tags:
-            - { name: form.type, alias: mtgox_ipn }
+            - { name: form.type, alias: wikp_mtgox_ipn }

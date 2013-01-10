@@ -23,8 +23,7 @@ class Order implements OrderInterface
     /**
      * @var \BannerZone
      *
-     * @ORM\Id
-     * @ORM\OneToOne(targetEntity="BannerZoneReference")
+     * @ORM\ManyToOne(targetEntity="BannerZoneReference", inversedBy="orders")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="banner_zone_id", referencedColumnName="id")
      * })
@@ -36,6 +35,12 @@ class Order implements OrderInterface
      * @ORM\JoinColumn(name="payment_instruction_id", referencedColumnName="id")
      */
     private $paymentInstruction;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Announcement", inversedBy="orders")
+     * @ORM\JoinColumn(name="announcement_id", referencedColumnName="id", nullable=true)
+     */
+    private $announcement;
 
     /**
      * @var string
@@ -165,6 +170,16 @@ class Order implements OrderInterface
     public function setBannerZoneReference(BannerZoneReference $reference)
     {
         $this->bannerZone = $reference;
+    }
+
+    public function getAnnouncement()
+    {
+        return $this->announcement;
+    }
+
+    public function setAnnouncement(Announcement $announcement)
+    {
+        $this->announcement = $announcement;
     }
 
     public function approve()

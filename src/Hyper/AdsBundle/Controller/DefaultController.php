@@ -32,7 +32,7 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('Zone not found.');
         }
 
-        /** @var $banner \Hyper\AdsBundle\Entity\Banner */
+        /** @var $banner \Hyper\AdsBundle\Entity\AnnouncementRepository */
         $banner = $em->getRepository('HyperAdsBundle:Banner')->getRandomBannerInZone($zone);
 
         if (empty($banner)) {

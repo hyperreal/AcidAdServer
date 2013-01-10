@@ -6,6 +6,8 @@ use Doctrine\ORM\EntityManager;
 use Hyper\AdsBundle\Entity\Announcement;
 use Hyper\AdsBundle\Entity\Advertiser;
 use Hyper\AdsBundle\Entity\Zone;
+use Hyper\AdsBundle\Entity\BannerZoneReference;
+use Hyper\AdsBundle\Exception\InvalidArgumentException;
 
 class PricesCalculator
 {
