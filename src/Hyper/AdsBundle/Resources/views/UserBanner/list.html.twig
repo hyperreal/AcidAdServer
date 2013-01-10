@@ -28,14 +28,10 @@
         </td>
         <td>
             <a href="{{ url('user_banner_edit', {'banner': banner.id }) }}}">Edytuj</a>
-            {% if banner.paid or banner.paidTo %}
                 <br /><a href="{{ url('user_banner_payments', {'bannerId': banner.id}) }}">Lista płatności</a>
-            {% endif %}
-            {% if banner.orders|length > 0 %}
                 <br /><a href="{{ url('user_banner_payments', {'bannerId': banner.id}) }}">
                     {{ 'payments.list'|trans({}, 'HyperAdsBundle') }}
                 </a>
-            {% endif %}
         </td>
     </tr>
     {% endfor %}

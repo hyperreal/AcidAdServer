@@ -9,6 +9,7 @@ class PaymentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $formBuilder, array $options)
     {
+        $formBuilder->add('pay_from', 'date', $this->getOptions('pay.from', 'now'));
         $formBuilder->add('pay_to', 'date', $this->getOptions('pay.to'));
     }
 
@@ -17,13 +18,13 @@ class PaymentType extends AbstractType
         return 'hyper_payment_form';
     }
 
-    private function getOptions($label)
+    private function getOptions($label, $timeString = 'now +1 month')
     {
         return array(
             'label' => $label,
             'translation_domain' => 'HyperAdsBundle',
             'property_path' => false,
-            'data' => new \DateTime('now +1 month')
+            'data' => new \DateTime($timeString)
         );
     }
 }

@@ -7,8 +7,6 @@
 namespace Hyper\AdsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\ManyToOne;
-use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -26,16 +24,22 @@ class BannerZoneReference
     protected $id;
 
     /**
-     * @ManyToOne(targetEntity="Banner", inversedBy="zones")
-     * @JoinColumn(name="banner_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Banner", inversedBy="zones")
+     * @ORM\JoinColumn(name="banner_id", referencedColumnName="id")
      */
     protected $banner;
 
     /**
-     * @ManyToOne(targetEntity="Zone", inversedBy="banners")
-     * @JoinColumn(name="zone_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Zone", inversedBy="banners")
+     * @ORM\JoinColumn(name="zone_id", referencedColumnName="id")
      */
     protected $zone;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="bannerZone")
+     * @var Order[]
+     */
+    protected $orders;
 
     /**
      * @ORM\Column(type="smallint")
@@ -55,7 +59,7 @@ class BannerZoneReference
     /**
      * @var string
      *
-     * @ORM\Column(name="pay_model", type="string", nullable=false)
+     * @ORM\Column(name="pay_model", type="paymodeltype", nullable=false)
      */
     private $payModel;
 
@@ -138,6 +142,19 @@ class BannerZoneReference
     public function getZone()
     {
         return $this->zone;
+    }
+
+    /**
+     * @return Order[]
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+
+    public function setOrders($orders)
+    {
+        $this->orders = $orders;
     }
 
     public function getPayModel()

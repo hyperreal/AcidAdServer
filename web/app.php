@@ -3,6 +3,8 @@
 use Symfony\Component\ClassLoader\ApcClassLoader;
 use Symfony\Component\HttpFoundation\Request;
 
+umask(0000);
+
 //if (function_exists('apc_add')) {
     // Use APC for autoloading to improve performance
     // Change 'sf2' by the prefix you want in order to prevent key conflict with another application

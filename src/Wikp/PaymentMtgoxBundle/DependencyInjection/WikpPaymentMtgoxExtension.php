@@ -27,6 +27,8 @@ class WikpPaymentMtgoxExtension extends Extension
 
         $container->setParameter('wikp_payment_mtgox.api_key', $config['api_key']);
         $container->setParameter('wikp_payment_mtgox.api_secret', $config['api_secret']);
+        $container->setParameter('wikp_payment_mtgox.order_repository_path', $config['order_repository_path']);
+
         $container->setParameter('wikp_payment_mtgox.return_url', $config['return_url']);
         $container->setParameter('wikp_payment_mtgox.cancel_url', $config['cancel_url']);
         $container->setParameter('wikp_payment_mtgox.debug', $config['debug']);

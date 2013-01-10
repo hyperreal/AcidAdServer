@@ -58,6 +58,7 @@ doctrine:
             bannertype: Hyper\AdsBundle\DBAL\BannerType
             zonetype: Hyper\AdsBundle\DBAL\ZoneType
             announcement_payment_type: Hyper\AdsBundle\DBAL\AnnouncementPaymentType
+            paymodeltype: Hyper\AdsBundle\DBAL\PayModelType
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%

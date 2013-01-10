@@ -16,7 +16,7 @@ security:
 
     firewalls:
         ads:
-            pattern: ^/(head|click|frame)
+            pattern: ^/(head|click|frame|mtgox)
             stateless: true
             anonymous: true
 
@@ -36,4 +36,6 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/mtgox/ipn$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user/, role: ROLE_USER }}
         - { path: ^/admin/, role: ROLE_ADMIN }}

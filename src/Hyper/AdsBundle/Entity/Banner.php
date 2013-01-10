@@ -214,11 +214,11 @@ class Banner extends Announcement
      *
      * @return \Hyper\AdsBundle\Entity\BannerZoneReference|null
      */
-    public function getReferenceInZone($zoneId)
+    public function getReferenceInZone($zone)
     {
         foreach ($this->zones as $zoneRef) {
             /** @var $zoneRef \Hyper\AdsBundle\Entity\BannerZoneReference */
-            if ($zoneId == $zoneRef->getZone()->getId()) {
+            if ($zone->getId() == $zoneRef->getZone()->getId()) {
                 return $zoneRef;
             }
         }

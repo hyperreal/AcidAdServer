@@ -15,10 +15,10 @@ class AnnouncementRepository extends EntityRepository
         $em = $this->getEntityManager();
 
         $query = $em->createQuery(
-            'SELECT b, o, pi, z
+            'SELECT b, o, pi, bzr
              FROM Hyper\AdsBundle\Entity\Banner b
-             LEFT JOIN b.orders o
-             LEFT JOIN o.zone AS z
+             LEFT JOIN b.zones bzr
+             LEFT JOIN bzr.orders o
              LEFT JOIN o.paymentInstruction pi
              WHERE b.id = ?1'
         );
@@ -32,10 +32,11 @@ class AnnouncementRepository extends EntityRepository
     public function getBannersWithDependenciesByAdvertiser(Advertiser $advertiser)
     {
         $query = $this->getEntityManager()->createQuery(
-            'SELECT b, o, z
+            'SELECT b
             FROM Hyper\AdsBundle\Entity\Banner b
-            LEFT JOIN b.orders o
-            LEFT JOIN o.zone AS z
+            LEFT JOIN b.zones bzr
+            LEFT JOIN bzr.orders o
+            LEFT JOIN bzr.zone z
             WHERE b.advertiser = ?1'
         );
 
