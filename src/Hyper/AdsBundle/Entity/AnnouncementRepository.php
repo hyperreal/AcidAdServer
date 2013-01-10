@@ -52,11 +52,10 @@ class AnnouncementRepository extends EntityRepository
             'SELECT b, bzr
              FROM Hyper\AdsBundle\Entity\Banner b
              JOIN b.zones bzr
-             WHERE b.expireDate > ?1 AND bzr.zone = ?2'
+             WHERE bzr.zone = ?1'
         );
 
-        $query->setParameter(1, new \DateTime());
-        $query->setParameter(2, $zone);
+        $query->setParameter(1, $zone);
 
         return $query->getResult();
     }
@@ -71,11 +70,9 @@ class AnnouncementRepository extends EntityRepository
         $query = $em->createQuery(
             'SELECT b, bzr
              FROM Hyper\AdsBundle\Entity\Banner b
-             LEFT JOIN b.zones bzr
-             WHERE b.expireDate > ?1'
+             LEFT JOIN b.zones bzr'
         );
 
-        $query->setParameter(1, new \DateTime());
         return $query->getResult();
     }
 

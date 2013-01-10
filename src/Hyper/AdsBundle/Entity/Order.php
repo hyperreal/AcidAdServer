@@ -5,12 +5,13 @@ namespace Hyper\AdsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
 use Hyper\AdsBundle\Entity\Announcement;
+use Wikp\PaymentMtgoxBundle\Plugin\OrderInterface;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\OrderRepository")
  * @ORM\Table(name="sent_order")
  */
-class Order
+class Order implements OrderInterface
 {
     /**
      * @ORM\Id
@@ -20,35 +21,63 @@ class Order
     private $id;
 
     /**
+     * @var \BannerZone
+     *
+     * @ORM\Id
+     * @ORM\OneToOne(targetEntity="BannerZoneReference")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="banner_zone_id", referencedColumnName="id")
+     * })
+     */
+    private $bannerZone;
+
+    /**
      * @ORM\OneToOne(targetEntity="JMS\Payment\CoreBundle\Entity\PaymentInstruction")
      * @ORM\JoinColumn(name="payment_instruction_id", referencedColumnName="id")
      */
     private $paymentInstruction;
 
-    /** @ORM\Column(name="order_number", type="string", unique = true) */
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="order_number", type="string", length=255, nullable=false)
+     */
     private $orderNumber;
 
-    /** @ORM\Column(type="decimal", scale=2, nullable=true) */
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="amount", type="decimal", nullable=true)
+     */
     private $amount;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Announcement", inversedBy="orders")
-     * @ORM\JoinColumn(name="announcement_id", referencedColumnName="id")
-     */
-    private $announcement;
-
-    /**
-     * @var Zone
-     * @ORM\ManyToOne(targetEntity="Zone", inversedBy="orders")
-     * @ORM\JoinColumn(name="zone_id", referencedColumnName="id", nullable=true)
-     */
-    private $zone;
-
-    /**
-     * @ORM\Column(type="date", name="payment_to", nullable=true)
      * @var \DateTime
+     *
+     * @ORM\Column(name="payment_from", type="date", nullable=true)
+     */
+    private $paymentFrom;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="payment_to", type="date", nullable=true)
      */
     private $paymentTo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="clicks", type="integer", nullable=true)
+     */
+    private $clicks;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="views", type="integer", nullable=true)
+     */
+    private $views;
 
     public function getId()
     {
@@ -85,19 +114,6 @@ class Order
         $this->amount = (float)$amount;
     }
 
-    /**
-     * @return Hyper\AdsBundle\Entity\Announcement
-     */
-    public function getAnnouncement()
-    {
-        return $this->announcement;
-    }
-
-    public function setAnnouncement(Announcement $announcement)
-    {
-        $this->announcement = $announcement;
-    }
-
     public function setPaymentTo(\DateTime $to)
     {
         $this->paymentTo = $to;
@@ -111,36 +127,51 @@ class Order
         return $this->paymentTo;
     }
 
-    /**
-     * @return Zone
-     */
-    public function getZone()
+    public function getPaymentFrom()
     {
-        if (!($this->getAnnouncement() instanceof Banner)) {
-            return null;
-        }
-
-        return $this->zone;
+        return $this->paymentFrom;
     }
 
-    public function setZone(Zone $zone)
+    public function setPaymentFrom(\DateTime $paymentFrom)
     {
-        if (!($this->getAnnouncement() instanceof Banner)) {
-            throw new \LogicException('You can assign zone only to order for banner');
-        }
+        $this->paymentFrom = $paymentFrom;
+    }
 
-        $this->zone = $zone;
+    public function getViews()
+    {
+        return $this->views;
+    }
+
+    public function setViews($views)
+    {
+        $this->views = $views;
+    }
+
+    public function getClicks()
+    {
+        return $this->clicks;
+    }
+
+    public function setClicks($clicks)
+    {
+        $this->clicks = $clicks;
     }
 
     public function getBannerZoneReference()
     {
-        /** @var $announcement Banner */
-        $announcement = $this->getAnnouncement();
-        if (!($announcement instanceof Banner)) {
-            return null;
-        }
-
-        return $announcement->getReferenceInZone($this->getZone()->getId());
+        return $this->bannerZone;
     }
 
+    public function setBannerZoneReference(BannerZoneReference $reference)
+    {
+        $this->bannerZone = $reference;
+    }
+
+    public function approve()
+    {
+    }
+
+    public function cancel()
+    {
+    }
 }
