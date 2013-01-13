@@ -292,6 +292,7 @@ class UserBannerController extends Controller
                 $urlRequest->setDescription(
                     $this->trans('mtgox.info')
                 );
+                $urlRequest->setAdditionalData($order->getId());
                 $urlRequest->setCurrency('BTC');
                 $urlRequest->setReturnSuccess(
                     $this->generateUrl('payment_successful', array('order' => $order->getId()), true)

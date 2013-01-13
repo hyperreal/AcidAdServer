@@ -34,7 +34,6 @@ class MtgoxIpnType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => false,
                 'csrf_protection' => false
             )
         );
@@ -73,6 +72,7 @@ class MtgoxIpnType extends AbstractType
                 )
             )
         );
+        $builder->add('aonce', 'text', $this->getStandardOptionsRequired());
     }
 
     private function addIfPartialFields(FormBuilderInterface $builder)
@@ -87,7 +87,7 @@ class MtgoxIpnType extends AbstractType
         $builder->add('amount', 'integer', $this->getStandardOptionsNotRequired());
         $builder->add('currency', 'text', $this->getStandardOptionsNotRequired());
         $builder->add('method', 'text', $this->getStandardOptionsNotRequired());
-        $builder->add('date', 'datetime', $this->getStandardOptionsNotRequired());
+        $builder->add('date', 'integer', $this->getStandardOptionsNotRequired());
     }
 
     private function getStandardOptionsRequired(array $constraints = array())

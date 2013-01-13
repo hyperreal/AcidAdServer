@@ -241,9 +241,12 @@ class Banner extends Announcement
         foreach ($this->orders as $order) {
             /** @var $order Order */
             /** @var $orderZone Zone */
-            $orderZone = $order->getZone();
-            if (!empty($orderZone) && $orderZone->getId() == $zone->getId()) {
-                $ordersInZone[] = $order;
+            $reference = $order->getBannerZoneReference();
+            if (!empty($reference)) {
+                $orderZone = $reference->getZone();
+                if (!empty($orderZone) && $orderZone->getId() == $zone->getId()) {
+                    $ordersInZone[] = $order;
+                }
             }
         }
 
