@@ -17,6 +17,7 @@ class MtgoxTransactionUrlRequest implements RequestTypeInterface
     private $description;
     private $sendEmail;
     private $ipnUrl;
+    private $additionalData;
 
     /** @var \Symfony\Component\HttpFoundation\ParameterBag */
     private $parameters;
@@ -56,6 +57,11 @@ class MtgoxTransactionUrlRequest implements RequestTypeInterface
         $this->ipnUrl = $ipnUrl;
     }
 
+    public function setAdditionalData($additionalData)
+    {
+        $this->additionalData = $additionalData;
+    }
+
     /**
      * @return \Wikp\PaymentMtgoxBundle\Mtgox\Request
      */
@@ -73,6 +79,7 @@ class MtgoxTransactionUrlRequest implements RequestTypeInterface
         $this->parameters->set('return_success', $this->returnSuccess);
         $this->parameters->set('return_failure', $this->returnFailure);
         $this->parameters->set('ipn', $this->ipnUrl);
+        $this->parameters->set('data', $this->additionalData);
 
         if (!empty($this->description)) {
             $this->parameters->set('description', $this->description);

@@ -17,10 +17,14 @@ services:
 
     wikp_payment_mtgox.plugin:
         class: %wikp_payment_mtgox.plugin.class%
+        public: true
+        scope: request
         arguments:
             - %wikp_payment_mtgox.return_url%
             - %wikp_payment_mtgox.cancel_url%
             - @wikp_payment_mtgox.client
+            - @form.factory
+            - @request
 
     wikp_payment_mtgox.order_repository:
         class: %wikp_payment_mtgox.order_repository.class%

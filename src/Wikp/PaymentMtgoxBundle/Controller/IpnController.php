@@ -35,7 +35,8 @@ class IpnController extends Controller
         $form->bind($wholeRequest);
 
         if (!$form->isValid()) {
-            throw new AccessDeniedException($form->getErrorsAsString());
+            throw new \InvalidArgumentException($form->getErrorsAsString());
+            //throw new AccessDeniedException($form->getErrorsAsString());
         }
 
         if ($form->get('status') === MtgoxIpnType::STATUS_PARTIAL) {
@@ -43,7 +44,7 @@ class IpnController extends Controller
         }
 
         $this->ppc->addPlugin($this->get('wikp_payment_mtgox.plugin'));
-        $order = $this->getOrderFromRepository($form->get('id')->getData());
+        $order = $this->getOrderFromRepository($form->get('data')->getData());
         $paymentInstruction = $order->getPaymentInstruction();
 
         if (MtgoxIpnType::STATUS_CANCELLED === $form->get('status')) {
@@ -74,7 +75,7 @@ class IpnController extends Controller
         } elseif (Result::STATUS_SUCCESS !== $result->getStatus()) {
             throw new RuntimeException('Transaction is unsuccessful: ' . $result->getReasonCode());
         }
-
+        $this->get('logger')->warn('JUHU');
         $order->approve();
         $this->saveOrder($order);
 
@@ -117,7 +118,7 @@ class IpnController extends Controller
 
     private function prepareRequestArray(Request $request)
     {
-        if ($request->server->has('HTTP_REST_SIGN')) {
+        if (!$request->server->has('HTTP_REST_SIGN')) {
             throw new AccessDeniedException("You didn't provide Rest-Sign header");
         }
 

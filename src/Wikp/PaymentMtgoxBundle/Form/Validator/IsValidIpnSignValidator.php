@@ -29,6 +29,6 @@ class IsValidIpnSignValidator extends ConstraintValidator
             true
         );
 
-        return $validSign !== $value->getHeaderRestSign();
+        return $validSign == base64_decode($value->getHeaderRestSign());
     }
 }
