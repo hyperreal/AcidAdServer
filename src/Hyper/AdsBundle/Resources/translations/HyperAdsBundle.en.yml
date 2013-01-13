@@ -56,7 +56,8 @@ next: __next
 payments.for.announcement: __payments.for.announcement
 order.number: __order.number
 date.submission: __date.submission
-pay.to: __pay.to
+pay.to: 'Payment to'
+pay.from: 'Payment from'
 amount: __amount
 is.paid: __is.paid
 zone: __zone

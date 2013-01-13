@@ -57,7 +57,7 @@ class MtgoxTransactionUrlRequest implements RequestTypeInterface
     }
 
     /**
-     * @return void|\Wikp\PaymentMtgoxBundle\Mtgox\Request
+     * @return \Wikp\PaymentMtgoxBundle\Mtgox\Request
      */
     public function asRequest()
     {

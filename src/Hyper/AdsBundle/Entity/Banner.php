@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Hyper\AdsBundle\DBAL\BannerType;
 use Hyper\AdsBundle\DBAL\AnnouncementPaymentType;
 use Hyper\AdsBundle\Helper\BannerTypeDeterminer;
+use Hyper\AdsBundle\Exception\InvalidArgumentException;
 
 /**
  * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\AnnouncementRepository")
@@ -214,11 +215,15 @@ class Banner extends Announcement
      *
      * @return \Hyper\AdsBundle\Entity\BannerZoneReference|null
      */
-    public function getReferenceInZone($zone)
+    public function getReferenceInZone($zoneId)
     {
+        if (!is_numeric($zoneId) || intval($zoneId) != $zoneId || $zoneId < 0) {
+            throw new InvalidArgumentException('Zone id is invalid');
+        }
+
         foreach ($this->zones as $zoneRef) {
             /** @var $zoneRef \Hyper\AdsBundle\Entity\BannerZoneReference */
-            if ($zone->getId() == $zoneRef->getZone()->getId()) {
+            if ($zoneId == $zoneRef->getZone()->getId()) {
                 return $zoneRef;
             }
         }

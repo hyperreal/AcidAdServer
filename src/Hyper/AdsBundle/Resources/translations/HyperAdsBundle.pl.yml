@@ -57,6 +57,7 @@ payments.for.announcement: 'Płatności za "%announcement%"'
 order.number: 'Numer zamówienia'
 date.submission: 'Data złożenia'
 pay.to: 'Płatność do'
+pay.from: 'Płatność od'
 amount: Kwota
 is.paid: 'Opłacono?'
 zone: Strefa

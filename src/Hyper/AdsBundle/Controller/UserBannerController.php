@@ -190,7 +190,7 @@ class UserBannerController extends Controller
 
         $order = new Order();
         $order->setAnnouncement($banner);
-        $order->setBannerZoneReference($banner->getReferenceInZone($zone));
+        $order->setBannerZoneReference($banner->getReferenceInZone($zone->getId()));
 
         $form = $this->createForm(new PaymentType(), $order);
 
@@ -242,7 +242,7 @@ class UserBannerController extends Controller
                 )
             );
             //$order->setAnnouncement($banner);
-            $order->setBannerZoneReference($banner->getReferenceInZone($zone));
+            $order->setBannerZoneReference($banner->getReferenceInZone($zone->getId()));
         }
 
         $form = $this->createForm(new PaymentType(), $order);

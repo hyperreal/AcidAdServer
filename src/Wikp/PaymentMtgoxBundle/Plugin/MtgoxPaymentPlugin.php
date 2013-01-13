@@ -49,4 +49,26 @@ class MtgoxPaymentPlugin extends AbstractPlugin
         $response = $this->client->rawRequest($request->asRequest());
         return $response->get('payment_url');
     }
+
+    public static function getValidMtgoxCurrencyCodes()
+    {
+        return array(
+            'USD',
+            'AUD',
+            'CAD',
+            'CHF',
+            'CNY',
+            'DKK',
+            'EUR',
+            'GBP',
+            'HKD',
+            'JPY',
+            'NZD',
+            'PLN',
+            'RUB',
+            'SEK',
+            'SGD',
+            'THB',
+        );
+    }
 }
