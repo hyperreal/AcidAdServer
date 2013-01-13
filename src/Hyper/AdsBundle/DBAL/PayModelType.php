@@ -19,7 +19,7 @@ class PayModelType extends Type
 
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
-        return "ENUM('daily', 'ppc', 'ppv') COMMENT '(DC2Type:bannertype)'";
+        return "ENUM('daily', 'ppc', 'ppv') COMMENT '(DC2Type:paymodeltype)'";
     }
 
     public function convertToPHPValue($value, AbstractPlatform $platform)

@@ -69,14 +69,30 @@ class Zone
 
     /**
      * @ORM\Column(type="decimal", name="daily_price", scale=2, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Currency")
      */
     private $dailyPrice;
+
+    /**
+     * @ORM\Column(type="decimal", name="view_price", scale=2, nullable=true)
+     */
+    private $viewPrice;
+
+    /**
+     * @ORM\Column(type="decimal", name="click_price", scale=2, nullable=true)
+     */
+    private $clickPrice;
 
     /**
      * @ORM\OneToMany(targetEntity="Order", mappedBy="zone")
      * @var Order[]
      */
     protected $orders;
+
+    /**
+     * @ORM\Column(type="integer", name="max_banners")
+     */
+    private $maxBanners;
 
     public function setId($id)
     {
@@ -166,6 +182,36 @@ class Zone
     public function setDailyPrice($dailyPrice)
     {
         $this->dailyPrice = $dailyPrice;
+    }
+
+    public function setViewPrice($viewPrice)
+    {
+        $this->viewPrice = (float)$viewPrice;
+    }
+
+    public function getViewPrice()
+    {
+        return $this->viewPrice;
+    }
+
+    public function setClickPrice($clickPrice)
+    {
+        $this->clickPrice = $clickPrice;
+    }
+
+    public function getClickPrice()
+    {
+        return $this->clickPrice;
+    }
+
+    public function getMaxBanners()
+    {
+        return $this->maxBanners;
+    }
+
+    public function setMaxBanners($maxBanners)
+    {
+        $this->maxBanners = (int)$maxBanners;
     }
 
     public function getBannerReferencesIds()

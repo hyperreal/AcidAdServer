@@ -64,7 +64,6 @@ class Client
 
     protected function setCommonCurlHeaders(Request $request)
     {
-        var_export($this->createRequestUrl($request->getMethod()));
         curl_setopt($this->curl, CURLOPT_URL, $this->createRequestUrl($request->getMethod()));
         curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($this->curl, CURLOPT_POSTFIELDS, $request->getParametersAsQueryString());
@@ -78,14 +77,12 @@ class Client
 
     protected function setHttpHeaders(Request $request)
     {
-        var_export($this->getHttpHeaders($request));
         curl_setopt($this->curl, CURLOPT_HTTPHEADER, $this->getHttpHeaders($request));
     }
 
     protected function getHttpHeaders(Request $request)
     {
         return array(
-            //'Content-length: ' . strlen($request->getParametersAsQueryString()),
             'Rest-Key: ' . $this->apiKey,
             'Rest-Sign: ' . $this->getRestSign($request),
             'Content-type: application/x-www-form-urlencoded',
