@@ -13,6 +13,7 @@ use JMS\Payment\CoreBundle\Model\FinancialTransactionInterface;
 use Wikp\PaymentMtgoxBundle\Plugin\MtgoxPaymentPlugin;
 use Wikp\PaymentMtgoxBundle\Mtgox\RequestType\MtgoxTransactionUrlRequest;
 use Hyper\AdsBundle\Entity\Announcement;
+use Hyper\AdsBundle\DBAL\PayModelType;
 use Hyper\AdsBundle\Entity\Banner;
 use Hyper\AdsBundle\Entity\BannerZoneReference;
 use Hyper\AdsBundle\Entity\Order;
@@ -326,17 +327,19 @@ class UserBannerController extends Controller
         $orderNumberGenerator = $this->get('hyper_ads.order_number_generator');
         $em = $this->getDoctrine()->getManager();
 
-        $order = new Order();
-        $order->setOrderNumber(
-            $orderNumberGenerator->getBannerPaymentOrderNumber($banner, $this->getUser(), $zone)
-        );
-        $order->setAnnouncement($banner);
-        $order->setZone($zone);
 
         $ref = new BannerZoneReference();
         $ref->setZone($zone);
         $ref->setBanner($banner);
         $ref->setProbability(1);
+        $ref->setPayModel(PayModelType::PAY_MODEL_DAILY);
+
+        $order = new Order();
+        $order->setOrderNumber(
+            $orderNumberGenerator->getBannerPaymentOrderNumber($banner, $this->getUser(), $zone)
+        );
+        $order->setAnnouncement($banner);
+        $order->setBannerZoneReference($ref);
 
         $em->persist($ref);
         $em->persist($order);
