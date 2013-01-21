@@ -48,6 +48,16 @@ class IpnController extends Controller
         $paymentInstruction = $order->getPaymentInstruction();
 
         if (MtgoxIpnType::STATUS_CANCELLED === $form->get('status')) {
+
+            $this->get('logger')->warn(
+                sprintf(
+                    'Payment IPN for order of ID=%d cancelled, paymentInstructionId=%d amount=%s',
+                    $order->getId(),
+                    $paymentInstruction->getId(),
+                    $paymentInstruction->getAmount()
+                )
+            );
+
             return $this->cancelOrder($order);
         }
 
@@ -70,12 +80,44 @@ class IpnController extends Controller
                     return $this->redirect($action->getUrl());
                 }
 
+                $this->get('logger')->error(
+                    sprintf(
+                        'Payment IPN for order of ID=%d unsuccessful, paymentInstructionId=%d amount=%s targetAmount=%s, exceptionMessage=%s',
+                        $order->getId(),
+                        $paymentInstruction->getId(),
+                        $paymentInstruction->getAmount(),
+                        $payment->getTargetAmount(),
+                        $ex->getMessage()
+                    )
+                );
+
                 throw $ex;
             }
         } elseif (Result::STATUS_SUCCESS !== $result->getStatus()) {
+            $this->get('logger')->error(
+                sprintf(
+                    'Payment IPN for order of ID=%d unsuccessful, paymentInstructionId=%d amount=%s targetAmount=%s, reasonCode=%s',
+                    $order->getId(),
+                    $paymentInstruction->getId(),
+                    $paymentInstruction->getAmount(),
+                    $payment->getTargetAmount(),
+                    $result->getReasonCode()
+                )
+            );
             throw new RuntimeException('Transaction is unsuccessful: ' . $result->getReasonCode());
         }
-        $this->get('logger')->warn('JUHU');
+
+        $this->get('logger')->warn(
+            sprintf(
+                'Payment IPN for order of ID=%d successful, paymentInstructionId=%d amount=%s targetAmount=%s',
+                $order->getId(),
+                $paymentInstruction->getId(),
+                $paymentInstruction->getAmount(),
+                $payment->getTargetAmount()
+            )
+        );
+
+        /** @var $order \Hyper\AdsBundle\Entity\Order */
         $order->approve();
         $this->saveOrder($order);
 

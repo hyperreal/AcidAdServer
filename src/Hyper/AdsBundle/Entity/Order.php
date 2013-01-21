@@ -13,6 +13,9 @@ use Wikp\PaymentMtgoxBundle\Plugin\OrderInterface;
  */
 class Order implements OrderInterface
 {
+    const STATUS_FINISHED = 1;
+    const STATUS_CANCELLED = 2;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -83,6 +86,16 @@ class Order implements OrderInterface
      * @ORM\Column(name="views", type="integer", nullable=true)
      */
     private $views;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $status;
+
+    public function __construct()
+    {
+        $this->status = 0;
+    }
 
     public function getId()
     {
@@ -162,6 +175,9 @@ class Order implements OrderInterface
         $this->clicks = $clicks;
     }
 
+    /**
+     * @return \Hyper\AdsBundle\Entity\BannerZoneReference
+     */
     public function getBannerZoneReference()
     {
         return $this->bannerZone;
@@ -184,9 +200,11 @@ class Order implements OrderInterface
 
     public function approve()
     {
+        $this->status = self::STATUS_FINISHED;
     }
 
     public function cancel()
     {
+        $this->status = self::STATUS_CANCELLED;
     }
 }
