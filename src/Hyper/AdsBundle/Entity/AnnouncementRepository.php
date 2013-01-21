@@ -49,14 +49,19 @@ class AnnouncementRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
 
+        // todo currently only pay per day payment model implemented!!!
         $query = $em->createQuery(
             'SELECT b, bzr
              FROM Hyper\AdsBundle\Entity\Banner b
              JOIN b.zones bzr
-             WHERE bzr.zone = ?1'
+             JOIN bzr.orders o
+             JOIN o.paymentInstruction pi
+             JOIN pi.payments p
+             WHERE bzr.zone = ?1 AND o.paymentFrom <= ?2 AND o.paymentTo >= ?2 AND p.approvedAmount = pi.amount'
         );
 
         $query->setParameter(1, $zone);
+        $query->setParameter(2, new \DateTime());
 
         return $query->getResult();
     }

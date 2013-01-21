@@ -48,7 +48,7 @@ class MtgoxPaymentPlugin extends AbstractPlugin
 
     public function approveAndDeposit(FinancialTransactionInterface $transaction, $retry)
     {
-        try {
+        /*try {
             $wholeRequest = $this->prepareRequestArray($this->request);
         } catch (AccessDeniedException $ex) {
             $transaction->setResponseCode(PluginInterface::RESPONSE_CODE_PENDING);
@@ -61,6 +61,7 @@ class MtgoxPaymentPlugin extends AbstractPlugin
         $form->bind($wholeRequest);
 
         if (!$form->isValid()) {
+            //todo throw exception?
             $transaction->setResponseCode(PluginInterface::RESPONSE_CODE_PENDING);
             $transaction->setReasonCode(PluginInterface::REASON_CODE_INVALID);
             $transaction->setState(FinancialTransactionInterface::STATE_FAILED);
@@ -73,6 +74,7 @@ class MtgoxPaymentPlugin extends AbstractPlugin
             $transaction->setState(FinancialTransactionInterface::STATE_CANCELED);
             return;
         }
+        */
 
         $transaction->setState(FinancialTransactionInterface::STATE_SUCCESS);
         $transaction->setResponseCode(PluginInterface::RESPONSE_CODE_SUCCESS);
