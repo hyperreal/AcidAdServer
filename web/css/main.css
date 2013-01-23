@@ -1,8 +1,0 @@
-ul.no-buttons {
-    list-style-type: none;
-}
-
-menu, ul.no-buttons {
-    margin: 0;
-    padding: 0;
-}

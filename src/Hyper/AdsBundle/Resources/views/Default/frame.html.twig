@@ -13,9 +13,9 @@
 <head>
     <title>{{ banner.title }}</title>
 {% if banner.type == 'flash' %}
-    <script type="text/javascript" src="{{ asset('js/swfobject.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/hyperads/js/swfobject.js') }}"></script>
     <script type="text/javascript">
-        swfobject.embedSWF("{{ asset(banner.fileUrl) }}", "banner", "{{ banner.width }}", "{{ banner.height }}", "9.0.0", "{{ asset('js/expressInstall.swf') }}")
+        swfobject.embedSWF("{{ asset(banner.fileUrl) }}", "banner", "{{ banner.width }}", "{{ banner.height }}", "9.0.0", "{{ asset('bundles/hyperads/js/expressInstall.swf') }}")
     </script>
 {% endif %}
     <style type="text/css">body{margin:0;}</style>

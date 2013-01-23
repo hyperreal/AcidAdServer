@@ -1,0 +1,39 @@
+ul.no-buttons {
+    list-style-type: none;
+}
+
+menu, ul.no-buttons {
+    margin: 0;
+    padding: 0;
+}
+
+form.user-form {
+    width: 450px;
+    margin: auto;
+    list-style: none;
+    background: #c3d9ff;
+    border: 1px solid #0088CC;
+    padding: 40px 0px;
+}
+
+form label{
+    float: left;
+    width: 150px;
+    text-align: right;
+    padding: 7px 5px 0 0;
+}
+
+form div {
+    clear: both;
+}
+
+form input[type="submit"], form button[type="submit"] {
+    position: relative;
+    float: right;
+    right: 88px;
+}
+
+ul form > button[type="submit"] {
+    float: none;
+    position: static;
+}
