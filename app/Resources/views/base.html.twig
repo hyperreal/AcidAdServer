@@ -5,11 +5,11 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/screen.css') }}" media="screen,projection" />
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}" media="print" />
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/hyperads/css/screen.css') }}" media="screen,projection" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/hyperads/css/print.css') }}" media="print" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/hyperads/css/main.css') }}" media="screen" />
         <!--[if lt IE 8]>
-            <link rel="stylesheet" href="{{ asset('css/ie.css') }}" type="text/css" media="screen, projection">
+            <link rel="stylesheet" href="{{ asset('bundles/hyperads/css/ie.css') }}" type="text/css" media="screen, projection">
         <![endif]-->
     </head>
     <body>
@@ -30,7 +30,7 @@
             <h1 id="logo" class="span-6 last">
                 <div class="span-3">@acid</div>
                 <a href="{{ path('_welcome') }}" class="span-3 last">
-                    <img src="{{ asset('images/hyperreal.png') }}" alt="logo" />
+                    <img src="{{ asset('bundles/hyperads/images/hyperreal.png') }}" alt="logo" />
                 </a>
             </h1>
         </div>
