@@ -32,15 +32,17 @@ These features are sorted by planned implementation-done time.
  * Nagios monitoring URL
  * E-mail notifications
  * UI improvements
- * Multiple banners in one zone at once (e.g. you can place four small boxes in scyscrapper)
+ * Multiple banners in one zone at once (e.g. you can place 
+   four small boxes in scyscrapper)
  * Performance improvements
  * Counting clicks of swfs with `clickTAG`
  * Statistic reports
 
 # Installation using composer
 
-If you don't have Composer yet, download it following the instructions on
-http://getcomposer.org/ or just run the following command:
+If you don't have Composer yet, download it following the 
+instructions on http://getcomposer.org/ or just run the 
+following command:
 
     curl -s http://getcomposer.org/installer | php
 
@@ -48,9 +50,20 @@ Then, use the `install` command to download needed vendors:
 
     php composer.phar install
 
-Next, adjust database settings in `app/config/parameters.yml` file and run following command from project root dir:
+Next, adjust database settings in `app/config/parameters.yml` 
+file and run following command from project root dir:
 
     ./app/console doctrine:schema:update --force
 
-Look that your virtual host document root must point to `web` directory (recommended) *or* you must access front
-controller starting with `web` path: `http://example.com/web/admin`
+Look that your virtual host document root must point to `web`
+directory (recommended) *or* you must access front controller 
+starting with `web` path: `http://example.com/web/admin`
+
+With `node` and `bower` installed, you can next install JS and CSS
+dependencies:
+
+    bower install
+
+Alternatively you can run below command, but `bower` is prefered.
+
+    ./bin/install-asset-deps
