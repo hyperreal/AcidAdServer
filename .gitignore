@@ -5,6 +5,8 @@
 /vendor/
 composer.phar
 web/uploads/*
+web/components/*
+!web/components/.gitkeep
 !web/uploads/.gitkeep
 app/config/parameters.*
 *.iml
