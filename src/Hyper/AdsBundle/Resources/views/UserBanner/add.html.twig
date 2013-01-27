@@ -13,3 +13,18 @@
     </li>
 </ul>
 {% endblock %}
+
+{% block javascripts %}
+{% if wysiwyg == 'enabled' %}
+<script type="text/javascript" src="{{ asset('components/ckeditor/ckeditor.js') }}"></script>
+    <script type="text/javascript">
+        ($(document).ready(function() {
+            CKEDITOR.replace('hyper_adsbundle_bannertype[description]', {
+                toolbar: 'Basic',
+                language: 'pl',
+                disableNativeSpellChecker: false
+            });
+        }))();
+    </script>
+{% endif %}
+{% endblock %}

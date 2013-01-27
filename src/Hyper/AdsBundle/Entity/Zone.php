@@ -84,12 +84,6 @@ class Zone
     private $clickPrice;
 
     /**
-     * @ORM\OneToMany(targetEntity="Order", mappedBy="zone")
-     * @var Order[]
-     */
-    protected $orders;
-
-    /**
      * @ORM\Column(type="integer", name="max_banners")
      */
     private $maxBanners;
