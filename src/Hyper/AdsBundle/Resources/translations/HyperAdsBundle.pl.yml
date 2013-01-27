@@ -102,3 +102,5 @@ name.last: Nazwisko
 all.changes.saved: 'Wszystkie zmiany zostały zapisane'
 announcement-free.add: 'Dodaj ogłoszenie bezpłatne'
 daily.price: 'Cena/dzień emisji'
+canceled.payment: 'Anulowano zamówienie'
+payment.was.canceled: 'Zamówienie zostało anulowane'

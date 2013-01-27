@@ -58,16 +58,14 @@ class PricesCalculator
 
     public function getActiveZonesPrices()
     {
-        // TODO !!!!
-        return array(
-            1 => 10,
-            self::ROUND_PRECISION => 10,
-        );
+        /** @var $zoneRepository \Hyper\AdsBundle\Entity\ZoneRepository */
+        $zoneRepository = $this->entityManager->getRepository('HyperAdsBundle:Zone');
+        return $zoneRepository->mapActiveZonesIdsToDailyPrice();
     }
 
     public function getDayPriceForZone(Zone $zone)
     {
-        return $zone->getID() * 10;//TODO !!!!
+        return $zone->getDailyPrice();
     }
 
     public function getPercentageDiscountForUser(Advertiser $advertiser)

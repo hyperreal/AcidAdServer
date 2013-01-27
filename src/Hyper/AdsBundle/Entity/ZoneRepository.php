@@ -44,4 +44,21 @@ class ZoneRepository extends EntityRepository
         $query->setParameter(1, $banner);
         $query->execute();
     }
+
+    public function mapActiveZonesIdsToDailyPrice()
+    {
+        $mapping = array();
+        $activeZones = $this->findBy(
+            array(
+                'active' => 1
+            )
+        );
+
+        foreach ($activeZones as $zone) {
+            /** @var $zone \Hyper\AdsBundle\Entity\Zone */
+            $mapping[$zone->getId()] = $zone->getDailyPrice();
+        }
+
+        return $mapping;
+    }
 }
