@@ -32,6 +32,7 @@ class PaymentsController extends Controller
     {
         $currentUser = $this->getUser();
 
+
         if ($order->getAnnouncement()->getAdvertiser()->getId() != $currentUser->getId()) {
             return $this->redirect($this->generateUrl('_welcome'));
         }

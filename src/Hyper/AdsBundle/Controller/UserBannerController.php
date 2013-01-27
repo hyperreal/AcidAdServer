@@ -218,21 +218,10 @@ class UserBannerController extends Controller
         $banner = $bannerRepository->getBannerWithDependenciesById($bannerId);
         $this->accessDeniedWhenInvalidUser($banner);
 
-
         /** @var $zoneRepository \Hyper\AdsBundle\Entity\ZoneRepository */
         $zoneRepository = $em->getRepository('HyperAdsBundle:Zone');
         /** @var $zone \Hyper\AdsBundle\Entity\Zone */
         $zone = $zoneRepository->find($zoneId);
-
-        $orderRepository = $em->getRepository('HyperAdsBundle:Order');
-
-        /** @var $potentialOrders \Hyper\AdsBundle\Entity\Order */
-        /*$order = $orderRepository->findOneBy(
-            array(
-                'announcement' => $banner,
-                'zone' => $zone
-            )
-        );*/
 
         $order = null;
         if (null === $order) {
@@ -280,17 +269,16 @@ class UserBannerController extends Controller
                 )
             );
 
-            //$banner->setPaidTo($payToDate);
-            //$order->setPaymentTo($payToDate);
             $order->setAmount($amount);
+            $order->setAnnouncement($banner);
             $order->setPaymentInstruction($instruction);
             $em->persist($order);
             $em->persist($banner);
             $em->flush();
 
-            if ($instruction->getState() == FinancialTransactionInterface::STATE_PENDING) {
+            if (FinancialTransactionInterface::STATE_PENDING == $instruction->getState()) {
                 $urlRequest = new MtgoxTransactionUrlRequest();
-                $urlRequest->setAmount('0.0001');
+                $urlRequest->setAmount($amount);
                 $urlRequest->setIpnUrl($this->generateUrl('wikp_payment_mtgox_ipn', array(), true));
                 $urlRequest->setDescription(
                     $this->trans('mtgox.info')
@@ -316,11 +304,14 @@ class UserBannerController extends Controller
             );
         }
 
-        return $this->renderView('HyperAdsBundle:UserBanner:payInZone.html.twig', array(
-            'banner' => $banner,
-            'zone' => $zone,
-            'form' => $form->createView()
-        ));
+        return $this->renderView(
+            'HyperAdsBundle:UserBanner:payInZone.html.twig',
+            array(
+                'banner' => $banner,
+                'zone' => $zone,
+                'form' => $form->createView()
+            )
+        );
     }
 
     private function addReferenceAndOrder(Banner $banner, Zone $zone)
