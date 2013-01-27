@@ -357,6 +357,7 @@ class UserBannerController extends Controller
 
         $formType = new BannerType();
         $formType->disableFileInput();
+        $formType->disableDescriptionInput();
 
         $editForm = $this->createForm($formType, $banner);
         $deleteForm = $this->createDeleteForm($banner->getId());
