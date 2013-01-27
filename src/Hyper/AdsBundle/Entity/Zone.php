@@ -83,7 +83,7 @@ class Zone
      */
     private $clickPrice;
 
-fi    /**
+    /**
      * @ORM\Column(type="integer", name="max_banners")
      */
     private $maxBanners;
