@@ -223,14 +223,6 @@ class Zone
         return sprintf('%s @%s (%s)', $this->getName(), $this->getPage()->getName(), $this->getType());
     }
 
-    /**
-     * @return Order[]
-     */
-    public function getOrders()
-    {
-        return $this->orders;
-    }
-
     public static function getZoneTypes()
     {
         return ZoneType::getValidTypes();
