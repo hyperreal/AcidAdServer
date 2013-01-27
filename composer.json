@@ -33,7 +33,8 @@
         "jms/security-extra-bundle": "1.2.*",
         "jms/di-extra-bundle": "1.1.*",
         "jms/payment-core-bundle": "master-dev",
-        "friendsofsymfony/user-bundle": "2.0.*@dev"
+        "friendsofsymfony/user-bundle": "2.0.*@dev",
+        "exercise/htmlpurifier-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

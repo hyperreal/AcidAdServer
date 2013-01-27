@@ -3,7 +3,7 @@
     "main": "web/css/main.css",
     "version": "1.0.0",
     "dependencies": {
-        "ckeditor": "https://github.com/ckeditor/ckeditor-releases/tree/4.0.1/standard",
+        "ckeditor": "https://github.com/ckeditor/ckeditor-releases/archive/4.0.1/standard.zip",
         "jquery": "~1.9.0"
     }
 }
