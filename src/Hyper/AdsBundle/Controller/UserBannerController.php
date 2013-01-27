@@ -264,7 +264,7 @@ class UserBannerController extends Controller
             $ppc->createPaymentInstruction(
                 $instruction = new PaymentInstruction(
                     $amount,
-                    'BTC',
+                    'EUR',
                     MtgoxPaymentPlugin::SYSTEM_NAME
                 )
             );
@@ -284,7 +284,7 @@ class UserBannerController extends Controller
                     $this->trans('mtgox.info')
                 );
                 $urlRequest->setAdditionalData($order->getId());
-                $urlRequest->setCurrency('BTC');
+                $urlRequest->setCurrency('EUR');
                 $urlRequest->setReturnSuccess(
                     $this->generateUrl('payment_successful', array('order' => $order->getId()), true)
                 );
