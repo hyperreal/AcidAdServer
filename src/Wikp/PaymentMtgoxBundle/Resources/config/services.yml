@@ -51,3 +51,5 @@ services:
             - @doctrine.orm.entity_manager
             - @wikp_payment_mtgox.client
 
+    wikp_payment_mtgox.stdin_reader:
+        class: Wikp\PaymentMtgoxBundle\Util\StandardInputReader

@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Wikp\PaymentMtgoxBundle\Exception\RuntimeException;
 use Wikp\PaymentMtgoxBundle\Form\MtgoxIpnType;
 use Wikp\PaymentMtgoxBundle\Form\IpnRequest;
@@ -22,7 +23,6 @@ class IpnController extends Controller
     const RESPONSE_OK = '[OK]';
 
     /**
-     * @DI\Inject("payment.plugin_controller")
      * @var \JMS\Payment\CoreBundle\PluginController\PluginControllerInterface
      */
     private $ppc;
@@ -35,19 +35,20 @@ class IpnController extends Controller
         $form->bind($wholeRequest);
 
         if (!$form->isValid()) {
-            throw new \InvalidArgumentException($form->getErrorsAsString());
-            //throw new AccessDeniedException($form->getErrorsAsString());
+            throw new HttpException(400, 'Bad request');
         }
 
-        if ($form->get('status') === MtgoxIpnType::STATUS_PARTIAL) {
+        if (MtgoxIpnType::STATUS_PARTIAL === $form->get('status')->getData()) {
             return new Response('partial payments not supported');
         }
+
+        $this->ppc = $this->get('payment.plugin_controller');
 
         $this->ppc->addPlugin($this->get('wikp_payment_mtgox.plugin'));
         $order = $this->getOrderFromRepository($form->get('data')->getData());
         $paymentInstruction = $order->getPaymentInstruction();
 
-        if (MtgoxIpnType::STATUS_CANCELLED === $form->get('status')) {
+        if (MtgoxIpnType::STATUS_CANCELLED === $form->get('status')->getData()) {
 
             $this->get('logger')->warn(
                 sprintf(
@@ -128,6 +129,7 @@ class IpnController extends Controller
     {
         $order->cancel();
         $this->saveOrder($order);
+
         return new Response(self::RESPONSE_OK);
     }
 
@@ -168,10 +170,15 @@ class IpnController extends Controller
         unset($wholeRequest['ipnRequestObject']);
 
         $wholeRequest['ipnRequestObject'] = new IpnRequest(
-            file_get_contents('php://input'),
+            $this->getStdinContents(),
             $request->server->get('HTTP_REST_SIGN')
         );
 
         return $wholeRequest;
+    }
+
+    protected function getStdinContents()
+    {
+        return $this->get('wikp_payment_mtgox.stdin_reader')->getStandardInput();
     }
 }
