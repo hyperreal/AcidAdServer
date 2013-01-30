@@ -9,6 +9,7 @@ parameters:
     wikp_payment_mtgox.cancel_url: null
     wikp_payment_mtgox.debug: true
     wikp_payment_mtgox.current_prices_retriever.class: Wikp\PaymentMtgoxBundle\Mtgox\CurrentPricesRetriever
+    wikp_payment_mtgox.exchange.class: Wikp\PaymentMtgoxBundle\Mtgox\Exchange
 
 services:
     wikp_payment_mtgox.client:
@@ -31,6 +32,11 @@ services:
         arguments:
             - @doctrine.orm.entity_manager
             - %wikp_payment_mtgox.order_repository_path%
+
+    wikp_payment_mtgox.exchange:
+        class: %wikp_payment_mtgox.exchange.class%
+        arguments:
+            - @doctrine.orm.entity_manager
 
     wikp_payment_mtgox.form.type.ipn:
         class: Wikp\PaymentMtgoxBundle\Form\MtgoxIpnType

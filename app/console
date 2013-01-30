@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Hyper\AdsBundle\Console\Command\ExpiringCampaignNotify;
 use Wikp\PaymentMtgoxBundle\Console\Command\RetrieveCurrentPrices;
+use Wikp\PaymentMtgoxBundle\Console\Command\ExchangeCalculator;
 
 $input = new ArgvInput();
 $env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'dev');
@@ -23,4 +24,5 @@ $kernel = new AppKernel($env, $debug);
 $application = new Application($kernel);
 $application->add(new ExpiringCampaignNotify());
 $application->add(new RetrieveCurrentPrices());
+$application->add(new ExchangeCalculator());
 $application->run($input);

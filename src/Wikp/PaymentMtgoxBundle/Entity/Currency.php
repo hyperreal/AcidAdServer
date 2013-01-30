@@ -28,14 +28,14 @@ class Currency
     private $name;
 
     /**
-     * @ORM\Column(type="decimal", scale=8, precision=15, name="ask_price")
+     * @ORM\Column(type="decimal", scale=8, precision=15, name="buy_price")
      */
-    private $askPrice;
+    private $buyPrice;
 
     /**
-     * @ORM\Column(type="decimal", scale=8, precision=15, name="bid_price")
+     * @ORM\Column(type="decimal", scale=8, precision=15, name="sell_price")
      */
-    private $bidPrice;
+    private $sellPrice;
 
     public function getId()
     {
@@ -67,33 +67,33 @@ class Currency
         $this->name = $name;
     }
 
-    public function getBidPrice()
+    public function getSellPrice()
     {
-        return $this->bidPrice;
+        return $this->sellPrice;
     }
 
-    public function setBidPrice($bidPrice)
+    public function setSellPrice($bidPrice)
     {
-        $this->bidPrice = $bidPrice;
+        $this->sellPrice = $bidPrice;
     }
 
-    public function getAskPrice()
+    public function getBuyPrice()
     {
-        return $this->askPrice;
+        return $this->buyPrice;
     }
 
-    public function setAskPrice($askPrice)
+    public function setBuyPrice($askPrice)
     {
-        $this->askPrice = $askPrice;
+        $this->buyPrice = $askPrice;
     }
 
     public function howMuchBitcoinsCanBuyForCurrency($currencyAmount)
     {
-        return $this->askPrice * $currencyAmount;
+        return $this->buyPrice * $currencyAmount;
     }
 
     public function howMuchCurrencyCanBuyForBitcoins($bitcoinAmount)
     {
-        return $this->bidPrice * $bitcoinAmount;
+        return $this->sellPrice * $bitcoinAmount;
     }
 }
