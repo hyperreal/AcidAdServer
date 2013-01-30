@@ -10,7 +10,7 @@ class PaymentDaysCalculatorTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @covers \Hyper\AdsBundle\Helper\PricesCalculator::getNumberOfDaysToPay
+     * @covers \Hyper\AdsBundle\Helper\PaymentDaysCalculator::getNumberOfDaysToPay
      * @dataProvider numbersOfDaysToPayProvider
      */
     public function testGetNumbersOfDaysToPay(array $orderDates, $from, $to, $expectedDaysToPay)
@@ -27,7 +27,7 @@ class PaymentDaysCalculatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Hyper\AdsBundle\Helper\PricesCalculator::getNumberOfDaysToPay
+     * @covers \Hyper\AdsBundle\Helper\PaymentDaysCalculator::getNumberOfDaysToPay
      * @expectedException Hyper\AdsBundle\Exception\InvalidArgumentException
      * @expectedExceptionMessage {from} must be lower than or equal {to}
      */
