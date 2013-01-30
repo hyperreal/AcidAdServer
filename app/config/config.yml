@@ -78,11 +78,6 @@ fos_user:
 jms_payment_core:
     secret: %payments_secret%
 
-services:
-    stats_collector:
-        class: "Hyper\AdsBundle\Helper\StatsCollector"
-        arguments: [@doctrine.orm.entity_manager]
-
 
 # Swiftmailer Configuration
 swiftmailer:
