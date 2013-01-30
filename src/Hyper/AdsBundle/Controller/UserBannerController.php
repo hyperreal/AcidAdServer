@@ -260,11 +260,15 @@ class UserBannerController extends Controller
 
             $interval = $payToDate->diff($payFromDate)->days;
 
-            $amount = $calc->getDayPriceForZone($zone) * $interval;
+            $currencyAmount = $calc->getDayPriceForZone($zone) * $interval;
+            /** @var $exchange \Wikp\PaymentMtgoxBundle\Mtgox\BitcoinExchangeInterface */
+            $exchange = $this->get('wikp_payment_mtgox.exchange');
+            $amount = $exchange->convertToBitcoins($currencyAmount);
+
             $ppc->createPaymentInstruction(
                 $instruction = new PaymentInstruction(
                     $amount,
-                    'EUR',
+                    'BTC',
                     MtgoxPaymentPlugin::SYSTEM_NAME
                 )
             );
@@ -284,7 +288,7 @@ class UserBannerController extends Controller
                     $this->trans('mtgox.info')
                 );
                 $urlRequest->setAdditionalData($order->getId());
-                $urlRequest->setCurrency('EUR');
+                $urlRequest->setCurrency('BTC');
                 $urlRequest->setReturnSuccess(
                     $this->generateUrl('payment_successful', array('order' => $order->getId()), true)
                 );

@@ -55,8 +55,8 @@ class RetrieveCurrentPrices extends ContainerAwareCommand
         $currency = $retriever->updateCurrencyPrices($this->getCurrencyObject($currencyCode));
 
         $output->writeln('<info>Prices retrieved</info>');
-        $output->writeln('<info>Ask price: </info><comment>' . $currency->getAskPrice() . '</comment>');
-        $output->writeln('<info>Bid price: </info><comment>' . $currency->getBidPrice() . '</comment>');
+        $output->writeln('<info>Buy price: </info><comment>' . $currency->getBuyPrice() . '</comment>');
+        $output->writeln('<info>Sell price: </info><comment>' . $currency->getSellPrice() . '</comment>');
         $output->writeln('<info>Prices stored in database</info>');
     }
 

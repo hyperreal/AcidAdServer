@@ -29,8 +29,8 @@ class CurrentPricesRetriever
     {
         $prices = $this->getCurrentPricesForCurrency($currency);
 
-        $currency->setAskPrice($prices['buy']);
-        $currency->setBidPrice($prices['sell']);
+        $currency->setBuyPrice($prices['buy']);
+        $currency->setSellPrice($prices['sell']);
 
         $this->em->persist($currency);
         $this->em->flush($currency);
