@@ -10,11 +10,20 @@
     </parameters>
 
     <services>
+
         <service id="hyper_ads.prices_calculator" class="%hyper_ads.prices_calculator.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+
         <service id="hyper_ads.order_number_generator" class="%hyper_ads.order_number_generator.class%">
         </service>
+
+        <service id="stats_collector" class="Hyper\AdsBundle\Helper\StatsCollector">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
     </services>
+
+
 
 </container>
