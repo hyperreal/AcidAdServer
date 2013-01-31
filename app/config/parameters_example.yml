@@ -18,6 +18,8 @@ parameters:
     mtgox_api_key:    apiKey
     mtgox_api_secret: "apiSecret"
 
+    ads_default_currency: EUR
+
     locale:            pl
     secret:            0724ebb222af8866b7d7a2524451219b
 

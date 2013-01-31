@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpFoundation\Response;
 use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
 use JMS\Payment\CoreBundle\Model\FinancialTransactionInterface;
 use Wikp\PaymentMtgoxBundle\Plugin\MtgoxPaymentPlugin;
@@ -21,6 +23,7 @@ use Hyper\AdsBundle\Entity\Zone;
 use Hyper\AdsBundle\Form\BannerType;
 use Hyper\AdsBundle\Form\OrderType;
 use Hyper\AdsBundle\Form\PaymentType;
+use Hyper\AdsBundle\Helper\PaymentDaysCalculator;
 
 class UserBannerController extends Controller
 {
@@ -181,16 +184,6 @@ class UserBannerController extends Controller
         /** @var $zone \Hyper\AdsBundle\Entity\Zone */
         $zone = $zoneRepository->find($zoneId);
 
-        $orderRepository = $em->getRepository('HyperAdsBundle:Order');
-
-        /** @var $potentialOrders \Hyper\AdsBundle\Entity\Order */
-        /*$order = $orderRepository->findOneBy(
-            array(
-                    'announcement' => $banner,
-                'zone' => $zone
-            )
-        );*/
-
         $order = new Order();
         $order->setAnnouncement($banner);
         $order->setBannerZoneReference($banner->getReferenceInZone($zone->getId()));
@@ -202,6 +195,41 @@ class UserBannerController extends Controller
             'zone' => $zone,
             'form' => $form->createView()
         );
+    }
+
+    /**
+     * @Route("/{banner}/zone/{zone}/calculate", name="user_banner_zone_calculate")
+     * @Method("POST")
+     */
+    public function daysAndCostAction(Request $request, Banner $banner, Zone $zone)
+    {
+        try {
+            $from = new \DateTime($request->get('from'));
+            $to = new \DateTime($request->get('to'));
+        } catch (\Exception $e) {
+            throw new HttpException(400, 'Bad request');
+        }
+
+        $bannerZoneReference = $banner->getReferenceInZone($zone->getId());
+        $daysCalculator = new PaymentDaysCalculator($bannerZoneReference);
+        $days = $daysCalculator->getNumberOfDaysToPay($from, $to);
+        /** @var $pricesCalculator \Hyper\AdsBundle\Helper\PricesCalculator */
+        $pricesCalculator = $this->get('hyper_ads.prices_calculator');
+        $dailyPrice = $pricesCalculator->getDayPriceForZone($zone);
+
+        $response = new Response(
+            json_encode(
+                array(
+                    'days' => $days,
+                    'dailyPrice' => $dailyPrice,
+                    'price' => $days * $dailyPrice,
+                    'currency' => $this->container->getParameter('ads_default_currency')
+                )
+            )
+        );
+        $response->headers->set('Content-type', 'application/json');
+
+        return $response;
     }
 
     /**
@@ -222,6 +250,7 @@ class UserBannerController extends Controller
         $zoneRepository = $em->getRepository('HyperAdsBundle:Zone');
         /** @var $zone \Hyper\AdsBundle\Entity\Zone */
         $zone = $zoneRepository->find($zoneId);
+        $bannerZoneReference = $banner->getReferenceInZone($zone->getId());
 
         $order = null;
         if (null === $order) {
@@ -234,7 +263,7 @@ class UserBannerController extends Controller
                 )
             );
             //$order->setAnnouncement($banner);
-            $order->setBannerZoneReference($banner->getReferenceInZone($zone->getId()));
+            $order->setBannerZoneReference($bannerZoneReference);
         }
 
         $form = $this->createForm(new PaymentType(), $order);
@@ -250,17 +279,12 @@ class UserBannerController extends Controller
             $calc = $this->get('hyper_ads.prices_calculator');
             /** @var $payToDate \DateTime */
             $payToDate = $form->get('pay_to')->getData();
+            $payFromDate = $form->get('pay_from')->getData();
 
-            $bannerPaidTo = $banner->getPaidToInZone($zone);
-            if (null === $bannerPaidTo) {
-                $payFromDate = new \DateTime();
-            } else {
-                $payFromDate = $bannerPaidTo;
-            }
+            $daysCalculator = new PaymentDaysCalculator($bannerZoneReference);
+            $days = $daysCalculator->getNumberOfDaysToPay($payFromDate, $payToDate);
+            $currencyAmount = $calc->getDayPriceForZone($zone) * $days;
 
-            $interval = $payToDate->diff($payFromDate)->days;
-
-            $currencyAmount = $calc->getDayPriceForZone($zone) * $interval;
             /** @var $exchange \Wikp\PaymentMtgoxBundle\Mtgox\BitcoinExchangeInterface */
             $exchange = $this->get('wikp_payment_mtgox.exchange');
             $amount = $exchange->convertToBitcoins($currencyAmount);

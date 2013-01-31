@@ -27,6 +27,15 @@ form div {
     clear: both;
 }
 
+form#payment-form div#hyper_payment_form {
+    float: left;
+    width: 370px;
+}
+
+form#payment-form div {
+    clear: none;
+}
+
 form input[type="submit"], form button[type="submit"] {
     position: relative;
     float: right;
