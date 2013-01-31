@@ -102,6 +102,9 @@ class Order implements OrderInterface
         return $this->id;
     }
 
+    /**
+     * @return \JMS\Payment\CoreBundle\Model\PaymentInstructionInterface
+     */
     public function getPaymentInstruction()
     {
         return $this->paymentInstruction;

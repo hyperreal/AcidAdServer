@@ -35,6 +35,7 @@ class IpnController extends Controller
         $form->bind($wholeRequest);
 
         if (!$form->isValid()) {
+            $this->get('logger')->warn('Invalid ipn ' . $form->getErrorsAsString());
             throw new HttpException(400, 'Bad request');
         }
 
