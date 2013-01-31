@@ -15,6 +15,8 @@ parameters:
     mailer_sender:     me@example.com
 
     payments_secret:  som3S3cr37P4ssw0rd
+    mtgox_api_key:    apiKey
+    mtgox_api_secret: "apiSecret"
 
     locale:            pl
     secret:            0724ebb222af8866b7d7a2524451219b
