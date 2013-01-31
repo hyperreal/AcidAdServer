@@ -14,12 +14,11 @@ class ExchangeCalculatorTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->command = new ExchangeCalculator();
-
     }
 
     public function testValidParams()
     {
-        $this->setContainer($this->getExchangeMock(false, 10, 'USD', 1000));
+        $this->setContainer($this->getExchangeMock(true, 10, 'EUR', 1000));
         $this->command->run($this->getInputMock(), $this->getOutputMock());
     }
 
@@ -28,27 +27,35 @@ class ExchangeCalculatorTest extends \PHPUnit_Framework_TestCase
         $mock = $this->getMockBuilder('Symfony\Component\Console\Output\OutputInterface')
             ->getMockForAbstractClass();
 
+        $mock->expects($this->any())
+            ->method('writeln')
+            ->with("10 BTC = <info>1000 EUR</info>");
+
         return $mock;
     }
 
-    private function getInputMock($fromBtc = true, $currency = 'BTC', $amount = 10)
+    private function getInputMock($fromBtc = true, $currency = 'EUR', $amount = 10)
     {
         $mock = $this->getMockBuilder('Symfony\Component\Console\Input\InputInterface')
+            ->setMethods(array('getOption', 'getArgument'))
             ->getMockForAbstractClass();
 
-        $mock->expects($this->at(1))
+        $mock->expects($this->any())
             ->method('getOption')
-            ->with($this->equalTo('from-btc'))
-            ->will($this->returnValue($fromBtc));
+            ->will(
+                $this->returnCallback(
+                    function ($name) use ($currency, $fromBtc) {
+                        if ('from-btc' == $name) {
+                            return $fromBtc;
+                        } elseif ('currency' == $name) {
+                            return $currency;
+                        }
+                    }
+                )
+            );
 
-        $mock->expects($this->at(2))
-            ->method('getOption')
-            ->with($this->equalTo('currency'))
-            ->will($this->returnValue($currency));
-
-        $mock->expects($this->at(1))
+        $mock->expects($this->any())
             ->method('getArgument')
-            ->with($this->equalTo('amount'))
             ->will($this->returnValue($amount));
 
         return $mock;
@@ -79,7 +86,7 @@ class ExchangeCalculatorTest extends \PHPUnit_Framework_TestCase
         } else {
             $mock->expects($this->once())
                 ->method('convertToBitcoins')
-                ->with($this->equalTo($amount), $this->equalTo($currency))
+                //->with($this->equalTo($amount), $this->equalTo($currency))
                 ->will($this->returnValue($expectedAmount));
             $mock->expects($this->never())
                 ->method('convertFromBitcoins');
