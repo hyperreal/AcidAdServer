@@ -85,6 +85,9 @@ class PaymentDaysCalculator
     {
         $this->unifiedOrders = array();
         foreach ($this->orders as $order) {
+            if (is_null($order->getPaymentTo())) {
+                continue;
+            }
             $toPayment = clone $order->getPaymentTo();
             $this->unifiedOrders[] = array(
                 'from' => $order->getPaymentFrom(),

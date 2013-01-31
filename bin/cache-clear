@@ -3,6 +3,13 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DIR=`dirname $DIR`
 
-sudo -u www-data /usr/bin/php $DIR/app/console cache:clear --env=prod
-sudo -u www-data /usr/bin/php $DIR/app/console cache:clear --env=dev
+HOST=`hostname`
+
+if [ "$HOST" = "thorn" ]; then
+	/usr/bin/php $DIR/app/console cache:clear --env=prod
+	/usr/bin/php $DIR/app/console cache:clear --env=dev
+else
+	sudo -u www-data /usr/bin/php $DIR/app/console cache:clear --env=prod
+	sudo -u www-data /usr/bin/php $DIR/app/console cache:clear --env=dev
+fi
 
