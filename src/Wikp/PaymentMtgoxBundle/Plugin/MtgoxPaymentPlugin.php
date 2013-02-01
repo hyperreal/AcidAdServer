@@ -76,7 +76,6 @@ class MtgoxPaymentPlugin extends AbstractPlugin
         }
         */
 
-        //todo!!!
         /** @var $payment \Jms\Payment\CoreBundle\Model\PaymentInterface */
         $payment = $transaction->getPayment();
         $transaction->setProcessedAmount($payment->getTargetAmount());
