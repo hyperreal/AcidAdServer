@@ -24,7 +24,6 @@ class AnnouncementRepository extends EntityRepository
         );
 
         $query->setParameter(1, $id);
-        $query->setMaxResults(1);
 
         return $query->getSingleResult();
     }
