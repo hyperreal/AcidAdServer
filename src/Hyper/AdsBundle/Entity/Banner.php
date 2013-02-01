@@ -253,6 +253,11 @@ class Banner extends Announcement
         return $ordersInZone;
     }
 
+    /**
+     * @param Zone $zone
+     *
+     * @return \DateTime|null
+     */
     public function getPaidToInZone(Zone $zone)
     {
         $orders = $this->getOrdersInZone($zone);
