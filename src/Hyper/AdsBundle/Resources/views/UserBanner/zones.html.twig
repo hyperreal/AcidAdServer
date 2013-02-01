@@ -1,11 +1,11 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}
-{{ 'zones.for.banner'|trans({'%banner%': banner.title}, 'HyperAdsBundle') }}
+{{ 'zones.for.banner'|babylon({'%banner%': banner.title}) }}
 {% endblock %}
 
 {% block body %}
-<h1>{{ 'zones.for.banner'|trans({'%banner%': banner.title}, 'HyperAdsBundle') }}</h1>
+<h1>{{ 'zones.for.banner'|babylon({'%banner%': banner.title}) }}</h1>
 
 {% if zones|length > 0 %}
     <div class="info">Poniżej wyświetlono listę stref, do których pasuje wybrany banner.</div>
@@ -13,11 +13,11 @@
     <table class="records-list">
         <thead>
         <tr>
-            <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'banner.in.zone'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'page'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'paid.to'|trans({}, 'HyperAdsBundle') }}</th>
+            <th>{{ 'id'|babylon }}</th>
+            <th>{{ 'banner.in.zone'|babylon }}</th>
+            <th>{{ 'name'|babylon }}</th>
+            <th>{{ 'page'|babylon }}</th>
+            <th>{{ 'paid.to'|babylon }}</th>
         </tr>
         </thead>
         <tbody>
@@ -38,12 +38,15 @@
                 <td>
                     {% set paidToInZone = banner.getPaidToInZone(zone) %}
                     {% if banner.orders|length > 0 and paidToInZone %}
-                        {{ 'paid.to.date'|trans({'%date%': paidToInZone|date('d. m. Y')}, 'HyperAdsBundle') }}
+                        {{ 'paid.to.date'|babylon({'%date%': paidToInZone|date('d. m. Y')}) }} <br />
+                        <a href="{{ url('user_banner_pay_in_zone', {'bannerId': banner.id, 'zoneId': zone.id}) }}">
+                            {{ 'extend.the.payment'|babylon }}
+                        </a>
                     {% else %}
-                        {{ 'not.paid'|trans({}, 'HyperAdsBundle') }}
+                        {{ 'not.paid'|babylon }}
                         <br />
                         <a href="{{ url('user_banner_pay_in_zone', {'bannerId': banner.id, 'zoneId': zone.id}) }}">
-                            {{ 'pay.banner.here'|trans({}, 'HyperAdsBundle') }}
+                            {{ 'pay.banner.here'|babylon }}
                         </a>
                     {% endif %}
                 </td>
@@ -52,11 +55,11 @@
         </tbody>
     </table>
     <div class="buttons">
-        <input type="submit" value="{{ 'save'|trans({}, 'HyperAdsBundle') }}"
+        <input type="submit" value="{{ 'save'|babylon }}"
     </div>
     </form>
 {% else %}
-    <div class="notice">{{ 'no.zones.to.add.banner'|trans({}, 'HyperAdsBundle') }}</div>
+    <div class="notice">{{ 'no.zones.to.add.banner'|babylon }}</div>
 {% endif %}
 
 {% endblock %}

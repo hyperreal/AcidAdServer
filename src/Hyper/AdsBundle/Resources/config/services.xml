@@ -22,6 +22,11 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
+        <service id="hyper_ads.twig.extension" class="Hyper\AdsBundle\Twig\AcidExtension">
+            <argument type="service" id="translator" />
+            <tag name="twig.extension" />
+        </service>
+
     </services>
 
 
