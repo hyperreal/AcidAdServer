@@ -76,6 +76,10 @@ class MtgoxPaymentPlugin extends AbstractPlugin
         }
         */
 
+        //todo!!!
+        /** @var $payment \Jms\Payment\CoreBundle\Model\PaymentInterface */
+        $payment = $transaction->getPayment();
+        $transaction->setProcessedAmount($payment->getTargetAmount());
         $transaction->setState(FinancialTransactionInterface::STATE_SUCCESS);
         $transaction->setResponseCode(PluginInterface::RESPONSE_CODE_SUCCESS);
         $transaction->setReasonCode(PluginInterface::REASON_CODE_SUCCESS);

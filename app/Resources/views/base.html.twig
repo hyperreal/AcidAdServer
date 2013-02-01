@@ -83,6 +83,11 @@
                 {{ app.session.flash('info') }}
             </div>
             {% endif %}
+            {% if app.session.hasFlash('success') %}
+            <div class="success">
+                {{ app.session.flash('success') }}
+            </div>
+            {% endif %}
             {% block body %}{% endblock %}
         </div>
 
