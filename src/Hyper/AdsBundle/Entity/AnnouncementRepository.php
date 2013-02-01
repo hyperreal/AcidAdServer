@@ -149,7 +149,7 @@ class AnnouncementRepository extends EntityRepository
             LEFT JOIN z.banners bzr
             LEFT JOIN bzr.banner b
             JOIN z.page p
-            WHERE z.maxWidth >= ?1 AND z.maxHeight >= ?2'
+            WHERE z.maxWidth >= ?1 AND z.maxHeight >= ?2 AND z.enabled = 1 AND z.dailyPrice > 0'
         );
 
         $query->setParameter(1, $banner->getWidth());
