@@ -188,7 +188,12 @@ class UserBannerController extends Controller
         $order->setAnnouncement($banner);
         $order->setBannerZoneReference($banner->getReferenceInZone($zone->getId()));
 
-        $form = $this->createForm(new PaymentType(), $order);
+        $paymentFormType = new PaymentType();
+        $paidTo = $banner->getPaidToInZone($zone);
+        if (!empty($paidTo)) {
+            $paymentFormType->setFromDate($paidTo->modify('+1 day'));
+        }
+        $form = $this->createForm($paymentFormType, $order);
 
         return array(
             'banner' => $banner,
