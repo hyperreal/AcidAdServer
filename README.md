@@ -55,7 +55,7 @@ following command from project root dir:
     
 Next create admin user
     
-    ./app/console fos:user:create --super admin
+    ./app/console fos:user:create --super-admin admin
 
 Look that your virtual host document root must point to `web` directory (recommended) *or* you must access front
 controller starting with `web` path: `http://example.com/web/admin`. If you are using PHP 5.4, you can run
