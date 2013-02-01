@@ -16,17 +16,23 @@ class PaymentType extends AbstractType
     public function setFromDate(\DateTime $from)
     {
         $this->fromDate = $from;
-        $this->toDate = $from->modify('+1 month');
+        $this->setToDate();
     }
 
     public function buildForm(FormBuilderInterface $formBuilder, array $options)
     {
         if (empty($this->fromDate)) {
             $this->fromDate = new \DateTime();
-            $this->toDate = $this->fromDate->modify('+1 month');
+            $this->setToDate();
         }
         $formBuilder->add('pay_from', 'date', $this->getOptions('pay.from', $this->fromDate));
         $formBuilder->add('pay_to', 'date', $this->getOptions('pay.to', $this->toDate));
+    }
+
+    private function setToDate()
+    {
+        $this->toDate = clone $this->fromDate;
+        $this->toDate->modify('+1 month');
     }
 
     public function getName()
