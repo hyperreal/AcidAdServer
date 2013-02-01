@@ -159,7 +159,7 @@ class UserBannerController extends Controller
         $em->flush();
         $em->commit();
         $this->get('session')->setFlash(
-            'info',
+            'success',
             $this->trans('all.changes.saved')
         );
 

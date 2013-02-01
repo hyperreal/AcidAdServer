@@ -8,6 +8,7 @@
 <h1>{{ 'zones.for.banner'|trans({'%banner%': banner.title}, 'HyperAdsBundle') }}</h1>
 
 {% if zones|length > 0 %}
+    <div class="info">Poniżej wyświetlono listę stref, do których pasuje wybrany banner.</div>
     <form action="{{ url('user_banner_zones_save', {'banner': banner.id }) }}" method="post">
     <table class="records-list">
         <thead>
