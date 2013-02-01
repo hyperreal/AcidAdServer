@@ -298,8 +298,11 @@ class UserBannerController extends Controller
             );
 
             $order->setAmount($amount);
+            $order->setPaymentFrom($payFromDate);
+            $order->setPaymentTo($payToDate);
             $order->setAnnouncement($banner);
             $order->setPaymentInstruction($instruction);
+
             $em->persist($order);
             $em->persist($banner);
             $em->flush();
@@ -309,7 +312,7 @@ class UserBannerController extends Controller
                 $urlRequest->setAmount($amount);
                 $urlRequest->setIpnUrl($this->generateUrl('wikp_payment_mtgox_ipn', array(), true));
                 $urlRequest->setDescription(
-                    $this->trans('mtgox.info')
+                    $this->trans('payment.info', array('%orderNumber%' => $order->getOrderNumber()))
                 );
                 $urlRequest->setAdditionalData($order->getId());
                 $urlRequest->setCurrency('BTC');
