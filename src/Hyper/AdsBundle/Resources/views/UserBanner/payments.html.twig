@@ -37,9 +37,9 @@
                 {% endif %}
             </td>
             <td>
-                {% if order.status == constant('Hyper\AdsBundle\Entity\Order::STATE_FINISHED') %}
+                {% if order.status == constant('Hyper\\AdsBundle\\Entity\\Order::STATUS_FINISHED') %}
                     {{ 'yes'|babylon }}
-                {% elseif order.status == constant('Hyper\AdsBundle\Entity\Order::STATE_CANCELLED') %}
+                {% elseif order.status == constant('Hyper\\AdsBundle\\Entity\\Order::STATUS_CANCELLED') %}
                     {{ 'cancelled'|babylon }}
                 {% else %}
                     {{ 'no'|babylon }} <a class="external" href="{{ order.paymentUrl }}">{{ 'pay'|babylon }}</a>
