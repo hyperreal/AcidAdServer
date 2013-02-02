@@ -3,6 +3,7 @@
 namespace Hyper\AdsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
 use Hyper\AdsBundle\Entity\Announcement;
 use Wikp\PaymentMtgoxBundle\Plugin\OrderInterface;
@@ -94,6 +95,7 @@ class Order implements OrderInterface
 
     /**
      * @ORM\Column(type="text", nullable=true, name="payment_url")
+     * @Assert\Url()
      */
     private $paymentUrl;
 
