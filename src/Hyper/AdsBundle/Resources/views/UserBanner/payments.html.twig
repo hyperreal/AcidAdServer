@@ -21,18 +21,30 @@
         {% for order in announcement.orders %}
         <tr>
             <td>{{ order.orderNumber }}</td>
-            <td>{{ order.paymentInstruction.createdAt|date('d. m. Y') }}r.</td>
-            <td>{{ order.paymentTo|date('d. m. Y') }}r.</td>
-            <td>{{ order.amount }} {{ order.paymentInstruction.currency }}</td>
             <td>
-                {% if order.paymentInstruction.state == constant('JMS\\Payment\\CoreBundle\\Model\\FinancialTransactionInterface::STATE_SUCCESS') %}
+                {% if order.paymentInstruction %}
+                    {{ order.paymentInstruction.createdAt|date('d. m. Y') }}r.
+                {% else %}
+                    {{ 'payment.instruction.not.found'|babylon }}
+                {% endif %}
+            </td>
+            <td>{{ order.paymentTo|date('d. m. Y') }}r.</td>
+            <td>
+                {% if order.paymentInstruction %}
+                    {{ order.amount }} {{ order.paymentInstruction.currency }}
+                {% else %}
+                    {{ 'payment.instruction.not.found'|babylon }}
+                {% endif %}
+            </td>
+            <td>
+                {% if order.paymentInstruction and order.paymentInstruction.state == constant('JMS\\Payment\\CoreBundle\\Model\\FinancialTransactionInterface::STATE_SUCCESS') %}
                     {{ 'yes'|trans({}, 'HyperAdsBundle') }}
                 {% else%}
                     {{ 'no'|trans({}, 'HyperAdsBundle') }}
                 {% endif %}
             </td>
             <td>
-                <span{% if not order.zone.enabled %} class="disabled"{% endif %}>{{ order.zone }}</span>
+                <span{% if not order.bannerZoneReference.zone.enabled %} class="disabled"{% endif %}>{{ order.bannerZoneReference.zone }}</span>
             </td>
         </tr>
         {% endfor %}

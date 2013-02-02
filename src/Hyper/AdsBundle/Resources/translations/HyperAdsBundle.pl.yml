@@ -65,7 +65,7 @@ yes: Tak
 no: Nie
 payments.empty: 'Lista płatności jest pusta'
 zones.for.banner: 'Strefy dla bannera "%banner%"'
-banner.in.zone: 'Włączony w strefie?'
+banner.in.zone: 'Strefa/włączony?'
 page: Strona
 paid.to: 'Opłacono do'
 paid.to.date: 'Opłacono do %date%r.'
