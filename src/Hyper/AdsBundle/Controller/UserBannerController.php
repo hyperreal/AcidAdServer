@@ -313,6 +313,8 @@ class UserBannerController extends Controller
             $em->persist($banner);
             $em->flush();
 
+            $em->refresh($order);
+
             if (FinancialTransactionInterface::STATE_PENDING == $instruction->getState()) {
                 $urlRequest = new MtgoxTransactionUrlRequest();
                 $urlRequest->setAmount($amount);
