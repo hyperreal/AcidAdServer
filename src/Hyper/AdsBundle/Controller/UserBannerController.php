@@ -337,6 +337,8 @@ class UserBannerController extends Controller
                 return $this->redirect($url);
             }
 
+            $em->flush();
+
             return array(
                 'form' => $form->createView(),
                 'banner' => $banner,
