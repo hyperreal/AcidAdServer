@@ -15,7 +15,6 @@
         <tr>
             <th>{{ 'id'|babylon }}</th>
             <th>{{ 'banner.in.zone'|babylon }}</th>
-            <th>{{ 'name'|babylon }}</th>
             <th>{{ 'page'|babylon }}</th>
             <th>{{ 'paid.to'|babylon }}</th>
         </tr>
@@ -31,9 +30,9 @@
             <tr>
                 <td>{{ zone.id }}</td>
                 <td>
-                    <input type="checkbox" name="use_in_zone[{{ zone.id }}]" value="1"{% if zoneActive %} checked="checked"{% endif %} />
+                    <input type="checkbox" id="use_{{ zone.id }}" name="use_in_zone[{{ zone.id }}]" value="1"{% if zoneActive %} checked="checked"{% endif %} />
+                    {{ zone.name }}
                 </td>
-                <td>{{ zone.name }}</td>
                 <td>{{ zone.page.name }}</td>
                 <td>
                     {% set paidToInZone = banner.getPaidToInZone(zone) %}

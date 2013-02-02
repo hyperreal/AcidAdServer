@@ -3,6 +3,7 @@
 namespace Hyper\AdsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
 use Hyper\AdsBundle\Entity\Announcement;
 use Wikp\PaymentMtgoxBundle\Plugin\OrderInterface;
@@ -55,7 +56,7 @@ class Order implements OrderInterface
     /**
      * @var float
      *
-     * @ORM\Column(name="amount", type="decimal", nullable=true)
+     * @ORM\Column(name="amount", type="decimal", nullable=true, scale=5)
      */
     private $amount;
 
@@ -91,6 +92,12 @@ class Order implements OrderInterface
      * @ORM\Column(type="smallint")
      */
     private $status;
+
+    /**
+     * @ORM\Column(type="text", nullable=true, name="payment_url")
+     * @Assert\Url()
+     */
+    private $paymentUrl;
 
     public function __construct()
     {
@@ -199,6 +206,16 @@ class Order implements OrderInterface
     public function setAnnouncement(Announcement $announcement)
     {
         $this->announcement = $announcement;
+    }
+
+    public function setPaymentUrl($url)
+    {
+        $this->paymentUrl = $url;
+    }
+
+    public function getPaymentUrl()
+    {
+        return $this->paymentUrl;
     }
 
     public function approve()
