@@ -309,6 +309,10 @@ class UserBannerController extends Controller
             $order->setAnnouncement($banner);
             $order->setPaymentInstruction($instruction);
 
+            $em->persist($order);
+            $em->persist($banner);
+            $em->flush();
+
             if (FinancialTransactionInterface::STATE_PENDING == $instruction->getState()) {
                 $urlRequest = new MtgoxTransactionUrlRequest();
                 $urlRequest->setAmount($amount);
@@ -329,15 +333,10 @@ class UserBannerController extends Controller
                 $order->setPaymentUrl($url);
 
                 $em->persist($order);
-                $em->persist($banner);
                 $em->flush();
 
                 return $this->redirect($url);
             }
-
-            $em->persist($order);
-            $em->persist($banner);
-            $em->flush();
 
             return array(
                 'form' => $form->createView(),
