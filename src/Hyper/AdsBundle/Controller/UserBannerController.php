@@ -330,10 +330,11 @@ class UserBannerController extends Controller
                 );
 
                 $url = $this->get('wikp_payment_mtgox.plugin')->getMtgoxTransactionUrl($urlRequest);
+
                 $order->setPaymentUrl($url);
 
                 $em->persist($order);
-                $em->flush();
+                $em->flush($order);
 
                 return $this->redirect($url);
             }
