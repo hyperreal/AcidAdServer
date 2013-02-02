@@ -1,15 +1,15 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-    {{ 'banner.buy'|trans({}, 'HyperAdsBundle') }}
+    {{ 'banner.buy'|babylon }}
 {% endblock %}
 {% block body %}
 <form action="{{ url('user_banner_create') }}" method="post" enctype="multipart/form-data">
     {{ form_widget(form) }}
-    <input type="submit" value="{{ 'save'|trans({}, 'HyperAdsBundle') }}"/>
+    <input type="submit" value="{{ 'save'|babylon }}"/>
 </form>
 <ul>
     <li>
-        <a href="{{ url('user_banner_list') }}">{{ 'back.to.the.list'|trans({}, 'HyperAdsBundle') }}</a>
+        <a href="{{ url('user_banner_list') }}">{{ 'back.to.the.list'|babylon }}</a>
     </li>
 </ul>
 {% endblock %}

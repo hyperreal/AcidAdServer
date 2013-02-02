@@ -1,21 +1,21 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}
-{{ 'pay.for.banner.in.zone'|trans({'%banner%': banner.title, '%zone%': zone}, 'HyperAdsBundle') }}
+{{ 'pay.for.banner.in.zone'|babylon({'%banner%': banner.title, '%zone%': zone}) }}
 {% endblock %}
 
 {% block body %}
 <h1>
-    {{ 'pay.for.banner'|trans({'%banner%': banner.title}, 'HyperAdsBundle') }}
+    {{ 'pay.for.banner'|babylon({'%banner%': banner.title}) }}
 </h1>
 <div class="info">
-    {{ 'pay.for.banner.in.zone.info'|trans({'%banner%': banner.title, '%zone%': zone}, 'HyperAdsBundle') }}
+    {{ 'pay.for.banner.in.zone.info'|babylon({'%banner%': banner.title, '%zone%': zone}) }}
 </div>
 
 <form action="{{ url('user_banner_pay_in_zone_save', {'bannerId': banner.id, 'zoneId': zone.id}) }}" method="post">
     {{ form_widget(form) }}
     <div class="buttons">
-        <input type="submit" value="{{ 'next'|trans({}, 'HyperAdsBundle') }}"/>
+        <input type="submit" value="{{ 'next'|babylon }}"/>
     </div>
 </form>
 
