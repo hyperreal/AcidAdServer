@@ -218,6 +218,11 @@ class Order implements OrderInterface
         return $this->paymentUrl;
     }
 
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
     public function approve()
     {
         $this->status = self::STATUS_FINISHED;
