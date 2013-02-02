@@ -329,7 +329,7 @@ class UserBannerController extends Controller
                 $order->setPaymentUrl($url);
 
                 $em->persist($order);
-                $em->persis($banner);
+                $em->persist($banner);
                 $em->flush();
 
                 return $this->redirect($url);
