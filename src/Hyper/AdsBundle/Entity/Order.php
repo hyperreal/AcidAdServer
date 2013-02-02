@@ -56,7 +56,7 @@ class Order implements OrderInterface
     /**
      * @var float
      *
-     * @ORM\Column(name="amount", type="decimal", nullable=true, scale=5)
+     * @ORM\Column(name="amount", type="decimal", nullable=true, scale=8, precision=14)
      */
     private $amount;
 
