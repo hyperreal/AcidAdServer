@@ -1,11 +1,11 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}
-{{ 'zones.for.banner'|babylon({'%banner%': banner.title}) }}
+{{ 'zones.for.banner'|babel({'%banner%': banner.title}) }}
 {% endblock %}
 
 {% block body %}
-<h1>{{ 'zones.for.banner'|babylon({'%banner%': banner.title}) }}</h1>
+<h1>{{ 'zones.for.banner'|babel({'%banner%': banner.title}) }}</h1>
 
 {% if zones|length > 0 %}
     <div class="info">Poniżej wyświetlono listę stref, do których pasuje wybrany banner.</div>
@@ -13,10 +13,10 @@
     <table class="records-list">
         <thead>
         <tr>
-            <th>{{ 'id'|babylon }}</th>
-            <th>{{ 'banner.in.zone'|babylon }}</th>
-            <th>{{ 'page'|babylon }}</th>
-            <th>{{ 'paid.to'|babylon }}</th>
+            <th>{{ 'id'|babel }}</th>
+            <th>{{ 'banner.in.zone'|babel }}</th>
+            <th>{{ 'page'|babel }}</th>
+            <th>{{ 'paid.to'|babel }}</th>
         </tr>
         </thead>
         <tbody>
@@ -37,15 +37,15 @@
                 <td>
                     {% set paidToInZone = banner.getPaidToInZone(zone) %}
                     {% if banner.orders|length > 0 and paidToInZone %}
-                        {{ 'paid.to.date'|babylon({'%date%': paidToInZone|date('d. m. Y')}) }} <br />
+                        {{ 'paid.to.date'|babel({'%date%': paidToInZone|date('d. m. Y')}) }} <br />
                         <a href="{{ url('user_banner_pay_in_zone', {'bannerId': banner.id, 'zoneId': zone.id}) }}">
-                            {{ 'extend.the.payment'|babylon }}
+                            {{ 'extend.the.payment'|babel }}
                         </a>
                     {% else %}
-                        {{ 'not.paid'|babylon }}
+                        {{ 'not.paid'|babel }}
                         <br />
                         <a href="{{ url('user_banner_pay_in_zone', {'bannerId': banner.id, 'zoneId': zone.id}) }}">
-                            {{ 'pay.banner.here'|babylon }}
+                            {{ 'pay.banner.here'|babel }}
                         </a>
                     {% endif %}
                 </td>
@@ -54,11 +54,11 @@
         </tbody>
     </table>
     <div class="buttons">
-        <input type="submit" value="{{ 'save'|babylon }}"
+        <input type="submit" value="{{ 'save'|babel }}"
     </div>
     </form>
 {% else %}
-    <div class="notice">{{ 'no.zones.to.add.banner'|babylon }}</div>
+    <div class="notice">{{ 'no.zones.to.add.banner'|babel }}</div>
 {% endif %}
 
 {% endblock %}

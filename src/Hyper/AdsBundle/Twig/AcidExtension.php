@@ -17,11 +17,11 @@ class AcidExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'babylon' => new \Twig_Filter_Method($this, 'babylonFilter')
+            'babel' => new \Twig_Filter_Method($this, 'babelFilter')
         );
     }
 
-    public function babylonFilter($key, array $parameters = array(), $locale = null)
+    public function babelFilter($key, array $parameters = array(), $locale = null)
     {
         return $this->translator->trans($key, $parameters, 'HyperAdsBundle', $locale);
     }

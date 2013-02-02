@@ -1,18 +1,18 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'list.advertiser'|babylon }}
+{{ 'list.advertiser'|babel }}
 {% endblock %}
 {% block body %}
-<h1>{{ 'list.advertiser'|babylon }}</h1>
+<h1>{{ 'list.advertiser'|babel }}</h1>
 
 {% if entities|length > 0 %}
 <table class="records_list">
     <thead>
     <tr>
-        <th>{{ 'id'|babylon }}</th>
-        <th>{{ 'name'|babylon }}</th>
-        <th>{{ 'email'|babylon }}</th>
-        <th>{{ 'actions'|babylon }}</th>
+        <th>{{ 'id'|babel }}</th>
+        <th>{{ 'name'|babel }}</th>
+        <th>{{ 'email'|babel }}</th>
+        <th>{{ 'actions'|babel }}</th>
     </tr>
     </thead>
     <tbody>
@@ -25,12 +25,12 @@
             <ul>
                 <li>
                     <a href="{{ path('admin_advertiser_show', { 'id': entity.id }) }}">
-                        {{ 'show'|babylon }}
+                        {{ 'show'|babel }}
                     </a>
                 </li>
                 <li>
                     <a href="{{ path('admin_advertiser_edit', { 'id': entity.id }) }}">
-                        {{ 'edit'|babylon }}
+                        {{ 'edit'|babel }}
                     </a>
                 </li>
             </ul>
@@ -40,13 +40,13 @@
     </tbody>
 </table>
 {% else %}
-<div class="message">{{ 'no.entities'|babylon }}</div>
+<div class="message">{{ 'no.entities'|babel }}</div>
 {% endif %}
 
 <ul>
     <li>
         <a href="{{ path('admin_advertiser_new') }}">
-            {{ 'create.new.entry'|babylon }}
+            {{ 'create.new.entry'|babel }}
         </a>
     </li>
 </ul>

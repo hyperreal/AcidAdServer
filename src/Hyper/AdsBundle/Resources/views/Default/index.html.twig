@@ -1,6 +1,6 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'welcome'|babylon }}
+{{ 'welcome'|babel }}
 {% endblock %}
 {% block body %}
 <div class="span-20 last">
@@ -14,13 +14,13 @@
 {% if is_granted("ROLE_USER") %}
     <ul class="no-buttons">
         <li>
-            <a class="span-7 box" href="{{ url('user_banner_new') }}">{{ 'banner.buy'|babylon }}</a>
+            <a class="span-7 box" href="{{ url('user_banner_new') }}">{{ 'banner.buy'|babel }}</a>
         </li>
         <li>
-            <a class="span-6 box" href="{{ url('user_banner_new') }}">{{ 'announcement.buy'|babylon }}</a>
+            <a class="span-6 box" href="{{ url('user_banner_new') }}">{{ 'announcement.buy'|babel }}</a>
         </li>
         <li>
-            <a class="span-4 last box" href="{{ url('user_banner_new') }}">{{ 'announcement.free.add'|babylon }}</a>
+            <a class="span-4 last box" href="{{ url('user_banner_new') }}">{{ 'announcement.free.add'|babel }}</a>
         </li>
     </ul>
 {% elseif is_granted("ROLE_ADMIN") %}

@@ -1,21 +1,21 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'new.banner'|babylon }}
+{{ 'new.banner'|babel }}
 {% endblock %}
 {% block body %}
-<h1>{{ 'new.banner'|babylon }}</h1>
+<h1>{{ 'new.banner'|babel }}</h1>
 
 <form action="{{ path('admin_banner_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <p>
-        <button type="submit">{{ 'create'|babylon }}</button>
+        <button type="submit">{{ 'create'|babel }}</button>
     </p>
 </form>
 
 <ul class="record_actions">
     <li>
         <a href="{{ path('admin_banner') }}">
-            {{ 'back.to.the.list'|babylon }}
+            {{ 'back.to.the.list'|babel }}
         </a>
     </li>
 </ul>

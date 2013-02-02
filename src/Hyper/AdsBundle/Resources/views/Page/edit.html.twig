@@ -1,27 +1,27 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'edit.page'|babylon({'pageName': entity.name}) }}
+{{ 'edit.page'|babel({'pageName': entity.name}) }}
 {% endblock %}
 {% block body %}
-<h1>{{ 'edit.page'|babylon({'pageName': entity.name}) }}</h1>
+<h1>{{ 'edit.page'|babel({'pageName': entity.name}) }}</h1>
 
 <form action="{{ path('admin_page_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
     <p>
-        <button type="submit">{{ 'edit'|babylon }}</button>
+        <button type="submit">{{ 'edit'|babel }}</button>
     </p>
 </form>
 
 <ul class="record_actions">
     <li>
         <a href="{{ path('admin_page') }}">
-            {{ 'back.to.the.list'|babylon }}
+            {{ 'back.to.the.list'|babel }}
         </a>
     </li>
     <li>
         <form action="{{ path('admin_page_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">{{ 'delete'|babylon }}</button>
+            <button type="submit">{{ 'delete'|babel }}</button>
         </form>
     </li>
 </ul>
