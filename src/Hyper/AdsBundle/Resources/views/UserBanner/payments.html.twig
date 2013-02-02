@@ -1,20 +1,20 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'payments.for.announcement'|trans({'%announcement%': announcement.title}, 'HyperAdsBundle') }}
+{{ 'payments.for.announcement'|babylon({'%announcement%': announcement.title}) }}
 {% endblock %}
 {% block body %}
-<h2>{{ 'payments.for.announcement'|trans({'%announcement%': announcement.title}, 'HyperAdsBundle') }}</h2>
+<h2>{{ 'payments.for.announcement'|babylon({'%announcement%': announcement.title}) }}</h2>
 
 {% if announcement.orders|length > 0 %}
     <table class="records-list">
         <thead>
         <tr>
-            <th>{{ 'order.number'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'date.submission'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'pay.to'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'amount'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'is.paid'|trans({}, 'HyperAdsBundle') }}</th>
-            <th>{{ 'zone'|trans({}, 'HyperAdsBundle') }}</th>
+            <th>{{ 'order.number'|babylon }}</th>
+            <th>{{ 'date.submission'|babylon }}</th>
+            <th>{{ 'pay.to'|babylon }}</th>
+            <th>{{ 'amount'|babylon }}</th>
+            <th>{{ 'is.paid'|babylon }}</th>
+            <th>{{ 'zone'|babylon }}</th>
         </tr>
         </thead>
         <tbody>
@@ -37,10 +37,12 @@
                 {% endif %}
             </td>
             <td>
-                {% if order.paymentInstruction and order.paymentInstruction.state == constant('JMS\\Payment\\CoreBundle\\Model\\FinancialTransactionInterface::STATE_SUCCESS') %}
-                    {{ 'yes'|trans({}, 'HyperAdsBundle') }}
-                {% else%}
-                    {{ 'no'|trans({}, 'HyperAdsBundle') }}
+                {% if order.status == constant('Hyper\AdsBundle\Entity\Order::STATE_FINISHED') %}
+                    {{ 'yes'|babylon }}
+                {% elseif order.status == constant('Hyper\AdsBundle\Entity\Order::STATE_CANCELLED') %}
+                    {{ 'cancelled'|babylon }}
+                {% else %}
+                    {{ 'no'|babylon }} <a class="external" href="{{ order.paymentUrl }}">{{ 'pay'|babylon }}</a>
                 {% endif %}
             </td>
             <td>
@@ -51,7 +53,7 @@
         </tbody>
     </table>
 {% else %}
-    <div class="notice message">{{ 'payments.empty'|trans({}, 'HyperAdsBundle') }}</div>
+    <div class="notice message">{{ 'payments.empty'|babylon }}</div>
 {% endif %}
 
 {% endblock %}

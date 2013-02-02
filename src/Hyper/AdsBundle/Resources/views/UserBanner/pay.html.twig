@@ -1,11 +1,11 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'banner.buy'|trans({}, 'HyperAdsBundle') }}
+{{ 'banner.buy'|babylon }}
 {% endblock %}
 {% block body %}
 <form action="{{ url('user_banner_pay_save', {'banner': banner.id}) }}" method="post">
     {{ form_widget(orderForm) }}
-    <input type="submit" value="{{ 'pay'|trans({}, 'HyperAdsBundle') }}"/>
+    <input type="submit" value="{{ 'pay'|babylon }}"/>
 </form>
 
 {% if zones|length > 0 %}

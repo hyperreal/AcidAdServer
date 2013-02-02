@@ -1,21 +1,21 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'new.zone'|trans({}, 'HyperAdsBundle') }}
+{{ 'new.zone'|babylon }}
 {% endblock %}
 {% block body %}
-<h1>{{ 'new.zone'|trans({}, 'HyperAdsBundle') }}</h1>
+<h1>{{ 'new.zone'|babylon }}</h1>
 
 <form action="{{ path('admin_zone_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <p>
-        <button type="submit">{{ 'create'|trans({}, 'HyperAdsBundle') }}</button>
+        <button type="submit">{{ 'create'|babylon }}</button>
     </p>
 </form>
 
 <ul class="record_actions">
     <li>
         <a href="{{ path('admin_zone') }}">
-            {{ 'back.to.the.list'|trans({}, 'HyperAdsBundle') }}
+            {{ 'back.to.the.list'|babylon }}
         </a>
     </li>
 </ul>

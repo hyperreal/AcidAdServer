@@ -1,27 +1,27 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'edit.banner'|trans({}, 'HyperAdsBundle') }}
+{{ 'edit.banner'|babylon }}
 {% endblock %}
 {% block body %}
-<h1>{{ 'edit.banner'|trans({}, 'HyperAdsBundle') }}</h1>
+<h1>{{ 'edit.banner'|babylon }}</h1>
 
 <form action="{{ path('admin_banner_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
     <p>
-        <button type="submit">{{ 'edit'|trans({}, 'HyperAdsBundle') }}</button>
+        <button type="submit">{{ 'edit'|babylon }}</button>
     </p>
 </form>
 
 <ul class="record_actions">
     <li>
         <a href="{{ path('admin_banner') }}">
-            {{ 'back.to.the.list'|trans({}, 'HyperAdsBundle') }}
+            {{ 'back.to.the.list'|babylon }}
         </a>
     </li>
     <li>
         <form action="{{ path('admin_banner_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">{{ 'delete'|trans({}, 'HyperAdsBundle') }}</button>
+            <button type="submit">{{ 'delete'|babylon }}</button>
         </form>
     </li>
 </ul>
