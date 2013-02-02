@@ -63,6 +63,9 @@ class IpnController extends Controller
             return $this->cancelOrder($order);
         }
 
+        //mtgox passes amount as int where 1 BTC as float = 100000000 BTC as int
+        $amount = $form->get('amount')->getData() / 100000000;
+
         if (null === ($pendingTransaction = $paymentInstruction->getPendingTransaction())) {
             $payment = $this->ppc->createPayment(
                 $paymentInstruction->getId(),
@@ -72,7 +75,7 @@ class IpnController extends Controller
             $payment = $pendingTransaction->getPayment();
         }
 
-        $result = $this->ppc->approveAndDeposit($payment->getId(), $payment->getTargetAmount());
+        $result = $this->ppc->approveAndDeposit($payment->getId(), $amount);
         if (Result::STATUS_PENDING === $result->getStatus()) {
             $ex = $result->getPluginException();
             if ($ex instanceof ActionRequiredException) {
