@@ -30,7 +30,6 @@ class IpnController extends Controller
     public function indexAction(Request $request)
     {
         $wholeRequest = $this->prepareRequestArray($request);
-        $this->get('logger')->warn('ipn 1');
         $form = $this->createForm('wikp_mtgox_ipn');
         $form->bind($wholeRequest);
 
@@ -38,19 +37,17 @@ class IpnController extends Controller
             $this->get('logger')->warn('Invalid ipn ' . $form->getErrorsAsString());
             throw new HttpException(400, 'Bad request');
         }
-        $this->get('logger')->warn('ipn 2');
+
         if (MtgoxIpnType::STATUS_PARTIAL === $form->get('status')->getData()) {
             return new Response('partial payments not supported');
         }
 
         $this->ppc = $this->get('payment.plugin_controller');
-        $this->get('logger')->warn('ipn 3');
         $this->ppc->addPlugin($this->get('wikp_payment_mtgox.plugin'));
-        $this->get('logger')->warn('ipn 4');
+        $this->get('logger')->warn(var_export($form->get('data')->getData(), true));
         $order = $this->getOrderFromRepository($form->get('data')->getData());
-        $this->get('logger')->warn('ipn 5');
         $paymentInstruction = $order->getPaymentInstruction();
-        $this->get('logger')->warn('ipn 6');
+
         if (MtgoxIpnType::STATUS_CANCELLED === $form->get('status')->getData()) {
 
             $this->get('logger')->warn(
@@ -66,7 +63,6 @@ class IpnController extends Controller
         }
 
         //mtgox passes amount as int where 1 BTC as float = 100000000 BTC as int
-        $this->get('logger')->warn('ipn 7');
         $amount = $form->get('amount')->getData() / 100000000;
 
         if (null === ($pendingTransaction = $paymentInstruction->getPendingTransaction())) {
@@ -77,7 +73,7 @@ class IpnController extends Controller
         } else {
             $payment = $pendingTransaction->getPayment();
         }
-        $this->get('logger')->warn('ipn 8');
+
         $result = $this->ppc->approveAndDeposit($payment->getId(), $amount);
         if (Result::STATUS_PENDING === $result->getStatus()) {
             $ex = $result->getPluginException();
