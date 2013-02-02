@@ -68,18 +68,18 @@ class Zone
     private $type = 'desktop';
 
     /**
-     * @ORM\Column(type="decimal", name="daily_price", scale=2, nullable=true)
+     * @ORM\Column(type="decimal", name="daily_price", scale=8, precision=14, nullable=true)
      * @ORM\ManyToOne(targetEntity="Currency")
      */
     private $dailyPrice;
 
     /**
-     * @ORM\Column(type="decimal", name="view_price", scale=2, nullable=true)
+     * @ORM\Column(type="decimal", name="view_price", scale=8, precision=14, nullable=true)
      */
     private $viewPrice;
 
     /**
-     * @ORM\Column(type="decimal", name="click_price", scale=2, nullable=true)
+     * @ORM\Column(type="decimal", name="click_price", scale=8, precision=14, nullable=true)
      */
     private $clickPrice;
 
