@@ -1,21 +1,21 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}
-{{ 'pay.for.banner.in.zone'|babylon({'%banner%': banner.title, '%zone%': zone}) }}
+{{ 'pay.for.banner.in.zone'|babel({'%banner%': banner.title, '%zone%': zone}) }}
 {% endblock %}
 
 {% block body %}
 <h1>
-    {{ 'pay.for.banner'|babylon({'%banner%': banner.title}) }}
+    {{ 'pay.for.banner'|babel({'%banner%': banner.title}) }}
 </h1>
 <div class="info">
-    {{ 'pay.for.banner.in.zone.info'|babylon({'%banner%': banner.title, '%zone%': zone}) }}
+    {{ 'pay.for.banner.in.zone.info'|babel({'%banner%': banner.title, '%zone%': zone}) }}
 </div>
 
 <form action="{{ url('user_banner_pay_in_zone_save', {'bannerId': banner.id, 'zoneId': zone.id}) }}" method="post">
     {{ form_widget(form) }}
     <div class="buttons">
-        <input type="submit" value="{{ 'next'|babylon }}"/>
+        <input type="submit" value="{{ 'next'|babel }}"/>
     </div>
 </form>
 

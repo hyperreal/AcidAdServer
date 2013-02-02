@@ -1,18 +1,18 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'list.page'|babylon }}
+{{ 'list.page'|babel }}
 {% endblock %}
 {% block body %}
-<h1>{{ 'list.page'|babylon }}</h1>
+<h1>{{ 'list.page'|babel }}</h1>
 
 {% if entities|length > 0 %}
 <table class="records_list">
     <thead>
     <tr>
-        <th>{{ 'id'|babylon }}</th>
-        <th>{{ 'name'|babylon }}</th>
-        <th>{{ 'url'|babylon }}</th>
-        <th>{{ 'actions'|babylon }}</th>
+        <th>{{ 'id'|babel }}</th>
+        <th>{{ 'name'|babel }}</th>
+        <th>{{ 'url'|babel }}</th>
+        <th>{{ 'actions'|babel }}</th>
     </tr>
     </thead>
     <tbody>
@@ -25,12 +25,12 @@
             <ul>
                 <li>
                     <a href="{{ path('admin_page_show', { 'id': entity.id }) }}">
-                        {{ 'show'|babylon }}
+                        {{ 'show'|babel }}
                     </a>
                 </li>
                 <li>
                     <a href="{{ path('admin_page_edit', { 'id': entity.id }) }}">
-                        {{ 'edit'|babylon }}
+                        {{ 'edit'|babel }}
                     </a>
                 </li>
             </ul>
@@ -40,12 +40,12 @@
     </tbody>
 </table>
 {% else %}
-<div class="message">{{ 'no.entities'|babylon }}</div>
+<div class="message">{{ 'no.entities'|babel }}</div>
 {% endif %}
 <ul>
     <li>
         <a href="{{ path('admin_page_new') }}">
-            {{ 'create.new.entry'|babylon }}
+            {{ 'create.new.entry'|babel }}
         </a>
     </li>
 </ul>

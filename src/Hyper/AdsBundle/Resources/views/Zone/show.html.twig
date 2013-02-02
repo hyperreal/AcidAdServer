@@ -1,34 +1,34 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'show.zone'|babylon({'zoneName': entity.name}) }}
+{{ 'show.zone'|babel({'zoneName': entity.name}) }}
 {% endblock %}
 {% block body %}
-<h1>{{ 'show.zone'|babylon({'zoneName': entity.name}) }}</h1>
+<h1>{{ 'show.zone'|babel({'zoneName': entity.name}) }}</h1>
 
 <table class="record_properties">
     <tbody>
     <tr>
-        <th>{{ 'id'|babylon }}</th>
+        <th>{{ 'id'|babel }}</th>
         <td>{{ entity.id }}</td>
     </tr>
     <tr>
-        <th>{{ 'name'|babylon }}</th>
+        <th>{{ 'name'|babel }}</th>
         <td>{{ entity.name }}</td>
     </tr>
     <tr>
-        <th>{{ 'name'|babylon }}</th>
+        <th>{{ 'name'|babel }}</th>
         <td>{{ entity.enabled }}</td>
     </tr>
     <tr>
-        <th>{{ 'max.width'|babylon }}</th>
+        <th>{{ 'max.width'|babel }}</th>
         <td>{{ entity.maxWidth }}</td>
     </tr>
     <tr>
-        <th>{{ 'max.height'|babylon }}</th>
+        <th>{{ 'max.height'|babel }}</th>
         <td>{{ entity.maxHeight }}</td>
     </tr>
     <tr>
-        <th>{{ 'type'|babylon }}</th>
+        <th>{{ 'type'|babel }}</th>
         <td>{{ entity.type }}</td>
     </tr>
     </tbody>
@@ -37,18 +37,18 @@
 <ul class="record_actions">
     <li>
         <a href="{{ path('admin_zone') }}">
-            {{ 'back.to.the.list'|babylon }}
+            {{ 'back.to.the.list'|babel }}
         </a>
     </li>
     <li>
         <a href="{{ path('admin_zone_edit', { 'id': entity.id }) }}">
-            {{ 'edit'|babylon }}
+            {{ 'edit'|babel }}
         </a>
     </li>
     <li>
         <form action="{{ path('admin_zone_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">{{ 'delete'|babylon }}</button>
+            <button type="submit">{{ 'delete'|babel }}</button>
         </form>
     </li>
 </ul>

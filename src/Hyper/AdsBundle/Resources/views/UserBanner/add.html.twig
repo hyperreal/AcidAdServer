@@ -1,15 +1,15 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-    {{ 'banner.buy'|babylon }}
+    {{ 'banner.buy'|babel }}
 {% endblock %}
 {% block body %}
 <form action="{{ url('user_banner_create') }}" method="post" enctype="multipart/form-data">
     {{ form_widget(form) }}
-    <input type="submit" value="{{ 'save'|babylon }}"/>
+    <input type="submit" value="{{ 'save'|babel }}"/>
 </form>
 <ul>
     <li>
-        <a href="{{ url('user_banner_list') }}">{{ 'back.to.the.list'|babylon }}</a>
+        <a href="{{ url('user_banner_list') }}">{{ 'back.to.the.list'|babel }}</a>
     </li>
 </ul>
 {% endblock %}

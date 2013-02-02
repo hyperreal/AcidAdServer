@@ -1,21 +1,21 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'edit.banners.in.zone'|babylon({'zoneName': zone.name}) }}
+{{ 'edit.banners.in.zone'|babel({'zoneName': zone.name}) }}
 {% endblock %}
 {% block body %}
 
-<h2>{{ 'zone.name'|babylon({'zoneName': zone.name}) }}</h2>
+<h2>{{ 'zone.name'|babel({'zoneName': zone.name}) }}</h2>
 
 <form action="{{ path('banner_config_save') }}" method="post">
     <p>
         <table>
             <thead>
                 <tr>
-                    <th>{{ 'banner.id'|babylon }}</th>
-                    <th>{{ 'banner.title'|babylon }}</th>
-                    <th>{{ 'banner.size'|babylon }}</th>
-                    <th>{{ 'use.in.zone'|babylon }}</th>
-                    <th>{{ 'probability'|babylon }}</th>
+                    <th>{{ 'banner.id'|babel }}</th>
+                    <th>{{ 'banner.title'|babel }}</th>
+                    <th>{{ 'banner.size'|babel }}</th>
+                    <th>{{ 'use.in.zone'|babel }}</th>
+                    <th>{{ 'probability'|babel }}</th>
                 </tr>
             </thead>
             {% for banner in allBanners %}
@@ -40,7 +40,7 @@
             {% endfor %}
         </table>
         <input type="hidden" name="zoneId" value="{{ zone.id }}" />
-        <input type="submit" class="button" value="{{ 'save'|babylon }}">
+        <input type="submit" class="button" value="{{ 'save'|babel }}">
     </p>
 </form>
 

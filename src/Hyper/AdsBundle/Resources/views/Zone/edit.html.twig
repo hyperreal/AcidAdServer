@@ -1,27 +1,27 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'edit.zone'|babylon({'zoneName': entity.name}) }}
+{{ 'edit.zone'|babel({'zoneName': entity.name}) }}
 {% endblock %}
 {% block body %}
-<h1>{{ 'edit.zone'|babylon({'zoneName': entity.name}) }}</h1>
+<h1>{{ 'edit.zone'|babel({'zoneName': entity.name}) }}</h1>
 
 <form action="{{ path('admin_zone_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
     <p>
-        <button type="submit">{{ 'edit'|babylon }}</button>
+        <button type="submit">{{ 'edit'|babel }}</button>
     </p>
 </form>
 
 <ul class="record_actions">
     <li>
         <a href="{{ path('admin_zone') }}">
-            {{ 'back.to.the.list'|babylon }}
+            {{ 'back.to.the.list'|babel }}
         </a>
     </li>
     <li>
         <form action="{{ path('admin_zone_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">{{ 'delete'|babylon }}</button>
+            <button type="submit">{{ 'delete'|babel }}</button>
         </form>
     </li>
 </ul>

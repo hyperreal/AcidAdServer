@@ -1,6 +1,6 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'show.banner'|babylon }}
+{{ 'show.banner'|babel }}
 {% endblock %}
 {% block body %}
 <h1>Banner</h1>
@@ -8,43 +8,43 @@
 <table class="record_properties">
     <tbody>
     <tr>
-        <th>{{ 'id'|babylon }}</th>
+        <th>{{ 'id'|babel }}</th>
         <td>{{ entity.id }}</td>
     </tr>
     <tr>
-        <th>{{ 'file'|babylon }}</th>
+        <th>{{ 'file'|babel }}</th>
         <td>{{ entity.path }}</td>
     </tr>
     <tr>
-        <th>{{ 'extension'|babylon }}</th>
+        <th>{{ 'extension'|babel }}</th>
         <td>{{ entity.extension }}</td>
     </tr>
     <tr>
-        <th>{{ 'width'|babylon }}</th>
+        <th>{{ 'width'|babel }}</th>
         <td>{{ entity.width }}</td>
     </tr>
     <tr>
-        <th>{{ 'height'|babylon }}</th>
+        <th>{{ 'height'|babel }}</th>
         <td>{{ entity.height }}</td>
     </tr>
     <tr>
-        <th>{{ 'type'|babylon }}</th>
+        <th>{{ 'type'|babel }}</th>
         <td>{{ entity.type }}</td>
     </tr>
     <tr>
-        <th>{{ 'title'|babylon }}</th>
+        <th>{{ 'title'|babel }}</th>
         <td>{{ entity.title }}</td>
     </tr>
     <tr>
-        <th>{{ 'linktitle'|babylon }}</th>
+        <th>{{ 'linktitle'|babel }}</th>
         <td>{{ entity.linkTitle }}</td>
     </tr>
     <tr>
-        <th>{{ 'url'|babylon }}</th>
+        <th>{{ 'url'|babel }}</th>
         <td>{{ entity.url }}</td>
     </tr>
     <tr>
-        <th>{{ 'description'|babylon }}</th>
+        <th>{{ 'description'|babel }}</th>
         <td>{{ entity.description }}</td>
     </tr>
     </tbody>
@@ -53,18 +53,18 @@
 <ul class="record_actions">
     <li>
         <a href="{{ path('admin_banner') }}">
-            {{ 'back.to.the.list'|babylon }}
+            {{ 'back.to.the.list'|babel }}
         </a>
     </li>
     <li>
         <a href="{{ path('admin_banner_edit', { 'id': entity.id }) }}">
-            {{ 'edit'|babylon }}
+            {{ 'edit'|babel }}
         </a>
     </li>
     <li>
         <form action="{{ path('admin_banner_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">{{ 'delete'|babylon }}</button>
+            <button type="submit">{{ 'delete'|babel }}</button>
         </form>
     </li>
 </ul>
