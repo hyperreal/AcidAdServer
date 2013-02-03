@@ -7,7 +7,6 @@
 namespace Hyper\AdsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use FOS\UserBundle\Entity\User as BaseUser;
@@ -18,6 +17,7 @@ use FOS\UserBundle\Entity\User as BaseUser;
  */
 class Advertiser extends BaseUser
 {
+    const DEFAULT_CURRENCY = 'GBP';
 
     /**
      * @ORM\Id
@@ -39,9 +39,15 @@ class Advertiser extends BaseUser
     /**
      * @var \Hyper\AdsBundle\Entity\Announcement[]
      *
-     * @OneToMany(targetEntity="Announcement", mappedBy="advertiser")
+     * @ORM\OneToMany(targetEntity="Announcement", mappedBy="advertiser")
      */
     protected $announcements;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Wikp\PaymentMtgoxBundle\Entity\Currency")
+     * @ORM\JoinColumn(name="default_currency", referencedColumnName="id")
+     */
+    private $defaultCurrency;
 
     public function __construct()
     {
@@ -107,6 +113,20 @@ class Advertiser extends BaseUser
     public function addAnnouncement(Announcement $announcement)
     {
         $this->announcements->add($announcement);
+    }
+
+    public function getDefaultCurrency($default = self::DEFAULT_CURRENCY)
+    {
+        if (empty($this->defaultCurrency)) {
+            return $default;
+        }
+
+        return $this->defaultCurrency;
+    }
+
+    public function setDefaultCurrency($currency)
+    {
+        $this->defaultCurrency = $currency;
     }
 
     public function __toString()
