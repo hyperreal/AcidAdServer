@@ -3,6 +3,7 @@
 namespace Hyper\AdsBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Hyper\AdsBundle\Entity\Order;
 
 class AnnouncementRepository extends EntityRepository
 {
@@ -56,11 +57,13 @@ class AnnouncementRepository extends EntityRepository
              JOIN bzr.orders o
              JOIN o.paymentInstruction pi
              JOIN pi.payments p
-             WHERE bzr.zone = ?1 AND o.paymentFrom <= ?2 AND o.paymentTo >= ?2 AND p.approvedAmount = pi.amount'
+             WHERE bzr.zone = ?1 AND o.paymentFrom <= ?2 AND o.paymentTo >= ?2 AND p.depositedAmount = pi.amount
+                AND o.status = ?3'
         );
 
         $query->setParameter(1, $zone);
         $query->setParameter(2, new \DateTime());
+        $query->setParameter(3, Order::STATUS_FINISHED);
 
         return $query->getResult();
     }
