@@ -71,6 +71,9 @@ fos_user:
     from_email:
         address: %mailer_from%
         sender_name: %mailer_sender%
+    profile:
+        form:
+            type: hyper_user_editprofile
     registration:
         confirmation:
             enabled: true

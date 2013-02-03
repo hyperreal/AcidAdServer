@@ -19,6 +19,7 @@
             <div id="login-bar" class="span-18">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <strong>{{ app.user.username }}</strong> |
+                <a href="{{ url('fos_user_profile_edit') }}">{{ 'edit.profile'|babel|lower }}</a> |
                 <a href="{{ path('fos_user_security_logout') }}">
                     {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
                 </a>

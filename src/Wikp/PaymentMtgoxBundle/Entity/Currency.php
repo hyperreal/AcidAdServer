@@ -96,4 +96,9 @@ class Currency
     {
         return $this->sellPrice * $bitcoinAmount;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
