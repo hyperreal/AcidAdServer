@@ -76,7 +76,7 @@ fos_user:
             type: hyper_user_editprofile
     registration:
         confirmation:
-            enabled: false
+            enabled: true
 
 jms_payment_core:
     secret: %payments_secret%
