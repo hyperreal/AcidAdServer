@@ -46,3 +46,11 @@ ul form > button[type="submit"] {
     float: none;
     position: static;
 }
+
+.first-spanned-row > *:first-child, .last > td {
+    border-bottom: 1px solid #92CAE4;
+}
+
+.spanned-column {
+    background: #D5EDF8;
+}

@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Welcome!{% endblock %} {{ page_title|babel }}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('css/screen.css') }}" media="screen,projection" />
@@ -21,7 +21,7 @@
                 <strong>{{ app.user.username }}</strong> |
                 <a href="{{ url('fos_user_profile_edit') }}">{{ 'edit.profile'|babel|lower }}</a> |
                 <a href="{{ path('fos_user_security_logout') }}">
-                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    {{ 'layout.logout'|trans({}, 'FOSUserBundle')|lower }}
                 </a>
                 {% else %}
                 <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a> |
@@ -93,7 +93,8 @@
         </div>
 
         <div id="footer" class="span-24 prepend-top">
-            {{ 'powered.by.acid'|trans({}, 'HyperAdsBundle') }} | <a href="https://github.com/hyperreal/AcidAdServer" class="github-fork">fork on github</a>
+            {{ 'powered.by.acid'|babel }} <a href="https://github.com/hyperreal/AcidAdServer" class="github-fork">{{ 'fork.on.github'|babel }}</a> |
+            <a href="{{ url("default_zones_info") }}">{{ 'zones.info'|babel|lower }}</a>
         </div>
 
     </div>

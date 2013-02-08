@@ -3,9 +3,25 @@
 namespace Hyper\AdsBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Hyper\AdsBundle\Entity\Zone;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Hyper\AdsBundle\Entity\Order;
 
 class ZoneRepository extends EntityRepository
 {
+    public function getPagesWithActiveZones()
+    {
+        $query = $this->getEntityManager()->createQuery(
+            'SELECT p, z
+            FROM Hyper\AdsBundle\Entity\Page p
+            JOIN p.zones z
+            WHERE z.enabled = 1
+            ORDER BY p.name, z.name'
+        );
+
+        return $query->getResult();
+    }
+
     /**
      * @param array $zonesIds
      * @return Zone[]

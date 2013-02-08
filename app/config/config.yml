@@ -30,6 +30,9 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    globals:
+        default_currency: %ads_default_currency%
+        page_title: %page_title%
 
 # Assetic Configuration
 assetic:
