@@ -47,7 +47,7 @@ ul form > button[type="submit"] {
     position: static;
 }
 
-.first-spanned-row > *:first-child, .last > td {
+.first-spanned-row > *:first-child, .last-zone > td, .first-spanned-row.first > td {
     border-bottom: 1px solid #92CAE4;
 }
 
