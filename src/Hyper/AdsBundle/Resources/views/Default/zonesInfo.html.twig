@@ -26,7 +26,7 @@
         <th class="spanned-column" rowspan="{{ page.zones|length }}">{{ page.name }}</th>
         {% for zone in page.zones %}
             {% if not loop.first %}
-                <tr{% if loop.last %} class="last"{% endif %}>
+                <tr{% if loop.last or (loop.length == 1 and loop.first) %} class="last"{% endif %}>
             {% endif %}
             <td>{{ zone.name }}</td>
             <td>{{ zone.maxWidth }} x {{ zone.maxHeight }}</td>
