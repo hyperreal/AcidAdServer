@@ -13,9 +13,7 @@ class AnnouncementRepository extends EntityRepository
      */
     public function getBannerWithDependenciesById($id)
     {
-        $em = $this->getEntityManager();
-
-        $query = $em->createQuery(
+        $query = $this->getEntityManager()->createQuery(
             'SELECT b, o, pi, bzr
              FROM Hyper\AdsBundle\Entity\Banner b
              LEFT JOIN b.zones bzr
