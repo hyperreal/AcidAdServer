@@ -41,17 +41,17 @@
             <menu class="admin">
                 <ul>
                     <li>
-                        <a href="{{ path('admin_advertiser') }}">{{ 'advertisers'|trans({}, 'HyperAdsBundle') }}</a>
+                        <a href="{{ path('admin_advertiser') }}">{{ 'advertisers'|babel }}</a>
                     </li>
                     <li>
-                        <a href="{{ path('admin_page') }}">{{ 'pages'|trans({}, 'HyperAdsBundle') }}</a>
+                        <a href="{{ path('admin_page') }}">{{ 'pages'|babel }}</a>
                     </li>
                     <li>
-                        <a href="{{ path('admin_zone') }}">{{ 'zones'|trans({}, 'HyperAdsBundle') }}</a>
+                        <a href="{{ path('admin_zone') }}">{{ 'zones'|babel }}</a>
                     </li>
 
                     <li>
-                        <a href="{{ path('admin_banner') }}">{{ 'banners'|trans({}, 'HyperAdsBundle') }}</a>
+                        <a href="{{ path('admin_banner') }}">{{ 'banners'|babel }}</a>
                     </li>
 
                 </ul>
@@ -61,7 +61,10 @@
             <menu class="user">
                 <ul>
                     <li>
-                        <a href="{{ path('user_banner_list') }}">{{ 'your.banners'|trans({}, 'HyperAdsBundle') }}</a>
+                        <a href="{{ path('user_banner_list') }}">{{ 'your.banners'|babel }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ url("default_zones_info") }}">{{ 'zones.info'|babel|lower }}</a>
                     </li>
                 </ul>
             </menu>
@@ -93,8 +96,7 @@
         </div>
 
         <div id="footer" class="span-24 prepend-top">
-            {{ 'powered.by.acid'|babel }} <a href="https://github.com/hyperreal/AcidAdServer" class="github-fork">{{ 'fork.on.github'|babel }}</a> |
-            <a href="{{ url("default_zones_info") }}">{{ 'zones.info'|babel|lower }}</a>
+            {{ 'powered.by.acid'|babel }} <a href="https://github.com/hyperreal/AcidAdServer" class="github-fork">{{ 'fork.on.github'|babel }}</a>
         </div>
 
     </div>

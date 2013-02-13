@@ -37,5 +37,6 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/mtgox/ipn$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/user/, role: ROLE_USER }}
-        - { path: ^/admin/, role: ROLE_ADMIN }}
+        - { path: ^/user/, role: ROLE_USER }
+        - { path: ^/zones-info, role: ROLE_USER }
+        - { path: ^/admin/, role: ROLE_ADMIN }
