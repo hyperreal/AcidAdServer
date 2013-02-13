@@ -188,7 +188,7 @@ class UserBannerController extends Controller
         $order->setAnnouncement($banner);
 
         try {
-            $reference = $banner->getReferenceInZoneAndThrowWhenNoRef($zone->getId());
+            $reference = $banner->getReferenceInZoneAndThrowWhenNoRef($zone);
         } catch (NoReferenceException $e) {
             $reference = new BannerZoneReference();
             $reference->setBanner($this);
