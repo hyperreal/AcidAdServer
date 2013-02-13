@@ -194,6 +194,7 @@ class UserBannerController extends Controller
             $reference = new BannerZoneReference();
             $reference->setBanner($banner);
             $reference->setZone($zone);
+            $reference->setPayModel(PayModelType::PAY_MODEL_DAILY);
             $em->persist($reference);
             $em->flush($reference);
         }
