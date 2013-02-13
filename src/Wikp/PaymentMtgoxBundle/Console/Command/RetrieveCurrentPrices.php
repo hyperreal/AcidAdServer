@@ -34,8 +34,6 @@ class RetrieveCurrentPrices extends ContainerAwareCommand
         } else {
             $this->retrieveCurrencyPrices($currencyCode, $output);
         }
-
-
     }
 
     protected function retrieveAllCurrenciesPrices(OutputInterface $output)

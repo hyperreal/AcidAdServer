@@ -84,7 +84,6 @@ fos_user:
 jms_payment_core:
     secret: %payments_secret%
 
-
 # Swiftmailer Configuration
 swiftmailer:
     transport: %mailer_transport%
@@ -93,6 +92,17 @@ swiftmailer:
     spool:     { type: memory }
 
 services:
+    cache:
+        class: Doctrine\Common\Cache\MemcacheCache
+        calls:
+            - [ setMemcache, [ @application.memcache ]]
+            - [ setNamespace, [ %application_memcache_prefix% ]]
+
+    application.memcache:
+        class: Memcache
+        calls:
+            - [ addServer, [ %application_memcache_host%, %application_memcache_port% ]]
+
     session.memcache:
         class: Memcache
         calls:
