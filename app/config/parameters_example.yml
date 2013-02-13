@@ -28,3 +28,9 @@ parameters:
     session_memcache_port: 11211
     session_memcache_prefix: "acid_"
     session_memcache_expire: 3600
+
+    application_memcache_host: 127.0.0.1
+    application_memcache_port: 11211
+    application_memcache_prefix: "acid_"
+
+
