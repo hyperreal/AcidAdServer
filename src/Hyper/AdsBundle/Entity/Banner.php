@@ -17,6 +17,7 @@ use Hyper\AdsBundle\DBAL\BannerType;
 use Hyper\AdsBundle\DBAL\AnnouncementPaymentType;
 use Hyper\AdsBundle\Helper\BannerTypeDeterminer;
 use Hyper\AdsBundle\Exception\InvalidArgumentException;
+use Hyper\AdsBundle\Exception\NoReferenceException;
 
 /**
  * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\AnnouncementRepository")
@@ -229,6 +230,16 @@ class Banner extends Announcement
         }
 
         return null;
+    }
+
+    public function getReferenceInZoneAndThrowWhenNoRef(Zone $zone)
+    {
+        $ref = $this->getReferenceInZone($zone->getId());
+        if (null === $ref) {
+            throw new NoReferenceException('Reference not found');
+        }
+
+        return $ref;
     }
 
     /**
