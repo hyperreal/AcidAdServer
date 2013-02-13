@@ -191,10 +191,7 @@ class UserBannerController extends Controller
         try {
             $reference = $banner->getReferenceInZoneAndThrowWhenNoRef($zone);
         } catch (NoReferenceException $e) {
-            $reference = new BannerZoneReference();
-            $reference->setBanner($banner);
-            $reference->setZone($zone);
-            $reference->setPayModel(PayModelType::PAY_MODEL_DAILY);
+            $reference = $this->createBannerZoneReference($banner, $zone);
             $em->persist($reference);
             $em->flush($reference);
         }
@@ -214,6 +211,19 @@ class UserBannerController extends Controller
             'form' => $form->createView(),
             'paidTo' => $paidTo,
         );
+    }
+
+    private function createBannerZoneReference($banner, $zone)
+    {
+        $reference = new BannerZoneReference();
+        $reference->setBanner($banner);
+        $reference->setZone($zone);
+        $reference->setPayModel(PayModelType::PAY_MODEL_DAILY);
+        $reference->setProbability(1);
+        $reference->setActive(1);
+        $reference->setViews(0);
+        $reference->setClicks(0);
+        return $reference;
     }
 
     /**
