@@ -192,7 +192,7 @@ class UserBannerController extends Controller
             $reference = $banner->getReferenceInZoneAndThrowWhenNoRef($zone);
         } catch (NoReferenceException $e) {
             $reference = new BannerZoneReference();
-            $reference->setBanner($this);
+            $reference->setBanner($banner);
             $reference->setZone($zone);
             $em->persist($reference);
             $em->flush($reference);
