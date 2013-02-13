@@ -186,7 +186,18 @@ class UserBannerController extends Controller
 
         $order = new Order();
         $order->setAnnouncement($banner);
-        $order->setBannerZoneReference($banner->getReferenceInZone($zone->getId()));
+
+        try {
+            $reference = $banner->getReferenceInZoneAndThrowWhenNoRef($zone->getId());
+        } catch (NoReferenceException $e) {
+            $reference = new BannerZoneReference();
+            $reference->setBanner($this);
+            $reference->setZone($zone);
+            $em->persist($reference);
+            $em->flush($reference);
+        }
+
+        $order->setBannerZoneReference($reference);
 
         $paymentFormType = new PaymentType();
         $paidTo = $banner->getPaidToInZone($zone);
