@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="success">
-        <p>{{ 'registration.confirmed'|trans({'%username%': user.username}, 'FOSUserBundle') }}</p>
+        {{ 'registration.confirmed'|trans({'%username%': user.username}, 'FOSUserBundle') }}
     </div>
     {% if app.session is not empty %}
         {% set targetUrl = app.session.get('_security.target_path') %}
