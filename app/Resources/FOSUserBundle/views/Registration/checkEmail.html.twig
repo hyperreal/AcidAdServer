@@ -2,6 +2,6 @@
 
 {% block body %}
     <div class="info">
-        <p>{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</p>
+        {{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}
     </div>
 {% endblock body %}
