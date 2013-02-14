@@ -37,7 +37,7 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
-        <service id="hyper_ads.listener.email_confirmation" class="Hyper\AdsBundle\EventListener\EmailConfirmationListener">
+        <service id="hyper_ads.listener.session_flush" class="Hyper\AdsBundle\EventListener\SessionFlushListener">
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="session" />
         </service>

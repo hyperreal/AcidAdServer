@@ -54,3 +54,26 @@ ul form > button[type="submit"] {
 .spanned-column {
     background: #D5EDF8;
 }
+
+aside menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+aside menu.admin {
+    background: #eeeaee;
+    border-bottom: 1px solid #aaa;
+}
+
+aside menu li {
+    margin: 0;
+    padding: 0;
+}
+
+aside menu li a {
+    display: block;
+    border-bottom: 1px dotted #ddd;
+    padding: 5px;
+    margin: 3px 0;
+}
