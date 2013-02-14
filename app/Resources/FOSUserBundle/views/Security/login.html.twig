@@ -4,7 +4,7 @@
 {% endblock %}
 {% block body %}
 {% if error %}
-    <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
+    <div class="error">{{ error|trans({}, 'FOSUserBundle') }}</div>
 {% endif %}
 
 <form action="{{ path("fos_user_security_check") }}" method="post" class="user-form">
