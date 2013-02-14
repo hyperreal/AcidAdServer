@@ -92,7 +92,7 @@ swiftmailer:
     spool:     { type: memory }
 
 services:
-    cache:
+    application_cache:
         class: Doctrine\Common\Cache\MemcacheCache
         calls:
             - [ setMemcache, [ @application.memcache ]]

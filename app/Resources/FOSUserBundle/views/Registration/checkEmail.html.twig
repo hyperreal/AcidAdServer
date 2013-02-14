@@ -1,5 +1,7 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    <p>{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</p>
+    <div class="info">
+        <p>{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</p>
+    </div>
 {% endblock body %}

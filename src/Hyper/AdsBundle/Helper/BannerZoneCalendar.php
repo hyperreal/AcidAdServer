@@ -5,6 +5,7 @@ namespace Hyper\AdsBundle\Helper;
 use Doctrine\Common\Cache\CacheProvider;
 use Doctrine\ORM\EntityManager;
 use Hyper\AdsBundle\Entity\Zone;
+use Hyper\AdsBundle\Helper\DatePeriodCreator;
 
 class BannerZoneCalendar
 {
@@ -35,9 +36,9 @@ class BannerZoneCalendar
      * @param \DateTime $from
      * @param \DateTime $to
      *
-     * @return \DateTime[]
+     * @return \Hyper\AdsBundle\Helper\DatePeriod[]
      */
-    public function getDaysInCommonWithZone(Zone $zone, \DateTime $from, \DateTime $to)
+    public function getCommonDaysForZone(Zone $zone, \DateTime $from, \DateTime $to)
     {
         if (!$this->cache->contains(self::CACHE_ALL_PREFIX . $zone->getId())) {
             $this->warmUp($zone);
@@ -51,12 +52,17 @@ class BannerZoneCalendar
         foreach ($period as $date) {
             $dateString = $date->format(self::DATE_FORMAT);
             $cacheId = self::CACHE_PREFIX . $zoneId . '_' . $dateString;
-            if (($value = $this->cache->fetch($cacheId)) && $value > 3) {
+            if (($value = $this->cache->fetch($cacheId)) && $value > 1) {
                 $commonDays[$dateString] = $date;
             }
         }
 
-        return $commonDays;
+        if (!empty($commonDays)) {
+            $datePeriodCreator = new DatePeriodCreator($commonDays, $oneDayInterval);
+            return $datePeriodCreator->getPeriods();
+        }
+
+        return array();
     }
 
     private function warmUp(Zone $zone)

@@ -33,8 +33,13 @@
         </service>
 
         <service id="hyper_ads.banner_zone_calendar" class="Hyper\AdsBundle\Helper\BannerZoneCalendar">
-            <argument type="service" id="cache" />
+            <argument type="service" id="application_cache" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <service id="hyper_ads.listener.email_confirmation" class="Hyper\AdsBundle\EventListener\EmailConfirmationListener">
+            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="session" />
         </service>
 
     </services>

@@ -246,19 +246,37 @@ class UserBannerController extends Controller
         $pricesCalculator = $this->get('hyper_ads.prices_calculator');
         $dailyPrice = $pricesCalculator->getDayPriceForZone($zone);
 
+        /** @var $calendar \Hyper\AdsBundle\Helper\BannerZoneCalendar */
+        $calendar = $this->get('hyper_ads.banner_zone_calendar');
+        $validDaysPeriods = $calendar->getCommonDaysForZone($zone, $from, $to);
+
         $response = new Response(
             json_encode(
                 array(
                     'days' => $days,
                     'dailyPrice' => $dailyPrice,
                     'price' => $days * $dailyPrice,
-                    'currency' => $this->container->getParameter('ads_default_currency')
+                    'currency' => $this->container->getParameter('ads_default_currency'),
+                    'common_days' => $this->constructCommonDaysArray($validDaysPeriods),
                 )
             )
         );
         $response->headers->set('Content-type', 'application/json');
 
         return $response;
+    }
+
+    private function constructCommonDaysArray(array $validDaysPeriods)
+    {
+        $periods = array();
+        foreach ($validDaysPeriods as $period) {
+            $periods[] = array(
+                's' => $period->getStart()->format('Y-m-d'),
+                'e' => $period->getEnd()->format('Y-m-d'),
+            );
+        }
+
+        return $periods;
     }
 
     /**
@@ -311,6 +329,7 @@ class UserBannerController extends Controller
             $payFromDate = $form->get('pay_from')->getData();
 
             $daysCalculator = new PaymentDaysCalculator($bannerZoneReference);
+
             $days = $daysCalculator->getNumberOfDaysToPay($payFromDate, $payToDate);
             $currencyAmount = $calc->getDayPriceForZone($zone) * $days;
 
@@ -384,7 +403,6 @@ class UserBannerController extends Controller
         /** @var $orderNumberGenerator \Hyper\AdsBundle\Helper\OrderNumberGenerator */
         $orderNumberGenerator = $this->get('hyper_ads.order_number_generator');
         $em = $this->getDoctrine()->getManager();
-
 
         $ref = new BannerZoneReference();
         $ref->setZone($zone);
