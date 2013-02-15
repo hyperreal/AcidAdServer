@@ -6,9 +6,11 @@ DIR=`dirname $DIR`
 HOST=`hostname`
 
 if [ "$HOST" = "thorn" ]; then
+	rm -fR $DIR/app/cache/*
 	/usr/bin/php $DIR/app/console cache:clear --env=prod
 	/usr/bin/php $DIR/app/console cache:clear --env=dev
 else
+	sudo rm -fR $DIR/app/cache/*
 	sudo -u www-data /usr/bin/php $DIR/app/console cache:clear --env=prod
 	sudo -u www-data /usr/bin/php $DIR/app/console cache:clear --env=dev
 fi
