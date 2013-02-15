@@ -107,5 +107,7 @@ zones.info: 'Zones information'
 zones.short.info: 'Below you can find a list of active pages and zones (places where you can put your banners). Maximum dimensions of them as well as daily prices are also provided.'
 acid.ad.server: 'Acid - Ad server'
 fork.on.github: 'fork on github'
-edit.profile: 'edit your profile'
+edit.profile: 'Edit your profile'
 analytics.stats: 'Google Analytics stats'
+empty.banners.list: "Banners' list is empty"
+check.zones: 'Activation in zones'

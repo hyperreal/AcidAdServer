@@ -48,7 +48,7 @@ your.banners: 'Twoje bannery'
 enabled.in.zones: 'Włączone w strefach'
 payments.list: 'Lista płatności'
 add.banner: 'Dodaj banner'
-pay: 'Zapłać'
+pay: Zapłać
 pay.for.banner.in.zone: 'Opłać banner "%banner%" w strefie %zone%'
 pay.for.banner: 'Opłać banner'
 pay.for.banner.in.zone.info: 'Strona ta pozwala opłacić banner "%banner%" w strefie "%zone%"'
@@ -74,7 +74,7 @@ pay.banner.here: 'Opłać banner w tej strefie'
 no.zones.to.add.banner: 'Brak stref, w których można byłoby dodać banner'
 edit.zone: 'Edytuj strefę zoneName'
 list.zone: 'Lista stref'
-enabled: 'Włączony'
+enabled: Włączony
 max.width: 'Maksymalna szerokość'
 max.height: 'Maksymalna wysokość'
 show.banners: 'Pokaż bannery'
@@ -87,8 +87,6 @@ advertisers: Reklamodawcy
 pages: Strony
 banners: Bannery
 zones: Strefy
-advertisers: Reklamodawcy
-pages: Strony
 zone.not.exists: 'Strefa nie isnieje'
 zones.associated.with.banner: 'Strefy powiązane z bannerem bannerName'
 add.banner.to.zone: 'Dodaj banner do strefy'
@@ -108,6 +106,8 @@ payment.info: 'Płatność za zamówienie nr %orderNumber%'
 zones.info: 'Informacje o strefach'
 zones.short.info: 'Poniżej znajduje się lista aktywnych stron i stref (miejsc, w których umieszczać można bannery) wraz z dostępnymi maksymalnymi rozmiarami'
 acid.ad.server: 'Acid - Serwer reklam'
-fork.on.github: 'github'
+fork.on.github: github
 edit.profile: 'edytuj swój profil'
 analytics.stats: 'Statystyki Analytics'
+empty.banners.list: 'Lista bannerów jest pusta'
+check.zones: 'Aktywacja w strefach'
