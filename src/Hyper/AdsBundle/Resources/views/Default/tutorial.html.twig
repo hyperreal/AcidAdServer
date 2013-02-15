@@ -1,0 +1,17 @@
+{% extends "::base.html.twig" %}
+{% block title %}
+{{ 'tutorial'|babel }}
+{% endblock %}
+{% block body %}
+
+Tu daj treść
+
+{% raw %}
+    obrazki daj w src/Hyper/AdsBundle/Resources/public/images
+    ja je potem prawidłowo podlinkuję (albo jak Ci się chce to wystarczy, że będziesz pisał:
+        {{ asset('bundles/hyperads/images/plik.png') }}
+    i wykonasz:
+        ./app/console assets:install --symlink
+{% endraw %}
+
+{% endblock %}
