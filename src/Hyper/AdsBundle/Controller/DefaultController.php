@@ -19,6 +19,15 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/tutorial", name="acid_tutorial")
+     * @Template()
+     */
+    public function tutorialAction()
+    {
+        return array();
+    }
+
+    /**
      * @param \Hyper\AdsBundle\Entity\Zone $zone
      *
      * @return \Symfony\Component\HttpFoundation\Response
