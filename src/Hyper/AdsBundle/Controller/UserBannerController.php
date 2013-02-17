@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
 use JMS\Payment\CoreBundle\Model\FinancialTransactionInterface;
 use Wikp\PaymentMtgoxBundle\Plugin\MtgoxPaymentPlugin;
+use Wikp\PaymentMtgoxBundle\Entity\Currency;
 use Wikp\PaymentMtgoxBundle\Mtgox\RequestType\MtgoxTransactionUrlRequest;
 use Hyper\AdsBundle\Entity\Announcement;
 use Hyper\AdsBundle\DBAL\PayModelType;
@@ -241,25 +242,38 @@ class UserBannerController extends Controller
             throw new HttpException(400, 'Bad request');
         }
 
+        /** @var $calendar \Hyper\AdsBundle\Helper\BannerZoneCalendar */
+        $calendar = $this->get('hyper_ads.banner_zone_calendar');
+        $invalidDaysPeriods = $calendar->getCommonDaysForZone($zone, $from, $to);
+
         $bannerZoneReference = $banner->getReferenceInZone($zone->getId());
         $daysCalculator = new PaymentDaysCalculator($bannerZoneReference);
+
         $days = $daysCalculator->getNumberOfDaysToPay($from, $to);
+        $days = $days - count($invalidDaysPeriods);
         /** @var $pricesCalculator \Hyper\AdsBundle\Helper\PricesCalculator */
         $pricesCalculator = $this->get('hyper_ads.prices_calculator');
         $dailyPrice = $pricesCalculator->getDayPriceForZone($zone);
 
-        /** @var $calendar \Hyper\AdsBundle\Helper\BannerZoneCalendar */
-        $calendar = $this->get('hyper_ads.banner_zone_calendar');
-        $validDaysPeriods = $calendar->getCommonDaysForZone($zone, $from, $to);
+        $currencyAmount = $days * $dailyPrice;
+        /** @var $user \Hyper\AdsBundle\Entity\Advertiser */
+        $user = $this->getUser();
+        $userCurrency = $user->getDefaultCurrency();
+        $exchange = $this->get('wikp_payment_mtgox.exchange');
+        if ($userCurrency instanceof Currency) {
+            $userCurrency = $userCurrency->getCode();
+        }
+        $btcAmount = $exchange->convertToBitcoins($currencyAmount, $this->container->getParameter('ads_default_currency'));
+        $userAmount = $exchange->convertFromBitcoins($btcAmount, $userCurrency);
 
-        $commonDaysArray = $this->constructCommonDaysArray($validDaysPeriods);
+        $commonDaysArray = $this->constructCommonDaysArray($invalidDaysPeriods);
         $response = new Response(
             json_encode(
                 array(
                     'days' => $days,
                     'dailyPrice' => $dailyPrice,
-                    'price' => $days * $dailyPrice,
-                    'currency' => $this->container->getParameter('ads_default_currency'),
+                    'price' => $userAmount,
+                    'currency' => $userCurrency,
                     'commonDays' => $commonDaysArray,
                 )
             )
@@ -331,9 +345,13 @@ class UserBannerController extends Controller
             $payToDate = $form->get('pay_to')->getData();
             $payFromDate = $form->get('pay_from')->getData();
 
+            /** @var $calendar \Hyper\AdsBundle\Helper\BannerZoneCalendar */
+            $calendar = $this->get('hyper_ads.banner_zone_calendar');
+            $invalidDaysPeriods = $calendar->getCommonDaysForZone($zone, $payFromDate, $payToDate);
+
             $daysCalculator = new PaymentDaysCalculator($bannerZoneReference);
 
-            $days = $daysCalculator->getNumberOfDaysToPay($payFromDate, $payToDate);
+            $days = $daysCalculator->getNumberOfDaysToPay($payFromDate, $payToDate) - count($invalidDaysPeriods);
             $currencyAmount = $calc->getDayPriceForZone($zone) * $days;
 
             /** @var $exchange \Wikp\PaymentMtgoxBundle\Mtgox\BitcoinExchangeInterface */
