@@ -13,7 +13,7 @@ class BannerZoneCalendar
 
     const CACHE_PREFIX = 'cal_';
     const CACHE_ALL_PREFIX = 'all_set_';
-    const MAX_BANNERS = 1;
+    const MAX_BANNERS = 0;
 
     /** @var \Doctrine\Common\Cache\CacheProvider */
     private $cache;
@@ -49,7 +49,8 @@ class BannerZoneCalendar
         foreach ($period as $date) {
             $dateString = $date->format(self::DATE_FORMAT);
             $cacheId = self::CACHE_PREFIX . $zoneId . '_' . $dateString;
-            if (($value = $this->cache->fetch($cacheId)) && $value > self::MAX_BANNERS) {
+			$value = $this->cache->fetch($cacheId);
+            if (!empty($value) && $value > self::MAX_BANNERS) {
                 $commonDays[$dateString] = $date;
             }
         }
@@ -67,7 +68,6 @@ class BannerZoneCalendar
         /** @var $orderRepository \Hyper\AdsBundle\Entity\OrderRepository */
         $orderRepository = $this->em->getRepository('HyperAdsBundle:Order');
         $ordersInZone = $orderRepository->getOrdersForZone($zone);
-
         $dailyInterval = new \DateInterval('P1D');
         $days = array();
         foreach ($ordersInZone as $order) {
