@@ -252,6 +252,7 @@ class UserBannerController extends Controller
         $calendar = $this->get('hyper_ads.banner_zone_calendar');
         $validDaysPeriods = $calendar->getCommonDaysForZone($zone, $from, $to);
 
+        $commonDaysArray = $this->constructCommonDaysArray($validDaysPeriods);
         $response = new Response(
             json_encode(
                 array(
@@ -259,7 +260,8 @@ class UserBannerController extends Controller
                     'dailyPrice' => $dailyPrice,
                     'price' => $days * $dailyPrice,
                     'currency' => $this->container->getParameter('ads_default_currency'),
-                    'common_days' => $this->constructCommonDaysArray($validDaysPeriods),
+                    'commonDays' => $commonDaysArray,
+                    'hasCommonDays' => !empty($hasCommonDays) ? 1  : 0,
                 )
             )
         );
