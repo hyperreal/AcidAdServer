@@ -263,7 +263,11 @@ class UserBannerController extends Controller
         if ($userCurrency instanceof Currency) {
             $userCurrency = $userCurrency->getCode();
         }
-        $btcAmount = $exchange->convertToBitcoins($currencyAmount, $this->container->getParameter('ads_default_currency'));
+        $btcAmount = $exchange->convertToBitcoins(
+            $currencyAmount,
+            $this->container->getParameter('ads_default_currency')
+        );
+        
         $userAmount = $exchange->convertFromBitcoins($btcAmount, $userCurrency);
 
         $commonDaysArray = $this->constructCommonDaysArray($invalidDaysPeriods);
@@ -272,7 +276,7 @@ class UserBannerController extends Controller
                 array(
                     'days' => $days,
                     'dailyPrice' => $dailyPrice,
-                    'price' => $userAmount,
+                    'price' => sprintf("%.2f", $userAmount),
                     'currency' => $userCurrency,
                     'commonDays' => $commonDaysArray,
                 )
