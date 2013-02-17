@@ -114,3 +114,4 @@ check.zones: 'Aktywacja w strefach'
 tutorial: Tutorial
 successful.payment: 'Dziękujemy za płatność'
 transaction.was.queued: 'Płatność została zakolejkowana w systemie płatności, sprawdź listę bannerów za jakiś czas. Jeśli dokonałeś płatności za pomocą klienta Bitcoin, będziesz musiał chwilkę poczekać :)'
+extend.the.payment: 'Przedłuż płatność'
