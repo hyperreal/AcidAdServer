@@ -3,6 +3,11 @@
 {{ 'tutorial'|babel }}
 {% endblock %}
 {% block body %}
+<script>
+    $(document).ready(function() {
+        $('.fancybox').fancybox();
+    });
+</script>
 
 		<h1>Podręcznik obsługi serwisu reklamowego Hyperreal.Info</h1>
 
@@ -27,11 +32,13 @@
 
 		<p>Bitcoiny do zakupu reklam na hyperrealu można kupić na wiele sposobów. My sprawdziliśmy jeden z nich, jest on polecany na polskim forum bitcoin. Prosimy jednak zwrócić uwagę, że hyperreal w żaden sposób nie odpowiada za wasze transakcje zakupu bitcoinów!</p>
 
-		<p>Przetestowanym przez nas sposobem zakupu jest <b>Bitcurex</b>, <a href="https://pln.bitcurex.com/">https://pln.bitcurex.com/</a> - jest to giełda walut, która wg. polskich użytkowników systemu bitcoin, działa sprawnie i szybko. Po założeniu konta, przelewasz tam odpowiednią kwotę przelewem bankowym w złotówkach, na ich konto w Mbanku, dane podane są pod adresem <a href="https://pln.bitcurex.com/zasilenie-konta">https://pln.bitcurex.com/zasilenie-konta</a> - poniżej przykładowy obrazek z zaznaczonym fragmentem ekranu.</p>
-
-		<a href="{{ asset('bundles/hyperads/images/bitxurex-dane-konta-do-wplat-pln.png') }}" class="imgpreview" title="Bitcurex">
+<table><tr><td>
+		<p>Przetestowanym przez nas sposobem zakupu jest <b>Bitcurex</b>, <a href="https://pln.bitcurex.com/">https://pln.bitcurex.com/</a> - jest to giełda walut, która wg. polskich użytkowników systemu bitcoin, działa sprawnie i szybko. Po założeniu konta, przelewasz tam odpowiednią kwotę przelewem bankowym w złotówkach, na ich konto w Mbanku, dane podane są pod adresem <a href="https://pln.bitcurex.com/zasilenie-konta">https://pln.bitcurex.com/zasilenie-konta</a> - obok przykładowy obrazek z zaznaczonym fragmentem ekranu.</p>
+</td><td>
+		<a href="{{ asset('bundles/hyperads/images/bitxurex-dane-konta-do-wplat-pln.png') }}" class="fancybox" title="Bitcurex">
 		<img src="{{ asset('bundles/hyperads/images/bitxurex-dane-konta-do-wplat-pln-M.png') }}">
 		</a>
+</td></tr></table>
 
 		<p>Wpłaty z kont w mBanku i MultiBanku są księgowane w ciągu kilku minut, reszta zgodnie z cyklem przelewów międzybankowych, a więc trzy razy dziennie w dni robocze. <b>Uwaga, należy dokładnie podać tytuł przelewu zgodnie ze spersonalizowanymi dla każdego konta, danymi w Bitcurex, gdyż transakcje księgowane są automatycznie na podstawie tego tytułu przelewu.</b> Bitcurex nie pobiera prowizji od wymiany walut, nie pobiera również prowizji od wpłat złotówkowych. Aby kupić BTC na giełdzie Bitcurex, nie trzeba okazywać dokumentów, jak na przykład jest to wymagane w Mt.Gox.</p>
 
@@ -47,23 +54,27 @@
 
 		<h3>Założenie konta</h3>
 
-		<p>Jeśli jesteś nowym klientem, powinieneś zacząć od założenia konta. Kliknij w "Zarejestruj" - patrz obrazek poniżej.</p>
-
+<table><tr><td>
+		<p>Jeśli jesteś nowym klientem, powinieneś zacząć od założenia konta. Kliknij w "Zarejestruj" - patrz obrazek obok.</p>
+</td><td>
 		<img src="{{ asset('bundles/hyperads/images/mak-zarejestruj.png') }}">
-
+</td></tr><tr><td>
 		<p>Wypełnij wszystkie rubryki jak na obrazku poniżej, pamiętając, że adres mailowy będzie musiał zostać zweryfikowany. Po otrzymaniu maila po prostu kliknij w link potwierdzający i konto zostanie aktywowane. Jeśli nie otrzymałeś maila w ciągu maksymalnie kilku minut, sprawdź folder z spamem, gdyż mail mógł tam przypadkiem wylądować. Gdybyś w ogóle nie otrzymał maila, skontaktuj się z nami.</p>
-
+</td><td>
 		<img src="{{ asset('bundles/hyperads/images/mak-rejestracja.png') }}">
+</td></tr></table>
 
 		<h3>Lista stref</h3>
 
-		<p>Po założeniu i aktywacji konta, zaloguj się do systemu. Po lewej stronie znajdziesz odnośnik "Informacje o strefach" - patrz obrazek poniżej.</p>
-
+<table><tr><td>
+		<p>Po założeniu i aktywacji konta, zaloguj się do systemu. Po lewej stronie znajdziesz odnośnik "Informacje o strefach" - patrz obrazek obok.</p>
+</td><td>
 		<img src="{{ asset('bundles/hyperads/images/mak-strona-glowna-informacje-o-strefach.png') }}">
-
+</td></tr><tr><td>
 		<p>Gdy klikniesz w ten odnośnik, pokaże ci się lista wszystkich możliwych do zamieszczenia bannerów, wraz z cennikiem i ich maksymalnymi rozmiarami. Przeanalizuj naszą ofertę, i zdecyduj się na jeden lub kilka bannerów. Uwaga, poniższe ceny są jedynie przykładowe i nie stanowią oferty handlowej. Aktualne ceny znajdziesz po zalogowaniu się na swoje konto.</p>
-
+</td><td>
 		<img src="{{ asset('bundles/hyperads/images/mak-informacje-o-strefach.png') }}">
+</td></tr></table>
 
 		<p>Wszystkie bannery rotują się w strefie z innymi ogłoszeniodawcami, maksymalnie w stosunku 1:5 czyli twój banner będzie pojawiał się średnio masymalnie co pięć wyświetleń strony. Jeśli chcesz zająć określoną strefę wyłącznie dla siebie, musisz zatem przygotować pięć bannerów i opłacić je oddzielnie.<p>
 
@@ -73,9 +84,11 @@
 
 		<p>W momencie, w którym zdecydowałeś się na określony banner, sprawdź dokładnie jego maksymalny rozmiar. System zaakceptuje mniejszy banner niż podana wartość maksymalna bannera, ale nie zaakceptuje większego.</p>
 
+<table><tr><td>
 		<p>Kiedy masz już gotowy do publikacji banner, kliknij w odnośnik "Twoje bannery", a potem w "Dodaj banner". Wgraj banner do systemu zgodnie z przykładowym obrazkiem poniżej:</p>
-
+</td></td>
 		<img src="{{ asset('bundles/hyperads/images/mak-wgrywanie-bannera.png') }}">
+</td></tr></table>
 
 		<p><i>Tytuł</i> to nazwa tego konkretnie bannera, abyś później wiedział, który banner jest który, jeśli posiadasz więcej bannerów. <i>Treść linku</i> jest istotna tylko wtedy, kiedy czytelnik hyperreala posługuje się jakąś starą przeglądarką tekstową, i w dzisiejszych czasach jest to mało realne, więc to, co tam wpiszesz, nie ma większego znaczenia. Natomiast bardzo ważne jest prawidłowe wypełnienie pola <i>URL</i> - bo tam własnie zostanie przeniesiony czytelnik w momencie, w którym kliknie w twój banner.</p>
 
