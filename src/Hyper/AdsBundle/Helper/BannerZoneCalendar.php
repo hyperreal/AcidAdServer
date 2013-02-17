@@ -13,7 +13,7 @@ class BannerZoneCalendar
 
     const CACHE_PREFIX = 'cal_';
     const CACHE_ALL_PREFIX = 'all_set_';
-    const MAX_BANNERS = 0;
+    const MAX_BANNERS = 5;
 
     /** @var \Doctrine\Common\Cache\CacheProvider */
     private $cache;
@@ -50,7 +50,7 @@ class BannerZoneCalendar
             $dateString = $date->format(self::DATE_FORMAT);
             $cacheId = self::CACHE_PREFIX . $zoneId . '_' . $dateString;
 			$value = $this->cache->fetch($cacheId);
-            if (!empty($value) && $value > self::MAX_BANNERS) {
+            if (!empty($value) && $value >= self::MAX_BANNERS) {
                 $commonDays[$dateString] = $date;
             }
         }
