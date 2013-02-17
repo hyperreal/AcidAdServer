@@ -83,7 +83,7 @@ form div > ul {
     float: right;
 }
 
-p {
+#tutorial p, #tutorial u {
 	font-family: 'Headland One', serif;
 }
 
