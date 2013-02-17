@@ -36,9 +36,10 @@ class BannerZoneCalendar
      */
     public function getCommonDaysForZone(Zone $zone, \DateTime $from, \DateTime $to)
     {
-        if (!$this->cache->contains(self::CACHE_ALL_PREFIX . $zone->getId())) {
+        //przerobić na event po ipn:success
+        //if (!$this->cache->contains(self::CACHE_ALL_PREFIX . $zone->getId())) {
             $this->warmUp($zone);
-        }
+        //}
 
         $oneDayInterval = new \DateInterval('P1D');
         $period = new \DatePeriod($from, $oneDayInterval, $to);
