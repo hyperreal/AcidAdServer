@@ -284,7 +284,11 @@ class Banner extends Announcement
         $paidToDates = array_filter(
             array_map(
                 function (Order $order) {
-                    return $order->getPaymentTo();
+                    if ($order->getStatus() == Order::STATUS_FINISHED) {
+                        return $order->getPaymentTo();
+                    } else {
+                        return null;
+                    }
                 },
                 $orders
             )
