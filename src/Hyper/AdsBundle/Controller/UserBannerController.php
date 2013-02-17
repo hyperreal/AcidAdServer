@@ -261,7 +261,6 @@ class UserBannerController extends Controller
                     'price' => $days * $dailyPrice,
                     'currency' => $this->container->getParameter('ads_default_currency'),
                     'commonDays' => $commonDaysArray,
-                    'hasCommonDays' => !empty($hasCommonDays) ? 1  : 0,
                 )
             )
         );
