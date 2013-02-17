@@ -28,12 +28,14 @@
 <script type="text/html" id="price-tpl">
     Liczba dni do zapłaty: <strong>{{days}}</strong><br/>
     Koszt: <strong>{{price}} {{currency}}</strong><br />
+    {{#hasCommonDays}}}
     Dni, w których nie można wyśwetlić bannera:
     <ul class="no-payment-possible">
-        {{#common_days}}
+        {{#commonDays}}
         <li>Od <strong>{{s}}</strong> do <strong>{{e}}</strong></li>
-        {{/common_days}}
+        {{/commonDays}}
     </ul>
+    {{/hasCommonDays}}
 </script>
 {% endraw %}
 <script type="text/javascript" src="{{ asset("bundles/hyperads/js/payment.js") }}"></script>

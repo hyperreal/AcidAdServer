@@ -13,6 +13,7 @@ class BannerZoneCalendar
 
     const CACHE_PREFIX = 'cal_';
     const CACHE_ALL_PREFIX = 'all_set_';
+    const MAX_BANNERS = 1;
 
     /** @var \Doctrine\Common\Cache\CacheProvider */
     private $cache;
@@ -24,11 +25,6 @@ class BannerZoneCalendar
     {
         $this->cache = $cache;
         $this->em = $em;
-    }
-
-    public function test()
-    {
-        $this->cache->save('dupa', 'cipa');
     }
 
     /**
@@ -52,7 +48,7 @@ class BannerZoneCalendar
         foreach ($period as $date) {
             $dateString = $date->format(self::DATE_FORMAT);
             $cacheId = self::CACHE_PREFIX . $zoneId . '_' . $dateString;
-            if (($value = $this->cache->fetch($cacheId)) && $value > 1) {
+            if (($value = $this->cache->fetch($cacheId)) && $value > self::MAX_BANNERS) {
                 $commonDays[$dateString] = $date;
             }
         }
