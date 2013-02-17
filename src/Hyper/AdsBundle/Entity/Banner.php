@@ -30,7 +30,11 @@ class Banner extends Announcement
     const UPLOAD_DIR = 'uploads';
 
     /**
-     * @Assert\File()
+     * @Assert\File(
+     *     maxSize="1024k",
+     *     mimeTypes={"image/jpeg", "image/gif", "image/png", "application/x-shockwave-flash" },
+     *     mimeTypesMessage="Only PNG, JPEG, GIF and SWF are accepted"
+     * )
      * @var \Symfony\Component\HttpFoundation\File\UploadedFile
      */
     protected $file;

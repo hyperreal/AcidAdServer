@@ -77,3 +77,8 @@ aside menu li a {
     padding: 5px;
     margin: 3px 0;
 }
+
+form div > ul {
+    list-style: none;
+    float: right;
+}
