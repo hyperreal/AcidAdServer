@@ -61,6 +61,7 @@ class UserBannerController extends Controller
         $banner = new Banner();
         $banner->setAdvertiser($this->getUser());
         $bannerType = new BannerType();
+        $bannerType->disableDescriptionInput();
         $form = $this->createForm($bannerType, $banner);
         $form->bind($request);
 
@@ -75,7 +76,8 @@ class UserBannerController extends Controller
 
         return array(
             'form' => $form->createView(),
-            'banner' => $banner
+            'banner' => $banner,
+            'wysiwyg' => 'disabled',
         );
     }
 
