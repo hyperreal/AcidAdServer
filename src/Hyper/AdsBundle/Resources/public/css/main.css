@@ -83,11 +83,6 @@ form div > ul {
     float: right;
 }
 
-#imgpreview{
-	position:absolute;
-	border:1px solid #ccc;
-	background:#333;
-	padding:5px;
-	display:none;
-	color:#fff;
+p {
+	font-family: 'Headland One', serif;
 }
