@@ -86,3 +86,8 @@ form div > ul {
 p {
 	font-family: 'Headland One', serif;
 }
+
+.no-payment-possible {
+    margin: 0;
+    padding: 0;
+}
