@@ -12,3 +12,4 @@ app/config/parameters.*
 *.iml
 *.ipr
 *.iws
+*.swp
