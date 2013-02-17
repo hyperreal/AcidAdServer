@@ -113,3 +113,4 @@ empty.banners.list: "Banners' list is empty"
 check.zones: 'Activation in zones'
 tutorial: Guide
 extend.the.payment: 'Extend the payment'
+payment.instruction.not.found: 'Payment instruction not found'
