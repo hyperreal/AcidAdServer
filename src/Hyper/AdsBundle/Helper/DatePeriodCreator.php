@@ -29,12 +29,11 @@ class DatePeriodCreator
 
     public function __construct(array $dates, \DateInterval $interval)
     {
-        $minDate = min($dates);
         /** @var $maxDate \DateTime */
         $maxDate = max($dates);
-        if ($this->getIntervalInSeconds($maxDate->diff($minDate)) < $this->getIntervalInSeconds($interval)) {
-            throw new InvalidArgumentException('Interval should be lower than max($dates) - min($dates)');
-        }
+        $currentMaxDate = clone $maxDate;
+        $currentMaxDate->add($interval);
+        $dates[] = $currentMaxDate;
         $this->dates = array_values($dates);
         $this->interval = $interval;
     }

@@ -249,8 +249,9 @@ class UserBannerController extends Controller
         $bannerZoneReference = $banner->getReferenceInZone($zone->getId());
         $daysCalculator = new PaymentDaysCalculator($bannerZoneReference);
 
-        $days = $daysCalculator->getNumberOfDaysToPay($from, $to);
-        $days = $days - count($invalidDaysPeriods);
+        $days = $from->diff($to)->days;
+
+        $days = $days - $this->getNumberOfCommonDaysFromPeriodsArray($invalidDaysPeriods);
         /** @var $pricesCalculator \Hyper\AdsBundle\Helper\PricesCalculator */
         $pricesCalculator = $this->get('hyper_ads.prices_calculator');
         $dailyPrice = $pricesCalculator->getDayPriceForZone($zone);
@@ -267,7 +268,7 @@ class UserBannerController extends Controller
             $currencyAmount,
             $this->container->getParameter('ads_default_currency')
         );
-        
+
         $userAmount = $exchange->convertFromBitcoins($btcAmount, $userCurrency);
 
         $commonDaysArray = $this->constructCommonDaysArray($invalidDaysPeriods);
@@ -285,6 +286,20 @@ class UserBannerController extends Controller
         $response->headers->set('Content-type', 'application/json');
 
         return $response;
+    }
+
+    /**
+     * @param \Hyper\AdsBundle\Helper\DatePeriod[] $periods
+     */
+    private function getNumberOfCommonDaysFromPeriodsArray(array $periods)
+    {
+        $numOfDays = 0;
+
+        foreach ($periods as $period) {
+            $numOfDays += $period->getStart()->diff($period->getEnd())->days;
+        }
+
+        return $numOfDays;
     }
 
     private function constructCommonDaysArray(array $validDaysPeriods)
@@ -353,24 +368,22 @@ class UserBannerController extends Controller
             $calendar = $this->get('hyper_ads.banner_zone_calendar');
             $invalidDaysPeriods = $calendar->getCommonDaysForZone($zone, $payFromDate, $payToDate);
 
-            $daysCalculator = new PaymentDaysCalculator($bannerZoneReference);
+            $days = $payFromDate->diff($payToDate)->days;
+            $days -= $this->getNumberOfCommonDaysFromPeriodsArray($invalidDaysPeriods);
 
-            $days = $daysCalculator->getNumberOfDaysToPay($payFromDate, $payToDate) - count($invalidDaysPeriods);
             $currencyAmount = $calc->getDayPriceForZone($zone) * $days;
 
-            /** @var $exchange \Wikp\PaymentMtgoxBundle\Mtgox\BitcoinExchangeInterface */
-            $exchange = $this->get('wikp_payment_mtgox.exchange');
-            $amount = $exchange->convertToBitcoins($currencyAmount);
+            $systemCurrency = $this->container->getParameter('ads_default_currency');
 
             $ppc->createPaymentInstruction(
                 $instruction = new PaymentInstruction(
-                    $amount,
-                    'BTC',
+                    $currencyAmount,
+                    $systemCurrency,
                     MtgoxPaymentPlugin::SYSTEM_NAME
                 )
             );
 
-            $order->setAmount($amount);
+            $order->setAmount($currencyAmount);
             $order->setPaymentFrom($payFromDate);
             $order->setPaymentTo($payToDate);
             $order->setAnnouncement($banner);
@@ -382,13 +395,13 @@ class UserBannerController extends Controller
 
             if (FinancialTransactionInterface::STATE_PENDING == $instruction->getState()) {
                 $urlRequest = new MtgoxTransactionUrlRequest();
-                $urlRequest->setAmount($amount);
+                $urlRequest->setAmount($currencyAmount);
                 $urlRequest->setIpnUrl($this->generateUrl('wikp_payment_mtgox_ipn', array(), true));
                 $urlRequest->setDescription(
                     $this->trans('payment.info', array('%orderNumber%' => $order->getOrderNumber()))
                 );
                 $urlRequest->setAdditionalData($order->getId());
-                $urlRequest->setCurrency('BTC');
+                $urlRequest->setCurrency($systemCurrency);
                 $urlRequest->setReturnSuccess(
                     $this->generateUrl('payment_successful', array('order' => $order->getId()), true)
                 );

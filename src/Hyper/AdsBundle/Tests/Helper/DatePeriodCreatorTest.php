@@ -6,14 +6,6 @@ use Hyper\AdsBundle\Helper\DatePeriodCreator;
 
 class DatePeriodCreatorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @expectedException Hyper\AdsBundle\Exception\InvalidArgumentException
-     */
-    public function testIntervalHigherThanDiffBetweenMaxAndMinDateCausesException()
-    {
-        new DatePeriodCreator($this->createDates(array(16)), new \DateInterval('P1Y'));
-    }
-
     public function testGetPeriodsFromOneMonthWithOneDayBreak()
     {
         $interval = new \DateInterval('P1D');
@@ -29,7 +21,7 @@ class DatePeriodCreatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2013-03-01', $periods[0]->getStart()->format('Y-m-d'));
         $this->assertEquals('2013-03-15', $periods[0]->getEnd()->format('Y-m-d'));
         $this->assertEquals('2013-03-17', $periods[1]->getStart()->format('Y-m-d'));
-        $this->assertEquals('2013-03-30', $periods[1]->getEnd()->format('Y-m-d'));
+        $this->assertEquals('2013-03-31', $periods[1]->getEnd()->format('Y-m-d'));
     }
 
     public function testGetPeriodsFromOneMonthWithMoreThanOneBreak()
@@ -54,10 +46,10 @@ class DatePeriodCreatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2013-03-16', $periods[2]->getStart()->format('Y-m-d'));
         $this->assertEquals('2013-03-19', $periods[2]->getEnd()->format('Y-m-d'));
         $this->assertEquals('2013-03-23', $periods[3]->getStart()->format('Y-m-d'));
-        $this->assertEquals('2013-03-30', $periods[3]->getEnd()->format('Y-m-d'));
+        $this->assertEquals('2013-03-31', $periods[3]->getEnd()->format('Y-m-d'));
     }
 
-    public function testGetPeriodsFromMonthWithNoBrakes()
+    public function testGetPeriodsFromMonthWithNoBreaks()
     {
         $interval = new \DateInterval('P1D');
         $dates = $this->createDates(array());
@@ -70,7 +62,7 @@ class DatePeriodCreatorTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Hyper\AdsBundle\Helper\DatePeriod', $periods[0]);
 
         $this->assertEquals('2013-03-01', $periods[0]->getStart()->format('Y-m-d'));
-        $this->assertEquals('2013-03-30', $periods[0]->getEnd()->format('Y-m-d'));
+        $this->assertEquals('2013-03-31', $periods[0]->getEnd()->format('Y-m-d'));
     }
 
     private function createDates(array $exclude)

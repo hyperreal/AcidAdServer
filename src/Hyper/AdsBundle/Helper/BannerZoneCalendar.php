@@ -49,18 +49,18 @@ class BannerZoneCalendar
         foreach ($period as $date) {
             $dateString = $date->format(self::DATE_FORMAT);
             $cacheId = self::CACHE_PREFIX . $zoneId . '_' . $dateString;
-			$value = $this->cache->fetch($cacheId);
-            if (!empty($value) && $value >= self::MAX_BANNERS) {
+            $value = $this->cache->fetch($cacheId);
+            if (false !== $value && $value >= self::MAX_BANNERS) {
                 $commonDays[$dateString] = $date;
             }
         }
 
-        if (!empty($commonDays)) {
-            $datePeriodCreator = new DatePeriodCreator($commonDays, $oneDayInterval);
-            return $datePeriodCreator->getPeriods();
+        if (empty($commonDays)) {
+            return array();
         }
+        $datePeriodCreator = new DatePeriodCreator($commonDays, $oneDayInterval);
 
-        return array();
+        return $datePeriodCreator->getPeriods();
     }
 
     private function warmUp(Zone $zone)
