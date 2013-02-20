@@ -21,7 +21,7 @@ class DatePeriodCreatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2013-03-01', $periods[0]->getStart()->format('Y-m-d'));
         $this->assertEquals('2013-03-16', $periods[0]->getEnd()->format('Y-m-d'));
         $this->assertEquals('2013-03-17', $periods[1]->getStart()->format('Y-m-d'));
-        $this->assertEquals('2013-03-31', $periods[1]->getEnd()->format('Y-m-d'));
+        $this->assertEquals('2013-03-30', $periods[1]->getEnd()->format('Y-m-d'));
     }
 
     public function testGetPeriodsFromOneMonthWithMoreThanOneBreak()
@@ -46,7 +46,7 @@ class DatePeriodCreatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2013-03-16', $periods[2]->getStart()->format('Y-m-d'));
         $this->assertEquals('2013-03-20', $periods[2]->getEnd()->format('Y-m-d'));
         $this->assertEquals('2013-03-23', $periods[3]->getStart()->format('Y-m-d'));
-        $this->assertEquals('2013-03-31', $periods[3]->getEnd()->format('Y-m-d'));
+        $this->assertEquals('2013-03-30', $periods[3]->getEnd()->format('Y-m-d'));
     }
 
     public function testGetPeriodsFromMonthWithNoBreaks()
@@ -62,7 +62,7 @@ class DatePeriodCreatorTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Hyper\AdsBundle\Helper\DatePeriod', $periods[0]);
 
         $this->assertEquals('2013-03-01', $periods[0]->getStart()->format('Y-m-d'));
-        $this->assertEquals('2013-03-31', $periods[0]->getEnd()->format('Y-m-d'));
+        $this->assertEquals('2013-03-30', $periods[0]->getEnd()->format('Y-m-d'));
     }
 
     private function createDates(array $exclude)
