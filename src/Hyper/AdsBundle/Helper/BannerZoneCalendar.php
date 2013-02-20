@@ -42,6 +42,7 @@ class BannerZoneCalendar
         //}
 
         $oneDayInterval = new \DateInterval('P1D');
+        $to->add($oneDayInterval);
         $period = new \DatePeriod($from, $oneDayInterval, $to);
 
         $zoneId = $zone->getId();

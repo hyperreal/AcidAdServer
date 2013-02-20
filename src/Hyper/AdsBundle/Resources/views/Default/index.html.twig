@@ -17,10 +17,18 @@
             <a class="span-7 box" href="{{ url('user_banner_new') }}">{{ 'banner.buy'|babel }}</a>
         </li>
         <li>
-            <a class="span-6 box" href="{{ url('user_banner_new') }}">{{ 'announcement.buy'|babel }}</a>
+            {# <a class="span-6 box" href="{{ url('user_banner_new') }}">{{ 'announcement.buy'|babel }}</a> #}
+            <span class="span-6 box">
+                {{ 'announcement.buy'|babel }}<br/>
+                <small class="quiet">W przygotowaniu</small>
+            </span>
         </li>
         <li>
-            <a class="span-4 last box" href="{{ url('user_banner_new') }}">{{ 'announcement.free.add'|babel }}</a>
+            {# <a class="span-4 last box" href="{{ url('user_banner_new') }}">{{ 'announcement.free.add'|babel }}</a> #}
+            <span class="span-4 last box">
+                {{ 'announcement.free.add'|babel }} <br/>
+                <small class="quiet">W przygotowaniu</small>
+            </span>
         </li>
     </ul>
 {% elseif is_granted("ROLE_ADMIN") %}

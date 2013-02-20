@@ -33,7 +33,7 @@ class DatePeriodCreator
         $maxDate = max($dates);
         $currentMaxDate = clone $maxDate;
         $currentMaxDate->add($interval);
-        $dates[] = $currentMaxDate;
+        //$dates[] = $currentMaxDate;
         $this->dates = array_values($dates);
         $this->interval = $interval;
     }
