@@ -24,6 +24,8 @@ class SessionFlushListener implements EventSubscriberInterface
 
     public function saveSession()
     {
-        $this->session->save();
+        if ($this->session->isStarted()) {
+            $this->session->save();
+        }
     }
 }
