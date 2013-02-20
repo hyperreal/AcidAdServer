@@ -296,7 +296,10 @@ class UserBannerController extends Controller
         $numOfDays = 0;
 
         foreach ($periods as $period) {
-            $numOfDays += $period->getStart()->diff($period->getEnd())->days;
+            $end = clone $period->getEnd();
+            $end->add(new \DateInterval('P1D'));
+
+            $numOfDays += $period->getStart()->diff($end)->days;
         }
 
         return $numOfDays;
