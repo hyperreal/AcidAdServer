@@ -19,7 +19,7 @@ class DatePeriodCreatorTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Hyper\AdsBundle\Helper\DatePeriod', $periods[1]);
 
         $this->assertEquals('2013-03-01', $periods[0]->getStart()->format('Y-m-d'));
-        $this->assertEquals('2013-03-15', $periods[0]->getEnd()->format('Y-m-d'));
+        $this->assertEquals('2013-03-16', $periods[0]->getEnd()->format('Y-m-d'));
         $this->assertEquals('2013-03-17', $periods[1]->getStart()->format('Y-m-d'));
         $this->assertEquals('2013-03-31', $periods[1]->getEnd()->format('Y-m-d'));
     }
@@ -40,11 +40,11 @@ class DatePeriodCreatorTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Hyper\AdsBundle\Helper\DatePeriod', $periods[3]);
 
         $this->assertEquals('2013-03-01', $periods[0]->getStart()->format('Y-m-d'));
-        $this->assertEquals('2013-03-09', $periods[0]->getEnd()->format('Y-m-d'));
+        $this->assertEquals('2013-03-10', $periods[0]->getEnd()->format('Y-m-d'));
         $this->assertEquals('2013-03-11', $periods[1]->getStart()->format('Y-m-d'));
-        $this->assertEquals('2013-03-14', $periods[1]->getEnd()->format('Y-m-d'));
+        $this->assertEquals('2013-03-15', $periods[1]->getEnd()->format('Y-m-d'));
         $this->assertEquals('2013-03-16', $periods[2]->getStart()->format('Y-m-d'));
-        $this->assertEquals('2013-03-19', $periods[2]->getEnd()->format('Y-m-d'));
+        $this->assertEquals('2013-03-20', $periods[2]->getEnd()->format('Y-m-d'));
         $this->assertEquals('2013-03-23', $periods[3]->getStart()->format('Y-m-d'));
         $this->assertEquals('2013-03-31', $periods[3]->getEnd()->format('Y-m-d'));
     }

@@ -66,7 +66,7 @@ class DatePeriodCreator
             $nextDateByInterval->add($this->interval);
             $nextInArray = $this->dates[$i + 1];
             if ($nextInArray->format('Y-m-d') != $nextDateByInterval->format('Y-m-d')) {
-                $lasts[] = $this->dates[$i];
+                $lasts[] = $nextDateByInterval;
                 $firsts[] = $nextInArray;
             }
         }
