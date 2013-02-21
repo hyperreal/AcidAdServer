@@ -57,7 +57,7 @@ class AnnouncementRepository extends EntityRepository
              JOIN pi.payments p
              WHERE bzr.zone = ?1
                 AND (
-                    b.fixedByAdmin
+                    b.fixedByAdmin = 1
                     OR
                     (o.paymentFrom <= ?2 AND o.paymentTo >= ?2 AND p.depositedAmount = pi.amount AND o.status = ?3)
                 )'
