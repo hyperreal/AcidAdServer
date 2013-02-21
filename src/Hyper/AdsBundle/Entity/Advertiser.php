@@ -17,7 +17,7 @@ use FOS\UserBundle\Entity\User as BaseUser;
  */
 class Advertiser extends BaseUser
 {
-    const DEFAULT_CURRENCY = 'GBP';
+    const DEFAULT_CURRENCY = 'EUR';
 
     /**
      * @ORM\Id
