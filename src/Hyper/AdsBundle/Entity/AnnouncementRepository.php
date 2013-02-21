@@ -52,9 +52,9 @@ class AnnouncementRepository extends EntityRepository
             'SELECT b, bzr
              FROM Hyper\AdsBundle\Entity\Banner b
              JOIN b.zones bzr
-             JOIN bzr.orders o
-             JOIN o.paymentInstruction pi
-             JOIN pi.payments p
+             LEFT JOIN bzr.orders o
+             LEFT JOIN o.paymentInstruction pi
+             LEFT JOIN pi.payments p
              WHERE bzr.zone = ?1
                 AND (
                     bzr.fixedByAdmin = 1
