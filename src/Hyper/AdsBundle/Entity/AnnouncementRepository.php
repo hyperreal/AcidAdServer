@@ -59,7 +59,13 @@ class AnnouncementRepository extends EntityRepository
                 AND (
                     bzr.fixedByAdmin = 1
                     OR
-                    (o.paymentFrom <= ?2 AND o.paymentTo >= ?2 AND p.depositedAmount = pi.amount AND o.status = ?3)
+                    (
+                      bzr.active = 1
+                          AND o.paymentFrom <= ?2
+                          AND o.paymentTo >= ?2
+                          AND p.depositedAmount = pi.amount
+                          AND o.status = ?3
+                    )
                 )'
         );
 
