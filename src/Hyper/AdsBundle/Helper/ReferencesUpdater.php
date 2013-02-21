@@ -37,6 +37,8 @@ class ReferencesUpdater
      */
     private $currentReferencesIds = array();
 
+    private $adminFix;
+
     /**
      * @var array
      */
@@ -53,6 +55,11 @@ class ReferencesUpdater
     public function setZone(Zone $zone)
     {
         $this->zone = $zone;
+    }
+
+    public function setAdminFix($fix)
+    {
+        $this->adminFix = !!$fix;
     }
 
     /**
@@ -102,7 +109,7 @@ class ReferencesUpdater
 
         $query = $this->entityManager->createQuery(
             'UPDATE Hyper\AdsBundle\Entity\BannerZoneReference bzr
-             SET bzr.active = 0
+             SET bzr.active = 0, bzr.fixedByAdmin = 0
              WHERE bzr.id IN (?1)'
         );
 
@@ -115,6 +122,8 @@ class ReferencesUpdater
         foreach ($this->banners as $banner) {
             $ref = $this->getReference($banner);
             $ref->setProbability($this->probabilities[$banner->getId()]);
+            $ref->setActive(true);
+            $ref->setFixedByAdmin(true);
             $this->persistReference($ref);
             $this->newReferencesIds[] = $ref->getId();
         }

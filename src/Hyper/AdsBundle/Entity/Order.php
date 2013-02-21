@@ -99,9 +99,15 @@ class Order implements OrderInterface
      */
     private $paymentUrl;
 
+    /**
+     * @ORM\Column(type="datetime", name="creation_date")
+     */
+    private $creationDate;
+
     public function __construct()
     {
         $this->status = 0;
+        $this->creationDate = new \DateTime();
     }
 
     public function getId()
@@ -221,6 +227,19 @@ class Order implements OrderInterface
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    public function setCreationDate(\DateTime $creationDate)
+    {
+        $this->creationDate = $creationDate;
     }
 
     public function approve()

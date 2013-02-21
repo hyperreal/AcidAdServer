@@ -215,6 +215,18 @@ class Banner extends Announcement
         return BannerType::getValidTypes();
     }
 
+    public function getActiveZonesCount()
+    {
+        return count(
+            array_filter(
+                $this->zones->toArray(),
+                function (BannerZoneReference $ref) {
+                    return $ref->getActive();
+                }
+            )
+        );
+    }
+
     /**
      * @param $zoneId
      *
