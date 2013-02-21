@@ -77,6 +77,7 @@ class BannerZoneReference
     public function __construct()
     {
         $this->payModel = PayModelType::PAY_MODEL_DAILY;
+        $this->fixedByAdmin = false;
     }
 
     public function setId($id)
