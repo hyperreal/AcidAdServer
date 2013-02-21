@@ -6,6 +6,7 @@
 
 namespace Hyper\AdsBundle\Entity;
 
+use Hyper\AdsBundle\DBAL\PayModelType;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -67,6 +68,16 @@ class BannerZoneReference
      * @ORM\Column(type="smallint", nullable=false)
      */
     protected $active = 1;
+
+    /**
+     * @ORM\Column(type="boolean", name="admin_fixed")
+     */
+    private $fixedByAdmin;
+
+    public function __construct()
+    {
+        $this->payModel = PayModelType::PAY_MODEL_DAILY;
+    }
 
     public function setId($id)
     {
@@ -166,4 +177,15 @@ class BannerZoneReference
     {
         $this->payModel = $payModel;
     }
+
+    public function isFixedByAdmin()
+    {
+        return $this->fixedByAdmin;
+    }
+
+    public function setFixedByAdmin($fixedByAdmin)
+    {
+        $this->fixedByAdmin = !!$fixedByAdmin;
+    }
+
 }

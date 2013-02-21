@@ -23,7 +23,7 @@
         <td>{{ banner.id }}</td>
         <td>{{ banner.title }}</td>
         <td>
-            {{ banner.zones|length }}
+            {{ banner.getActiveZonesCount() }}
             <br /><a href="{{ url('user_banner_zones', {'banner': banner.id }) }}">{{ 'check.zones'|babel }}</a>
         </td>
         <td>
