@@ -55,7 +55,7 @@ class AnnouncementRepository extends EntityRepository
              LEFT JOIN bzr.orders o
              LEFT JOIN o.paymentInstruction pi
              LEFT JOIN pi.payments p
-             WHERE bzr.zone = ?1 AND bzr,fixedByAdmin != ?4
+             WHERE bzr.zone = ?1 AND bzr.fixedByAdmin != ?4
                 AND (
                     bzr.fixedByAdmin = ?5
                     OR
