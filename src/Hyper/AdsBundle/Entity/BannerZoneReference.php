@@ -70,7 +70,7 @@ class BannerZoneReference
     /**
      * @ORM\Column(type="smallint", nullable=false)
      */
-    protected $active = 1;
+    protected $active = 0;
 
     /**
      * @ORM\Column(type="smallint", name="admin_fixed")
