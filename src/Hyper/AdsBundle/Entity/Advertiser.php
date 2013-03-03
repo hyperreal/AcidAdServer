@@ -39,7 +39,7 @@ class Advertiser extends BaseUser
     /**
      * @var \Hyper\AdsBundle\Entity\Announcement[]
      *
-     * @ORM\OneToMany(targetEntity="Announcement", mappedBy="advertiser")
+     * @ORM\OneToMany(targetEntity="Announcement", mappedBy="advertiser", cascade={"persist", "remove"})
      */
     protected $announcements;
 
