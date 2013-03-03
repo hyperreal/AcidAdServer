@@ -40,7 +40,7 @@ class BannerZoneReference
     protected $zone;
 
     /**
-     * @ORM\OneToMany(targetEntity="Order", mappedBy="bannerZone")
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="bannerZone", cascade={"persist", "remove"})
      * @var Order[]
      */
     protected $orders;

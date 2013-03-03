@@ -41,7 +41,7 @@ class Zone
     private $name;
 
     /**
-     * @OneToMany(targetEntity="BannerZoneReference", mappedBy="zone")
+     * @OneToMany(targetEntity="BannerZoneReference", mappedBy="zone", cascade={"persist", "remove"})
      * @var \Doctrine\Common\Collections\ArrayCollection
      */
     private $banners;

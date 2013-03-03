@@ -82,7 +82,7 @@ class Banner extends Announcement
     protected $originalFileName;
 
     /**
-     * @OneToMany(targetEntity="BannerZoneReference", mappedBy="banner")
+     * @OneToMany(targetEntity="BannerZoneReference", mappedBy="banner", cascade={"persist", "remove"})
      *
      * @var \Doctrine\Common\Collections\ArrayCollection
      */

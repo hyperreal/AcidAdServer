@@ -59,7 +59,7 @@ class Announcement
     protected $paidTo;
 
     /**
-     * @ORM\OneToMany(targetEntity="Order", mappedBy="announcement")
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="announcement", cascade={"persist", "remove"})
      */
     protected $orders;
 
