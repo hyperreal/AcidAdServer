@@ -16,6 +16,9 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class BannerZoneReference
 {
+    const FIXED_BY_ADMIN_NEVER = 0;
+    const FIXED_BY_ADMIN_ALWAYS = 1;
+    const FIXED_BY_ADMIN_USER_DECIDES = 2;
 
     /**
      * @ORM\Id
@@ -70,7 +73,7 @@ class BannerZoneReference
     protected $active = 1;
 
     /**
-     * @ORM\Column(type="boolean", name="admin_fixed")
+     * @ORM\Column(type="smallint", name="admin_fixed")
      */
     private $fixedByAdmin;
 
@@ -179,14 +182,27 @@ class BannerZoneReference
         $this->payModel = $payModel;
     }
 
-    public function isFixedByAdmin()
+    public function getFixedByAdmin()
     {
         return $this->fixedByAdmin;
     }
 
     public function setFixedByAdmin($fixedByAdmin)
     {
-        $this->fixedByAdmin = !!$fixedByAdmin;
+        if (!in_array($fixedByAdmin, self::getValidFixedByAdminSpecifications())) {
+            throw new \InvalidArgumentException('Invalid specification');
+        }
+
+        $this->fixedByAdmin = $fixedByAdmin;
+    }
+
+    public static function getValidFixedByAdminSpecifications()
+    {
+        return array(
+            self::FIXED_BY_ADMIN_ALWAYS,
+            self::FIXED_BY_ADMIN_NEVER,
+            self::FIXED_BY_ADMIN_USER_DECIDES,
+        );
     }
 
 }

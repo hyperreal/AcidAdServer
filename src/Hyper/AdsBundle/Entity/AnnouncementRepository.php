@@ -55,9 +55,9 @@ class AnnouncementRepository extends EntityRepository
              LEFT JOIN bzr.orders o
              LEFT JOIN o.paymentInstruction pi
              LEFT JOIN pi.payments p
-             WHERE bzr.zone = ?1
+             WHERE bzr.zone = ?1 AND bzr,fixedByAdmin != ?4
                 AND (
-                    bzr.fixedByAdmin = 1
+                    bzr.fixedByAdmin = ?5
                     OR
                     (
                       bzr.active = 1
@@ -72,6 +72,9 @@ class AnnouncementRepository extends EntityRepository
         $query->setParameter(1, $zone);
         $query->setParameter(2, new \DateTime());
         $query->setParameter(3, Order::STATUS_FINISHED);
+        $query->setParameter(4, BannerZoneReference::FIXED_BY_ADMIN_NEVER);
+        $query->setParameter(5, BannerZoneReference::FIXED_BY_ADMIN_ALWAYS);
+
 
         return $query->getResult();
     }

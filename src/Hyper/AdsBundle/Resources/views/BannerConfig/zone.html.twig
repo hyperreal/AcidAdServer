@@ -14,6 +14,7 @@
                     <th>{{ 'banner.id'|babel }}</th>
                     <th>{{ 'banner.title'|babel }}</th>
                     <th>{{ 'banner.size'|babel }}</th>
+                    <th>{{ 'activated.by.user'|babel }}</th>
                     <th>{{ 'use.in.zone'|babel }}</th>
                     <th>{{ 'probability'|babel }}</th>
                 </tr>
@@ -28,9 +29,14 @@
                         </a>
                     </td>
                     <td>{{ banner.width }}x{{ banner.height }}</td>
+                    <td>{% if banner.id in usedBannerIds and reference.active == 1 %}{{ 'active'|babel }}{% else %}{{ 'inactive'|babel }}{% endif %}</td>
                     <td>
-                        <input type="checkbox" name="newBanners[{{ banner.id }}]" value="{{ banner.id }}"
-                            {% if banner.id in usedBannerIds and reference.active == 1 %} checked="checked"{% endif %} />
+                        <label class="table" for="new-b-{{ banner.id }}-0">{{ 'user.decides'|babel|lower }}</label>
+                        <input type="radio" name="newBanners[{{ banner.id }}]" value="0" id="new-b-{{ banner.id }}-0"{% if banner.id in usedBannerIds and reference.fixedByAdmin|number_format(1) == '0.0' %} checked="checked"{% endif %} />
+                        <label class="table" for="new-b-{{ banner.id }}-1">{{ 'yes'|babel|lower }}</label>
+                        <input type="radio" name="newBanners[{{ banner.id }}]" value="1" id="new-b-{{ banner.id }}-1"{% if banner.id in usedBannerIds and reference.fixedByAdmin|number_format(1) == '1.0' %} checked="checked"{% endif %} />
+                        <label class="table" for="new-b-{{ banner.id }}-2">{{ 'no'|babel|lower }}</label>
+                        <input type="radio" name="newBanners[{{ banner.id }}]" value="2" id="new-b-{{ banner.id }}-2"{% if banner.id in usedBannerIds and reference.fixedByAdmin|number_format(1) == '2.0' %} checked="checked"{% endif %} />
                     </td>
                     <td>
                         <input type="number" name="probability[{{ banner.id }}]" size="3"

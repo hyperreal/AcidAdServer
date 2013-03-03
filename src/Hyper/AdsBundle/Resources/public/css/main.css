@@ -95,3 +95,10 @@ form div > ul {
 #tutorial tbody tr:nth-child(2n) td {
     background: #FFF;
 }
+
+table label.table {
+    float: none;
+    margin-left: 9px;
+    font-weight: normal;
+    padding: 0;
+}
