@@ -16,9 +16,9 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class BannerZoneReference
 {
-    const FIXED_BY_ADMIN_NEVER = 0;
+    const FIXED_BY_ADMIN_NEVER = 2;
     const FIXED_BY_ADMIN_ALWAYS = 1;
-    const FIXED_BY_ADMIN_USER_DECIDES = 2;
+    const FIXED_BY_ADMIN_USER_DECIDES = 0;
 
     /**
      * @ORM\Id
