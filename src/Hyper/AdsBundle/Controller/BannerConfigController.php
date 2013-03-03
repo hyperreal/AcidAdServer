@@ -64,11 +64,15 @@ class BannerConfigController extends Controller
      */
     public function saveAction(Request $request)
     {
-        $newBannerIds   = $request->get('newBanners');
-        $probabilities  = $request->get('probability');
-        $zoneId         = $request->get('zoneId');
+        $fixedByAdminSpec = $request->get('newBanners');
+        $probabilities = $request->get('probability');
+        $zoneId = $request->get('zoneId');
 
-        if (!is_array($newBannerIds)) {
+        if (empty($fixedByAdminSpec)) {
+            $fixedByAdminSpec = array();
+        }
+
+        if (!is_array($fixedByAdminSpec)) {
             throw new \Exception('invalid banner ID\'s');
         }
 
@@ -85,14 +89,21 @@ class BannerConfigController extends Controller
             throw $this->createNotFoundException($this->trans('zone.not.exists'));
         }
 
+        $banners = array();
+
         /** @var $banners \Hyper\AdsBundle\Entity\Banner[] */
-        $banners = $bannersRepository->findBy(array('id' => $newBannerIds));
+        if (!empty($fixedByAdminSpec)) {
+            $banners = $bannersRepository->findBy(array('id' => array_keys($fixedByAdminSpec)));
+        }
 
         $referenceUpdater = new ReferencesUpdater($em);
         $referenceUpdater->setZone($zone);
         $referenceUpdater->setProbabilities($probabilities);
         $referenceUpdater->setBanners($banners);
+        $referenceUpdater->setFixedByAdminSpecification($fixedByAdminSpec);
         $referenceUpdater->updateReferences();
+
+        $this->get('session')->setFlash('success', $this->trans('banners.configs.are.saved'));
 
         return $this->redirect($this->generateUrl('admin_zone_show', array('id' => $zoneId)));
     }
