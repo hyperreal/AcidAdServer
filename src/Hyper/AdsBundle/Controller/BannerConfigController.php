@@ -32,7 +32,7 @@ class BannerConfigController extends Controller
 
         /** @var $bannerZoneRepository \Hyper\AdsBundle\Entity\BannerZoneReferenceRepository */
         $bannerZoneRepository   = $em->getRepository('HyperAdsBundle:BannerZoneReference');
-        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AnnouncementRepository */
+        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AdvertisementRepository */
         $bannerRepository       = $em->getRepository('HyperAdsBundle:Banner');
         $zoneRepository         = $em->getRepository('HyperAdsBundle:Zone');
 
@@ -80,7 +80,7 @@ class BannerConfigController extends Controller
         $em = $this->get('doctrine.orm.entity_manager');
 
         $zonesRepository        = $em->getRepository('HyperAdsBundle:Zone');
-        /** @var $bannersRepository \Hyper\AdsBundle\Entity\AnnouncementRepository */
+        /** @var $bannersRepository \Hyper\AdsBundle\Entity\AdvertisementRepository */
         $bannersRepository      = $em->getRepository('HyperAdsBundle:Banner');
 
         /** @var $zone \Hyper\AdsBundle\Entity\Zone */

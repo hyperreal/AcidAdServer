@@ -15,7 +15,7 @@ use JMS\Payment\CoreBundle\Model\FinancialTransactionInterface;
 use Wikp\PaymentMtgoxBundle\Plugin\MtgoxPaymentPlugin;
 use Wikp\PaymentMtgoxBundle\Entity\Currency;
 use Wikp\PaymentMtgoxBundle\Mtgox\RequestType\MtgoxTransactionUrlRequest;
-use Hyper\AdsBundle\Entity\Announcement;
+use Hyper\AdsBundle\Entity\Advertisement;
 use Hyper\AdsBundle\DBAL\PayModelType;
 use Hyper\AdsBundle\Entity\Banner;
 use Hyper\AdsBundle\Entity\BannerZoneReference;
@@ -91,7 +91,7 @@ class UserBannerController extends Controller
         $this->accessDeniedWhenInvalidUser();
 
         $em = $this->getDoctrine()->getManager();
-        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AnnouncementRepository */
+        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AdvertisementRepository */
         $bannerRepository = $em->getRepository('HyperAdsBundle:Banner');
         $bannerList = $bannerRepository->getBannersWithDependenciesByAdvertiser($this->getUser());
 
@@ -107,7 +107,7 @@ class UserBannerController extends Controller
     public function zonesAction(Banner $banner)
     {
         $this->accessDeniedWhenInvalidUser($banner);
-        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AnnouncementRepository */
+        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AdvertisementRepository */
         $bannerRepository = $this->getDoctrine()->getManager()->getRepository('HyperAdsBundle:Banner');
 
         $possibleZones = $bannerRepository->getPossibleZonesForBanner($banner);
@@ -126,7 +126,7 @@ class UserBannerController extends Controller
     public function zonesSaveAction(Request $request, $banner)
     {
         $em = $this->getDoctrine()->getManager();
-        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AnnouncementRepository */
+        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AdvertisementRepository */
         $bannerRepository = $em->getRepository('HyperAdsBundle:Banner');
         $banner = $bannerRepository->getBannerWithDependenciesById($banner);
 
@@ -177,7 +177,7 @@ class UserBannerController extends Controller
     public function payInZoneAction($bannerId, $zoneId)
     {
         $em = $this->getDoctrine()->getManager();
-        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AnnouncementRepository */
+        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AdvertisementRepository */
         $bannerRepository = $em->getRepository('HyperAdsBundle:Banner');
 
         $banner = $bannerRepository->getBannerWithDependenciesById($bannerId);
@@ -326,7 +326,7 @@ class UserBannerController extends Controller
     public function payInZoneSaveAction(Request $request, $bannerId, $zoneId)
     {
         $em = $this->getDoctrine()->getManager();
-        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AnnouncementRepository */
+        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AdvertisementRepository */
         $bannerRepository = $em->getRepository('HyperAdsBundle:Banner');
 
         $banner = $bannerRepository->getBannerWithDependenciesById($bannerId);
@@ -630,8 +630,8 @@ class UserBannerController extends Controller
      */
     public function paymentsAction($bannerId = null)
     {
-        /** @var $announcementRepository \Hyper\AdsBundle\Entity\AnnouncementRepository */
-        $announcementRepository = $this->getDoctrine()->getManager()->getRepository('HyperAdsBundle:Announcement');
+        /** @var $announcementRepository \Hyper\AdsBundle\Entity\AdvertisementRepository */
+        $announcementRepository = $this->getDoctrine()->getManager()->getRepository('HyperAdsBundle:Advertisement');
 
         try {
             $banner = $announcementRepository->getBannerWithDependenciesById($bannerId);
@@ -653,7 +653,7 @@ class UserBannerController extends Controller
             ->getForm();
     }
 
-    private function accessDeniedWhenInvalidUser(Announcement $announcement = null)
+    private function accessDeniedWhenInvalidUser(Advertisement $announcement = null)
     {
         /** @var $user \Hyper\AdsBundle\Entity\Advertiser */
         $user = $this->getUser();
@@ -662,7 +662,7 @@ class UserBannerController extends Controller
         }
 
         if (null !== $announcement && !$user->hasRole('ROLE_ADMIN') && $announcement->getAdvertiser() != $user) {
-            throw new AccessDeniedException("You can edit only your own announcements when you don't have admin privileges");
+            throw new AccessDeniedException("You can edit only your own advertisements when you don't have admin privileges");
         }
     }
 }

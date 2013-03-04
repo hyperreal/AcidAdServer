@@ -5,7 +5,7 @@ namespace Hyper\AdsBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 use Hyper\AdsBundle\Entity\Order;
 
-class AnnouncementRepository extends EntityRepository
+class AdvertisementRepository extends EntityRepository
 {
     /**
      * @param $id
@@ -172,4 +172,18 @@ class AnnouncementRepository extends EntityRepository
         return $query->getResult();
     }
 
+
+    public function getAnnouncementsForUser(Advertiser $advertiser)
+    {
+        $query = $this->getEntityManager()->createQuery(
+            'SELECT a, o
+            FROM Hyper\AdsBundle\Entity\Announcement a
+            LEFT JOIN a.orders o
+            WHERE a.advertiser = ?1'
+        );
+
+        $query->setParameter(1, $advertiser);
+
+        return $query->getResult();
+    }
 }

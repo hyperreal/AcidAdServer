@@ -92,7 +92,7 @@ form div > ul {
     padding: 0;
 }
 
-#tutorial tbody tr:nth-child(2n) td {
+#tutorial tbody tr:nth-child(2n) td, .cke_dialog_contents tbody tr:nth-child(2n) td {
     background: #FFF;
 }
 
