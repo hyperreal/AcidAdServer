@@ -37,11 +37,11 @@ class Advertiser extends BaseUser
     protected $lastName;
 
     /**
-     * @var \Hyper\AdsBundle\Entity\Announcement[]
+     * @var \Hyper\AdsBundle\Entity\Advertisement[]
      *
-     * @ORM\OneToMany(targetEntity="Announcement", mappedBy="advertiser", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Advertisement", mappedBy="advertiser", cascade={"persist", "remove"})
      */
-    protected $announcements;
+    protected $advertisements;
 
     /**
      * @ORM\ManyToOne(targetEntity="Wikp\PaymentMtgoxBundle\Entity\Currency")
@@ -52,7 +52,7 @@ class Advertiser extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        $this->announcements = new ArrayCollection();
+        $this->advertisements = new ArrayCollection();
     }
 
     public function setId($id)
@@ -97,22 +97,22 @@ class Advertiser extends BaseUser
 
     public function getBanners()
     {
-        return $this->announcements;
+        return $this->advertisements;
     }
 
-    public function addBanner(Announcement $announcement)
+    public function addBanner(Advertisement $announcement)
     {
-        $this->announcements->add($announcement);
+        $this->advertisements->add($announcement);
     }
 
-    public function getAnnouncements()
+    public function getAdvertisements()
     {
-        return $this->announcements;
+        return $this->advertisements;
     }
 
-    public function addAnnouncement(Announcement $announcement)
+    public function addAdvertisement(Advertisement $announcement)
     {
-        $this->announcements->add($announcement);
+        $this->advertisements->add($announcement);
     }
 
     public function getDefaultCurrency($default = self::DEFAULT_CURRENCY)

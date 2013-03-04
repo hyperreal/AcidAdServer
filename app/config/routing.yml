@@ -64,6 +64,11 @@ user_banner:
     prefix: /user/banner
     type: annotation
 
+user_announcement:
+    resource: "@HyperAdsBundle/Controller/UserAnnouncementController.php"
+    prefix: /user/announcement
+    type: annotation
+
 payments:
     resource: "@HyperAdsBundle/Controller/PaymentsController.php"
     prefix: /payments

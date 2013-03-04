@@ -91,6 +91,28 @@ swiftmailer:
     password:  %mailer_password%
     spool:     { type: memory }
 
+trsteel_ckeditor:
+    class: Trsteel\CkeditorBundle\Form\Type\CkeditorType
+    transformers: ['strip_js', 'strip_css', 'strip_comments']
+    toolbar: ['basicstyles', 'clipboard', 'paragraph', 'links', 'insert', 'tools']
+    toolbar_groups:
+        clipboard: ['PasteText','PasteFromWord','-','Undo','Redo']
+        basicstyles: ['Bold','Italic','Underline','Strike','Subscript','Superscript', 'TextColor']
+        paragraph: ['NumberedList','BulletedList','Outdent','Indent']
+        links: ['Link','Unlink']
+        insert: ['Image','Table']
+        tools: ['Source', '-', 'Maximize']
+    ui_color: '#FFFFFF'
+    startup_outline_blocks: true
+    width: 800
+    height: 400
+    language: %locale%
+    external_plugins:
+        colorbutton:
+            path: components/ckeditor-colorbutton
+        panelbutton:
+            path: components/ckeditor-panelbutton
+
 services:
     application_cache:
         class: Doctrine\Common\Cache\MemcacheCache
