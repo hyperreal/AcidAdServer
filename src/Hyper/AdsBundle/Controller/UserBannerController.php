@@ -201,7 +201,7 @@ class UserBannerController extends Controller
 
         $order->setBannerZoneReference($reference);
 
-        $paymentFormType = new PaymentType();
+        $paymentFormType = $this->get('hyper_ads.payment_form_type');
         $paidTo = $banner->getPaidToInZone($zone);
         if (!empty($paidTo)) {
             $paymentFormType->setFromDate($paidTo->modify('+1 day'));
@@ -247,7 +247,6 @@ class UserBannerController extends Controller
         $invalidDaysPeriods = $calendar->getCommonDaysForZone($zone, $from, $to);
 
         $bannerZoneReference = $banner->getReferenceInZone($zone->getId());
-        $daysCalculator = new PaymentDaysCalculator($bannerZoneReference);
 
         $days = $from->diff($to)->days;
 
@@ -321,7 +320,7 @@ class UserBannerController extends Controller
     /**
      * @Route("/{bannerId}/zone/{zoneId}/pay/save", name="user_banner_pay_in_zone_save")
      * @Method("POST")
-     * @Template()
+     * @Template("HyperAdsBundle:UserBanner:payInZone.html.twig")
      */
     public function payInZoneSaveAction(Request $request, $bannerId, $zoneId)
     {
@@ -352,7 +351,7 @@ class UserBannerController extends Controller
             $order->setBannerZoneReference($bannerZoneReference);
         }
 
-        $form = $this->createForm(new PaymentType(), $order);
+        $form = $this->createForm($this->get('hyper_ads.payment_form_type'), $order);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -420,6 +419,10 @@ class UserBannerController extends Controller
                 return $this->redirect($url);
             }
 
+            //what is going on?
+            $this->get('hyper_ads.payments_logger')
+                ->warn('what is going on? instruction has not state PENDING but' . $instruction->getState());
+
             $em->flush();
 
             return array(
@@ -429,13 +432,10 @@ class UserBannerController extends Controller
             );
         }
 
-        return $this->renderView(
-            'HyperAdsBundle:UserBanner:payInZone.html.twig',
-            array(
-                'banner' => $banner,
-                'zone' => $zone,
-                'form' => $form->createView()
-            )
+        return array(
+            'banner' => $banner,
+            'zone' => $zone,
+            'form' => $form->createView()
         );
     }
 

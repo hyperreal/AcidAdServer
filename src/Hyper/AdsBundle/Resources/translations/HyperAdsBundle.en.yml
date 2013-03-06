@@ -114,3 +114,4 @@ check.zones: 'Activation in zones'
 tutorial: Guide
 extend.the.payment: 'Extend the payment'
 payment.instruction.not.found: 'Payment instruction not found'
+max.days.error: 'You could only buy banner for %maxDays%'
