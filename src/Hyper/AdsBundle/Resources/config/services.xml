@@ -32,6 +32,12 @@
             <argument>%fos_user.model.user.class%</argument>
         </service>
 
+        <service id="hyper_ads.payment_form_type" class="Hyper\AdsBundle\Form\PaymentType">
+            <tag name="form.type" alias="hyper_payment_form" />
+            <argument>%max_one_banner_days%</argument>
+            <argument type="service" id="translator" />
+        </service>
+
         <service id="hyper_ads.banner_zone_calendar" class="Hyper\AdsBundle\Helper\BannerZoneCalendar">
             <argument type="service" id="application_cache" />
             <argument type="service" id="doctrine.orm.entity_manager" />
@@ -42,8 +48,18 @@
             <argument type="service" id="session" />
         </service>
 
+        <service id="hyper_ads.payments_logger" class="Symfony\Bridge\Monolog\Logger">
+            <argument>pay</argument>
+            <call method="pushHandler">
+                <argument type="service" id="hyper_ads.payments_logger.handler" />
+            </call>
+        </service>
+
+        <service id="hyper_ads.payments_logger.handler" class="Monolog\Handler\StreamHandler">
+            <argument>%kernel.logs_dir%/%kernel.environment%.payments.log</argument>
+            <argument>200</argument>
+        </service>
+
     </services>
-
-
 
 </container>

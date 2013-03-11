@@ -32,7 +32,7 @@
                     <td>{% if banner.id in usedBannerIds and reference.active == 1 %}{{ 'active'|babel }}{% else %}{{ 'inactive'|babel }}{% endif %}</td>
                     <td>
                         <label class="table" for="new-b-{{ banner.id }}-0">{{ 'user.decides'|babel|lower }}</label>
-                        <input type="radio" name="newBanners[{{ banner.id }}]" value="0" id="new-b-{{ banner.id }}-0"{% if banner.id in usedBannerIds and reference.fixedByAdmin|number_format(1) == '0.0' %} checked="checked"{% endif %} />
+                        <input type="radio" name="newBanners[{{ banner.id }}]" value="0" id="new-b-{{ banner.id }}-0"{% if (banner.id in usedBannerIds and reference.fixedByAdmin|number_format(1) == '0.0') or banner.id not in usedBannerIds %} checked="checked"{% endif %} />
                         <label class="table" for="new-b-{{ banner.id }}-1">{{ 'always'|babel|lower }}</label>
                         <input type="radio" name="newBanners[{{ banner.id }}]" value="1" id="new-b-{{ banner.id }}-1"{% if banner.id in usedBannerIds and reference.fixedByAdmin|number_format(1) == '1.0' %} checked="checked"{% endif %} />
                         <label class="table" for="new-b-{{ banner.id }}-2">{{ 'never'|babel|lower }}</label>
