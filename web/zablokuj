@@ -1,0 +1,3 @@
+#!/bin/sh
+rm -f error503.html
+ln -s error503.html. error503.html
