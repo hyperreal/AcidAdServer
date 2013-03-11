@@ -33,4 +33,4 @@ parameters:
     application_memcache_port: 11211
     application_memcache_prefix: "acid_"
 
-
+    max_one_banner_days: 365
