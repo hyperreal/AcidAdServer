@@ -73,10 +73,6 @@ dependencies:
 
     bower install
 
-Alternatively you can run below command, but `bower` is prefered.
-
-    ./bin/install-asset-deps
-
 # Development
 
 Acid is based on Symfony2 but does not utilize Assetic. We prefer Grunt so if you want to develop some UI-related tasks
