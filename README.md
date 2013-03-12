@@ -1,5 +1,4 @@
-...work in progress... **please don't use on production environments** because huge changes will be made in workflow of
-adding and managing advertisements and banners.
+There are still work to do with Acid. Please use carefully.
 
 # AcidAdServer
 
@@ -8,12 +7,11 @@ AcidAdServer is ad serving web application based on Symfony 2 framework.
 With Acid you can:
 
  * Manage banners and advertisements of your customers
- * Allow users to manage their banners and advertisements (**work in progress**)
- * Pay for banners in Bitcoins (**work in progress**)
+ * Allow users to manage their banners and advertisements
+ * Pay for banners in Bitcoins (via MtGox)
  * Create zones in your sites' profiles (`zone` is a place on your site, where you probably want to put some banner(s))
  * Upload banners like images and swf's
  * Assign banners to zones (one banner can be assigned to multiple zones and one zone can contain multiple banners)
- * View statistics of clicks and views of your banners
 
 If you have questions, feel free to e-mail me at *fajka at hyperreal dot info*
 
@@ -78,3 +76,10 @@ dependencies:
 Alternatively you can run below command, but `bower` is prefered.
 
     ./bin/install-asset-deps
+
+# Development
+
+Acid is based on Symfony2 but does not utilize Assetic. We prefer Grunt so if you want to develop some UI-related tasks
+install `nodejs` (we recommend source distribution and `./configure && make && sudo make install`), `grunt-cli`
+(`npm install grunt-cli -g`) and in project's root perform `npm install`. Next you can edit bundle's stylesheet(s) in
+LESS format and with `grunt watch` command check results immediately.
