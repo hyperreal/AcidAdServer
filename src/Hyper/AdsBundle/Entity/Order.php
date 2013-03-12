@@ -4,7 +4,7 @@ namespace Hyper\AdsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
+use JMS\Payment\CoreBundle\Model\PaymentInstructionInterface;
 use Hyper\AdsBundle\Entity\Advertisement;
 use Wikp\PaymentMtgoxBundle\Plugin\OrderInterface;
 
@@ -123,7 +123,7 @@ class Order implements OrderInterface
         return $this->paymentInstruction;
     }
 
-    public function setPaymentInstruction(PaymentInstruction $paymentInstruction)
+    public function setPaymentInstruction(PaymentInstructionInterface $paymentInstruction)
     {
         $this->paymentInstruction = $paymentInstruction;
     }
