@@ -1,7 +1,9 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}, 'FOSUserBundle') }}</p>
+    <div class="success">
+        {{ 'registration.confirmed'|trans({'%username%': user.username}, 'FOSUserBundle') }}
+    </div>
     {% if app.session is not empty %}
         {% set targetUrl = app.session.get('_security.target_path') %}
         {% if targetUrl is not empty %}<p><a href="{{ targetUrl }}">{{ 'registration.back'|trans({}, 'FOSUserBundle') }}</a></p>{% endif %}

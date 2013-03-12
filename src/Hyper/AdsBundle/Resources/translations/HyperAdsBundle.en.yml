@@ -1,71 +1,117 @@
-edit.advertiser: "Edit advertiser advertiserName"
-__edit: Edit
-back.to.the.list: Back to the list
-__delete: Delete
-new.advertiser: "New advertiser"
-create: Create
-show.advertiser: "Advertiser advertiserName"
+edit.advertiser: 'Edit advertiser advertiserName'
+edit: Edit
+back.to.the.list: 'Back to the list'
+delete: Delete
+list.advertiser: 'List of advertisers'
 id: ID
 name: Name
 email: Email
+actions: Actions
+show: Show
+no.entities: 'No records found'
+create.new.entry: 'Create new'
+new.advertiser: 'New advertiser'
+create: Create
+show.advertiser: 'Advertiser advertiserName'
 firstname: Firstname
 lastname: Lastname
-__show: Show
-list.advertiser: "List of advertisers"
-actions: Actions
-no.entities: "No records found"
-create.new.entry: "Create new"
-edit.banner: "Edit banner"
-new.banner: "New banner"
-show.banner: "Banner"
+edit.banner: 'Edit banner'
+list.banner: 'List of banners'
 file: File
 extension: Extension
 width: Width
 height: Height
 type: Type
+new.banner: 'New banner'
+show.banner: Banner
 title: Title
-linktitle: Link text
+linktitle: 'Link text'
 url: URL
 description: Description
-list.banner: "List of banners"
-__welcome: "Welcome to AcidAdServer"
-edit.zone: "Edit zone zoneName"
-new.zone: "New zone"
-show.zone: "Zone zoneName"
-max.width: "Max. width"
-max.height: "Max. height"
-list.zone: "List of zones"
-enabled: Enabled
-date.start: "Start date"
-date.expire: "Expire date"
-edit.page: "Edit page pageName"
-new.page: "New page"
-show.page: "Page pageName"
-list.page: "List of pages"
-powered.by.acid: 'Powered by AcidAdServer'
-advertisers: "Advertisers"
-pages: Pages
-__banners: Banners
-__zones: Zones
-__advertisers: Advertisers
-__pages: Pages
-zone.not.exists: "Zone not exists"
-edit.banners.in.zone: "Banners in zone zoneName"
-zones.associated.with.banner: "Zones associated with bannerName"
-zone.name: "Zone zoneName"
-add.banner.to.zone: "Add banner to zone"
-page: Page
-save: Save
-banner.id: Banner ID
-banner.title: "Banner title"
-banner.size: "Banner size"
-use.in.zone: "Use in zone?"
+edit.banners.in.zone: 'Banners in zone zoneName'
+zone.name: 'Zone zoneName'
+banner.id: 'Banner ID'
+banner.title: 'Banner title'
+banner.size: 'Banner size'
+use.in.zone: 'Use in zone?'
 probability: Probability
-show.banners: "Show banners"
-mail.expiring.subject: "Mail subject"
-mail.expiring.content: "Mail content"
-flash.movie: "Flash movie"
-image: "Image"
-text: "Text"
-name.first: "Firstname"
-name.last: "Lastname"
+save: Save
+welcome: 'Welcome to AcidAdServer'
+banner.buy: 'Buy banner'
+announcement.buy: 'Buy announcement'
+announcement.free.add: 'Add free announcement'
+edit.page: 'Edit page pageName'
+list.page: 'List of pages'
+new.page: 'New page'
+show.page: 'Page pageName'
+your.banners: 'Your banners'
+enabled.in.zones: 'Enabled in zones'
+payments.list: 'List of payments'
+add.banner: 'Add banner'
+pay: 'Pay'
+pay.for.banner.in.zone: 'Pay for banner %banner% in zone %zone%'
+pay.for.banner: 'Pay for banner'
+pay.for.banner.in.zone.info: 'This page allows you to pay for banner %banner% in %zone% zone'
+next: 'Next'
+payments.for.announcement: 'Payments for announcement'
+order.number: 'Order number'
+date.submission: 'Submission date'
+pay.to: 'Payment to'
+pay.from: 'Payment from'
+amount: 'Amount'
+is.paid: 'Is paid?'
+zone: 'Zone'
+yes: 'Yes'
+no: 'No'
+payments.empty: 'Payments list is empty'
+zones.for.banner: 'Zones for banner'
+banner.in.zone: 'Banners in zone'
+page: Page
+paid.to: 'Paid to'
+paid.to.date: 'Paid to date'
+not.paid: 'Not paid'
+pay.banner.here: 'Pay for banner here'
+no.zones.to.add.banner: 'There are no zones where you can put this banner'
+edit.zone: 'Edit zone zoneName'
+list.zone: 'List of zones'
+enabled: Enabled
+max.width: 'Max. width'
+max.height: 'Max. height'
+show.banners: 'Show banners'
+new.zone: 'New zone'
+show.zone: 'Zone zoneName'
+date.start: 'Start date'
+date.expire: 'Expire date'
+powered.by.acid: 'Powered by AcidAdServer'
+advertisers: Advertisers
+pages: Pages
+banners: Banners
+zones: Zones
+zone.not.exists: 'Zone not exists'
+zones.associated.with.banner: 'Zones associated with bannerName'
+add.banner.to.zone: 'Add banner to zone'
+mail.expiring.subject: 'Mail subject'
+mail.expiring.content: 'Mail content'
+flash.movie: 'Flash movie'
+image: Image
+text: Text
+name.first: Firstname
+name.last: Lastname
+all.changes.saved: 'All changes have been saved'
+announcement-free.add: 'Add free text announcement'
+daily.price: 'Daily price'
+canceled.payment: 'Cancelled payment'
+payment.was.canceled: 'Order was cancelled'
+payment.info: 'Payment for order no. %orderNumber%'
+zones.info: 'Zones information'
+zones.short.info: 'Below you can find a list of active pages and zones (places where you can put your banners). Maximum dimensions of them as well as daily prices are also provided.'
+acid.ad.server: 'Acid - Ad server'
+fork.on.github: 'fork on github'
+edit.profile: 'Edit your profile'
+analytics.stats: 'Google Analytics stats'
+empty.banners.list: "Banners' list is empty"
+check.zones: 'Activation in zones'
+tutorial: Guide
+extend.the.payment: 'Extend the payment'
+payment.instruction.not.found: 'Payment instruction not found'
+max.days.error: 'You could only buy banner for %maxDays%'

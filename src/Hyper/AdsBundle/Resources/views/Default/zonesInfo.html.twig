@@ -1,0 +1,46 @@
+{% extends "::base.html.twig" %}
+{% block title %}
+{{ 'zones.info'|babel }}
+{% endblock %}
+
+{% block body %}
+<h1>{{ 'zones.info'|babel }}</h1>
+
+{% if pages|length > 0 %}
+<div class="info">
+    {{ 'zones.short.info'|babel }}
+</div>
+
+<table class="records_list">
+    <thead>
+    <tr>
+        <th>{{ 'page'|babel }}</th>
+        <th>{{ 'zone'|babel }}</th>
+        <th>{{ 'sizes'|babel }}</th>
+        <th>{{ 'daily.price'|babel }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for page in pages %}
+    <tr class="first-spanned-row{% if loop.last %} last{% endif %}{% if page.zones|length == 1 %} first{% endif %}">
+        <th class="spanned-column" rowspan="{{ page.zones|length }}">{{ page.name }}</th>
+        {% for zone in page.zones %}
+            {% if not loop.first %}
+                <tr{% if loop.last  %} class="last-zone"{% endif %}>
+            {% endif %}
+            <td>{{ zone.name }}</td>
+            <td>{{ zone.maxWidth }} x {{ zone.maxHeight }}</td>
+            <td>{{ zone.dailyPrice|number_format(2, ',', '.') }} {{ default_currency }}</td>
+        </tr>
+        {% endfor %}
+    {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<div class="notice">
+    {{ 'no.zones.active'|babel }}
+</div>
+{% endif %}
+
+{% endblock %}

@@ -5,5 +5,12 @@
 /vendor/
 composer.phar
 web/uploads/*
+web/components/*
+node_modules/
+!web/components/.gitkeep
 !web/uploads/.gitkeep
 app/config/parameters.*
+*.iml
+*.ipr
+*.iws
+*.swp

@@ -1,0 +1,59 @@
+{% extends "::base.html.twig" %}
+{% block title %}
+{{ 'payments.for.announcement'|babel({'%announcement%': announcement.title}) }}
+{% endblock %}
+{% block body %}
+<h2>{{ 'payments.for.announcement'|babel({'%announcement%': announcement.title}) }}</h2>
+
+{% if announcement.orders|length > 0 %}
+    <table class="records-list">
+        <thead>
+        <tr>
+            <th>{{ 'order.number'|babel }}</th>
+            <th>{{ 'date.submission'|babel }}</th>
+            <th>{{ 'pay.to'|babel }}</th>
+            <th>{{ 'amount'|babel }}</th>
+            <th>{{ 'is.paid'|babel }}</th>
+            <th>{{ 'zone'|babel }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in announcement.orders %}
+        <tr>
+            <td>{{ order.orderNumber }}</td>
+            <td>
+                {% if order.paymentInstruction %}
+                    {{ order.paymentInstruction.createdAt|date('d. m. Y') }}r.
+                {% else %}
+                    {{ 'payment.instruction.not.found'|babel }}
+                {% endif %}
+            </td>
+            <td>{{ order.paymentTo|date('d. m. Y') }}r.</td>
+            <td>
+                {% if order.paymentInstruction %}
+                    {{ order.amount }} {{ order.paymentInstruction.currency }}
+                {% else %}
+                    {{ 'payment.instruction.not.found'|babel }}
+                {% endif %}
+            </td>
+            <td>
+                {% if order.status == constant('Hyper\\AdsBundle\\Entity\\Order::STATUS_FINISHED') %}
+                    {{ 'yes'|babel }}
+                {% elseif order.status == constant('Hyper\\AdsBundle\\Entity\\Order::STATUS_CANCELLED') %}
+                    {{ 'cancelled'|babel }}
+                {% else %}
+                    {{ 'no'|babel }} <a class="external" href="{{ order.paymentUrl }}">{{ 'pay'|babel }}</a>
+                {% endif %}
+            </td>
+            <td>
+                <span{% if not order.bannerZoneReference.zone.enabled %} class="disabled"{% endif %}>{{ order.bannerZoneReference.zone }}</span>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <div class="notice message">{{ 'payments.empty'|babel }}</div>
+{% endif %}
+
+{% endblock %}

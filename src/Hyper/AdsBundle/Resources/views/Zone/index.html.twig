@@ -1,22 +1,22 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'list.zone'|trans({}, 'HyperAdsBundle') }}
+{{ 'list.zone'|babel }}
 {% endblock %}
 {% block body %}
-<h1>{{ 'list.zone'|trans({}, 'HyperAdsBundle') }}</h1>
+<h1>{{ 'list.zone'|babel }}</h1>
 
 {% if entities|length > 0 %}
 <table class="records_list">
     <thead>
     <tr>
-        <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
-        <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
-        <th>{{ 'page'|trans({}, 'HyperAdsBundle') }}</th>
-        <th>{{ 'enabled'|trans({}, 'HyperAdsBundle') }}</th>
-        <th>{{ 'max.width'|trans({}, 'HyperAdsBundle') }}</th>
-        <th>{{ 'max.height'|trans({}, 'HyperAdsBundle') }}</th>
-        <th>{{ 'type'|trans({}, 'HyperAdsBundle') }}</th>
-        <th>{{ 'actions'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'id'|babel }}</th>
+        <th>{{ 'name'|babel }}</th>
+        <th>{{ 'page'|babel }}</th>
+        <th>{{ 'enabled'|babel }}</th>
+        <th>{{ 'max.width'|babel }}</th>
+        <th>{{ 'max.height'|babel }}</th>
+        <th>{{ 'type'|babel }}</th>
+        <th>{{ 'actions'|babel }}</th>
     </tr>
     </thead>
     <tbody>
@@ -28,7 +28,7 @@
         <td>
             {{ entity.name }}
             <br />
-            <a href="{{ path('banner_config_zone', {'zoneId': entity.id}) }}">{{ 'show.banners'|trans({}, 'HyperAdsBundle') }}</a>
+            <a href="{{ path('banner_config_zone', {'zoneId': entity.id}) }}">{{ 'show.banners'|babel }}</a>
         </td>
         <td>{{ entity.page.name }}</td>
         <td>{{ entity.enabled }}</td>
@@ -39,12 +39,12 @@
             <ul>
                 <li>
                     <a href="{{ path('admin_zone_show', { 'id': entity.id }) }}">
-                        {{ '__show'|trans({}, 'HyperAdsBundle') }}
+                        {{ 'show'|babel }}
                     </a>
                 </li>
                 <li>
                     <a href="{{ path('admin_zone_edit', { 'id': entity.id }) }}">
-                        {{ '__edit'|trans({}, 'HyperAdsBundle') }}
+                        {{ 'edit'|babel }}
                     </a>
                 </li>
             </ul>
@@ -54,12 +54,12 @@
     </tbody>
 </table>
 {% else %}
-<div class="message">{{ 'no.entities'|trans({}, 'HyperAdsBundle') }}</div>
+<div class="message">{{ 'no.entities'|babel }}</div>
 {% endif %}
 <ul>
     <li>
         <a href="{{ path('admin_zone_new') }}">
-            {{ 'create.new.entry'|trans({}, 'HyperAdsBundle') }}
+            {{ 'create.new.entry'|babel }}
         </a>
     </li>
 </ul>

@@ -1,4 +1,4 @@
-<form action="{{ path('fos_user_group_new') }}" {{ form_enctype(form) }} method="POST" class="fos_user_group_new">
+<form action="{{ path('fos_user_group_new') }}" {{ form_enctype(form) }} method="POST" class="fos_user_group_new user-form">
     {{ form_widget(form) }}
     <div>
         <input type="submit" value="{{ 'group.new.submit'|trans([], 'FOSUserBundle') }}" />

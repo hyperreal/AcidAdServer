@@ -1,0 +1,45 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+{{ 'your.banners'|babel }}
+{% endblock %}
+
+{% block body %}
+<h1>{{ 'your.banners'|babel }}</h1>
+
+{% if banners|length > 0 %}
+<table class="records-list">
+    <thead>
+    <tr>
+        <th>{{ 'id'|babel }}</th>
+        <th>{{ 'title'|babel }}</th>
+        <th>{{ 'enabled.in.zones'|babel }}</th>
+        <th>{{ 'actions'|babel }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for banner in banners %}
+    <tr>
+        <td>{{ banner.id }}</td>
+        <td>{{ banner.title }}</td>
+        <td>
+            {{ banner.getActiveZonesCount() }}
+            <br /><a href="{{ url('user_banner_zones', {'banner': banner.id }) }}">{{ 'check.zones'|babel }}</a>
+        </td>
+        <td>
+            <a href="{{ url('user_banner_edit', {'banner': banner.id }) }}}">Edytuj</a>
+            <br /><a href="{{ url('user_banner_payments', {'bannerId': banner.id}) }}">{{ 'payments.list'|babel }}</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <div class="notice message">{{ 'empty.banners.list'|babel }}</div>
+{% endif %}
+
+<div class="additional-links">
+    <a href="{{ url('user_banner_new') }}">{{ 'add.banner'|babel }}</a>
+</div>
+
+{% endblock %}

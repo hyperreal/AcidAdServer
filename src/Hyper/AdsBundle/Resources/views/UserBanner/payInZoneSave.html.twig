@@ -1,0 +1,22 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+{{ 'pay.for.banner.in.zone'|babel({'%banner%': banner.title, '%zone%': zone}) }}
+{% endblock %}
+
+{% block body %}
+<h1>
+    {{ 'pay.for.banner'|babel({'%banner%': banner.title}) }}
+</h1>
+<div class="info">
+    {{ 'pay.for.banner.in.zone.info'|babel({'%banner%': banner.title, '%zone%': zone}) }}
+</div>
+
+<form action="{{ url('user_banner_pay_in_zone_save', {'bannerId': banner.id, 'zoneId': zone.id}) }}" method="post">
+    {{ form_widget(form) }}
+    <div class="buttons">
+        <input type="submit" class="title" value="{{ 'next'|babel }}"/>
+    </div>
+</form>
+
+{% endblock %}

@@ -3,9 +3,20 @@
 namespace Hyper\AdsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
-abstract class Advertisement
+/**
+ * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\AdvertisementRepository")
+ * @ORM\Table(name="announcement")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn("announcement_type", type="string")
+ * @ORM\DiscriminatorMap({"announcement" = "Announcement", "banner" = "Banner"})
+ */
+class Advertisement
 {
+    const TYPE_ANNOUNCEMENT = 'announcement';
+    const TYPE_BANNER = 'banner';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -19,10 +30,38 @@ abstract class Advertisement
     protected $title;
 
     /**
-     * @ORM\Column(type="date", name="expire_date")
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $description;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Advertiser", inversedBy="advertisements")
+     * @ORM\JoinColumn(name="advertiser_id", referencedColumnName="id")
+     *
+     * @var \Hyper\AdsBundle\Entity\Advertiser
+     */
+    protected $advertiser;
+
+    /**
+     * @ORM\Column(type="smallint", name="paid")
+     */
+    protected $paid = false;
+
+    /**
+     * @ORM\Column(type="date", name="paid_to", nullable=true)
      * @var \DateTime
      */
-    protected $expireDate;
+    protected $paidTo;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="announcement", cascade={"persist", "remove"})
+     */
+    protected $orders;
+
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+    }
 
     public function setId($id)
     {
@@ -44,18 +83,72 @@ abstract class Advertisement
         return $this->title;
     }
 
-    public function getExpireDate()
+    public function getDescription()
     {
-        return $this->expireDate;
+        return $this->description;
     }
 
-    public function setExpireDate(\DateTime $date)
+    public function setDescription($description)
     {
-        $this->expireDate = $date;
+        $this->description = strval($description);
     }
 
-    public function isExpired()
+    public function isActive()
     {
-        return $this->getExpireDate() < new \DateTime();
+        return $this->getPaidTo() > new \DateTime();
+    }
+
+    public function setPaid($paid = true)
+    {
+        $this->paid = !!$paid;
+    }
+
+    public function getPaid()
+    {
+        return $this->paid;
+    }
+
+    public function isPaid()
+    {
+        return $this->getPaid();
+    }
+
+    /**
+     * @return Advertiser
+     */
+    public function getAdvertiser()
+    {
+        return $this->advertiser;
+    }
+
+    public function setAdvertiser(Advertiser $advertiser)
+    {
+        $this->advertiser = $advertiser;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getPaidTo()
+    {
+        return $this->paidTo;
+    }
+
+    public function setPaidTo(\DateTime $paidTo)
+    {
+        $this->paidTo = $paidTo;
+    }
+
+    /**
+     * @return Order[]
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+
+    public function __toString()
+    {
+        return sprintf('%s (ID: %d)', $this->getTitle(), $this->getId());
     }
 }

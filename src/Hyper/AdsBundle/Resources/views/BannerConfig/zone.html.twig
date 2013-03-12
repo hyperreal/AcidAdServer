@@ -1,21 +1,22 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'edit.banners.in.zone'|trans({'zoneName': zone.name}, 'HyperAdsBundle') }}
+{{ 'edit.banners.in.zone'|babel({'zoneName': zone.name}) }}
 {% endblock %}
 {% block body %}
 
-<h2>{{ 'zone.name'|trans({'zoneName': zone.name}, 'HyperAdsBundle') }}</h2>
+<h2>{{ 'zone.name'|babel({'zoneName': zone.name}) }}</h2>
 
 <form action="{{ path('banner_config_save') }}" method="post">
     <p>
         <table>
             <thead>
                 <tr>
-                    <th>{{ 'banner.id'|trans({}, 'HyperAdsBundle') }}</th>
-                    <th>{{ 'banner.title'|trans({}, 'HyperAdsBundle') }}</th>
-                    <th>{{ 'banner.size'|trans({}, 'HyperAdsBundle') }}</th>
-                    <th>{{ 'use.in.zone'|trans({}, 'HyperAdsBundle') }}</th>
-                    <th>{{ 'probability'|trans({}, 'HyperAdsBundle') }}</th>
+                    <th>{{ 'banner.id'|babel }}</th>
+                    <th>{{ 'banner.title'|babel }}</th>
+                    <th>{{ 'banner.size'|babel }}</th>
+                    <th>{{ 'activated.by.user'|babel }}</th>
+                    <th class="span-6">{{ 'use.in.zone'|babel }}</th>
+                    <th>{{ 'probability'|babel }}</th>
                 </tr>
             </thead>
             {% for banner in allBanners %}
@@ -28,9 +29,14 @@
                         </a>
                     </td>
                     <td>{{ banner.width }}x{{ banner.height }}</td>
+                    <td>{% if banner.id in usedBannerIds and reference.active == 1 %}{{ 'active'|babel }}{% else %}{{ 'inactive'|babel }}{% endif %}</td>
                     <td>
-                        <input type="checkbox" name="newBanners[{{ banner.id }}]" value="{{ banner.id }}"
-                            {% if banner.id in usedBannerIds and reference.active == 1 %} checked="checked"{% endif %} />
+                        <label class="table" for="new-b-{{ banner.id }}-0">{{ 'user.decides'|babel|lower }}</label>
+                        <input type="radio" name="newBanners[{{ banner.id }}]" value="0" id="new-b-{{ banner.id }}-0"{% if (banner.id in usedBannerIds and reference.fixedByAdmin|number_format(1) == '0.0') or banner.id not in usedBannerIds %} checked="checked"{% endif %} />
+                        <label class="table" for="new-b-{{ banner.id }}-1">{{ 'always'|babel|lower }}</label>
+                        <input type="radio" name="newBanners[{{ banner.id }}]" value="1" id="new-b-{{ banner.id }}-1"{% if banner.id in usedBannerIds and reference.fixedByAdmin|number_format(1) == '1.0' %} checked="checked"{% endif %} />
+                        <label class="table" for="new-b-{{ banner.id }}-2">{{ 'never'|babel|lower }}</label>
+                        <input type="radio" name="newBanners[{{ banner.id }}]" value="2" id="new-b-{{ banner.id }}-2"{% if banner.id in usedBannerIds and reference.fixedByAdmin|number_format(1) == '2.0' %} checked="checked"{% endif %} />
                     </td>
                     <td>
                         <input type="number" name="probability[{{ banner.id }}]" size="3"
@@ -40,7 +46,7 @@
             {% endfor %}
         </table>
         <input type="hidden" name="zoneId" value="{{ zone.id }}" />
-        <input type="submit" class="button" value="{{ 'save'|trans({}, 'HyperAdsBundle') }}">
+        <input type="submit" class="button" value="{{ 'save'|babel }}">
     </p>
 </form>
 

@@ -1,34 +1,34 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'show.zone'|trans({'zoneName': entity.name}, 'HyperAdsBundle') }}
+{{ 'show.zone'|babel({'zoneName': entity.name}) }}
 {% endblock %}
 {% block body %}
-<h1>{{ 'show.zone'|trans({'zoneName': entity.name}, 'HyperAdsBundle') }}</h1>
+<h1>{{ 'show.zone'|babel({'zoneName': entity.name}) }}</h1>
 
 <table class="record_properties">
     <tbody>
     <tr>
-        <th>{{ 'id'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'id'|babel }}</th>
         <td>{{ entity.id }}</td>
     </tr>
     <tr>
-        <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'name'|babel }}</th>
         <td>{{ entity.name }}</td>
     </tr>
     <tr>
-        <th>{{ 'name'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'name'|babel }}</th>
         <td>{{ entity.enabled }}</td>
     </tr>
     <tr>
-        <th>{{ 'max.width'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'max.width'|babel }}</th>
         <td>{{ entity.maxWidth }}</td>
     </tr>
     <tr>
-        <th>{{ 'max.height'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'max.height'|babel }}</th>
         <td>{{ entity.maxHeight }}</td>
     </tr>
     <tr>
-        <th>{{ 'type'|trans({}, 'HyperAdsBundle') }}</th>
+        <th>{{ 'type'|babel }}</th>
         <td>{{ entity.type }}</td>
     </tr>
     </tbody>
@@ -37,18 +37,18 @@
 <ul class="record_actions">
     <li>
         <a href="{{ path('admin_zone') }}">
-            {{ 'back.to.the.list'|trans({}, 'HyperAdsBundle') }}
+            {{ 'back.to.the.list'|babel }}
         </a>
     </li>
     <li>
         <a href="{{ path('admin_zone_edit', { 'id': entity.id }) }}">
-            {{ '__edit'|trans({}, 'HyperAdsBundle') }}
+            {{ 'edit'|babel }}
         </a>
     </li>
     <li>
         <form action="{{ path('admin_zone_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">{{ '__delete'|trans({}, 'HyperAdsBundle') }}</button>
+            <button type="submit">{{ 'delete'|babel }}</button>
         </form>
     </li>
 </ul>

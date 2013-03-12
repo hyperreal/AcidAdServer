@@ -1,0 +1,30 @@
+{% extends "::base.html.twig" %}
+{% block title %}
+    {{ 'banner.buy'|babel }}
+{% endblock %}
+{% block body %}
+<form action="{{ url('user_banner_create') }}" method="post" enctype="multipart/form-data">
+    {{ form_widget(form) }}
+    <input type="submit" value="{{ 'save'|babel }}"/>
+</form>
+<ul>
+    <li>
+        <a href="{{ url('user_banner_list') }}">{{ 'back.to.the.list'|babel }}</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block javascripts %}
+{% if wysiwyg is defined and wysiwyg == 'enabled' %}
+<script type="text/javascript" src="{{ asset('components/ckeditor/ckeditor.js') }}"></script>
+    <script type="text/javascript">
+        ($(document).ready(function() {
+            CKEDITOR.replace('hyper_adsbundle_bannertype[description]', {
+                toolbar: 'Basic',
+                language: 'pl',
+                disableNativeSpellChecker: false
+            });
+        }))();
+    </script>
+{% endif %}
+{% endblock %}

@@ -3,7 +3,6 @@
 namespace Hyper\AdsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -30,18 +29,16 @@ class BannerConfigController extends Controller
     {
         /** @var $em \Doctrine\ORM\EntityManager */
         $em = $this->get('doctrine.orm.entity_manager');
-        /** @var $tr \Symfony\Component\Translation\Translator */
-        $tr = $this->get('translator');
 
         /** @var $bannerZoneRepository \Hyper\AdsBundle\Entity\BannerZoneReferenceRepository */
         $bannerZoneRepository   = $em->getRepository('HyperAdsBundle:BannerZoneReference');
-        /** @var $bannerRepository \Hyper\AdsBundle\Entity\BannerRepository */
+        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AdvertisementRepository */
         $bannerRepository       = $em->getRepository('HyperAdsBundle:Banner');
         $zoneRepository         = $em->getRepository('HyperAdsBundle:Zone');
 
         $zone = $zoneRepository->find($zoneId);
         if (empty($zone)) {
-            throw $this->createNotFoundException($tr->trans('zone.not.exists', array(), 'HyperAdsBundle'));
+            throw $this->createNotFoundException($this->trans('zone.not.exists'));
         }
 
         $allBanners = $bannerRepository->getAllActiveBanners();
@@ -67,14 +64,15 @@ class BannerConfigController extends Controller
      */
     public function saveAction(Request $request)
     {
-        /** @var $tr \Symfony\Component\Translation\Translator */
-        $tr = $this->get('translator');
+        $fixedByAdminSpec = $request->get('newBanners');
+        $probabilities = $request->get('probability');
+        $zoneId = $request->get('zoneId');
 
-        $newBannerIds   = $request->get('newBanners');
-        $probabilities  = $request->get('probability');
-        $zoneId         = $request->get('zoneId');
+        if (empty($fixedByAdminSpec)) {
+            $fixedByAdminSpec = array();
+        }
 
-        if (!is_array($newBannerIds)) {
+        if (!is_array($fixedByAdminSpec)) {
             throw new \Exception('invalid banner ID\'s');
         }
 
@@ -82,25 +80,31 @@ class BannerConfigController extends Controller
         $em = $this->get('doctrine.orm.entity_manager');
 
         $zonesRepository        = $em->getRepository('HyperAdsBundle:Zone');
-        /** @var $bannersRepository \Hyper\AdsBundle\Entity\BannerRepository */
+        /** @var $bannersRepository \Hyper\AdsBundle\Entity\AdvertisementRepository */
         $bannersRepository      = $em->getRepository('HyperAdsBundle:Banner');
 
         /** @var $zone \Hyper\AdsBundle\Entity\Zone */
         $zone = $zonesRepository->find($zoneId);
         if (empty($zone)) {
-            throw $this->createNotFoundException($tr->trans('zone.not.exists', array(), 'HyperAdsBundle'));
+            throw $this->createNotFoundException($this->trans('zone.not.exists'));
         }
 
+        $banners = array();
+
         /** @var $banners \Hyper\AdsBundle\Entity\Banner[] */
-        $banners = $bannersRepository->findBy(array('id' => $newBannerIds));
+        if (!empty($fixedByAdminSpec)) {
+            $banners = $bannersRepository->findBy(array('id' => array_keys($fixedByAdminSpec)));
+        }
 
         $referenceUpdater = new ReferencesUpdater($em);
         $referenceUpdater->setZone($zone);
         $referenceUpdater->setProbabilities($probabilities);
         $referenceUpdater->setBanners($banners);
+        $referenceUpdater->setFixedByAdminSpecification($fixedByAdminSpec);
         $referenceUpdater->updateReferences();
+
+        $this->get('session')->setFlash('success', $this->trans('banners.configs.are.saved'));
 
         return $this->redirect($this->generateUrl('admin_zone_show', array('id' => $zoneId)));
     }
-
 }

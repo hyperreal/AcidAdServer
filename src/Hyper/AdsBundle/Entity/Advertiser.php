@@ -7,7 +7,6 @@
 namespace Hyper\AdsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use FOS\UserBundle\Entity\User as BaseUser;
@@ -18,6 +17,7 @@ use FOS\UserBundle\Entity\User as BaseUser;
  */
 class Advertiser extends BaseUser
 {
+    const DEFAULT_CURRENCY = 'EUR';
 
     /**
      * @ORM\Id
@@ -37,16 +37,22 @@ class Advertiser extends BaseUser
     protected $lastName;
 
     /**
-     * @var \Hyper\AdsBundle\Entity\Banner[]
+     * @var \Hyper\AdsBundle\Entity\Advertisement[]
      *
-     * @OneToMany(targetEntity="Banner", mappedBy="advertiser")
+     * @ORM\OneToMany(targetEntity="Advertisement", mappedBy="advertiser", cascade={"persist", "remove"})
      */
-    protected $banners;
+    protected $advertisements;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Wikp\PaymentMtgoxBundle\Entity\Currency")
+     * @ORM\JoinColumn(name="default_currency", referencedColumnName="id")
+     */
+    private $defaultCurrency;
 
     public function __construct()
     {
         parent::__construct();
-        $this->banners = new ArrayCollection();
+        $this->advertisements = new ArrayCollection();
     }
 
     public function setId($id)
@@ -91,12 +97,36 @@ class Advertiser extends BaseUser
 
     public function getBanners()
     {
-        return $this->banners;
+        return $this->advertisements;
     }
 
-    public function addBanner(Banner $banner)
+    public function addBanner(Advertisement $announcement)
     {
-        $this->banners->add($banner);
+        $this->advertisements->add($announcement);
+    }
+
+    public function getAdvertisements()
+    {
+        return $this->advertisements;
+    }
+
+    public function addAdvertisement(Advertisement $announcement)
+    {
+        $this->advertisements->add($announcement);
+    }
+
+    public function getDefaultCurrency($default = self::DEFAULT_CURRENCY)
+    {
+        if (empty($this->defaultCurrency)) {
+            return $default;
+        }
+
+        return $this->defaultCurrency;
+    }
+
+    public function setDefaultCurrency($currency)
+    {
+        $this->defaultCurrency = $currency;
     }
 
     public function __toString()

@@ -2,10 +2,10 @@
 
 namespace Hyper\AdsBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
+use Hyper\AdsBundle\Entity\Zone;
 
 class DefaultController extends Controller
 {
@@ -16,6 +16,36 @@ class DefaultController extends Controller
     public function indexAction()
     {
         return array();
+    }
+
+    /**
+     * @Route("/tutorial", name="acid_tutorial")
+     * @Template()
+     */
+    public function tutorialAction()
+    {
+        return array();
+    }
+
+    /**
+     * @param \Hyper\AdsBundle\Entity\Zone $zone
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/kurwa/{zone}")
+     * @Template()
+     */
+    public function kurwaAction(Zone $zone)
+    {
+        /** @var $repo \Hyper\AdsBundle\Entity\ZoneRepository */
+        $repo = $this->get('doctrine.orm.entity_manager')->getRepository('HyperAdsBundle:Zone');
+
+        $start = new \DateTime('now');
+        $end = new \DateTime('now +4 month');
+        $repo->checkZoneAvailabilityInDays($zone, $start, $end);
+
+        return array(
+            'content' => 'olala'
+        );
     }
 
     /**
@@ -33,7 +63,7 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('Zone not found.');
         }
 
-        /** @var $banner \Hyper\AdsBundle\Entity\Banner */
+        /** @var $banner \Hyper\AdsBundle\Entity\AdvertisementRepository */
         $banner = $em->getRepository('HyperAdsBundle:Banner')->getRandomBannerInZone($zone);
 
         if (empty($banner)) {
@@ -95,6 +125,20 @@ class DefaultController extends Controller
         );
 
         return $resp;
+    }
+
+    /**
+     * @Route("/zones-info", name="default_zones_info")
+     * @Template()
+     */
+    public function zonesInfoAction()
+    {
+        return array(
+            'pages' => $this
+                ->get('doctrine.orm.entity_manager')
+                ->getRepository('HyperAdsBundle:Zone')
+                ->getPagesWithActiveZones()
+        );
     }
 
     /**

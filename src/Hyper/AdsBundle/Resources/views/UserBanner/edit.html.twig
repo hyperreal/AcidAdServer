@@ -1,0 +1,25 @@
+{% extends "::base.html.twig" %}
+{% block title %}
+{{ 'banner.buy'|babel }}
+{% endblock %}
+{% block body %}
+<div id="banner-preview" class="hide">
+    <img src="{{ asset(banner.fileUrl) }}" alt="{{ banner.title }}"/>
+</div>
+<form action="{{ url('user_banner_save', {'banner': banner.id}) }}" method="post" enctype="multipart/form-data">
+    {{ form_widget(editForm) }}
+    <input type="submit" value="{{ 'edit'|babel }}"/>
+</form>
+<form action="{{ url('user_banner_remove', {'banner': banner.id}) }}" method="post">
+    <ul>
+        <li>
+            {{ form_widget(deleteForm) }}
+            <input type="submit" value="{{ 'delete'|babel }}"/>
+        </li>
+        <li>
+            <a href="{{ url('user_banner_list') }}">{{ 'back.to.the.list'|babel }}</a>
+        </li>
+    </ul>
+
+</form>
+{% endblock %}
