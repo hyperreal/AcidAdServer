@@ -38,7 +38,7 @@ class Page
     protected $url;
 
     /**
-     * @OneToMany(targetEntity="Zone", mappedBy="page")
+     * @OneToMany(targetEntity="Zone", mappedBy="page", cascade={"persist", "remove"})
      */
     protected $zones;
 

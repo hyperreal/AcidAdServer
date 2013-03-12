@@ -1,0 +1,31 @@
+{% extends "::base.html.twig" %}
+{% block title %}
+{{ 'banner.buy'|babel }}
+{% endblock %}
+{% block body %}
+<form action="{{ url('user_banner_pay_save', {'banner': banner.id}) }}" method="post">
+    {{ form_widget(orderForm) }}
+    <input type="submit" value="{{ 'pay'|babel }}"/>
+</form>
+
+{% if zones|length > 0 %}
+<table class="prices">
+    <thead>
+        <tr>
+            <th>Strefa</th>
+            <th>Cena</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for zone in zones %}
+    <tr>
+        <td>{{ zone.page.name }} - {{ zone.name }}</td>
+        <td>{{ zonesPrices[zone.id] }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="notice">Brak stref, w których można by umieścić banner.</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+{{ 'new.announcement'|babel }}
+{% endblock %}
+
+{% block body %}
+
+<form method="POST" action="{{ url('user_announcement_save') }}">
+    <div>
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+        {{ form_errors(form.title) }}
+    </div>
+    <div>
+        {{ form_label(form.announcementPaymentType) }}
+        {{ form_widget(form.announcementPaymentType) }}
+        {{ form_errors(form.announcementPaymentType) }}
+    </div>
+    <div>
+        {{ form_widget(form.description) }}
+        {{ form_errors(form.description) }}
+        {{ form_rest(form) }}
+    </div>
+    <input type="submit" value="{{ 'save'|babel }}">
+</form>
+
+{% endblock %}

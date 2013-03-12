@@ -2,6 +2,8 @@
 
 use Symfony\Component\HttpFoundation\Request;
 
+umask(0000);
+
 // If you don't want to setup permissions the proper way, just uncomment the following PHP line
 // read http://symfony.com/doc/current/book/installation.html#configuration-and-setup for more information
 //umask(0000);
@@ -12,6 +14,7 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
     || !in_array(@$_SERVER['REMOTE_ADDR'], array(
         '127.0.0.1',
+        '89.229.20.164',
         '::1',
     ))
 ) {

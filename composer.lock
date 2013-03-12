@@ -1,6 +1,51 @@
 {
-    "hash": "87fbda331f600bd4cbe6786198718f99",
+    "hash": "1e09cea08075eeba8bf62eb6c37befd7",
     "packages": [
+        {
+            "name": "Trsteel/ckeditor-bundle",
+            "version": "dev-master",
+            "target-dir": "Trsteel/CkeditorBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/trsteel88/TrsteelCkeditorBundle.git",
+                "reference": "fec7c1964c6bf9fb21d0d3c23445e149ae3ccbfb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/trsteel88/TrsteelCkeditorBundle/zipball/fec7c1964c6bf9fb21d0d3c23445e149ae3ccbfb",
+                "reference": "fec7c1964c6bf9fb21d0d3c23445e149ae3ccbfb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/form": ">=2.1,<2.3-dev",
+                "symfony/framework-bundle": "2.*,<2.3",
+                "twig/twig": ">=1.1,<2.0-dev"
+            },
+            "time": "2013-03-04 08:11:02",
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Trsteel\\CkeditorBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Trent Steel",
+                    "email": "trsteel88@gmail.com"
+                }
+            ],
+            "description": "Symfony2 bundle for easy integration of the CKEditor WYSIWYG",
+            "keywords": [
+                "CKEditor",
+                "editor",
+                "wysiwyg"
+            ]
+        },
         {
             "name": "doctrine/common",
             "version": "2.3.x-dev",
@@ -25,7 +70,6 @@
                     "dev-master": "2.3.x-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Doctrine\\Common": "lib/"
@@ -47,8 +91,8 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2",
-                "doctrine/common": "2.3.*"
+                "doctrine/common": "2.3.*",
+                "php": ">=5.3.2"
             },
             "time": "2012-12-17 15:35:54",
             "type": "library",
@@ -57,7 +101,6 @@
                     "dev-master": "2.3.x-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Doctrine\\DBAL": "lib/"
@@ -90,54 +133,53 @@
             "homepage": "http://www.doctrine-project.org",
             "keywords": [
                 "database",
-                "persistence",
                 "dbal",
+                "persistence",
                 "queryobject"
             ]
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "target-dir": "Doctrine/Bundle/DoctrineBundle",
             "source": {
                 "type": "git",
                 "url": "git://github.com/doctrine/DoctrineBundle.git",
-                "reference": "2991d0dfa58a5583d9231c490750e29c45b0a6e9"
+                "reference": "v1.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/DoctrineBundle/archive/2991d0dfa58a5583d9231c490750e29c45b0a6e9.zip",
-                "reference": "2991d0dfa58a5583d9231c490750e29c45b0a6e9",
+                "url": "https://github.com/doctrine/DoctrineBundle/zipball/v1.0.0",
+                "reference": "v1.0.0",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2",
                 "doctrine/dbal": ">=2.2,<2.4-dev",
-                "symfony/framework-bundle": ">=2.1,<2.3-dev",
-                "symfony/doctrine-bridge": ">=2.1,<2.3-dev",
-                "jdorn/sql-formatter": ">=1.1,<2.0"
+                "php": ">=5.3.2",
+                "symfony/doctrine-bridge": "2.1.*",
+                "symfony/framework-bundle": "2.1.*"
             },
             "require-dev": {
                 "doctrine/orm": ">=2.2,<2.4-dev",
-                "symfony/yaml": ">=2.1,<2.3-dev",
-                "symfony/validator": ">=2.1,<2.3-dev"
+                "symfony/validator": "2.1.*",
+                "symfony/yaml": "2.1.*"
             },
             "suggest": {
                 "doctrine/orm": "The Doctrine ORM integration is optional in the bundle."
             },
-            "time": "2012-12-11 09:53:45",
+            "time": "2012-09-07 14:18:21",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Doctrine\\Bundle\\DoctrineBundle": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -159,9 +201,9 @@
             "homepage": "http://www.doctrine-project.org",
             "keywords": [
                 "database",
+                "dbal",
                 "orm",
-                "persistence",
-                "dbal"
+                "persistence"
             ]
         },
         {
@@ -179,10 +221,10 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2",
+                "doctrine/dbal": "2.3.*",
                 "ext-pdo": "*",
-                "symfony/console": "2.*",
-                "doctrine/dbal": "2.3.*"
+                "php": ">=5.3.2",
+                "symfony/console": "2.*"
             },
             "suggest": {
                 "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
@@ -198,7 +240,6 @@
                     "dev-master": "2.3.x-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Doctrine\\ORM": "lib/"
@@ -235,6 +276,92 @@
             ]
         },
         {
+            "name": "exercise/htmlpurifier-bundle",
+            "version": "dev-master",
+            "target-dir": "Exercise/HTMLPurifierBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Exercise/HTMLPurifierBundle.git",
+                "reference": "a7f859215a3946a1d79c049a591bb2503e678196"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Exercise/HTMLPurifierBundle/zipball/a7f859215a3946a1d79c049a591bb2503e678196",
+                "reference": "a7f859215a3946a1d79c049a591bb2503e678196",
+                "shasum": ""
+            },
+            "require": {
+                "ezyang/htmlpurifier": ">=4.0,<5.0",
+                "php": ">=5.3.2"
+            },
+            "time": "2013-03-12 03:06:22",
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Exercise\\HTMLPurifierBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "contributors",
+                    "homepage": "https://github.com/Exercise/HTMLPurifierBundle/contributors"
+                }
+            ],
+            "description": "HTMLPurifier integration for your Symfony2 project",
+            "homepage": "https://github.com/Exercise/HTMLPurifierBundle",
+            "keywords": [
+                "htmlpurifier"
+            ]
+        },
+        {
+            "name": "ezyang/htmlpurifier",
+            "version": "v4.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezyang/htmlpurifier.git",
+                "reference": "v4.5.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/v4.5.0",
+                "reference": "v4.5.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "time": "2013-02-18 00:04:08",
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HTMLPurifier": "library/"
+                },
+                "files": [
+                    "library/HTMLPurifier.composer.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Edward Z. Yang",
+                    "email": "admin@htmlpurifier.org",
+                    "homepage": "http://ezyang.com"
+                }
+            ],
+            "description": "Standards compliant HTML filter written in PHP",
+            "homepage": "http://htmlpurifier.org/",
+            "keywords": [
+                "html"
+            ]
+        },
+        {
             "name": "friendsofsymfony/user-bundle",
             "version": "dev-master",
             "target-dir": "FOS/UserBundle",
@@ -255,12 +382,12 @@
                 "symfony/security-bundle": ">=2.1,<2.3-dev"
             },
             "require-dev": {
-                "twig/twig": "*",
                 "doctrine/doctrine-bundle": "*",
                 "swiftmailer/swiftmailer": "*",
-                "willdurand/propel-typehintable-behavior": "dev-master",
                 "symfony/validator": "2.1.*",
-                "symfony/yaml": "2.1.*"
+                "symfony/yaml": "2.1.*",
+                "twig/twig": "*",
+                "willdurand/propel-typehintable-behavior": "dev-master"
             },
             "suggest": {
                 "doctrine/couchdb-odm-bundle": "*",
@@ -274,7 +401,6 @@
                     "dev-master": "2.0.x-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "FOS\\UserBundle": ""
@@ -305,53 +431,6 @@
             ]
         },
         {
-            "name": "jdorn/sql-formatter",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "git://github.com/jdorn/sql-formatter.git",
-                "reference": "0461ab0ff16e096b8c51f085349f38ed5f2ea241"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/jdorn/sql-formatter/archive/0461ab0ff16e096b8c51f085349f38ed5f2ea241.zip",
-                "reference": "0461ab0ff16e096b8c51f085349f38ed5f2ea241",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.4"
-            },
-            "time": "2012-11-17 22:31:58",
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.2.x-dev"
-                }
-            },
-            "installation-source": "source",
-            "autoload": {
-                "classmap": [
-                    "lib"
-                ]
-            },
-            "license": [
-                "LGPL"
-            ],
-            "authors": [
-                {
-                    "name": "Jeremy Dorn",
-                    "email": "jeremy@jeremydorn.com",
-                    "homepage": "http://jeremydorn.com/"
-                }
-            ],
-            "description": "a PHP SQL highlighting library",
-            "homepage": "https://github.com/jdorn/sql-formatter/",
-            "keywords": [
-                "sql",
-                "highlight"
-            ]
-        },
-        {
             "name": "jms/aop-bundle",
             "version": "1.0.0",
             "target-dir": "JMS/AopBundle",
@@ -367,12 +446,11 @@
                 "shasum": ""
             },
             "require": {
-                "symfony/framework-bundle": "2.*",
-                "jms/cg": "1.0.0"
+                "jms/cg": "1.0.0",
+                "symfony/framework-bundle": "2.*"
             },
             "time": "2012-01-02 15:50:26",
             "type": "symfony-bundle",
-            "installation-source": "dist",
             "autoload": {
                 "psr-0": {
                     "JMS\\AopBundle": ""
@@ -398,7 +476,6 @@
             },
             "time": "2012-01-02 15:40:52",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "psr-0": {
                     "CG\\": "src/"
@@ -421,28 +498,27 @@
                 "shasum": ""
             },
             "require": {
-                "symfony/framework-bundle": "2.1.*",
                 "jms/aop-bundle": "1.0.*",
                 "jms/metadata": "1.1.*",
-                "symfony/process": "2.1.*",
-                "symfony/finder": "2.1.*"
+                "symfony/finder": "2.1.*",
+                "symfony/framework-bundle": "2.1.*",
+                "symfony/process": "2.1.*"
             },
             "require-dev": {
+                "doctrine/doctrine-bundle": "*",
+                "doctrine/orm": "*",
                 "jms/security-extra-bundle": "1.*",
-                "symfony/validator": "*",
-                "symfony/form": "*",
-                "symfony/class-loader": "*",
-                "symfony/yaml": "*",
+                "sensio/framework-extra-bundle": "*",
                 "symfony/browser-kit": "*",
+                "symfony/class-loader": "*",
+                "symfony/form": "*",
                 "symfony/security-bundle": "*",
                 "symfony/twig-bundle": "*",
-                "sensio/framework-extra-bundle": "*",
-                "doctrine/doctrine-bundle": "*",
-                "doctrine/orm": "*"
+                "symfony/validator": "*",
+                "symfony/yaml": "*"
             },
             "time": "2012-09-21 08:56:32",
             "type": "symfony-bundle",
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "JMS\\DiExtraBundle": ""
@@ -468,7 +544,6 @@
             },
             "time": "2012-01-02 16:32:49",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "psr-0": {
                     "Metadata\\": "src/"
@@ -491,25 +566,25 @@
                 "shasum": ""
             },
             "require": {
+                "ext-mcrypt": "*",
                 "php": ">=5.3.2",
-                "symfony/framework-bundle": ">=2.0,<2.2-dev",
-                "ext-mcrypt": "*"
+                "symfony/framework-bundle": ">=2.0,<2.2-dev"
             },
             "require-dev": {
-                "sensio/framework-extra-bundle": "*",
                 "doctrine/doctrine-bundle": "*",
                 "doctrine/orm": "*",
-                "jms/payment-paypal-bundle": "*",
                 "jms/aop-bundle": "*",
                 "jms/di-extra-bundle": "*",
-                "symfony/class-loader": "*",
-                "symfony/twig-bundle": "*",
-                "symfony/finder": "*",
+                "jms/payment-paypal-bundle": "*",
+                "sensio/framework-extra-bundle": "*",
                 "symfony/browser-kit": "*",
+                "symfony/class-loader": "*",
                 "symfony/css-selector": "*",
+                "symfony/finder": "*",
                 "symfony/form": "*",
-                "symfony/validator": "*",
                 "symfony/process": "*",
+                "symfony/twig-bundle": "*",
+                "symfony/validator": "*",
                 "symfony/yaml": "*"
             },
             "suggest": {
@@ -518,7 +593,6 @@
             },
             "time": "2012-12-12 21:37:47",
             "type": "symfony-bundle",
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "JMS\\Payment\\CoreBundle": ""
@@ -557,29 +631,28 @@
                 "shasum": ""
             },
             "require": {
-                "symfony/framework-bundle": "2.1.*",
-                "symfony/security-bundle": "*",
-                "jms/metadata": "1.1.*",
                 "jms/aop-bundle": "1.0.*",
-                "jms/di-extra-bundle": "1.1.*"
+                "jms/di-extra-bundle": "1.1.*",
+                "jms/metadata": "1.1.*",
+                "symfony/framework-bundle": "2.1.*",
+                "symfony/security-bundle": "*"
             },
             "require-dev": {
-                "sensio/framework-extra-bundle": "*",
-                "symfony/class-loader": "*",
-                "symfony/yaml": "*",
-                "symfony/browser-kit": "*",
-                "symfony/finder": "*",
-                "symfony/css-selector": "*",
-                "symfony/process": "*",
                 "doctrine/doctrine-bundle": "*",
-                "symfony/twig-bundle": "*",
                 "doctrine/orm": "*",
+                "sensio/framework-extra-bundle": "*",
+                "symfony/browser-kit": "*",
+                "symfony/class-loader": "*",
+                "symfony/css-selector": "*",
+                "symfony/finder": "*",
                 "symfony/form": "*",
-                "symfony/validator": "*"
+                "symfony/process": "*",
+                "symfony/twig-bundle": "*",
+                "symfony/validator": "*",
+                "symfony/yaml": "*"
             },
             "time": "2012-09-06 16:12:23",
             "type": "symfony-bundle",
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "JMS\\SecurityExtraBundle": ""
@@ -601,22 +674,22 @@
                 "shasum": ""
             },
             "require": {
-                "symfony/process": ">=2.1.0,<2.3-dev",
-                "php": ">=5.3.1"
+                "php": ">=5.3.1",
+                "symfony/process": ">=2.1.0,<2.3-dev"
             },
             "require-dev": {
-                "twig/twig": ">=1.6.0,<2.0",
                 "leafo/lessphp": "*",
                 "leafo/scssphp": "*",
+                "leafo/scssphp-compass": "*",
                 "ptachoire/cssembed": "*",
-                "leafo/scssphp-compass": "*"
+                "twig/twig": ">=1.6.0,<2.0"
             },
             "suggest": {
-                "twig/twig": "Assetic provides the integration with the Twig templating engine",
                 "leafo/lessphp": "Assetic provides the integration with the lessphp LESS compiler",
                 "leafo/scssphp": "Assetic provides the integration with the scssphp SCSS compiler",
+                "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin",
                 "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris",
-                "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin"
+                "twig/twig": "Assetic provides the integration with the Twig templating engine"
             },
             "time": "2012-12-14 18:31:26",
             "type": "library",
@@ -625,7 +698,6 @@
                     "dev-master": "1.1-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Assetic": "src/"
@@ -654,16 +726,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "dev-master",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog",
-                "reference": "0df12342ef6c5efc748b27bb9ef92e1c95631058"
+                "reference": "1.2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Seldaek/monolog/archive/0df12342ef6c5efc748b27bb9ef92e1c95631058.zip",
-                "reference": "0df12342ef6c5efc748b27bb9ef92e1c95631058",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1.2.1",
+                "reference": "1.2.1",
                 "shasum": ""
             },
             "require": {
@@ -673,23 +745,23 @@
                 "mlehner/gelf-php": "1.0.*"
             },
             "suggest": {
-                "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server",
                 "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
-                "ext-mongo": "Allow sending log messages to a MongoDB server"
+                "ext-mongo": "Allow sending log messages to a MongoDB server",
+                "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server"
             },
-            "time": "2012-12-14 11:27:44",
+            "time": "2012-08-29 11:53:20",
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.3.x-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Monolog": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -733,7 +805,6 @@
                     "dev-master": "2.1.x-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Sensio\\Bundle\\DistributionBundle": ""
@@ -750,8 +821,8 @@
             ],
             "description": "The base bundle for the Symfony Distributions",
             "keywords": [
-                "distribution",
-                "configuration"
+                "configuration",
+                "distribution"
             ]
         },
         {
@@ -770,8 +841,8 @@
                 "shasum": ""
             },
             "require": {
-                "symfony/framework-bundle": "2.1.*",
-                "doctrine/common": ">=2.1,<2.4-dev"
+                "doctrine/common": ">=2.1,<2.4-dev",
+                "symfony/framework-bundle": "2.1.*"
             },
             "time": "2012-10-17 04:38:27",
             "type": "symfony-bundle",
@@ -780,7 +851,6 @@
                     "dev-master": "2.1.x-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Sensio\\Bundle\\FrameworkExtraBundle": ""
@@ -817,12 +887,12 @@
                 "shasum": ""
             },
             "require": {
-                "symfony/framework-bundle": "2.1.*",
-                "symfony/console": "2.1.*"
+                "symfony/console": "2.1.*",
+                "symfony/framework-bundle": "2.1.*"
             },
             "require-dev": {
-                "symfony/doctrine-bridge": "2.1.*",
                 "doctrine/orm": ">=2.1,<2.4-dev",
+                "symfony/doctrine-bridge": "2.1.*",
                 "twig/twig": ">=1.8,<2.0-dev"
             },
             "time": "2012-11-19 16:10:57",
@@ -832,7 +902,6 @@
                     "dev-master": "2.1.x-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Sensio\\Bundle\\GeneratorBundle": ""
@@ -873,7 +942,6 @@
                     "dev-master": "4.2-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "files": [
                     "lib/swift_required.php"
@@ -896,18 +964,18 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0",
                 "kriswallsmith/assetic": "1.1.*",
+                "php": ">=5.3.0",
                 "symfony/framework-bundle": ">=2.1.0,<2.3-dev"
             },
             "require-dev": {
-                "symfony/twig-bundle": ">=2.1.0,<2.3-dev",
-                "symfony/console": ">=2.1.0,<2.3-dev",
                 "symfony/class-loader": ">=2.1.0,<2.3-dev",
-                "symfony/yaml": ">=2.1.0,<2.3-dev",
-                "symfony/form": ">=2.1.0,<2.3-dev",
+                "symfony/console": ">=2.1.0,<2.3-dev",
+                "symfony/css-selector": ">=2.1.0,<2.3-dev",
                 "symfony/dom-crawler": ">=2.1.0,<2.3-dev",
-                "symfony/css-selector": ">=2.1.0,<2.3-dev"
+                "symfony/form": ">=2.1.0,<2.3-dev",
+                "symfony/twig-bundle": ">=2.1.0,<2.3-dev",
+                "symfony/yaml": ">=2.1.0,<2.3-dev"
             },
             "suggest": {
                 "symfony/twig-bundle": ">=2.1.0,<2.3-dev"
@@ -919,7 +987,6 @@
                     "dev-master": "2.1.x-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Symfony\\Bundle\\AsseticBundle": ""
@@ -959,15 +1026,15 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2",
                 "monolog/monolog": "1.*",
-                "symfony/monolog-bridge": ">=2.1.0,<2.3-dev",
+                "php": ">=5.3.2",
+                "symfony/config": ">=2.1.0,<2.3-dev",
                 "symfony/dependency-injection": ">=2.1.0,<2.3-dev",
-                "symfony/config": ">=2.1.0,<2.3-dev"
+                "symfony/monolog-bridge": ">=2.1.0,<2.3-dev"
             },
             "require-dev": {
-                "symfony/yaml": ">=2.1.0,<2.3-dev",
-                "symfony/config": ">=2.1.0,<2.3-dev"
+                "symfony/config": ">=2.1.0,<2.3-dev",
+                "symfony/yaml": ">=2.1.0,<2.3-dev"
             },
             "time": "2012-09-20 10:40:24",
             "type": "symfony-bundle",
@@ -976,7 +1043,6 @@
                     "dev-master": "2.1.x-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Symfony\\Bundle\\MonologBundle": ""
@@ -1004,9 +1070,9 @@
                 "symfony/swiftmailer-bridge": ">=2.1.0,<2.3-dev"
             },
             "require-dev": {
+                "symfony/config": ">=2.1.0,<2.3-dev",
                 "symfony/dependency-injection": ">=2.1.0,<2.3-dev",
                 "symfony/http-kernel": ">=2.1.0,<2.3-dev",
-                "symfony/config": ">=2.1.0,<2.3-dev",
                 "symfony/yaml": ">=2.1.0,<2.3-dev"
             },
             "time": "2012-10-17 04:18:11",
@@ -1016,7 +1082,6 @@
                     "dev-master": "2.1-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Symfony\\Bundle\\SwiftmailerBundle": ""
@@ -1038,54 +1103,53 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
                 "doctrine/common": ">2.2,<2.4-dev",
+                "php": ">=5.3.3",
                 "twig/twig": ">=1.9.1,<2.0-dev"
             },
             "replace": {
-                "symfony/doctrine-bridge": "self.version",
-                "symfony/monolog-bridge": "self.version",
-                "symfony/propel1-bridge": "self.version",
-                "symfony/swiftmailer-bridge": "self.version",
-                "symfony/twig-bridge": "self.version",
-                "symfony/framework-bundle": "self.version",
-                "symfony/security-bundle": "self.version",
-                "symfony/twig-bundle": "self.version",
-                "symfony/web-profiler-bundle": "self.version",
                 "symfony/browser-kit": "self.version",
                 "symfony/class-loader": "self.version",
                 "symfony/config": "self.version",
                 "symfony/console": "self.version",
                 "symfony/css-selector": "self.version",
                 "symfony/dependency-injection": "self.version",
+                "symfony/doctrine-bridge": "self.version",
                 "symfony/dom-crawler": "self.version",
                 "symfony/event-dispatcher": "self.version",
                 "symfony/filesystem": "self.version",
                 "symfony/finder": "self.version",
                 "symfony/form": "self.version",
+                "symfony/framework-bundle": "self.version",
                 "symfony/http-foundation": "self.version",
                 "symfony/http-kernel": "self.version",
                 "symfony/locale": "self.version",
+                "symfony/monolog-bridge": "self.version",
                 "symfony/options-resolver": "self.version",
                 "symfony/process": "self.version",
+                "symfony/propel1-bridge": "self.version",
                 "symfony/routing": "self.version",
                 "symfony/security": "self.version",
+                "symfony/security-bundle": "self.version",
                 "symfony/serializer": "self.version",
+                "symfony/swiftmailer-bridge": "self.version",
                 "symfony/templating": "self.version",
                 "symfony/translation": "self.version",
+                "symfony/twig-bridge": "self.version",
+                "symfony/twig-bundle": "self.version",
                 "symfony/validator": "self.version",
+                "symfony/web-profiler-bundle": "self.version",
                 "symfony/yaml": "self.version"
             },
             "require-dev": {
+                "doctrine/data-fixtures": "1.0.*",
                 "doctrine/dbal": ">=2.2,<2.4-dev",
                 "doctrine/orm": ">=2.2.3,<2.4-dev",
-                "doctrine/data-fixtures": "1.0.*",
-                "propel/propel1": "dev-master",
-                "monolog/monolog": "1.*"
+                "monolog/monolog": "1.*",
+                "propel/propel1": "dev-master"
             },
             "time": "2012-12-15 17:28:15",
             "type": "library",
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Symfony": "src/",
@@ -1135,7 +1199,6 @@
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Twig_Extensions_": "lib/"
@@ -1182,7 +1245,6 @@
                     "dev-master": "1.12-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Twig_": "lib/"
@@ -1206,6 +1268,52 @@
             "keywords": [
                 "templating"
             ]
+        },
+        {
+            "name": "wikp/payment-mtgox-bundle",
+            "version": "dev-master",
+            "target-dir": "Wikp/PaymentMtgoxBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wikp/PaymentMtgoxBundle.git",
+                "reference": "bb10847c862c3fa235f00fee80719bc263eda02a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wikp/PaymentMtgoxBundle/zipball/bb10847c862c3fa235f00fee80719bc263eda02a",
+                "reference": "bb10847c862c3fa235f00fee80719bc263eda02a",
+                "shasum": ""
+            },
+            "require": {
+                "jms/payment-core-bundle": "dev-master",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/browser-kit": "2.1.x-dev"
+            },
+            "time": "2013-02-25 10:45:25",
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Wikp\\PaymentMtgoxBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Piotr Wikieł",
+                    "email": "piotr.wikiel@gmail.com"
+                }
+            ],
+            "description": "Bundle for creating payment system based on MtGox.com (Bitcoin cryptocurrency",
+            "homepage": "http://github.com/wikp/PaymentMtgoxBundle",
+            "keywords": [
+                "bitcoin",
+                "payment"
+            ]
         }
     ],
     "packages-dev": null,
@@ -1215,6 +1323,9 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "jms/payment-core-bundle": 20,
-        "friendsofsymfony/user-bundle": 20
+        "friendsofsymfony/user-bundle": 20,
+        "exercise/htmlpurifier-bundle": 20,
+        "trsteel/ckeditor-bundle": 20,
+        "wikp/payment-mtgox-bundle": 20
     }
 }

@@ -13,7 +13,10 @@
         "email": "fajka@hyperreal.info"
     },
     "autoload": {
-        "psr-0": { "Hyper": "src/" }
+        "psr-0": { 
+            "Hyper": "src/" ,
+            "Wikp": "src/"
+        }
     },
     "require": {
         "php": ">=5.3.3",
@@ -30,7 +33,10 @@
         "jms/security-extra-bundle": "1.2.*",
         "jms/di-extra-bundle": "1.1.*",
         "jms/payment-core-bundle": "master-dev",
-        "friendsofsymfony/user-bundle": "2.0.*@dev"
+        "friendsofsymfony/user-bundle": "2.0.*@dev",
+        "exercise/htmlpurifier-bundle": "dev-master",
+        "Trsteel/ckeditor-bundle": "dev-master",
+        "wikp/payment-mtgox-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

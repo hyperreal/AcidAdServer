@@ -1,0 +1,27 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DIR=`dirname $DIR`
+
+HOST=`hostname`
+
+function sudoClear() {
+    sudo rm -fR $DIR/app/cache/*
+    sudo -u www-data /usr/bin/php $DIR/app/console cache:clear --env=prod
+    sudo -u www-data /usr/bin/php $DIR/app/console cache:clear --env=dev
+}
+
+function userClear() {
+    rm -fR $DIR/app/cache/*
+    /usr/bin/php $DIR/app/console cache:clear --env=prod
+    /usr/bin/php $DIR/app/console cache:clear --env=dev
+}
+
+if [ "$HOST" = "thorn" ]; then
+    userClear
+elif [ "$HOST" = "air" ]; then
+    userClear
+else
+    sudoClear
+fi
+

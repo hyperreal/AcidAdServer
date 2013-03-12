@@ -2,6 +2,14 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
 
+wikp_payment_mtgox:
+    api_key: %mtgox_api_key%
+    api_secret: %mtgox_api_secret%
+    return_url: http://dupa.com/
+    cancel_url: http://dupa.com/
+    order_repository_path: "HyperAdsBundle:Order"
+    debug: %kernel.debug%
+
 framework:
     #esi:             ~
     translator:      { fallback: %locale% }
@@ -16,12 +24,15 @@ framework:
     default_locale:  %locale%
     trust_proxy_headers: false # Should Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
     session:
-        lifetime: 7200
+        handler_id: session.handler.memcache
 
 # Twig Configuration
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    globals:
+        default_currency: %ads_default_currency%
+        page_title: %page_title%
 
 # Assetic Configuration
 assetic:
@@ -49,6 +60,8 @@ doctrine:
         types:
             bannertype: Hyper\AdsBundle\DBAL\BannerType
             zonetype: Hyper\AdsBundle\DBAL\ZoneType
+            announcement_payment_type: Hyper\AdsBundle\DBAL\AnnouncementPaymentType
+            paymodeltype: Hyper\AdsBundle\DBAL\PayModelType
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
@@ -61,6 +74,9 @@ fos_user:
     from_email:
         address: %mailer_from%
         sender_name: %mailer_sender%
+    profile:
+        form:
+            type: hyper_user_editprofile
     registration:
         confirmation:
             enabled: true
@@ -68,15 +84,52 @@ fos_user:
 jms_payment_core:
     secret: %payments_secret%
 
-services:
-    stats_collector:
-        class: "Hyper\AdsBundle\Helper\StatsCollector"
-        arguments: [@doctrine.orm.entity_manager]
-
-
 # Swiftmailer Configuration
 swiftmailer:
     transport: %mailer_transport%
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
+
+trsteel_ckeditor:
+    class: Trsteel\CkeditorBundle\Form\Type\CkeditorType
+    transformers: ['strip_js', 'strip_css', 'strip_comments']
+    toolbar: ['basicstyles', 'clipboard', 'paragraph', 'links', 'insert', 'tools']
+    toolbar_groups:
+        clipboard: ['PasteText','PasteFromWord','-','Undo','Redo']
+        basicstyles: ['Bold','Italic','Underline','Strike','Subscript','Superscript', 'TextColor']
+        paragraph: ['NumberedList','BulletedList','Outdent','Indent']
+        links: ['Link','Unlink']
+        insert: ['Image','Table']
+        tools: ['Source', '-', 'Maximize']
+    ui_color: '#FFFFFF'
+    startup_outline_blocks: true
+    width: 800
+    height: 400
+    language: %locale%
+    external_plugins:
+        colorbutton:
+            path: components/ckeditor-colorbutton
+        panelbutton:
+            path: components/ckeditor-panelbutton
+
+services:
+    application_cache:
+        class: Doctrine\Common\Cache\MemcacheCache
+        calls:
+            - [ setMemcache, [ @application.memcache ]]
+            - [ setNamespace, [ %application_memcache_prefix% ]]
+
+    application.memcache:
+        class: Memcache
+        calls:
+            - [ addServer, [ %application_memcache_host%, %application_memcache_port% ]]
+
+    session.memcache:
+        class: Memcache
+        calls:
+            - [ addServer, [ %session_memcache_host%, %session_memcache_port% ]]
+
+    session.handler.memcache:
+        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcacheSessionHandler
+        arguments: [ @session.memcache, { prefix: %session_memcache_prefix%, expiretime: %session_memcache_expire% } ]

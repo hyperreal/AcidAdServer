@@ -1,21 +1,21 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-{{ 'new.page'|trans({}, 'HyperAdsBundle') }}
+{{ 'new.page'|babel }}
 {% endblock %}
 {% block body %}
-<h1>{{ 'new.page'|trans({}, 'HyperAdsBundle') }}</h1>
+<h1>{{ 'new.page'|babel }}</h1>
 
 <form action="{{ path('admin_page_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <p>
-        <button type="submit">{{ 'create'|trans({}, 'HyperAdsBundle') }}</button>
+        <button type="submit">{{ 'create'|babel }}</button>
     </p>
 </form>
 
 <ul class="record_actions">
     <li>
         <a href="{{ path('admin_page') }}">
-            {{ 'back.to.the.list'|trans({}, 'HyperAdsBundle') }}
+            {{ 'back.to.the.list'|babel }}
         </a>
     </li>
 </ul>

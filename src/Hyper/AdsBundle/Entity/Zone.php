@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Hyper\AdsBundle\DBAL\ZoneType;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\ZoneRepository")
  * @ORM\Table(name="zone")
  */
 class Zone
@@ -26,45 +26,67 @@ class Zone
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @ManyToOne (targetEntity="Page", inversedBy="zones")
      * @JoinColumn(name="page_id", referencedColumnName="id")
      */
-    protected $page;
+    private $page;
 
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
-    protected $name;
+    private $name;
 
     /**
-     * @OneToMany(targetEntity="BannerZoneReference", mappedBy="zone")
+     * @OneToMany(targetEntity="BannerZoneReference", mappedBy="zone", cascade={"persist", "remove"})
+     * @var \Doctrine\Common\Collections\ArrayCollection
      */
-    protected $banners;
+    private $banners;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    protected $enabled = 1;
+    private $enabled = 1;
 
     /**
      * @ORM\Column(type="integer", name="max_width")
      */
-    protected $maxWidth;
+    private $maxWidth;
 
     /**
      * @ORM\Column(type="integer", name="max_height")
      */
-    protected $maxHeight;
+    private $maxHeight;
 
     /**
      * @ORM\Column(type="zonetype")
      * @Assert\Choice(callback="getZoneTypes")
      */
-    protected $type = 'desktop';
+    private $type = 'desktop';
+
+    /**
+     * @ORM\Column(type="decimal", name="daily_price", scale=8, precision=14, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Currency")
+     */
+    private $dailyPrice;
+
+    /**
+     * @ORM\Column(type="decimal", name="view_price", scale=8, precision=14, nullable=true)
+     */
+    private $viewPrice;
+
+    /**
+     * @ORM\Column(type="decimal", name="click_price", scale=8, precision=14, nullable=true)
+     */
+    private $clickPrice;
+
+    /**
+     * @ORM\Column(type="integer", name="max_banners")
+     */
+    private $maxBanners;
 
     public function setId($id)
     {
@@ -144,6 +166,56 @@ class Zone
     public function getType()
     {
         return $this->type;
+    }
+
+    public function getDailyPrice()
+    {
+        return $this->dailyPrice;
+    }
+
+    public function setDailyPrice($dailyPrice)
+    {
+        $this->dailyPrice = $dailyPrice;
+    }
+
+    public function setViewPrice($viewPrice)
+    {
+        $this->viewPrice = (float)$viewPrice;
+    }
+
+    public function getViewPrice()
+    {
+        return $this->viewPrice;
+    }
+
+    public function setClickPrice($clickPrice)
+    {
+        $this->clickPrice = $clickPrice;
+    }
+
+    public function getClickPrice()
+    {
+        return $this->clickPrice;
+    }
+
+    public function getMaxBanners()
+    {
+        return $this->maxBanners;
+    }
+
+    public function setMaxBanners($maxBanners)
+    {
+        $this->maxBanners = (int)$maxBanners;
+    }
+
+    public function getBannerReferencesIds()
+    {
+        return array_map(
+            function (BannerZoneReference $ref) {
+                return $ref->getId();
+            },
+            $this->banners->toArray()
+        );
     }
 
     public function __toString()

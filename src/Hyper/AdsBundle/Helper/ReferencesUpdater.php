@@ -12,35 +12,20 @@ class ReferencesUpdater
     const ERROR_ZONE_NOT_SET = 'Zone is not set';
     const ERROR_PROBABILITIES_BANNER_COUNT = 'Number of banners is not equal with number of probabilities';
 
-    /**
-     * @var \Doctrine\ORM\EntityManager
-     */
+    /** @var \Doctrine\ORM\EntityManager */
     private $entityManager;
 
-    /**
-     * @var \Hyper\AdsBundle\Entity\Zone
-     */
+    /** @var \Hyper\AdsBundle\Entity\Zone */
     private $zone;
 
-    /**
-     * @var \Hyper\AdsBundle\Entity\Banner[]
-     */
+    /** @var \Hyper\AdsBundle\Entity\Banner[] */
     private $banners = array();
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $probabilities = array();
 
-    /**
-     * @var array
-     */
-    private $currentReferencesIds = array();
-
-    /**
-     * @var array
-     */
-    private $newReferencesIds = array();
+    /** @var array */
+    private $fixedByAdminSpecification = array();
 
     public function __construct(EntityManager $entityManager)
     {
@@ -73,12 +58,16 @@ class ReferencesUpdater
         $this->probabilities = $probabilities;
     }
 
+    public function setFixedByAdminSpecification(array $spec = array())
+    {
+        $this->fixedByAdminSpecification = $spec;
+    }
+
     /**
      * @throws \InvalidArgumentException
      */
     public function updateReferences()
     {
-        $this->filterUnusedProbabilities();
         $this->validateParameters();
         $this->updateReferencesInTransaction();
     }
@@ -86,37 +75,17 @@ class ReferencesUpdater
     private function updateReferencesInTransaction()
     {
         $this->entityManager->beginTransaction();
-        $this->retrieveCurrentReferencesIds();
-        $this->updateBannersProbabilities();
-        $this->removeUnusedReferences();
+        $this->updateBanners();
         $this->entityManager->commit();
     }
 
-    private function removeUnusedReferences()
-    {
-        $toDeleteRefsIds = array_diff($this->currentReferencesIds, $this->newReferencesIds);
-
-        if (empty($toDeleteRefsIds)) {
-            return;
-        }
-
-        $query = $this->entityManager->createQuery(
-            'UPDATE Hyper\AdsBundle\Entity\BannerZoneReference bzr
-             SET bzr.active = 0
-             WHERE bzr.id IN (?1)'
-        );
-
-        $query->setParameter(1, $toDeleteRefsIds);
-        $query->execute(); //don't need to call $em->clear() because we perform redirect
-    }
-
-    private function updateBannersProbabilities()
+    private function updateBanners()
     {
         foreach ($this->banners as $banner) {
             $ref = $this->getReference($banner);
             $ref->setProbability($this->probabilities[$banner->getId()]);
+            $ref->setFixedByAdmin(intval($this->fixedByAdminSpecification[$banner->getId()]));
             $this->persistReference($ref);
-            $this->newReferencesIds[] = $ref->getId();
         }
     }
 
@@ -137,26 +106,15 @@ class ReferencesUpdater
         return $ref;
     }
 
-    private function filterUnusedProbabilities()
-    {
-        $probabilities = array();
-
-        foreach ($this->banners as $banner) {
-            if (isset($this->probabilities[$banner->getId()])) {
-                $probabilities[$banner->getId()] = $this->probabilities[$banner->getId()];
-            }
-        }
-
-        $this->probabilities = $probabilities;
-    }
-
     private function validateParameters()
     {
         if (empty($this->zone)) {
             throw new \InvalidArgumentException(self::ERROR_ZONE_NOT_SET);
         }
 
-        if (count($this->banners) != count($this->probabilities)) {
+        if (count($this->banners) != count($this->probabilities)
+            || count($this->banners) != count($this->fixedByAdminSpecification)
+        ) {
             throw new \InvalidArgumentException(self::ERROR_PROBABILITIES_BANNER_COUNT);
         }
     }
@@ -173,27 +131,6 @@ class ReferencesUpdater
         $ref->setZone($this->zone);
 
         return $ref;
-    }
-
-    private function retrieveCurrentReferencesIds()
-    {
-        $currentReferences = $this->getBannerReferencesFromZone();
-        $this->currentReferencesIds = array();
-
-        foreach ($currentReferences as $reference) {
-            $this->currentReferencesIds[] = $reference->getId();
-        }
-    }
-
-    /**
-     * @return \Hyper\AdsBundle\Entity\BannerZoneReference[]
-     */
-    private function getBannerReferencesFromZone()
-    {
-        /** @var $repository \Hyper\AdsBundle\Entity\BannerZoneReferenceRepository */
-        $repository = $this->entityManager->getRepository('HyperAdsBundle:BannerZoneReference');
-
-        return $repository->getBannerReferencesByZone($this->zone);
     }
 }
 

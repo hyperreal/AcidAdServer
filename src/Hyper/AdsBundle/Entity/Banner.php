@@ -14,10 +14,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Hyper\AdsBundle\DBAL\BannerType;
+use Hyper\AdsBundle\DBAL\AnnouncementPaymentType;
+use Hyper\AdsBundle\Helper\BannerTypeDeterminer;
+use Hyper\AdsBundle\Exception\InvalidArgumentException;
+use Hyper\AdsBundle\Exception\NoReferenceException;
 
 /**
- * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\BannerRepository")
- * @ORM\Table(name="banner")
+ * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\AdvertisementRepository")
  */
 class Banner extends Advertisement
 {
@@ -27,7 +30,11 @@ class Banner extends Advertisement
     const UPLOAD_DIR = 'uploads';
 
     /**
-     * @Assert\File()
+     * @Assert\File(
+     *     maxSize="1024k",
+     *     mimeTypes={"image/jpeg", "image/gif", "image/png", "application/x-shockwave-flash" },
+     *     mimeTypesMessage="Only PNG, JPEG, GIF and SWF are accepted"
+     * )
      * @var \Symfony\Component\HttpFoundation\File\UploadedFile
      */
     protected $file;
@@ -53,7 +60,7 @@ class Banner extends Advertisement
     protected $height;
 
     /**
-     * @ORM\Column(type="bannertype")
+     * @ORM\Column(type="bannertype", name="banner_type")
      * @Assert\Choice(callback="getBannerTypes")
      */
     protected $type;
@@ -70,33 +77,22 @@ class Banner extends Advertisement
     protected $url;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $description;
-
-    /**
      * @ORM\Column(type="string", name="original_file_name")
      */
     protected $originalFileName;
 
     /**
-     * @OneToMany(targetEntity="BannerZoneReference", mappedBy="banner")
+     * @OneToMany(targetEntity="BannerZoneReference", mappedBy="banner", cascade={"persist", "remove"})
      *
      * @var \Doctrine\Common\Collections\ArrayCollection
      */
     protected $zones;
 
-    /**
-     * @ManyToOne(targetEntity="Advertiser", inversedBy="banners")
-     * @JoinColumn(name="advertiser_id", referencedColumnName="id")
-     *
-     * @var \Hyper\AdsBundle\Entity\Advertiser
-     */
-    protected $advertiser;
-
     public function __construct()
     {
         $this->zones = new ArrayCollection();
+        $this->announcementPaymentType = AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_PREMIUM;
+        $this->type = BannerType::BANNER_TYPE_TEXT;
     }
 
     public function setDescription($description)
@@ -214,14 +210,21 @@ class Banner extends Advertisement
         $this->originalFileName = $fileName;
     }
 
-    public function __toString()
-    {
-        return $this->getId();
-    }
-
     public static function getBannerTypes()
     {
         return BannerType::getValidTypes();
+    }
+
+    public function getActiveZonesCount()
+    {
+        return count(
+            array_filter(
+                $this->zones->toArray(),
+                function (BannerZoneReference $ref) {
+                    return $ref->getActive();
+                }
+            )
+        );
     }
 
     /**
@@ -231,6 +234,10 @@ class Banner extends Advertisement
      */
     public function getReferenceInZone($zoneId)
     {
+        if (!is_numeric($zoneId) || intval($zoneId) != $zoneId || $zoneId < 0) {
+            throw new InvalidArgumentException('Zone id is invalid');
+        }
+
         foreach ($this->zones as $zoneRef) {
             /** @var $zoneRef \Hyper\AdsBundle\Entity\BannerZoneReference */
             if ($zoneId == $zoneRef->getZone()->getId()) {
@@ -241,14 +248,69 @@ class Banner extends Advertisement
         return null;
     }
 
-    public function getAdvertiser()
+    public function getReferenceInZoneAndThrowWhenNoRef(Zone $zone)
     {
-        return $this->advertiser;
+        $ref = $this->getReferenceInZone($zone->getId());
+        if (null === $ref) {
+            throw new NoReferenceException('Reference not found');
+        }
+
+        return $ref;
     }
 
-    public function setAdvertiser(Advertiser $advertiser)
+    /**
+     * @param Zone $zone
+     * @return Order[]
+     */
+    public function getOrdersInZone(Zone $zone)
     {
-        $this->advertiser = $advertiser;
+        $ordersInZone = array();
+        foreach ($this->orders as $order) {
+            /** @var $order Order */
+            /** @var $orderZone Zone */
+            $reference = $order->getBannerZoneReference();
+            if (!empty($reference)) {
+                $orderZone = $reference->getZone();
+                if (!empty($orderZone) && $orderZone->getId() == $zone->getId()) {
+                    $ordersInZone[] = $order;
+                }
+            }
+        }
+
+        return $ordersInZone;
+    }
+
+    /**
+     * @param Zone $zone
+     *
+     * @return \DateTime|null
+     */
+    public function getPaidToInZone(Zone $zone)
+    {
+        $orders = $this->getOrdersInZone($zone);
+
+        if (empty($orders)) {
+            return null;
+        }
+
+        $paidToDates = array_filter(
+            array_map(
+                function (Order $order) {
+                    if ($order->getStatus() == Order::STATUS_FINISHED) {
+                        return $order->getPaymentTo();
+                    } else {
+                        return null;
+                    }
+                },
+                $orders
+            )
+        );
+
+        if (empty($paidToDates)) {
+            return null;
+        }
+
+        return max($paidToDates);
     }
 
     public function getAbsolutePath()
@@ -290,6 +352,14 @@ class Banner extends Advertisement
         $this->path = $filename;
         $this->originalFileName = $info['basename'];
         $this->file = null;
+
+        $this->setBannerType();
+    }
+
+    private function setBannerType()
+    {
+        $determiner = new BannerTypeDeterminer($this);
+        $this->type = $determiner->getType();
     }
 
     private function generateFileName(array $pathInfo)

@@ -4,17 +4,62 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <parameters>
-        <parameter key="hyper_ads.example.class">Hyper\AdsBundle\Example</parameter>
+        <parameter key="hyper_ads.prices_calculator.class">Hyper\AdsBundle\Helper\PricesCalculator</parameter>
+        <parameter key="hyper_ads.order_number_generator.class">Hyper\AdsBundle\Helper\OrderNumberGenerator</parameter>
     </parameters>
 
     <services>
-        <service id="hyper_ads.example" class="%hyper_ads.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+
+        <service id="hyper_ads.prices_calculator" class="%hyper_ads.prices_calculator.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+
+        <service id="hyper_ads.order_number_generator" class="%hyper_ads.order_number_generator.class%">
+        </service>
+
+        <service id="stats_collector" class="Hyper\AdsBundle\Helper\StatsCollector">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <service id="hyper_ads.twig.extension" class="Hyper\AdsBundle\Twig\AcidExtension">
+            <argument type="service" id="translator" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="hyper_ads.user_edit.form.type" class="Hyper\AdsBundle\Form\EditProfileType">
+            <tag name="form.type" alias="hyper_user_editprofile" />
+            <argument>%fos_user.model.user.class%</argument>
+        </service>
+
+        <service id="hyper_ads.payment_form_type" class="Hyper\AdsBundle\Form\PaymentType">
+            <tag name="form.type" alias="hyper_payment_form" />
+            <argument>%max_one_banner_days%</argument>
+            <argument type="service" id="translator" />
+        </service>
+
+        <service id="hyper_ads.banner_zone_calendar" class="Hyper\AdsBundle\Helper\BannerZoneCalendar">
+            <argument type="service" id="application_cache" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <service id="hyper_ads.listener.session_flush" class="Hyper\AdsBundle\EventListener\SessionFlushListener">
+            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="session" />
+        </service>
+
+        <service id="hyper_ads.payments_logger" class="Symfony\Bridge\Monolog\Logger">
+            <argument>pay</argument>
+            <call method="pushHandler">
+                <argument type="service" id="hyper_ads.payments_logger.handler" />
+            </call>
+        </service>
+
+        <service id="hyper_ads.payments_logger.handler" class="Monolog\Handler\StreamHandler">
+            <argument>%kernel.logs_dir%/%kernel.environment%.payments.log</argument>
+            <argument>200</argument>
+        </service>
+
     </services>
-    -->
+
 </container>
