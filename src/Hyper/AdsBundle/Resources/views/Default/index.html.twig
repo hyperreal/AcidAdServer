@@ -3,37 +3,37 @@
 {{ 'welcome'|babel }}
 {% endblock %}
 {% block body %}
-<div class="span-20 last">
-    <blockquote class="push-2 span-7">Many a small thing has been made large by the right kind of advertising.
+<div class="row span8">
+    <blockquote>Many a small thing has been made large by the right kind of advertising.
         <br/>
-        <span class="right">&mdash; Mark Twain</span>
+        <span class="offset1">&mdash; Mark Twain</span>
     </blockquote>
 </div>
 
-<div id="actions" class="prepend-top append-bottom span-20 last">
 {% if is_granted("ROLE_USER") %}
-    <ul class="no-buttons">
-        <li>
-            <a class="span-7 box" href="{{ url('user_banner_new') }}">{{ 'banner.buy'|babel }}</a>
-        </li>
-        <li>
-            {# <a class="span-6 box" href="{{ url('user_banner_new') }}">{{ 'announcement.buy'|babel }}</a> #}
-            <span class="span-6 box">
-                {{ 'announcement.buy'|babel }}<br/>
-                <small class="quiet">W przygotowaniu</small>
-            </span>
-        </li>
-        <li>
-            {# <a class="span-4 last box" href="{{ url('user_banner_new') }}">{{ 'announcement.free.add'|babel }}</a> #}
-            <span class="span-4 last box">
-                {{ 'announcement.free.add'|babel }} <br/>
-                <small class="quiet">W przygotowaniu</small>
-            </span>
-        </li>
-    </ul>
-{% elseif is_granted("ROLE_ADMIN") %}
-    admin
+    <div class="row">
+        <div class="span3">
+            <h2>{{ 'banner'|babel }}</h2>
+            <p>Kup banner info lorem ipsum dolor sit amet</p>
+            <p>
+                <a class="btn btn-primary" href="{{ url('user_banner_new') }}">Przejdź dalej</a>
+            </p>
+        </div>
+
+        <div class="span3">
+            <h2>{{ 'announcement'|babel }}</h2>
+            <p>
+                W przygotowaniu
+            </p>
+        </div>
+
+        <div class="span3">
+            <h2>{{ 'announcement.free'|babel }}</h2>
+            <p>
+                W przygotowaniu
+            </p>
+        </div>
+    </div>
 {% endif %}
-</div>
 
 {% endblock %}
