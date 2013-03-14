@@ -3,11 +3,15 @@
 {{ 'welcome'|babel }}
 {% endblock %}
 {% block body %}
-<div class="row span8">
+<div class="row span7 hero-unit">
+    <h1>Acid Ad Server</h1>
     <blockquote>Many a small thing has been made large by the right kind of advertising.
         <br/>
-        <span class="offset1">&mdash; Mark Twain</span>
+        <small>Mark Twain</small>
     </blockquote>
+    <p>
+        <a class="btn btn-primary btn-large" href="{{ url('acid_tutorial') }}">Dowiedz się więcej</a>
+    </p>
 </div>
 
 {% if is_granted("ROLE_USER") %}
@@ -16,7 +20,7 @@
             <h2>{{ 'banner'|babel }}</h2>
             <p>Kup banner info lorem ipsum dolor sit amet</p>
             <p>
-                <a class="btn btn-primary" href="{{ url('user_banner_new') }}">Przejdź dalej</a>
+                <a class="btn btn-primary" href="{{ url('user_banner_new') }}">{{ 'banner.buy'|babel }}</a>
             </p>
         </div>
 

@@ -11,7 +11,7 @@
     {{ 'zones.short.info'|babel }}
 </div>
 
-<table class="records_list">
+<table class="table table-striped">
     <thead>
     <tr>
         <th>{{ 'page'|babel }}</th>
@@ -22,8 +22,8 @@
     </thead>
     <tbody>
     {% for page in pages %}
-    <tr class="first-spanned-row{% if loop.last %} last{% endif %}{% if page.zones|length == 1 %} first{% endif %}">
-        <th class="spanned-column" rowspan="{{ page.zones|length }}">{{ page.name }}</th>
+    <tr class="{% if loop.last %} last{% endif %}{% if page.zones|length == 1 %} first{% endif %}">
+        <th rowspan="{{ page.zones|length }}">{{ page.name }}</th>
         {% for zone in page.zones %}
             {% if not loop.first %}
                 <tr{% if loop.last  %} class="last-zone"{% endif %}>
