@@ -16,28 +16,39 @@
     </head>
     <body>
 
-    <div class="container">
-        <div id="header" class="nav row">
-            <div id="login-bar" class="span4">
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                <strong>{{ app.user.username }}</strong> |
-                <a href="{{ url('fos_user_profile_edit') }}">{{ 'edit.profile'|babel|lower }}</a> |
-                <a href="{{ path('fos_user_security_logout') }}">
-                    {{ 'layout.logout'|trans({}, 'FOSUserBundle')|lower }}
-                </a>
-                {% else %}
-                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a> |
-                <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
-                {% endif %}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="brand" href="{{ url('_welcome') }}">AcidAdServer</a>
+                <div class="nav-collapse collapse">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <p class="pull-right navbar-text">Zalogowany jako {{ app.user.username }}</p>
+                        <ul class="nav">
+                            <li>
+                                <a href="{{ url('fos_user_profile_edit') }}">{{ 'edit.profile'|babel|lower }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}">
+                                    {{ 'layout.logout'|trans({}, 'FOSUserBundle')|lower }}
+                                </a>
+                            </li>
+                        </ul>
+                    {% else %}
+                        <ul class="nav">
+                            <li>
+                                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+                            </li>
+                        </ul>
+                    {% endif %}
+                </div>
             </div>
-            <h1 id="logo" class="offset3 span4">
-                <div class="span-3">@acid</div>
-                <a href="{{ path('_welcome') }}" class="span-3 last">
-                    <img src="{{ asset('bundles/hyperads/images/hyperreal.png') }}" alt="logo" />
-                </a>
-            </h1>
         </div>
+    </div>
 
+    <div class="container">
         <div class="row">
             <aside class="span3">
                 <menu class="well sidebar-nav">
@@ -106,8 +117,10 @@
             </div>
         </div>
 
-        <div id="footer" class="row">
-            {{ 'powered.by.acid'|babel }} <a href="https://github.com/hyperreal/AcidAdServer" class="github-fork">{{ 'fork.on.github'|babel }}</a>
+        <hr/>
+        <footer>
+            &copy; <a href="http://hyperreal.info/">hyperreal.info</a> 2012-{{ 'now'|date('Y') }} <br/>
+            {{ 'powered.by.acid'|babel }} | <a href="https://github.com/hyperreal/AcidAdServer" class="github-fork">{{ 'fork.on.github'|babel }}</a>
         </div>
 
     </div>
