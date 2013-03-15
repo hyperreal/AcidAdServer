@@ -8,6 +8,7 @@
         "jquery": "~1.9.0",
 		"mustache": "0.7.2",
 		"fancybox": "2.1.4",
-        "bootstrap": "2.3.1"
+        "bootstrap": "2.3.1",
+        "swfobject": "*"
     }
 }
