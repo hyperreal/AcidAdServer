@@ -1,4 +1,4 @@
-<ul class="nav nav-pills nav-stacked">
+<ul class="well nav nav-list">
     {% if is_granted('ROLE_ADMIN') %}
     <li class="nav-header">Admin</li>
     <li{% if app.request.get('_route') == 'admin_advertiser' %} class="active"{% endif %}>
