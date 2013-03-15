@@ -1,0 +1,33 @@
+<ul class="nav nav-pills nav-stacked">
+    {% if is_granted('ROLE_ADMIN') %}
+    <li class="nav-header">Admin</li>
+    <li{% if app.request.get('_route') == 'admin_advertiser' %} class="active"{% endif %}>
+        <a href="{{ path('admin_advertiser') }}">{{ 'advertisers'|babel }}</a>
+    </li>
+    <li{% if app.request.get('_route') == 'admin_page' %} class="active"{% endif %}>
+        <a href="{{ path('admin_page') }}">{{ 'pages'|babel }}</a>
+    </li>
+    <li{% if app.request.get('_route') == 'admin_zone' %} class="active"{% endif %}>
+        <a href="{{ path('admin_zone') }}">{{ 'zones'|babel }}</a>
+    </li>
+
+    <li{% if app.request.get('_route') == 'admin_banner' %} class="active"{% endif %}>
+        <a href="{{ path('admin_banner') }}">{{ 'banners'|babel }}</a>
+    </li>
+    <li class="nav-header">User</li>
+    {% endif %}
+    {% if is_granted("ROLE_USER") %}
+    <li{% if app.request.get('_route') == 'acid_tutorial' %} class="active"{% endif %}>
+        <a href="{{ url('acid_tutorial') }}">{{ 'tutorial'|babel }}</a>
+    </li>
+    <li{% if app.request.get('_route') == 'user_banner_list' %} class="active"{% endif %}>
+        <a href="{{ path('user_banner_list') }}">{{ 'your.banners'|babel }}</a>
+    </li>
+    <li{% if app.request.get('_route') == 'default_zones_info' %} class="active"{% endif %}>
+        <a href="{{ url("default_zones_info") }}">{{ 'zones.info'|babel }}</a>
+    </li>
+    <li>
+        <a href="http://www.seethestats.com/site/hyperreal.info/STSd1bIizV7" target="_blank" class="external">{{ 'analytics.stats'|babel }}</a>
+    </li>
+    {% endif %}
+</ul>
