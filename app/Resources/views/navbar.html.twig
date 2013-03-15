@@ -1,0 +1,31 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="brand" href="{{ url('_welcome') }}">AcidAdServer</a>
+            <div class="nav-collapse collapse">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <p class="pull-right navbar-text">Zalogowany jako {{ app.user.username }}</p>
+                <ul class="nav">
+                    <li>
+                        <a href="{{ url('fos_user_profile_edit') }}">{{ 'edit.profile'|babel|lower }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('fos_user_security_logout') }}">
+                            {{ 'layout.logout'|trans({}, 'FOSUserBundle')|lower }}
+                        </a>
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="nav">
+                    <li>
+                        <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

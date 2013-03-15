@@ -1,0 +1,23 @@
+{% if app.session.hasFlash('error') %}
+<div class="error">
+    {{ app.session.flash('error') }}
+</div>
+{% endif %}
+
+{% if app.session.hasFlash('notice') %}
+<div class="notice">
+    {{ app.session.flash('notice') }}
+</div>
+{% endif %}
+
+{% if app.session.hasFlash('info') %}
+<div class="info">
+    {{ app.session.flash('info') }}
+</div>
+{% endif %}
+
+{% if app.session.hasFlash('success') %}
+<div class="success">
+    {{ app.session.flash('success') }}
+</div>
+{% endif %}
