@@ -265,8 +265,10 @@ class Container implements IntrospectableContainerInterface
             unset($this->scopedServices[$name]);
 
             foreach ($this->scopeChildren[$name] as $child) {
-                $services[$child] = $this->scopedServices[$child];
-                unset($this->scopedServices[$child]);
+                if (isset($this->scopedServices[$child])) {
+                    $services[$child] = $this->scopedServices[$child];
+                    unset($this->scopedServices[$child]);
+                }
             }
 
                         $this->services = call_user_func_array('array_diff_key', $services);
@@ -509,11 +511,11 @@ abstract class Kernel implements KernelInterface, TerminableInterface
     protected $classes;
     protected $errorReportingLevel;
 
-    const VERSION         = '2.1.5-DEV';
-    const VERSION_ID      = '20105';
+    const VERSION         = '2.1.9-DEV';
+    const VERSION_ID      = '20109';
     const MAJOR_VERSION   = '2';
     const MINOR_VERSION   = '1';
-    const RELEASE_VERSION = '5';
+    const RELEASE_VERSION = '9';
     const EXTRA_VERSION   = 'DEV';
 
     
@@ -1605,18 +1607,30 @@ class HttpKernel extends BaseHttpKernel
         }
 
         if ($this->esiSupport && (true === $options['standalone'] || 'esi' === $options['standalone'])) {
-            $uri = $this->generateInternalUri($controller, $options['attributes'], $options['query']);
+            if (0 === strpos($controller, 'http://') || 0 === strpos($controller, 'https://')) {
+                $uri = $controller;
+            } else {
+                $uri = $this->generateInternalUri($controller, $options['attributes'], $options['query']);
+            }
 
             $alt = '';
             if ($options['alt']) {
-                $alt = $this->generateInternalUri($options['alt'][0], isset($options['alt'][1]) ? $options['alt'][1] : array(), isset($options['alt'][2]) ? $options['alt'][2] : array());
+                if (is_string($options['alt']) && (0 === strpos($options['alt'], 'http://') || 0 === strpos($options['alt'], 'https://'))) {
+                    $alt = $options['alt'];
+                } else {
+                    $alt = $this->generateInternalUri($options['alt'][0], isset($options['alt'][1]) ? $options['alt'][1] : array(), isset($options['alt'][2]) ? $options['alt'][2] : array());
+                }
             }
 
             return $this->container->get('esi')->renderIncludeTag($uri, $alt, $options['ignore_errors'], $options['comment']);
         }
 
         if ('js' === $options['standalone']) {
-            $uri = $this->generateInternalUri($controller, $options['attributes'], $options['query'], false);
+            if (0 === strpos($controller, 'http://') || 0 === strpos($controller, 'https://')) {
+                $uri = $controller;
+            } else {
+                $uri = $this->generateInternalUri($controller, $options['attributes'], $options['query'], false);
+            }
             $defaultContent = null;
 
             if ($template = $this->container->getParameter('templating.hinclude.default_template')) {
@@ -1628,7 +1642,12 @@ class HttpKernel extends BaseHttpKernel
 
         $request = $this->container->get('request');
 
-                if (0 === strpos($controller, '/')) {
+                if (0 === strpos($controller, 'http://') || 0 === strpos($controller, 'https://')) {
+            $subRequest = Request::create($controller, 'get', array(), $request->cookies->all(), array(), $request->server->all());
+            if ($session = $request->getSession()) {
+                $subRequest->setSession($session);
+            }
+        } elseif (0 === strpos($controller, '/')) {
             $subRequest = Request::create($request->getUriForPath($controller), 'get', array(), $request->cookies->all(), array(), $request->server->all());
             if ($session = $request->getSession()) {
                 $subRequest->setSession($session);

@@ -1,97 +1,3 @@
-body {
-  padding: 60px 0 20px 0;
-}
-ul.no-buttons {
-  list-style-type: none;
-}
-menu,
-ul.no-buttons {
-  margin: 0;
-  padding: 0;
-}
-form.user-form {
-  width: 450px;
-  margin: auto;
-  list-style: none;
-  background: #c3d9ff;
-  border: 1px solid #0088CC;
-  padding: 40px 0px;
-}
-form label {
-  float: left;
-  width: 150px;
-  text-align: right;
-  padding: 7px 5px 0 0;
-}
-form div {
-  clear: both;
-}
-form#payment-form div#hyper_payment_form {
-  float: left;
-  width: 370px;
-}
-form#payment-form div {
-  clear: none;
-}
-form input[type="submit"],
-form button[type="submit"] {
-  position: relative;
-  float: right;
-  right: 88px;
-}
-ul form > button[type="submit"] {
-  float: none;
-  position: static;
-}
-.first-spanned-row > *:first-child,
-.last-zone > td,
-.first-spanned-row.first > td {
-  border-bottom: 1px solid #92CAE4;
-}
-.spanned-column {
-  background: #D5EDF8;
-}
-aside menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-aside menu li {
-  margin: 0;
-  padding: 0;
-}
-aside menu li a {
-  display: block;
-  border-bottom: 1px dotted #ddd;
-  padding: 5px;
-  margin: 3px 0;
-}
-aside menu.admin {
-  background: #eeeaee;
-  border-bottom: 1px solid #aaa;
-}
-form div > ul {
-  list-style: none;
-  float: right;
-}
-#tutorial p,
-#tutorial ul {
-  font-family: 'Headland One', serif;
-}
-.no-payment-possible {
-  margin: 0;
-  padding: 0;
-}
-#tutorial tbody tr:nth-child(2n) td,
-.cke_dialog_contents tbody tr:nth-child(2n) td {
-  background: #FFF;
-}
-table label.table {
-  float: none;
-  margin-left: 9px;
-  font-weight: normal;
-  padding: 0;
-}
 /*!
  * Bootstrap v2.3.1
  *
@@ -5346,4 +5252,103 @@ a.badge:focus {
 }
 .affix {
   position: fixed;
+}
+body {
+  padding: 60px 0 20px 0;
+}
+body.grey {
+  background: #f5f5f5;
+}
+ul.no-buttons {
+  list-style-type: none;
+}
+menu,
+ul.no-buttons {
+  margin: 0;
+  padding: 0;
+}
+form.user-form {
+  width: 450px;
+  margin: auto;
+  list-style: none;
+  background: #c3d9ff;
+  border: 1px solid #0088CC;
+  padding: 40px 0px;
+}
+form label {
+  float: left;
+  width: 150px;
+  text-align: right;
+  padding: 7px 5px 0 0;
+}
+form div {
+  clear: both;
+}
+form#payment-form div#hyper_payment_form {
+  float: left;
+  width: 370px;
+}
+form#payment-form div {
+  clear: none;
+}
+.first-spanned-row > *:first-child,
+.last-zone > td,
+.first-spanned-row.first > td {
+  border-bottom: 1px solid #92CAE4;
+}
+.spanned-column {
+  background: #D5EDF8;
+}
+aside menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+aside menu li {
+  margin: 0;
+  padding: 0;
+}
+aside menu li a {
+  display: block;
+  border-bottom: 1px dotted #ddd;
+  padding: 5px;
+  margin: 3px 0;
+}
+aside menu.admin {
+  background: #eeeaee;
+  border-bottom: 1px solid #aaa;
+}
+form div > ul {
+  list-style: none;
+  float: right;
+}
+#tutorial p,
+#tutorial ul {
+  font-family: 'Headland One', serif;
+}
+.no-payment-possible {
+  margin: 0;
+  padding: 0;
+}
+#tutorial tbody tr:nth-child(2n) td,
+.cke_dialog_contents tbody tr:nth-child(2n) td {
+  background: #FFF;
+}
+table label.table {
+  float: none;
+  margin-left: 9px;
+  font-weight: normal;
+  padding: 0;
+}
+.form-signin {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  border-radius: 5px 5px 5px 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  margin: 0 auto 20px;
+  max-width: 300px;
+  padding: 19px 29px 29px;
+}
+.form-signin .form-signin-heading {
+  margin-bottom: 10px;
 }
