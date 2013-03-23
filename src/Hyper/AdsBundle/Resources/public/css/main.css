@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 body {
   padding: 60px 0 20px 0;
 }
-=======
->>>>>>> ogloszenia
 ul.no-buttons {
   list-style-type: none;
 }
@@ -15,12 +12,6 @@ ul.no-buttons {
 form.user-form {
   width: 450px;
   margin: auto;
-<<<<<<< HEAD
-=======
-  list-style: none;
-  background: #c3d9ff;
-  border: 1px solid #0088CC;
->>>>>>> ogloszenia
   padding: 40px 0px;
 }
 form label {
@@ -39,46 +30,9 @@ form#payment-form div#hyper_payment_form {
 form#payment-form div {
   clear: none;
 }
-form input[type="submit"],
-form button[type="submit"] {
-  position: relative;
-  float: right;
-  right: 88px;
-}
-ul form > button[type="submit"] {
-  float: none;
-  position: static;
-}
-.first-spanned-row > *:first-child,
-.last-zone > td,
-.first-spanned-row.first > td {
-  border-bottom: 1px solid #92CAE4;
-}
 .spanned-column {
   background: #D5EDF8;
 }
-<<<<<<< HEAD
-=======
-aside menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-aside menu li {
-  margin: 0;
-  padding: 0;
-}
-aside menu li a {
-  display: block;
-  border-bottom: 1px dotted #ddd;
-  padding: 5px;
-  margin: 3px 0;
-}
-aside menu.admin {
-  background: #eeeaee;
-  border-bottom: 1px solid #aaa;
-}
->>>>>>> ogloszenia
 form div > ul {
   list-style: none;
   float: right;
@@ -101,7 +55,6 @@ table label.table {
   font-weight: normal;
   padding: 0;
 }
-<<<<<<< HEAD
 /*!
  * Bootstrap v2.3.1
  *
@@ -5357,5 +5310,3 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
-=======
->>>>>>> ogloszenia
