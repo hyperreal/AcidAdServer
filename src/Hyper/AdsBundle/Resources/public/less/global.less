@@ -11,30 +11,44 @@ menu, ul.no-buttons {
     padding: 0;
 }
 
-form.user-form {
-    width: 450px;
-    margin: auto;
-    padding: 40px 0px;
-}
+form {
 
-form label{
-    float: left;
-    width: 150px;
-    text-align: right;
-    padding: 7px 5px 0 0;
-}
+    &.user-form {
+        width: 450px;
+        margin: auto;
+        list-style: none;
+        background: #c3d9ff;
+        border: 1px solid #0088CC;
+        padding: 40px 0px;
+    }
 
-form div {
-    clear: both;
-}
+    label {
+        float: left;
+        width: 150px;
+        text-align: right;
+        padding: 7px 5px 0 0;
+    }
 
-form#payment-form div#hyper_payment_form {
-    float: left;
-    width: 370px;
-}
+    div {
+        clear: both;
+    }
 
-form#payment-form div {
-    clear: none;
+    &#payment-form {
+        div {
+            clear: none;
+
+            &#hyper_payment_form {
+                float: left;
+                width: 370px;
+            }
+        }
+    }
+
+    input[type="submit"], button[type="submit"] {
+        position: relative;
+        float: right;
+        right: 88px;
+    }
 }
 
 .spanned-column {
@@ -67,7 +81,6 @@ table label.table {
     font-weight: normal;
     padding: 0;
 }
-
 
 .form-signin {
 
