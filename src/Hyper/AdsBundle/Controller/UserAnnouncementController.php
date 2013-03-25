@@ -5,6 +5,7 @@ namespace Hyper\AdsBundle\Controller;
 use Hyper\AdsBundle\Entity\Advertisement;
 use Hyper\AdsBundle\Entity\Announcement;
 use Hyper\AdsBundle\Form\AnnouncementType;
+use \Hyper\AdsBundle\Exception\InvalidArgumentException;
 use JMS\DiExtraBundle\Annotation as DI;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -97,20 +98,33 @@ class UserAnnouncementController extends Controller
     }
 
     /**
-     * @Route("/{announcement}/save", name="user_announcement_update")
+     * @Route("/{announcement}/update-handler", name="user_announcement_update_handler")
      * @Template("HyperAdsBundle:UserAnnouncement:edit.html.twig")
      * @Method("POST")
      */
-    public function updateAction(Announcement $announcement, Request $request)
+    public function announcementHandlerAction(Request $request, Announcement $announcement)
+    {
+        $action = $request->get('action');
+        $request->request->remove('action');
+
+        if ($this->trans('delete') === $action) {
+            return $this->updateAnnouncement($announcement, $request, 'remove');
+        } elseif ($this->trans('save') === $action) {
+            return $this->updateAnnouncement($announcement, $request, 'persist');
+        }
+
+        throw new InvalidArgumentException('Invalid action');
+    }
+
+    private function updateAnnouncement(Announcement $announcement, Request $request, $action)
     {
         $form = $this->createForm(new AnnouncementType(), $announcement);
         $form->bind($request);
 
         if ($form->isValid()) {
-            $this->entityManager->persist($announcement);
-            $this->entityManager->flush($announcement);
+            $this->persistOrRemoveAnnouncement($action, $announcement);
+            $this->persistOrRemoveFlash($action);
 
-            $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('announcement.saved'));
             return $this->redirect($this->generateUrl('user_announcement_index'));
         }
 
@@ -120,13 +134,24 @@ class UserAnnouncementController extends Controller
         );
     }
 
-    /**
-     * @Route("/{announcement}/delete", name="user_announcement_delete")
-     * @Method("POST")
-     */
-    public function deleteAction(Announcement $announcement, Request $request)
+    private function persistOrRemoveFlash($action)
     {
+        if ('persist' === $action) {
+            $this->get('session')->getFlashBag()->add('success', $this->trans('announcement.saved'));
+        } elseif ('remove' === $action) {
+            $this->get('session')->getFlashBag()->add('success', $this->trans('announcement.deleted'));
+        }
+    }
 
+    private function persistOrRemoveAnnouncement($action, $announcement)
+    {
+        if ('persist' === $action) {
+            $this->entityManager->persist($announcement);
+        } elseif ('remove' === $action) {
+            $this->entityManager->remove($announcement);
+        }
+
+        $this->entityManager->flush();
     }
 
     private function throwUnlessValidUser(Advertisement $advertisement)
