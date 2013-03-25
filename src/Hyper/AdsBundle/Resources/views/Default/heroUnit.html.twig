@@ -1,0 +1,10 @@
+<div class="row {% if is_granted("ROLE_USER") %}span7 {% endif %}hero-unit">
+    <h1>Acid Ad Server</h1>
+    <blockquote>Many a small thing has been made large by the right kind of advertising.
+        <br/>
+        <small>Mark Twain</small>
+    </blockquote>
+    <p>
+        <a class="btn btn-primary btn-large" href="{{ url('acid_tutorial') }}">Dowiedz się więcej</a>
+    </p>
+</div>

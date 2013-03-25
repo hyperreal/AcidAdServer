@@ -49,7 +49,7 @@ Then, use the `install` command to download needed vendors:
     php composer.phar install
 
 Next, adjust database settings in `app/config/parameters.yml` (copy an example file) file and run
-file and run following command from project root dir:
+following command from project root dir:
 
     ./app/console doctrine:schema:create --force
     
@@ -64,10 +64,6 @@ controller starting with `web` path: `http://example.com/web/admin`. If you are 
    
 instead of installing Apache or nginx.
 
-Look that your virtual host document root must point to `web`
-directory (recommended) *or* you must access front controller 
-starting with `web` path: `http://example.com/web/admin`
-
 With `node` and `bower` installed, you can next install JS and CSS
 dependencies:
 
@@ -79,3 +75,4 @@ Acid is based on Symfony2 but does not utilize Assetic. We prefer Grunt so if yo
 install `nodejs` (we recommend source distribution and `./configure && make && sudo make install`), `grunt-cli`
 (`npm install grunt-cli -g`) and in project's root perform `npm install`. Next you can edit bundle's stylesheet(s) in
 LESS format and with `grunt watch` command check results immediately.
+

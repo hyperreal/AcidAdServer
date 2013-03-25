@@ -23,7 +23,10 @@
         {{ form_errors(form.description) }}
         {{ form_rest(form) }}
     </div>
-    <input type="submit" value="{{ 'save'|babel }}">
+    <div class="form-actions">
+        <input type="submit" class="btn btn-primary btn-large" value="{{ 'save'|babel }}">
+        <input type="submit" class="btn btn-danger btn-large" value="{{ 'delete'|babel }}">
+    </div>
 </form>
 
 {% endblock %}
