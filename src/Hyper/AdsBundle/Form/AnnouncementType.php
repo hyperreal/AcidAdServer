@@ -27,7 +27,7 @@ class AnnouncementType extends AbstractType
         );
         $builder->add(
             'description',
-            'ckeditor',
+            'purified_ckeditor',
             array(
                 'attr' => array('id' => "description"),
                 'label' => 'description',

@@ -5288,12 +5288,6 @@ form#payment-form div#hyper_payment_form {
   float: left;
   width: 370px;
 }
-form input[type="submit"],
-form button[type="submit"] {
-  position: relative;
-  float: right;
-  right: 88px;
-}
 .spanned-column {
   background: #d5edf8;
 }
