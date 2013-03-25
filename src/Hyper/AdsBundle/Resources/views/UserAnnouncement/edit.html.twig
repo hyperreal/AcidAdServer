@@ -7,7 +7,7 @@
 {% block body %}
 
 <h1>{{ 'edit.announcement'|babel({'%announcement%': announcement}) }}</h1>
-<form method="POST" action="{{ url('user_announcement_update', {'announcement': announcement.id}) }}">
+<form method="post" action="{{ url('user_announcement_update_handler', {'announcement': announcement.id}) }}">
     <div>
         {{ form_label(form.title) }}
         {{ form_widget(form.title) }}
@@ -25,8 +25,8 @@
     </div>
     <div class="form-actions">
         <div class="pull-right">
-            <input type="submit" class="btn btn-danger" value="{{ 'delete'|babel }}">
-            <input type="submit" class="btn btn-primary" value="{{ 'save'|babel }}">
+            <input type="submit" name="action" class="btn btn-danger" value="{{ 'delete'|babel }}">
+            <input type="submit" name="action" class="btn btn-primary" value="{{ 'save'|babel }}">
         </div>
     </div>
 </form>
