@@ -9,7 +9,7 @@
 {% if is_granted("ROLE_USER") %}
     <div class="row">
         <div class="span3">
-            <h2>{{ 'banner'|babel }}</h2>
+            <h2>{{ 'banners'|babel }}</h2>
             <p>Kup banner info lorem ipsum dolor sit amet</p>
             <p>
                 <a class="btn btn-primary" href="{{ url('user_banner_new') }}">{{ 'banner.buy'|babel }}</a>
@@ -17,7 +17,7 @@
         </div>
 
         <div class="span3">
-            <h2>{{ 'announcement'|babel }}</h2>
+            <h2>{{ 'announcements'|babel }}</h2>
             <p>
                 W przygotowaniu
             </p>
@@ -27,6 +27,9 @@
             <h2>{{ 'announcement.free'|babel }}</h2>
             <p>
                 W przygotowaniu
+            </p>
+            <p>
+                <a class="btn btn-primary" href="{{ url('user_announcement_new') }}">{{ 'announcement.add'|babel }}</a>
             </p>
         </div>
     </div>

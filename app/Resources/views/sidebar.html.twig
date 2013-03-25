@@ -23,6 +23,9 @@
     <li{% if app.request.get('_route') == 'user_banner_list' %} class="active"{% endif %}>
         <a href="{{ path('user_banner_list') }}">{{ 'your.banners'|babel }}</a>
     </li>
+    <li{% if app.request.get('_route') == 'user_announcement_index' %} class="active"{% endif %}>
+        <a href="{{ url('user_announcement_index') }}">{{ 'your.announcements'|babel }}</a>
+    </li>
     <li{% if app.request.get('_route') == 'default_zones_info' %} class="active"{% endif %}>
         <a href="{{ url("default_zones_info") }}">{{ 'zones.info'|babel }}</a>
     </li>
