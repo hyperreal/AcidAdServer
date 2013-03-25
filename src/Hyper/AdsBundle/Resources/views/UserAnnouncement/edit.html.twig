@@ -24,8 +24,10 @@
         {{ form_rest(form) }}
     </div>
     <div class="form-actions">
-        <input type="submit" class="btn btn-primary btn-large" value="{{ 'save'|babel }}">
-        <input type="submit" class="btn btn-danger btn-large" value="{{ 'delete'|babel }}">
+        <div class="pull-right">
+            <input type="submit" class="btn btn-danger" value="{{ 'delete'|babel }}">
+            <input type="submit" class="btn btn-primary" value="{{ 'save'|babel }}">
+        </div>
     </div>
 </form>
 

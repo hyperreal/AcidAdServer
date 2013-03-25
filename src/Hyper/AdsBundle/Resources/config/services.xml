@@ -60,6 +60,15 @@
             <argument>200</argument>
         </service>
 
+        <service id="hyper_ads.form.type.purified_ckeditor" class="Hyper\AdsBundle\Form\Type\PurifiedCkeditorType">
+            <argument type="service" id="hyper_ads.form.transformer.html_purifier" />
+            <tag name="form.type" alias="purified_ckeditor" />
+        </service>
+
+        <service id="hyper_ads.form.transformer.html_purifier" class="Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer">
+            <argument type="service" id="exercise_html_purifier.default" />
+        </service>
+
     </services>
 
 </container>

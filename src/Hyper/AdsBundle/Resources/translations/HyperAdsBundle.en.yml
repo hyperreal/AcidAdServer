@@ -115,3 +115,6 @@ tutorial: Guide
 extend.the.payment: 'Extend the payment'
 payment.instruction.not.found: 'Payment instruction not found'
 max.days.error: 'You could only buy banner for %maxDays%'
+payment.type: 'Payment type'
+announcement.standard: 'Free announcement'
+edit.announcement: 'Edit announcement'
