@@ -7,112 +7,26 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/hyperads/css/main.css') }}" media="screen" />
 		<link href='http://fonts.googleapis.com/css?family=Headland+One&subset=latin-ext' rel='stylesheet' type='text/css'>
-        <!--[if lt IE 8]>
-            <link rel="stylesheet" href="{{ asset('css/ie.css') }}" type="text/css" media="screen, projection">
-        <![endif]-->
         <script type="text/javascript" src="{{ asset('components/jquery/jquery.min.js') }}"></script>
 		<link rel="stylesheet" href="{{ asset('components/fancybox/source/jquery.fancybox.css') }}" type="text/css" media="screen" />
         <script type="text/javascript" src="{{ asset('components/fancybox/source/jquery.fancybox.pack.js') }}"></script>
     </head>
     <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <a class="brand" href="{{ url('_welcome') }}">AcidAdServer</a>
-                <div class="nav-collapse collapse">
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <p class="pull-right navbar-text">Zalogowany jako {{ app.user.username }}</p>
-                        <ul class="nav">
-                            <li>
-                                <a href="{{ url('fos_user_profile_edit') }}">{{ 'edit.profile'|babel|lower }}</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('fos_user_security_logout') }}">
-                                    {{ 'layout.logout'|trans({}, 'FOSUserBundle')|lower }}
-                                </a>
-                            </li>
-                        </ul>
-                    {% else %}
-                        <ul class="nav">
-                            <li>
-                                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
-                            </li>
-                        </ul>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include "::navbar.html.twig" %}
 
     <div class="container">
+
         <div class="row">
+
+            {% if is_granted("ROLE_USER") %}
             <aside class="span3">
-                <menu class="well sidebar-nav">
-                    <ul>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li class="nav-header">Admin</li>
-                        <li>
-                            <a href="{{ path('admin_advertiser') }}">{{ 'advertisers'|babel }}</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin_page') }}">{{ 'pages'|babel }}</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin_zone') }}">{{ 'zones'|babel }}</a>
-                        </li>
-
-                        <li>
-                            <a href="{{ path('admin_banner') }}">{{ 'banners'|babel }}</a>
-                        </li>
-                        <li class="nav-header">User</li>
-                    {% endif %}
-                    {% if is_granted("ROLE_USER") %}
-                        <li>
-                            <a href="{{ url('acid_tutorial') }}">{{ 'tutorial'|babel }}</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('user_banner_list') }}">{{ 'your.banners'|babel }}</a>
-                        </li>
-                        <li>
-                            <a href="{{ url("default_zones_info") }}">{{ 'zones.info'|babel }}</a>
-                        </li>
-                        <li>
-                            <a href="http://www.seethestats.com/site/hyperreal.info/STSd1bIizV7" target="_blank" class="external">{{ 'analytics.stats'|babel }}</a>
-                        </li>
-                    {% endif %}
-                    </ul>
-                </menu>
+                {% include "::sidebar.html.twig" %}
             </aside>
+            {% endif %}
 
-            <div class="row span9">
-                {% if app.session.hasFlash('error') %}
-                    <div class="error">
-                        {{ app.session.flash('error') }}
-                    </div>
-                {% endif %}
-
-                {% if app.session.hasFlash('notice') %}
-                    <div class="notice">
-                        {{ app.session.flash('notice') }}
-                    </div>
-                {% endif %}
-
-                {% if app.session.hasFlash('info') %}
-                    <div class="info">
-                        {{ app.session.flash('info') }}
-                    </div>
-                {% endif %}
-
-                {% if app.session.hasFlash('success') %}
-                    <div class="success">
-                        {{ app.session.flash('success') }}
-                    </div>
-                {% endif %}
-
+            <div class="row{% if is_granted("ROLE_USER") %} span9{% endif %}">
+                {% include "::flashes.html.twig" %}
                 {% block body %}{% endblock %}
             </div>
         </div>
@@ -121,9 +35,6 @@
         <footer>
             &copy; <a href="http://hyperreal.info/">hyperreal.info</a> 2012-{{ 'now'|date('Y') }} <br/>
             {{ 'powered.by.acid'|babel }} | <a href="https://github.com/hyperreal/AcidAdServer" class="github-fork">{{ 'fork.on.github'|babel }}</a>
-        </div>
-
-    </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

@@ -1,0 +1,23 @@
+{% for error in app.session.flashbag.get('error') %}
+<div class="error">
+    {{ error }}
+</div>
+{% endfor %}
+
+{% for notice in app.session.flashbag.get('notice') %}
+<div class="notice">
+    {{ notice }}
+</div>
+{% endfor %}
+
+{% for info in app.session.flashbag.get('info') %}
+<div class="info">
+    {{ info }}
+</div>
+{% endfor %}
+
+{% for success in app.session.flashbag.get('success') %}
+<div class="success">
+    {{ success }}
+</div>
+{% endfor %}

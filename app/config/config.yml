@@ -104,7 +104,7 @@ trsteel_ckeditor:
         tools: ['Source', '-', 'Maximize']
     ui_color: '#FFFFFF'
     startup_outline_blocks: true
-    width: 800
+    width: 697
     height: 400
     language: %locale%
     external_plugins:

@@ -98,11 +98,26 @@ class UserAnnouncementController extends Controller
 
     /**
      * @Route("/{announcement}/save", name="user_announcement_update")
+     * @Template("HyperAdsBundle:UserAnnouncement:edit.html.twig")
      * @Method("POST")
      */
     public function updateAction(Announcement $announcement, Request $request)
     {
+        $form = $this->createForm(new AnnouncementType(), $announcement);
+        $form->bind($request);
 
+        if ($form->isValid()) {
+            $this->entityManager->persist($announcement);
+            $this->entityManager->flush($announcement);
+
+            $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('announcement.saved'));
+            return $this->redirect($this->generateUrl('user_announcement_index'));
+        }
+
+        return array(
+            'form' => $form->createView(),
+            'announcement' => $announcement,
+        );
     }
 
     /**

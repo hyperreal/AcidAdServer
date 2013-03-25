@@ -5256,9 +5256,6 @@ a.badge:focus {
 body {
   padding: 60px 0 20px 0;
 }
-body.grey {
-  background: #f5f5f5;
-}
 ul.no-buttons {
   list-style-type: none;
 }
@@ -5270,9 +5267,6 @@ ul.no-buttons {
 form.user-form {
   width: 450px;
   margin: auto;
-  list-style: none;
-  background: #c3d9ff;
-  border: 1px solid #0088CC;
   padding: 40px 0px;
 }
 form label {
@@ -5291,32 +5285,8 @@ form#payment-form div#hyper_payment_form {
 form#payment-form div {
   clear: none;
 }
-.first-spanned-row > *:first-child,
-.last-zone > td,
-.first-spanned-row.first > td {
-  border-bottom: 1px solid #92CAE4;
-}
 .spanned-column {
-  background: #D5EDF8;
-}
-aside menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-aside menu li {
-  margin: 0;
-  padding: 0;
-}
-aside menu li a {
-  display: block;
-  border-bottom: 1px dotted #ddd;
-  padding: 5px;
-  margin: 3px 0;
-}
-aside menu.admin {
-  background: #eeeaee;
-  border-bottom: 1px solid #aaa;
+  background: #d5edf8;
 }
 form div > ul {
   list-style: none;
@@ -5332,7 +5302,7 @@ form div > ul {
 }
 #tutorial tbody tr:nth-child(2n) td,
 .cke_dialog_contents tbody tr:nth-child(2n) td {
-  background: #FFF;
+  background: #fff;
 }
 table label.table {
   float: none;
@@ -5341,8 +5311,8 @@ table label.table {
   padding: 0;
 }
 .form-signin {
-  background-color: #FFFFFF;
-  border: 1px solid #E5E5E5;
+  background-color: #e5e5e5;
+  border: 1px solid #e5e5e5;
   border-radius: 5px 5px 5px 5px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   margin: 0 auto 20px;
