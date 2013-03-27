@@ -2,20 +2,19 @@
 
 namespace Hyper\AdsBundle\Tests\Entity;
 
-use Hyper\AdsBundle\Entity\Advertisement;
+use Hyper\AdsBundle\Entity\Announcement;
 use Hyper\AdsBundle\Entity\Banner;
 use Hyper\AdsBundle\DBAL\AnnouncementPaymentType;
 
 class AnnouncementTest extends \PHPUnit_Framework_TestCase
 {
     const AD_ID = 997;
-    /** @var \Hyper\AdsBundle\Entity\Advertisement */
+    /** @var \Hyper\AdsBundle\Entity\Announcement */
     private $ad;
 
     public function setUp()
     {
-        $this->markTestSkipped();
-        $this->ad = new Advertisement();
+        $this->ad = new Announcement();
     }
 
     /**
@@ -51,7 +50,7 @@ class AnnouncementTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsActiveForStandardAd()
     {
-        $this->ad->setAdvertisementPaymentType(AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_STANDARD);
+        $this->ad->setAnnouncementPaymentType(AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_STANDARD);
         $this->assertTrue($this->ad->isActive());
     }
 
@@ -62,7 +61,7 @@ class AnnouncementTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsActiveForPremiumAd()
     {
-        $this->ad->setAdvertisementPaymentType(AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_PREMIUM);
+        $this->ad->setAnnouncementPaymentType(AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_PREMIUM);
         $this->ad->setPaidTo(new \DateTime('now - 1 month'));
         $this->assertFalse($this->ad->isActive());
         $this->ad->setPaidTo(new \DateTime('now + 1 month'));
@@ -75,7 +74,7 @@ class AnnouncementTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetValidAnnouncementPaymentType($paymentType)
     {
-        $this->ad->setAdvertisementPaymentType($paymentType);
+        $this->ad->setAnnouncementPaymentType($paymentType);
         $this->assertAttributeEquals($paymentType, 'announcementPaymentType', $this->ad);
     }
 
@@ -86,7 +85,7 @@ class AnnouncementTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetInvalidAnnouncementPaymentTypesProvider()
     {
-        $this->ad->setAdvertisementPaymentType('invalid');
+        $this->ad->setAnnouncementPaymentType('invalid');
     }
 
     public function validAnnouncementPaymentTypesProvider()
