@@ -35,7 +35,11 @@
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "exercise/htmlpurifier-bundle": "dev-master",
         "Trsteel/ckeditor-bundle": "dev-master",
-        "wikp/payment-mtgox-bundle": "dev-master"
+        "wikp/payment-mtgox-bundle": "dev-master",
+        "jms/metadata": "1.2.*@dev",
+        "friendsofsymfony/rest-bundle": "0.12.*@dev",
+		"jms/serializer-bundle": "0.12.*@dev",
+		"jms/serializer": "0.12.*@dev"
     },
     "scripts": {
         "post-install-cmd": [

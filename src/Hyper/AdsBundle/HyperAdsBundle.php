@@ -12,4 +12,9 @@ class HyperAdsBundle extends Bundle
         $platform = $em->getConnection()->getDatabasePlatform();
         $platform->registerDoctrineTypeMapping('enum', 'string');
     }
+
+    public function getParent()
+    {
+        return 'FOSUserBundle';
+    }
 }
