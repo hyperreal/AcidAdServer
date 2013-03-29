@@ -22,7 +22,7 @@
         <td>{{ entity.username }}</td>
         <td>{{ entity.email }}</td>
         <td>
-            <ul>
+            <ul class="unstyled">
                 <li>
                     <a href="{{ path('admin_advertiser_show', { 'id': entity.id }) }}">
                         {{ 'show'|babel }}
@@ -43,12 +43,10 @@
 <div class="message">{{ 'no.entities'|babel }}</div>
 {% endif %}
 
-<ul>
-    <li>
-        <a href="{{ path('admin_advertiser_new') }}">
-            {{ 'create.new.entry'|babel }}
-        </a>
-    </li>
-</ul>
+<div class="additional-links">
+    <a href="{{ path('admin_advertiser_new') }}" class="btn pull-right">
+        {{ 'create.new.entry'|babel }}
+    </a>
+</div>
 
 {% endblock %}
