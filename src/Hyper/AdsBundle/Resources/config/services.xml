@@ -69,6 +69,10 @@
             <argument type="service" id="exercise_html_purifier.default" />
         </service>
 
+        <service id="hyper_ads.entity_serializer" class="Hyper\AdsBundle\Api\EntitySerializer">
+            <argument type="service" id="router" />
+        </service>
+
     </services>
 
 </container>

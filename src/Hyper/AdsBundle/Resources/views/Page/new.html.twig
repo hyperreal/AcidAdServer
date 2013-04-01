@@ -7,16 +7,11 @@
 
 <form action="{{ path('admin_page_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
-    <p>
-        <button type="submit">{{ 'create'|babel }}</button>
-    </p>
+    <div class="form-actions">
+        <a href="{{ path('admin_page') }}" class="btn">{{ 'back.to.the.list'|babel }}</a>
+        <div class="pull-right">
+            <button type="submit" class="btn btn-primary">{{ 'create'|babel }}</button>
+        </div>
+    </div>
 </form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_page') }}">
-            {{ 'back.to.the.list'|babel }}
-        </a>
-    </li>
-</ul>
 {% endblock %}

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
@@ -475,13 +476,56 @@ class UserBannerController extends Controller
         $formType->disableDescriptionInput();
 
         $editForm = $this->createForm($formType, $banner);
-        $deleteForm = $this->createDeleteForm($banner->getId());
 
         return array(
             'editForm' => $editForm->createView(),
-            'deleteForm' => $deleteForm->createView(),
             'banner' => $banner,
         );
+    }
+
+    /**
+     * @Route("/edit/{banner}/save-handler", name="user_banner_save_handler")
+     * @Method("POST")
+     * @Template("HyperAdsBundle:UserBanner:edit.html.twig")
+     */
+    public function saveHandlerAction(Request $request, Banner $banner)
+    {
+        $this->accessDeniedWhenInvalidUser($banner);
+        $action = $request->get('action');
+        $request->request->remove('action');
+        if (!in_array($action, array('update', 'remove'))) {
+            throw new BadRequestHttpException('Invalid action');
+        }
+
+        $formType = new BannerType();
+        $formType->disableFileInput();
+        $formType->disableDescriptionInput();
+        $editFrom = $this->createForm($formType, $banner);
+        $editFrom->bind($request);
+
+        if ($editFrom->isValid()) {
+            $this->persistOrRemoveBanner($banner, $action);
+            return $this->redirect($this->generateUrl('user_banner_list'));
+        }
+
+        return array(
+            'editForm' => $editFrom,
+            'banner' => $banner,
+        );
+    }
+
+    private function persistOrRemoveBanner($banner, $action)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if ('update' == $action) {
+            $em->persist($banner);
+            $this->get('session')->getFlashBag()->add('success', $this->trans('banner.updated'));
+        } elseif ('remove' == $action) {
+            $em->remove($banner);
+            $this->get('session')->getFlashBag()->add('success', $this->trans('banner.removed'));
+        }
+
+        $em->flush();
     }
 
     /**
@@ -507,11 +551,8 @@ class UserBannerController extends Controller
             return $this->redirect($this->generateUrl('user_banner_list'));
         }
 
-        $deleteForm = $this->createDeleteForm($banner->getId());
-
         return array(
             'editForm' => $editForm,
-            'deleteForm' => $deleteForm,
             'banner' => $banner
         );
     }

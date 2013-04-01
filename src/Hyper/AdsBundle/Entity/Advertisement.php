@@ -48,6 +48,12 @@ class Advertisement
     protected $paid = false;
 
     /**
+     * @ORM\Column(type="datetime", name="add_date")
+     * @var \DateTime
+     */
+    protected $addDate;
+
+    /**
      * @ORM\Column(type="date", name="paid_to", nullable=true)
      * @var \DateTime
      */
@@ -61,6 +67,7 @@ class Advertisement
     public function __construct()
     {
         $this->orders = new ArrayCollection();
+        $this->addDate = new \DateTime();
     }
 
     public function setId($id)
@@ -111,6 +118,19 @@ class Advertisement
     public function isPaid()
     {
         return $this->getPaid();
+    }
+
+    public function setAddDate(\DateTime $addDate)
+    {
+        $this->addDate = $addDate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getAddDate()
+    {
+        return $this->addDate;
     }
 
     /**
