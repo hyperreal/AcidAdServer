@@ -8,6 +8,24 @@ use Hyper\AdsBundle\Entity\Order;
 class AdvertisementRepository extends EntityRepository
 {
     /**
+     * @return \Hyper\AdsBundle\Entity\Announcement[]
+     */
+    public function getLastAnnouncementsForApi()
+    {
+        $query = $this->getEntityManager()->createQuery(
+            'SELECT a, u
+            FROM Hyper\AdsBundle\Entity\Announcement a
+            JOIN a.advertiser u
+            ORDER BY a.announcementPaymentType ASC, a.addDate DESC'
+        );
+
+        $query->execute();
+
+        return $query->getResult();
+    }
+
+
+    /**
      * @param $id
      * @return \Hyper\AdsBundle\Entity\Banner
      */
