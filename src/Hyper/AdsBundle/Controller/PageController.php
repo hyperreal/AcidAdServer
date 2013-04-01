@@ -2,6 +2,7 @@
 
 namespace Hyper\AdsBundle\Controller;
 
+use \Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -126,6 +127,54 @@ class PageController extends Controller
     }
 
     /**
+     * @Route("/{id}/update-handler", name="admin_page_update_handler")
+     * @Method("POST")
+     * @Template("HyperAdsBundle:Page:edit.html.twig")
+     */
+    public function updateHandlerAction(Request $request, Page $page)
+    {
+        $action = $request->get('action');
+        $request->request->remove('action');
+
+        $form = $this->createForm(new PageType(), $page);
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $this->persistOrRemovePage($page, $action);
+            $this->persistOrRemoveFlash($action);
+
+            return $this->redirect($this->generateUrl('admin_page'));
+        }
+
+        return array(
+            'entity' => $page,
+            'edit_form' => $form->createView(),
+        );
+    }
+
+    private function persistOrRemoveFlash($action)
+    {
+        if ('update' == $action) {
+            $this->get('session')->getFlashBag()->add('success', $this->trans('page.updated'));
+        } elseif ('remove' == $action) {
+            $this->get('session')->getFlashBag()->add('success', $this->trans('page.removed'));
+        }
+    }
+
+    private function persistOrRemovePage(Page $page, $action)
+    {
+        if ('update' == $action) {
+            $this->get('doctrine.orm.entity_manager')->persist($page);
+        } elseif ('remove' == $action) {
+            $this->get('doctrine.orm.entity_manager')->remove($page);
+        } else {
+            throw new BadRequestHttpException('Invalid action');
+        }
+
+        $this->get('doctrine.orm.entity_manager')->flush();
+    }
+
+    /**
      * Edits an existing Page entity.
      *
      * @Route   ("/{id}/update", name="admin_page_update")
@@ -156,7 +205,6 @@ class PageController extends Controller
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
