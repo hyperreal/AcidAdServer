@@ -53,12 +53,14 @@
         {% endfor %}
         </tbody>
     </table>
-    <div class="buttons">
-        <input type="submit" value="{{ 'save'|babel }}" />
+    <div class="form-actions">
+        <div class="pull-right">
+            <input class="btn btn-primary" type="submit" value="{{ 'save'|babel }}" />
+        </div>
     </div>
     </form>
 {% else %}
-    <div class="notice">{{ 'no.zones.to.add.banner'|babel }}</div>
+    <div class="alert">{{ 'no.zones.to.add.banner'|babel }}</div>
 {% endif %}
 
 {% endblock %}

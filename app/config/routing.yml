@@ -69,6 +69,11 @@ user_announcement:
     prefix: /user/announcement
     type: annotation
 
+acid_api:
+    resource: "@HyperAdsBundle/Controller/ApiController.php"
+    prefix: /api
+    type: annotation
+
 payments:
     resource: "@HyperAdsBundle/Controller/PaymentsController.php"
     prefix: /payments
