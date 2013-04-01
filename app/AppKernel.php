@@ -24,8 +24,6 @@ class AppKernel extends Kernel
             new Wikp\PaymentMtgoxBundle\WikpPaymentMtgoxBundle(),
             new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
             new Trsteel\CkeditorBundle\TrsteelCkeditorBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle(),
-            new \FOS\RestBundle\FOSRestBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
