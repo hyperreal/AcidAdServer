@@ -6,7 +6,7 @@ use Hyper\AdsBundle\Exception\InvalidArgumentException;
 use Hyper\AdsBundle\Entity\Announcement;
 use Symfony\Component\Routing\RouterInterface;
 
-class EntitySerializer
+class EntitySerializer implements EntitySerializerInterface
 {
     /** @var \Symfony\Component\Routing\RouterInterface */
     private $router;
@@ -34,7 +34,7 @@ class EntitySerializer
         }
 
         $class = new \ReflectionClass($object);
-        $methodName = 'serialize' . ucfirst($class->getShortName());
+        $methodName = 'convert' . ucfirst($class->getShortName());
 
         if (!method_exists($this, $methodName)) {
             throw new InvalidArgumentException("Serializer for class $class was not found.");
@@ -43,7 +43,7 @@ class EntitySerializer
         return $this->$methodName($object, !!$full);
     }
 
-    private function serializeAnnouncement(Announcement $announcement, $full)
+    private function convertAnnouncement(Announcement $announcement, $full)
     {
         $serialized = array(
             'id' => $announcement->getId(),
