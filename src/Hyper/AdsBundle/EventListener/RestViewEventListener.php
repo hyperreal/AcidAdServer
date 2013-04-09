@@ -39,7 +39,7 @@ class RestViewEventListener implements EventSubscriberInterface
     }
 
     public function onKernelRequest(GetResponseEvent $event)
-    {return;
+    {
         $controller = $event->getRequest()->get('_controller');
         $controller = substr($controller, 0, strpos($controller, ':'));
         $class = new \ReflectionClass($controller);
