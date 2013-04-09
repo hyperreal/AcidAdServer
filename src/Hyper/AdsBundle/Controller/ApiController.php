@@ -36,9 +36,7 @@ class ApiController extends RestController
      */
     public function getAnnouncementAction(Announcement $announcement)
     {
-        return $this->getJsonResponse(
-            $this->get('hyper_ads.entity_serializer')->toJson($announcement, true)
-        );
+        return $announcement; // :)
     }
 
     /**
@@ -48,7 +46,7 @@ class ApiController extends RestController
      */
     public function reportAnnouncementAction()
     {
-        $id = $this->getRequest()->request->get('report');
+        $id = $this->getRequest()->request->get('id');
 
         if (!is_numeric($id) || $id < 1) {
             throw new BadRequestHttpException('Report ID must be a positive integer');
@@ -62,14 +60,12 @@ class ApiController extends RestController
         $report = new AdvertisementReport();
         $report->setAdvertisement($announcement);
 
-        $em->persist($report);
-        $em->flush();
+        $this->entityManager->persist($report);
+        $this->entityManager->flush();
 
-        return $this->getJsonResponse(
-            array(
-                's' => true,
-                'm' => 'OK'
-            )
+        return array(
+            's' => true,
+            'm' => 'OK'
         );
     }
 

@@ -3,6 +3,8 @@
 namespace Hyper\AdsBundle\EventListener;
 
 use Doctrine\Common\Annotations\Reader;
+use Doctrine\ORM\EntityManager;
+use Hyper\AdsBundle\Api\EntitySerializer;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -16,31 +18,28 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class RestViewEventListener implements EventSubscriberInterface
 {
-    private $container;
+    private $entityManager;
     private $reader;
+    private $serializer;
 
-    public function __construct(ContainerInterface $container, Reader $reader)
+    public function __construct(EntityManager $entityManager, Reader $reader, EntitySerializer $serializer)
     {
-        $this->container = $container;
+        $this->entityManager = $entityManager;
+        $this->serializer = $serializer;
         $this->reader = $reader;
     }
 
     public static function getSubscribedEvents()
     {
         return array(
-            KernelEvents::VIEW => 'responseListener',
-            KernelEvents::EXCEPTION => 'exceptionListener',
-            KernelEvents::REQUEST => 'tokenValidationListener',
-            KernelEvents::CONTROLLER => 'controllerListener',
+            KernelEvents::VIEW => 'onKernelView',
+            KernelEvents::EXCEPTION => 'onKernelException',
+            KernelEvents::REQUEST => 'onKernelRequest', //token validation
         );
     }
 
-    public function controllerListener(FilterControllerEvent $event)
-    {
-    }
-
-    public function tokenValidationListener(GetResponseEvent $event)
-    {
+    public function onKernelRequest(GetResponseEvent $event)
+    {return;
         $controller = $event->getRequest()->get('_controller');
         $controller = substr($controller, 0, strpos($controller, ':'));
         $class = new \ReflectionClass($controller);
@@ -54,13 +53,13 @@ class RestViewEventListener implements EventSubscriberInterface
             return;
         }
 
-        $tokenEntity = $this->container->get('doctrine.orm.entity_manager')->getRepository('HyperAdsBundle:ApiToken')->find($token);
+        $tokenEntity = $this->entityManager->getRepository('HyperAdsBundle:ApiToken')->find($token);
         if (empty($tokenEntity)) {
             return $this->getErrorResponse('Invalid token', 401);
         }
     }
 
-    public function responseListener(GetResponseForControllerResultEvent $event)
+    public function onKernelView(GetResponseForControllerResultEvent $event)
     {
         $response = $event->getResponse();
         if ($response && $response->headers->get('Content-type') == 'application/json') {
@@ -75,7 +74,8 @@ class RestViewEventListener implements EventSubscriberInterface
                 'Content-type' => 'application/json'
             )
         );
-        $method = new \ReflectionMethod($event->getRequest()->get('_controller'));
+        list($controllerObject, $controllerMethod) = explode('::', $event->getRequest()->get('_controller'));
+        $method = new \ReflectionMethod($controllerObject, $controllerMethod);
         $annotations = $this->reader->getMethodAnnotations($method);
         $full = false;
         foreach ($annotations as $annotation) {
@@ -85,21 +85,26 @@ class RestViewEventListener implements EventSubscriberInterface
         }
 
         if (is_object($controllerResult)) {
-            $response->setContent($this->container->get('hyper_ads.entity_serializer')->toJson($controllerResult, $full));
+            $content = json_encode($this->serializer->toJson($controllerResult, $full));
+        } elseif (is_array($controllerResult) && !empty($controllerResult) && is_object(current($controllerResult))) {
+            $content = json_encode($this->serializer->toJsonArray($controllerResult));
         } else {
-            $response->setContent(json_encode($controllerResult));
+            $content = json_encode($controllerResult);
         }
+
+        $response->setContent($content);
+        $event->setResponse($response);
     }
 
-    public function exceptionListener(GetResponseForExceptionEvent $event)
+    public function onKernelException(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
         if ($exception instanceof \Symfony\Component\HttpKernel\Exception\BadRequestHttpException) {
-            $event->setResponse($this->getErrorResponse($exception->getMessage(), 400));
+            $event->setResponse($this->getErrorResponse('Bad request', 400));
         } elseif ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
-            $event->setResponse($this->getErrorResponse($exception->getMessage(), 404));
+            $event->setResponse($this->getErrorResponse('Not found', 404));
         } else {
-            $event->setResponse($this->getErrorResponse($exception->getMessage(), 500));
+            $event->setResponse($this->getErrorResponse('Internal server error', 500));
         }
     }
 
