@@ -42,7 +42,12 @@ class RestViewEventListener implements EventSubscriberInterface
     {
         $controller = $event->getRequest()->get('_controller');
         $controller = substr($controller, 0, strpos($controller, ':'));
+        if (!class_exists($controller)) {
+            return;
+        }
+
         $class = new \ReflectionClass($controller);
+
         if (!$class->isSubclassOf('Hyper\AdsBundle\Controller\RestController')) {
             return;
         }

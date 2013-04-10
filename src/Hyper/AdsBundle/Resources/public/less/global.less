@@ -12,37 +12,16 @@ menu, ul.no-buttons {
 }
 
 form {
-
-    &.user-form {
-        width: 450px;
-        margin: auto;
-        list-style: none;
-        background: #c3d9ff;
-        border: 1px solid #0088CC;
-        padding: 40px 0px;
-    }
-
     label {
         float: left;
         width: 150px;
         text-align: right;
         padding: 7px 5px 0 0;
     }
-
-    div {
-        clear: both;
+    div.with-file > div > div:nth-child(2) {
+        margin-top: 8px;
     }
 
-    &#payment-form {
-        div {
-            clear: none;
-
-            &#hyper_payment_form {
-                float: left;
-                width: 370px;
-            }
-        }
-    }
 }
 
 .spanned-column {
@@ -90,5 +69,6 @@ table label.table {
     max-width: 300px;
     padding: 19px 29px 29px;
 }
+
 
 
