@@ -87,7 +87,7 @@ trsteel_ckeditor:
         basicstyles: ['Bold','Italic','Underline','Strike','Subscript','Superscript', 'TextColor']
         paragraph: ['NumberedList','BulletedList','Outdent','Indent']
         links: ['Link','Unlink']
-        insert: ['Image','Table']
+        insert: ['Table']
         tools: ['Source', '-', 'Maximize']
     ui_color: '#FFFFFF'
     startup_outline_blocks: true

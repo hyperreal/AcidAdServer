@@ -91,7 +91,7 @@ class PaymentType extends AbstractType
             'label' => $label,
             'translation_domain' => 'HyperAdsBundle',
             'property_path' => false,
-            'data' => $time
+            'data' => $time,
         );
     }
 }
