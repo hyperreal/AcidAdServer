@@ -50,6 +50,8 @@ class EntitySerializer implements EntitySerializerInterface
             'userName' => $announcement->getAdvertiser()->getUsername(),
             'uid' => $announcement->getAdvertiser()->getId(),
             'title' => $announcement->getTitle(),
+            'hasImage' => false,
+            'imageUrl' => '',
             'addDate' => $announcement->getAddDate()->getTimestamp(),
             'type' => $announcement->getAnnouncementPaymentType(),
             'content' => $announcement->getDescription(),
