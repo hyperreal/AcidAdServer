@@ -23,6 +23,7 @@
         {{ form_rest(form) }}
     </div>
     <div class="form-actions">
+        <a href="{{ path('user_announcement_index') }}" class="btn">{{ 'back.to.the.list'|babel }}</a>
         <div class="pull-right">
             <input type="submit" class="btn btn-primary" value="{{ 'add.announcement'|babel }}">
         </div>

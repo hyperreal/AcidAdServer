@@ -1,5 +1,6 @@
 imports:
     - { resource: parameters.yml }
+    - { resource: purifier.yml }
     - { resource: security.yml }
 
 wikp_payment_mtgox:
@@ -87,7 +88,7 @@ trsteel_ckeditor:
         basicstyles: ['Bold','Italic','Underline','Strike','Subscript','Superscript', 'TextColor']
         paragraph: ['NumberedList','BulletedList','Outdent','Indent']
         links: ['Link','Unlink']
-        insert: ['Table']
+        insert: ['Table', 'Image']
         tools: ['Source', '-', 'Maximize']
     ui_color: '#FFFFFF'
     startup_outline_blocks: true
