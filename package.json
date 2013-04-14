@@ -15,7 +15,7 @@
     "server"
   ],
   "license": "BSD",
-  "author": "wikp",
+  "author": "fajka",
   "readmeFilename": "README.md",
   "devDependencies": {
     "grunt": "~0.4.0",
