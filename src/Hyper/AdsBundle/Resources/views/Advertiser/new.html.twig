@@ -7,16 +7,14 @@
 
 <form action="{{ path('admin_advertiser_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
-    <p>
-        <button type="submit">{{ 'create'|babel }}</button>
-    </p>
-</form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_advertiser') }}">
+    <div class="form-actions">
+        <a href="{{ path('admin_advertiser') }}" class="btn">
             {{ 'back.to.the.list'|babel }}
         </a>
-    </li>
-</ul>
+        <div class="pull-right">
+            <button class="btn btn-primary pull-right" type="submit">{{ 'create'|babel }}</button>
+        </div>
+    </div>
+</form>
+
 {% endblock %}

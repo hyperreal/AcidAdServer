@@ -1,0 +1,8 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ 'register'|babel }}{% endblock %}
+
+{% block body %}
+    <h2>{{ 'register'|babel }}</h2>
+    {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+{% endblock body %}

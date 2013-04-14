@@ -18,7 +18,7 @@ class AnnouncementTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Hyper\AdsBundle\Entity\Announcement::__construct
+     * @covers \Hyper\AdsBundle\Entity\Advertisement::__construct
      */
     public function testValidInitialization()
     {
@@ -26,8 +26,8 @@ class AnnouncementTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Hyper\AdsBundle\Entity\Announcement::setId
-     * @covers \Hyper\AdsBundle\Entity\Announcement::getId
+     * @covers \Hyper\AdsBundle\Entity\Advertisement::setId
+     * @covers \Hyper\AdsBundle\Entity\Advertisement::getId
      */
     public function testSetId()
     {
@@ -36,8 +36,8 @@ class AnnouncementTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Hyper\AdsBundle\Entity\Announcement::setTitle
-     * @covers \Hyper\AdsBundle\Entity\Announcement::getTitle
+     * @covers \Hyper\AdsBundle\Entity\Advertisement::setTitle
+     * @covers \Hyper\AdsBundle\Entity\Advertisement::getTitle
      */
     public function testSetTitle()
     {
@@ -46,7 +46,7 @@ class AnnouncementTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Hyper\AdsBundle\Entity\Announcement::isActive
+     * @covers \Hyper\AdsBundle\Entity\Advertisement::isActive
      */
     public function testIsActiveForStandardAd()
     {
@@ -55,9 +55,9 @@ class AnnouncementTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Hyper\AdsBundle\Entity\Announcement::setPaidTo
-     * @covers \Hyper\AdsBundle\Entity\Announcement::getPaidTo
-     * @covers \Hyper\AdsBundle\Entity\Announcement::isActive
+     * @covers \Hyper\AdsBundle\Entity\Advertisement::setPaidTo
+     * @covers \Hyper\AdsBundle\Entity\Advertisement::getPaidTo
+     * @covers \Hyper\AdsBundle\Entity\Advertisement::isActive
      */
     public function testIsActiveForPremiumAd()
     {

@@ -20,9 +20,9 @@ use Hyper\AdsBundle\Exception\InvalidArgumentException;
 use Hyper\AdsBundle\Exception\NoReferenceException;
 
 /**
- * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\AnnouncementRepository")
+ * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\AdvertisementRepository")
  */
-class Banner extends Announcement
+class Banner extends Advertisement
 {
     const RAND_MIN = 10000000;
     const RAND_MAX = 99999999;

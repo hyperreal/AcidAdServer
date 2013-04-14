@@ -3,6 +3,7 @@
 namespace Hyper\AdsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -126,64 +127,57 @@ class AdvertiserController extends Controller
     }
 
     /**
-     * Edits an existing Advertiser entity.
-     *
-     * @Route   ("/{id}/update", name="admin_advertiser_update")
-     * @Method  ("POST")
+     * @Route("/{id}/update", name="admin_advertiser_update_handler")
+     * @Method("POST")
      * @Template("HyperAdsBundle:Advertiser:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
+    public function updateHandlerAction(Request $request, Advertiser $id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $action = $request->get('action');
+        $request->request->remove('action');
 
-        $entity = $em->getRepository('HyperAdsBundle:Advertiser')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Advertiser entity.');
+        if (!in_array($action, array('update', 'delete'))) {
+            throw new BadRequestHttpException('Invalid action');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm   = $this->createForm(new AdvertiserType(), $entity);
-        $editForm->bind($request);
-
-        if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('admin_advertiser_edit', array('id' => $id)));
-        }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        return $this->updateAdvertiser($id, $request, $action);
     }
 
-    /**
-     * Deletes a Advertiser entity.
-     *
-     * @Route ("/{id}/delete", name="admin_advertiser_delete")
-     * @Method("POST")
-     */
-    public function deleteAction(Request $request, $id)
+    private function updateAdvertiser(Advertiser $advertiser, Request $request, $action)
     {
-        $form = $this->createDeleteForm($id);
+        $form = $this->createForm(new AdvertiserType(), $advertiser);
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em     = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('HyperAdsBundle:Advertiser')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Advertiser entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+            $this->persistOrRemoveAdvertiser($advertiser, $action);
+            $this->persistOrRemoveFlash($action);
+            return $this->redirect($this->generateUrl('admin_advertiser_edit', array('id' => $advertiser->getId())));
         }
 
-        return $this->redirect($this->generateUrl('admin_advertiser'));
+        return array(
+            'entity'      => $advertiser,
+            'edit_form' => $form
+        );
+    }
+
+    private function persistOrRemoveFlash($action)
+    {
+        if ('update' == $action) {
+            $this->get('session')->getFlashBag()->add('success', $this->trans('advertiser.updated'));
+        } elseif ('delete' == $action) {
+            $this->get('session')->getFlashBag()->add('success', $this->trans('advertiser.removed'));
+        }
+    }
+
+    private function persistOrRemoveAdvertiser(Advertiser $advertiser, $action)
+    {
+        if ('update' == $action) {
+            $this->get('doctrine.orm.entity_manager')->persist($advertiser);
+        } elseif ('delete' == $action) {
+            $this->get('doctrine.orm.entity_manager')->remove($advertiser);
+        }
+
+        $this->get('doctrine.orm.entity_manager')->flush();
     }
 
     private function createDeleteForm($id)

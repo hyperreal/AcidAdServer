@@ -1,0 +1,6 @@
+exercise_html_purifier:
+    default:
+        HTML.ForbiddenElements: [ "script", "style" ]
+        Cache.SerializerPath: '%kernel.cache_dir%/htmlpurifier-default'
+    premium:
+        Cache.SerializerPath: '%kernel.cache_dir%/htmlpurifier-premium'

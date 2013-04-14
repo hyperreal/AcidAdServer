@@ -3,7 +3,7 @@
 namespace Hyper\AdsBundle\Helper;
 
 use Doctrine\ORM\EntityManager;
-use Hyper\AdsBundle\Entity\Announcement;
+use Hyper\AdsBundle\Entity\Advertisement;
 use Hyper\AdsBundle\Entity\Advertiser;
 use Hyper\AdsBundle\Entity\Zone;
 use Hyper\AdsBundle\Entity\BannerZoneReference;
@@ -20,7 +20,7 @@ class PricesCalculator
         $this->entityManager = $entityManager;
     }
 
-    public function getAmountToPayForAnnouncementInZone(Announcement $announcement, Zone $zone)
+    public function getAmountToPayForAnnouncementInZone(Advertisement $announcement, Zone $zone)
     {
         $expireDate = $announcement->getExpireDate();
         $toExpirationInterval = $expireDate->diff(new \DateTime());
@@ -38,7 +38,7 @@ class PricesCalculator
         return round($calculatedPrice, self::ROUND_PRECISION);
     }
 
-    public function getPossibleDayPricesForAnnouncement(Announcement $announcement)
+    public function getPossibleDayPricesForAnnouncement(Advertisement $announcement)
     {
         $zonePrices = $this->getActiveZonesPrices();
 

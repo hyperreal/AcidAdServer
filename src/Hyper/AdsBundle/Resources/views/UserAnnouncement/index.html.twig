@@ -1,0 +1,39 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+{{ 'your.announcements'|babel }}
+{% endblock %}
+
+{% block body %}
+<h1>{{ 'your.announcements'|babel }}</h1>
+
+{% if announcements|length > 0 %}
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>{{ 'id'|babel }}</th>
+        <th>{{ 'title'|babel }}</th>
+        <th>{{ 'actions'|babel }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for announcement in announcements %}
+    <tr>
+        <td>{{ announcement.id }}</td>
+        <td>{{ announcement.title }}</td>
+        <td>
+            <a href="{{ url('user_announcement_edit', {'announcement': announcement.id }) }}">Edytuj</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="notice message">{{ 'empty.announcements.list'|babel }}</div>
+{% endif %}
+
+<div class="additional-links">
+    <a href="{{ url('user_announcement_new') }}" class="btn pull-right">{{ 'add.announcement'|babel }}</a>
+</div>
+
+{% endblock %}

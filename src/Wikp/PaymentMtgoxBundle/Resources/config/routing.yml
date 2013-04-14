@@ -1,5 +1,0 @@
-wikp_payment_mtgox_ipn:
-    pattern:  /ipn
-    defaults: { _controller: WikpPaymentMtgoxBundle:Ipn:index }
-    requirements:
-        _method: POST
