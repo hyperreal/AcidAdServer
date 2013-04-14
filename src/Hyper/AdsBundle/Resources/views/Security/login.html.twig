@@ -15,6 +15,7 @@
     <input type="password" class="input-block-level" name="_password" placeholder="{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}" />
 
     <a href="{{ path('fos_user_registration_register') }}" class="btn">{{ 'register'|babel }}</a>
+    <a href="{{ path('fos_user_resetting_request') }}" class="btn">{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}</a>
     <button type="submit" class="btn btn-large btn-primary pull-right" name="_submit">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
 </form>
 {% endblock body %}
