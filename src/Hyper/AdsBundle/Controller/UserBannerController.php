@@ -399,7 +399,7 @@ class UserBannerController extends Controller
             if (FinancialTransactionInterface::STATE_PENDING == $instruction->getState()) {
                 $urlRequest = new MtgoxTransactionUrlRequest();
                 $urlRequest->setAmount($currencyAmount);
-                $urlRequest->setSendEmail(true);
+                $urlRequest->setSendEmail(1);
                 $urlRequest->setIpnUrl($this->generateUrl('wikp_payment_mtgox_ipn', array(), true));
                 $urlRequest->setDescription(
                     $this->trans('payment.info', array('%orderNumber%' => $order->getOrderNumber()))
