@@ -70,7 +70,7 @@ class AnnouncementTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider validAnnouncementPaymentTypesProvider
-     * @covers \Hyper\AdsBundle\Entity\Advertisement::setAnnouncementPaymentType
+     * @covers \Hyper\AdsBundle\Entity\Announcement::setAnnouncementPaymentType
      */
     public function testSetValidAnnouncementPaymentType($paymentType)
     {
@@ -81,7 +81,7 @@ class AnnouncementTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Given announcement payment type is invalid
-     * @covers \Hyper\AdsBundle\Entity\Advertisement::setAnnouncementPaymentType
+     * @covers \Hyper\AdsBundle\Entity\Announcement::setAnnouncementPaymentType
      */
     public function testSetInvalidAnnouncementPaymentTypesProvider()
     {
