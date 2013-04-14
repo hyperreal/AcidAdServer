@@ -5,7 +5,6 @@
     "dependencies": {
 		"ckeditor-colorbutton": "http://download.ckeditor.com/colorbutton/releases/colorbutton_4.0.1.zip",
 		"ckeditor-panelbutton": "http://download.ckeditor.com/panelbutton/releases/panelbutton_4.0.1.zip",
-        "jquery": "~1.9.0",
 		"mustache": "0.7.2",
 		"fancybox": "2.1.4",
         "bootstrap": "2.3.1",
