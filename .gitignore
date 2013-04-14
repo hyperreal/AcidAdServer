@@ -14,3 +14,4 @@ app/config/parameters.*
 *.ipr
 *.iws
 *.swp
+web/error503.html
