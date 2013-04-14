@@ -1,0 +1,35 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+{{ 'edit.announcement'|babel({'%announcement%': announcement}) }}
+{% endblock %}
+
+{% block body %}
+
+<h1>{{ 'edit.announcement'|babel({'%announcement%': announcement}) }}</h1>
+<form method="post" action="{{ url('user_announcement_update_handler', {'announcement': announcement.id}) }}">
+    <div>
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+        {{ form_errors(form.title) }}
+    </div>
+    <div>
+        {{ form_label(form.announcementPaymentType) }}
+        {{ form_widget(form.announcementPaymentType) }}
+        {{ form_errors(form.announcementPaymentType) }}
+    </div>
+    <div>
+        {{ form_widget(form.description) }}
+        {{ form_errors(form.description) }}
+        {{ form_rest(form) }}
+    </div>
+    <div class="form-actions">
+        <a class="btn" href="{{ path('user_announcement_index') }}">{{ 'back.to.the.list'|babel }}</a>
+        <div class="pull-right">
+            <input type="submit" name="action" class="btn btn-danger" value="{{ 'delete'|babel }}">
+            <input type="submit" name="action" class="btn btn-primary" value="{{ 'save'|babel }}">
+        </div>
+    </div>
+</form>
+
+{% endblock %}

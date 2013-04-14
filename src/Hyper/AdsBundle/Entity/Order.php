@@ -4,8 +4,8 @@ namespace Hyper\AdsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
-use Hyper\AdsBundle\Entity\Announcement;
+use JMS\Payment\CoreBundle\Model\PaymentInstructionInterface;
+use Hyper\AdsBundle\Entity\Advertisement;
 use Wikp\PaymentMtgoxBundle\Plugin\OrderInterface;
 
 /**
@@ -41,7 +41,7 @@ class Order implements OrderInterface
     private $paymentInstruction;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Announcement", inversedBy="orders")
+     * @ORM\ManyToOne(targetEntity="Advertisement", inversedBy="orders")
      * @ORM\JoinColumn(name="announcement_id", referencedColumnName="id", nullable=true)
      */
     private $announcement;
@@ -123,7 +123,7 @@ class Order implements OrderInterface
         return $this->paymentInstruction;
     }
 
-    public function setPaymentInstruction(PaymentInstruction $paymentInstruction)
+    public function setPaymentInstruction(PaymentInstructionInterface $paymentInstruction)
     {
         $this->paymentInstruction = $paymentInstruction;
     }
@@ -209,7 +209,7 @@ class Order implements OrderInterface
         return $this->announcement;
     }
 
-    public function setAnnouncement(Announcement $announcement)
+    public function setAnnouncement(Advertisement $announcement)
     {
         $this->announcement = $announcement;
     }

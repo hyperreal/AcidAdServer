@@ -13,6 +13,7 @@ class AdvertiserType extends AbstractType
         $builder
             ->add('username', 'text', array('label' => 'name', 'translation_domain' => 'HyperAdsBundle'))
             ->add('email', 'email', array('label' => 'email', 'translation_domain' => 'HyperAdsBundle'))
+            ->add('password', 'password', array('label' => 'password', 'translation_domain' => 'HyperAdsBundle'))
             ->add('firstName', 'text', array('label' => 'name.first', 'translation_domain' => 'HyperAdsBundle'))
             ->add('lastName', 'text', array('label' => 'name.last', 'translation_domain' => 'HyperAdsBundle'));
     }

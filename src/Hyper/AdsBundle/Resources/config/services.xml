@@ -32,6 +32,13 @@
             <argument>%fos_user.model.user.class%</argument>
         </service>
 
+        <service id="hyper_ads.user_register.form.type" class="Hyper\AdsBundle\Form\RegistrationType">
+            <tag name="form.type" alias="hyper_user_register" />
+            <argument>%fos_user.model.user.class%</argument>
+            <argument type="service" id="translator" />
+            <argument type="service" id="router" />
+        </service>
+
         <service id="hyper_ads.payment_form_type" class="Hyper\AdsBundle\Form\PaymentType">
             <tag name="form.type" alias="hyper_payment_form" />
             <argument>%max_one_banner_days%</argument>
@@ -48,6 +55,13 @@
             <argument type="service" id="session" />
         </service>
 
+        <service id="hyper_ads.listener.rest_view" class="Hyper\AdsBundle\EventListener\RestViewEventListener">
+            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="annotation_reader" />
+            <argument type="service" id="hyper_ads.entity_serializer" />
+        </service>
+
         <service id="hyper_ads.payments_logger" class="Symfony\Bridge\Monolog\Logger">
             <argument>pay</argument>
             <call method="pushHandler">
@@ -58,6 +72,19 @@
         <service id="hyper_ads.payments_logger.handler" class="Monolog\Handler\StreamHandler">
             <argument>%kernel.logs_dir%/%kernel.environment%.payments.log</argument>
             <argument>200</argument>
+        </service>
+
+        <service id="hyper_ads.form.type.purified_ckeditor" class="Hyper\AdsBundle\Form\Type\PurifiedCkeditorType">
+            <argument type="service" id="hyper_ads.form.transformer.html_purifier" />
+            <tag name="form.type" alias="purified_ckeditor" />
+        </service>
+
+        <service id="hyper_ads.form.transformer.html_purifier" class="Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer">
+            <argument type="service" id="exercise_html_purifier.default" />
+        </service>
+
+        <service id="hyper_ads.entity_serializer" class="Hyper\AdsBundle\Api\EntitySerializer">
+            <argument type="service" id="router" />
         </service>
 
     </services>

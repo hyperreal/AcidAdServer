@@ -6,20 +6,14 @@
 <div id="banner-preview" class="hide">
     <img src="{{ asset(banner.fileUrl) }}" alt="{{ banner.title }}"/>
 </div>
-<form action="{{ url('user_banner_save', {'banner': banner.id}) }}" method="post" enctype="multipart/form-data">
+<form action="{{ url('user_banner_save_handler', {'banner': banner.id}) }}" method="post" enctype="multipart/form-data">
     {{ form_widget(editForm) }}
-    <input type="submit" value="{{ 'edit'|babel }}"/>
-</form>
-<form action="{{ url('user_banner_remove', {'banner': banner.id}) }}" method="post">
-    <ul>
-        <li>
-            {{ form_widget(deleteForm) }}
-            <input type="submit" value="{{ 'delete'|babel }}"/>
-        </li>
-        <li>
-            <a href="{{ url('user_banner_list') }}">{{ 'back.to.the.list'|babel }}</a>
-        </li>
-    </ul>
-
+    <div class="form-actions">
+        <a href="{{ url('user_banner_list') }}" class="btn">{{ 'back.to.the.list'|babel }}</a>
+        <div class="pull-right">
+            <button name="action" type="submit" value="remove" class="btn btn-danger">{{ 'delete'|babel }}</button>
+            <button name="action" type="submit" value="update" class="btn btn-primary">{{ 'edit'|babel }}</button>
+        </div>
+    </div>
 </form>
 {% endblock %}

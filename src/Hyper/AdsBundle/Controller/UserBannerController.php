@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
@@ -15,7 +16,7 @@ use JMS\Payment\CoreBundle\Model\FinancialTransactionInterface;
 use Wikp\PaymentMtgoxBundle\Plugin\MtgoxPaymentPlugin;
 use Wikp\PaymentMtgoxBundle\Entity\Currency;
 use Wikp\PaymentMtgoxBundle\Mtgox\RequestType\MtgoxTransactionUrlRequest;
-use Hyper\AdsBundle\Entity\Announcement;
+use Hyper\AdsBundle\Entity\Advertisement;
 use Hyper\AdsBundle\DBAL\PayModelType;
 use Hyper\AdsBundle\Entity\Banner;
 use Hyper\AdsBundle\Entity\BannerZoneReference;
@@ -91,7 +92,7 @@ class UserBannerController extends Controller
         $this->accessDeniedWhenInvalidUser();
 
         $em = $this->getDoctrine()->getManager();
-        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AnnouncementRepository */
+        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AdvertisementRepository */
         $bannerRepository = $em->getRepository('HyperAdsBundle:Banner');
         $bannerList = $bannerRepository->getBannersWithDependenciesByAdvertiser($this->getUser());
 
@@ -107,7 +108,7 @@ class UserBannerController extends Controller
     public function zonesAction(Banner $banner)
     {
         $this->accessDeniedWhenInvalidUser($banner);
-        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AnnouncementRepository */
+        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AdvertisementRepository */
         $bannerRepository = $this->getDoctrine()->getManager()->getRepository('HyperAdsBundle:Banner');
 
         $possibleZones = $bannerRepository->getPossibleZonesForBanner($banner);
@@ -126,7 +127,7 @@ class UserBannerController extends Controller
     public function zonesSaveAction(Request $request, $banner)
     {
         $em = $this->getDoctrine()->getManager();
-        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AnnouncementRepository */
+        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AdvertisementRepository */
         $bannerRepository = $em->getRepository('HyperAdsBundle:Banner');
         $banner = $bannerRepository->getBannerWithDependenciesById($banner);
 
@@ -177,7 +178,7 @@ class UserBannerController extends Controller
     public function payInZoneAction($bannerId, $zoneId)
     {
         $em = $this->getDoctrine()->getManager();
-        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AnnouncementRepository */
+        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AdvertisementRepository */
         $bannerRepository = $em->getRepository('HyperAdsBundle:Banner');
 
         $banner = $bannerRepository->getBannerWithDependenciesById($bannerId);
@@ -325,7 +326,7 @@ class UserBannerController extends Controller
     public function payInZoneSaveAction(Request $request, $bannerId, $zoneId)
     {
         $em = $this->getDoctrine()->getManager();
-        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AnnouncementRepository */
+        /** @var $bannerRepository \Hyper\AdsBundle\Entity\AdvertisementRepository */
         $bannerRepository = $em->getRepository('HyperAdsBundle:Banner');
 
         $banner = $bannerRepository->getBannerWithDependenciesById($bannerId);
@@ -475,13 +476,56 @@ class UserBannerController extends Controller
         $formType->disableDescriptionInput();
 
         $editForm = $this->createForm($formType, $banner);
-        $deleteForm = $this->createDeleteForm($banner->getId());
 
         return array(
             'editForm' => $editForm->createView(),
-            'deleteForm' => $deleteForm->createView(),
             'banner' => $banner,
         );
+    }
+
+    /**
+     * @Route("/edit/{banner}/save-handler", name="user_banner_save_handler")
+     * @Method("POST")
+     * @Template("HyperAdsBundle:UserBanner:edit.html.twig")
+     */
+    public function saveHandlerAction(Request $request, Banner $banner)
+    {
+        $this->accessDeniedWhenInvalidUser($banner);
+        $action = $request->get('action');
+        $request->request->remove('action');
+        if (!in_array($action, array('update', 'remove'))) {
+            throw new BadRequestHttpException('Invalid action');
+        }
+
+        $formType = new BannerType();
+        $formType->disableFileInput();
+        $formType->disableDescriptionInput();
+        $editFrom = $this->createForm($formType, $banner);
+        $editFrom->bind($request);
+
+        if ($editFrom->isValid()) {
+            $this->persistOrRemoveBanner($banner, $action);
+            return $this->redirect($this->generateUrl('user_banner_list'));
+        }
+
+        return array(
+            'editForm' => $editFrom,
+            'banner' => $banner,
+        );
+    }
+
+    private function persistOrRemoveBanner($banner, $action)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if ('update' == $action) {
+            $em->persist($banner);
+            $this->get('session')->getFlashBag()->add('success', $this->trans('banner.updated'));
+        } elseif ('remove' == $action) {
+            $em->remove($banner);
+            $this->get('session')->getFlashBag()->add('success', $this->trans('banner.removed'));
+        }
+
+        $em->flush();
     }
 
     /**
@@ -507,11 +551,8 @@ class UserBannerController extends Controller
             return $this->redirect($this->generateUrl('user_banner_list'));
         }
 
-        $deleteForm = $this->createDeleteForm($banner->getId());
-
         return array(
             'editForm' => $editForm,
-            'deleteForm' => $deleteForm,
             'banner' => $banner
         );
     }
@@ -630,8 +671,8 @@ class UserBannerController extends Controller
      */
     public function paymentsAction($bannerId = null)
     {
-        /** @var $announcementRepository \Hyper\AdsBundle\Entity\AnnouncementRepository */
-        $announcementRepository = $this->getDoctrine()->getManager()->getRepository('HyperAdsBundle:Announcement');
+        /** @var $announcementRepository \Hyper\AdsBundle\Entity\AdvertisementRepository */
+        $announcementRepository = $this->getDoctrine()->getManager()->getRepository('HyperAdsBundle:Advertisement');
 
         try {
             $banner = $announcementRepository->getBannerWithDependenciesById($bannerId);
@@ -653,7 +694,7 @@ class UserBannerController extends Controller
             ->getForm();
     }
 
-    private function accessDeniedWhenInvalidUser(Announcement $announcement = null)
+    private function accessDeniedWhenInvalidUser(Advertisement $announcement = null)
     {
         /** @var $user \Hyper\AdsBundle\Entity\Advertiser */
         $user = $this->getUser();
@@ -662,7 +703,7 @@ class UserBannerController extends Controller
         }
 
         if (null !== $announcement && !$user->hasRole('ROLE_ADMIN') && $announcement->getAdvertiser() != $user) {
-            throw new AccessDeniedException("You can edit only your own announcements when you don't have admin privileges");
+            throw new AccessDeniedException("You can edit only your own advertisements when you don't have admin privileges");
         }
     }
 }

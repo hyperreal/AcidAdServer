@@ -14,9 +14,8 @@
     "ad",
     "server"
   ],
-  "author": "wikp",
   "license": "BSD",
-  "gitHead": "874b04756b15978d18c7a170785ebe845ee4dced",
+  "author": "wikp",
   "readmeFilename": "README.md",
   "devDependencies": {
     "grunt": "~0.4.0",

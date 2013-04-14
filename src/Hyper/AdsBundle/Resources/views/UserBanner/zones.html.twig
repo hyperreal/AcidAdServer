@@ -8,9 +8,9 @@
 <h1>{{ 'zones.for.banner'|babel({'%banner%': banner.title}) }}</h1>
 
 {% if zones|length > 0 %}
-    <div class="info">Poniżej wyświetlono listę stref, do których pasuje wybrany banner.</div>
+    <div class="alert alert-info">Poniżej wyświetlono listę stref, do których pasuje wybrany banner.</div>
     <form action="{{ url('user_banner_zones_save', {'banner': banner.id }) }}" method="post">
-    <table class="records-list">
+    <table class="table table-striped">
         <thead>
         <tr>
             <th>{{ 'id'|babel }}</th>
@@ -53,12 +53,15 @@
         {% endfor %}
         </tbody>
     </table>
-    <div class="buttons">
-        <input type="submit" value="{{ 'save'|babel }}" />
+    <div class="form-actions">
+        <a href="{{ path('user_banner_list') }}" class="btn">{{ 'back.to.the.list'|babel }}</a>
+        <div class="pull-right">
+            <input class="btn btn-primary" type="submit" value="{{ 'save'|babel }}" />
+        </div>
     </div>
     </form>
 {% else %}
-    <div class="notice">{{ 'no.zones.to.add.banner'|babel }}</div>
+    <div class="alert">{{ 'no.zones.to.add.banner'|babel }}</div>
 {% endif %}
 
 {% endblock %}

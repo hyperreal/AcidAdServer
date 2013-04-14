@@ -6,16 +6,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
-use Hyper\AdsBundle\Entity\Announcement;
+use Hyper\AdsBundle\Entity\Advertisement;
 
 class OrderType extends AbstractType
 {
     /**
-     * @var \Hyper\AdsBundle\Entity\Announcement
+     * @var \Hyper\AdsBundle\Entity\Advertisement
      */
     private $announcement;
 
-    public function setAnnouncement(Announcement $announcement)
+    public function setAnnouncement(Advertisement $announcement)
     {
         $this->announcement = $announcement;
     }
@@ -23,7 +23,7 @@ class OrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if (empty($this->announcement)) {
-            throw new \LogicException('Announcement has to be provided');
+            throw new \LogicException('Advertisement has to be provided');
         }
 
         $announcementId = $this->announcement->getId();
@@ -37,7 +37,7 @@ class OrderType extends AbstractType
                         ->where('an.id = ?1')
                         ->setParameter(1, $announcementId);
                 },
-                'class' => 'Hyper\AdsBundle\Entity\Announcement',
+                'class' => 'Hyper\AdsBundle\Entity\Advertisement',
                 'data' => $this->announcement,
                 'read_only' => true,
                 'label' => 'announcement',
