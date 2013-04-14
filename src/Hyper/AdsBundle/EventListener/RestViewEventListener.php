@@ -6,6 +6,7 @@ use Doctrine\Common\Annotations\Reader;
 use Doctrine\ORM\EntityManager;
 use Hyper\AdsBundle\Api\EntitySerializer;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
@@ -40,15 +41,7 @@ class RestViewEventListener implements EventSubscriberInterface
 
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $controller = $event->getRequest()->get('_controller');
-        $controller = substr($controller, 0, strpos($controller, ':'));
-        if (!class_exists($controller)) {
-            return;
-        }
-
-        $class = new \ReflectionClass($controller);
-
-        if (!$class->isSubclassOf('Hyper\AdsBundle\Controller\RestController')) {
+        if (!$this->isRestController($event->getRequest())) {
             return;
         }
 
@@ -103,14 +96,31 @@ class RestViewEventListener implements EventSubscriberInterface
 
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
+        if (!$this->isRestController($event->getRequest())) {
+            return;
+        }
+
         $exception = $event->getException();
         if ($exception instanceof \Symfony\Component\HttpKernel\Exception\BadRequestHttpException) {
             $event->setResponse($this->getErrorResponse('Bad request', 400));
         } elseif ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
             $event->setResponse($this->getErrorResponse('Not found', 404));
         } else {
-            $event->setResponse($this->getErrorResponse('Internal server error', 500));
+            $event->setResponse($this->getErrorResponse('Internal server error' . $exception->getTraceAsString(), 500));
         }
+    }
+
+    private function isRestController(Request $request)
+    {
+        $controller = $request->get('_controller');
+        $controller = substr($controller, 0, strpos($controller, ':'));
+        if (!class_exists($controller)) {
+            return false;
+        }
+
+        $class = new \ReflectionClass($controller);
+
+        return $class->isSubclassOf('Hyper\AdsBundle\Controller\RestController');
     }
 
     private function getErrorResponse($message, $statusCode)

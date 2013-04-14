@@ -150,4 +150,13 @@ class DefaultController extends Controller
         return array();
     }
 
+    /**
+     * @Route("/rules", name="default_rules")
+     * @Template()
+     */
+    public function rulesAction()
+    {
+        return array();
+    }
+
 }

@@ -68,6 +68,8 @@ fos_user:
     registration:
         confirmation:
             enabled: true
+        form:
+            type: hyper_user_register
 
 jms_payment_core:
     secret: %payments_secret%

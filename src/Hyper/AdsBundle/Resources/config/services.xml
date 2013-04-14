@@ -32,6 +32,13 @@
             <argument>%fos_user.model.user.class%</argument>
         </service>
 
+        <service id="hyper_ads.user_register.form.type" class="Hyper\AdsBundle\Form\RegistrationType">
+            <tag name="form.type" alias="hyper_user_register" />
+            <argument>%fos_user.model.user.class%</argument>
+            <argument type="service" id="translator" />
+            <argument type="service" id="router" />
+        </service>
+
         <service id="hyper_ads.payment_form_type" class="Hyper\AdsBundle\Form\PaymentType">
             <tag name="form.type" alias="hyper_payment_form" />
             <argument>%max_one_banner_days%</argument>
