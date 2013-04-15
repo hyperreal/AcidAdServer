@@ -7,6 +7,15 @@ use Hyper\AdsBundle\Entity\Order;
 
 class AdvertisementRepository extends EntityRepository
 {
+    const REPORTS_NUM_REMOVE_FROM_API = 3;
+
+    private static $maxReportsToRemoveFromApiList = self::REPORTS_NUM_REMOVE_FROM_API;
+
+    public function setMaxReportsNum($num)
+    {
+        self::$maxReportsToRemoveFromApiList = abs(intval($num));
+    }
+
     /**
      * @return \Hyper\AdsBundle\Entity\Announcement[]
      */
@@ -16,9 +25,17 @@ class AdvertisementRepository extends EntityRepository
             'SELECT a, u
             FROM Hyper\AdsBundle\Entity\Announcement a
             JOIN a.advertiser u
-            ORDER BY a.announcementPaymentType ASC, a.addDate DESC'
+            WHERE (a.adminDisabled = 0 OR a.adminDisabled IS NULL) AND (a.disabled = 0 OR a.disabled IS NULL)
+            ORDER BY a.announcementPaymentType ASC, a.addDate DESC
+            '
         );
 
+        /*
+            LEFT JOIN a.reports r
+            GROUP BY a.id
+            HAVING COUNT(r.id) < :num
+            $query->setParameter(':num', self::$maxReportsToRemoveFromApiList);
+        */
         $query->execute();
 
         return $query->getResult();

@@ -16,6 +16,7 @@ class AnnouncementType extends AbstractType
         unset($choices[AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_PREMIUM]);
 
         $builder->add('title', 'text', array('label' => 'title', 'translation_domain' => 'HyperAdsBundle'));
+        $builder->add('disabled', 'checkbox', array('required' => false, 'label' => 'check.to.disable', 'translation_domain' => 'HyperAdsBundle'));
         $builder->add(
             'announcementPaymentType',
             'choice',

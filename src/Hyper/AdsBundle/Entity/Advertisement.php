@@ -64,6 +64,12 @@ class Advertisement
      */
     protected $orders;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AdvertisementReport", mappedBy="advertisement", cascade={"persist", "remove"})
+     * @var AdvertisementReport[]
+     */
+    protected $reports;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -165,6 +171,14 @@ class Advertisement
     public function getOrders()
     {
         return $this->orders;
+    }
+
+    /**
+     * @return AdvertisementReport[]
+     */
+    public function getReports()
+    {
+        return $this->reports;
     }
 
     public function __toString()

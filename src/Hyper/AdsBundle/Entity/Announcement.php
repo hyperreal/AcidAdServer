@@ -19,10 +19,22 @@ class Announcement extends Advertisement
      */
     private $announcementPaymentType;
 
+    /**
+     * @ORM\Column(name="disabled", type="boolean")
+     */
+    private $disabled;
+
+    /**
+     * @ORM\Column(name="admin_disabled", type="boolean")
+     */
+    private $adminDisabled;
+
     public function __construct()
     {
         parent::__construct();
         $this->paid = AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_STANDARD != $this->announcementPaymentType;
+        $this->adminDisabled = false;
+        $this->disabled = false;
     }
 
     public function setAnnouncementPaymentType($announcementPaymentType)
@@ -46,6 +58,26 @@ class Announcement extends Advertisement
         } else {
             return parent::isActive();
         }
+    }
+
+    public function isDisabled()
+    {
+        return $this->disabled;
+    }
+
+    public function setDisabled($disabled)
+    {
+        $this->disabled = !!$disabled;
+    }
+
+    public function isAdminDisabled()
+    {
+        return $this->adminDisabled;
+    }
+
+    public function setAdminDisabled($adminDisabled)
+    {
+        $this->adminDisabled = !!$adminDisabled;
     }
 
     public static function getAnnouncementPaymentTypes()
