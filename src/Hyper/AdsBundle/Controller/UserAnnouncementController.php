@@ -90,6 +90,7 @@ class UserAnnouncementController extends Controller
      */
     public function editAction(Announcement $announcement)
     {
+        $this->throwUnlessValidUser($announcement);
         $form = $this->createForm(new AnnouncementType(), $announcement);
         return array(
             'form' => $form->createView(),
@@ -104,6 +105,7 @@ class UserAnnouncementController extends Controller
      */
     public function announcementHandlerAction(Request $request, Announcement $announcement)
     {
+        $this->throwUnlessValidUser($announcement);
         $action = $request->get('action');
         $request->request->remove('action');
 
