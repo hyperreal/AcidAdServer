@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyper\AdsBundle\Controller;
+namespace Hyper\AdsBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -8,10 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Hyper\AdsBundle\Entity\Zone;
 use Hyper\AdsBundle\Form\ZoneType;
+use Hyper\AdsBundle\Controller\Controller;
 
-/**
- * Zone controller.
- */
 class ZoneController extends Controller
 {
     /**
@@ -77,7 +75,7 @@ class ZoneController extends Controller
      *
      * @Route   ("/create", name="admin_zone_create")
      * @Method  ("POST")
-     * @Template("HyperAdsBundle:Zone:new.html.twig")
+     * @Template("HyperAdsBundle:Admin:Zone/new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -130,7 +128,7 @@ class ZoneController extends Controller
      *
      * @Route   ("/{id}/update", name="admin_zone_update")
      * @Method  ("POST")
-     * @Template("HyperAdsBundle:Zone:edit.html.twig")
+     * @Template("HyperAdsBundle:Admin:Zone/edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {

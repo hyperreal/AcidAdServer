@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyper\AdsBundle\Controller;
+namespace Hyper\AdsBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -8,10 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Hyper\AdsBundle\Entity\Banner;
 use Hyper\AdsBundle\Form\BannerType;
+use Hyper\AdsBundle\Controller\Controller;
 
-/**
- * Banner controller.
- */
 class BannerController extends Controller
 {
     /**
@@ -77,7 +75,7 @@ class BannerController extends Controller
      *
      * @Route   ("/create", name="admin_banner_create")
      * @Method  ("POST")
-     * @Template("HyperAdsBundle:Banner:new.html.twig")
+     * @Template("HyperAdsBundle:Admin:Banner/new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -131,7 +129,7 @@ class BannerController extends Controller
      *
      * @Route   ("/{id}/update", name="admin_banner_update")
      * @Method  ("POST")
-     * @Template("HyperAdsBundle:Banner:edit.html.twig")
+     * @Template("HyperAdsBundle:Admin:Banner/edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
