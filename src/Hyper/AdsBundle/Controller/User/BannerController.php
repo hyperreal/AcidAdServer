@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyper\AdsBundle\Controller;
+namespace Hyper\AdsBundle\Controller\User;
 
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,10 +25,10 @@ use Hyper\AdsBundle\Entity\Zone;
 use Hyper\AdsBundle\Form\BannerType;
 use Hyper\AdsBundle\Form\OrderType;
 use Hyper\AdsBundle\Form\PaymentType;
-use Hyper\AdsBundle\Helper\PaymentDaysCalculator;
+use Hyper\AdsBundle\Controller\Controller;
 use Hyper\AdsBundle\Exception\NoReferenceException;
 
-class UserBannerController extends Controller
+class BannerController extends Controller
 {
     /**
      * @Route("/new", name="user_banner_new")
@@ -54,7 +54,7 @@ class UserBannerController extends Controller
     /**
      * @Route("/create", name="user_banner_create")
      * @Method("POST")
-     * @Template("HyperAdsBundle:UserBanner:add.html.twig")
+     * @Template("HyperAdsBundle:User:Banner/add.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -121,7 +121,7 @@ class UserBannerController extends Controller
 
     /**
      * @Route("/{banner}/zones/save", name="user_banner_zones_save")
-     * @Template("HyperAdsBundle:UserBannerController:zones.html.twig")
+     * @Template("HyperAdsBundle:User:BannerController/zones.html.twig")
      * @Method("POST")
      */
     public function zonesSaveAction(Request $request, $banner)
@@ -321,7 +321,7 @@ class UserBannerController extends Controller
     /**
      * @Route("/{bannerId}/zone/{zoneId}/pay/save", name="user_banner_pay_in_zone_save")
      * @Method("POST")
-     * @Template("HyperAdsBundle:UserBanner:payInZone.html.twig")
+     * @Template("HyperAdsBundle:User:Banner/payInZone.html.twig")
      */
     public function payInZoneSaveAction(Request $request, $bannerId, $zoneId)
     {
@@ -487,7 +487,7 @@ class UserBannerController extends Controller
     /**
      * @Route("/edit/{banner}/save-handler", name="user_banner_save_handler")
      * @Method("POST")
-     * @Template("HyperAdsBundle:UserBanner:edit.html.twig")
+     * @Template("HyperAdsBundle:User:Banner/edit.html.twig")
      */
     public function saveHandlerAction(Request $request, Banner $banner)
     {
@@ -532,7 +532,7 @@ class UserBannerController extends Controller
     /**
      * @Route("/edit/{banner}/save", name="user_banner_save")
      * @Method("POST")
-     * @Template("HyperAdsBundle:UserBanner:edit.html.twig")
+     * @Template("HyperAdsBundle:User:Banner/edit.html.twig")
      */
     public function saveAction(Request $request, Banner $banner)
     {
@@ -610,7 +610,7 @@ class UserBannerController extends Controller
     /**
      * @Route("/{banner}/pay/save", name="user_banner_pay_save")
      * @Method("POST")
-     * @Template("HyperAdsBundle:UserBanner.pay.html.twig")
+     * @Template("HyperAdsBundle:User:Banner/pay.html.twig")
      */
     public function paySaveAction(Request $request, Banner $banner)
     {

@@ -35,37 +35,37 @@ default:
     type: annotation
 
 admin_advertiser:
-    resource: "@HyperAdsBundle/Controller/AdvertiserController.php"
+    resource: "@HyperAdsBundle/Controller/Admin/AdvertiserController.php"
     prefix: /admin/advertiser
     type: annotation
 
 admin_page:
-    resource: "@HyperAdsBundle/Controller/PageController.php"
+    resource: "@HyperAdsBundle/Controller/Admin/PageController.php"
     prefix: /admin/page
     type: annotation
 
 admin_zone:
-    resource: "@HyperAdsBundle/Controller/ZoneController.php"
+    resource: "@HyperAdsBundle/Controller/Admin/ZoneController.php"
     prefix: /admin/zone
     type: annotation
 
 admin_banner_config:
-    resource: "@HyperAdsBundle/Controller/BannerConfigController.php"
+    resource: "@HyperAdsBundle/Controller/Admin/BannerConfigController.php"
     prefix: /admin/banner-config
     type: annotation
 
 admin_banner:
-    resource: "@HyperAdsBundle/Controller/BannerController.php"
+    resource: "@HyperAdsBundle/Controller/Admin/BannerController.php"
     prefix: /admin/banner
     type: annotation
 
 user_banner:
-    resource: "@HyperAdsBundle/Controller/UserBannerController.php"
+    resource: "@HyperAdsBundle/Controller/User/BannerController.php"
     prefix: /user/banner
     type: annotation
 
 user_announcement:
-    resource: "@HyperAdsBundle/Controller/UserAnnouncementController.php"
+    resource: "@HyperAdsBundle/Controller/User/AnnouncementController.php"
     prefix: /user/announcement
     type: annotation
 

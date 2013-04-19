@@ -1,11 +1,12 @@
 <?php
 
-namespace Hyper\AdsBundle\Controller;
+namespace Hyper\AdsBundle\Controller\User;
 
 use Hyper\AdsBundle\Entity\Advertisement;
 use Hyper\AdsBundle\Entity\Announcement;
 use Hyper\AdsBundle\Form\AnnouncementType;
-use \Hyper\AdsBundle\Exception\InvalidArgumentException;
+use Hyper\AdsBundle\Controller\Controller;
+use Hyper\AdsBundle\Exception\InvalidArgumentException;
 use JMS\DiExtraBundle\Annotation as DI;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -13,7 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class UserAnnouncementController extends Controller
+class AnnouncementController extends Controller
 {
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -50,7 +51,7 @@ class UserAnnouncementController extends Controller
     /**
      * @Route("/save", name="user_announcement_save")
      * @Method("POST")
-     * @Template("HyperAdsBundle:UserAnnouncement:new.html.twig")
+     * @Template("HyperAdsBundle:User:Announcement/new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -100,7 +101,7 @@ class UserAnnouncementController extends Controller
 
     /**
      * @Route("/{announcement}/update-handler", name="user_announcement_update_handler")
-     * @Template("HyperAdsBundle:UserAnnouncement:edit.html.twig")
+     * @Template("HyperAdsBundle:User:Announcement/edit.html.twig")
      * @Method("POST")
      */
     public function announcementHandlerAction(Request $request, Announcement $announcement)

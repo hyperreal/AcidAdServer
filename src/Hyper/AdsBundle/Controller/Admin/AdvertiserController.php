@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyper\AdsBundle\Controller;
+namespace Hyper\AdsBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -9,10 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Hyper\AdsBundle\Entity\Advertiser;
 use Hyper\AdsBundle\Form\AdvertiserType;
+use Hyper\AdsBundle\Controller\Controller;
 
-/**
- * Advertiser controller.
- */
 class AdvertiserController extends Controller
 {
     /**
@@ -78,7 +76,7 @@ class AdvertiserController extends Controller
      *
      * @Route   ("/create", name="admin_advertiser_create")
      * @Method  ("POST")
-     * @Template("HyperAdsBundle:Advertiser:new.html.twig")
+     * @Template("HyperAdsBundle:Admin:Advertiser/new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -129,7 +127,7 @@ class AdvertiserController extends Controller
     /**
      * @Route("/{id}/update", name="admin_advertiser_update_handler")
      * @Method("POST")
-     * @Template("HyperAdsBundle:Advertiser:edit.html.twig")
+     * @Template("HyperAdsBundle:Admin:Advertiser/edit.html.twig")
      */
     public function updateHandlerAction(Request $request, Advertiser $id)
     {

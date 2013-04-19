@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyper\AdsBundle\Controller;
+namespace Hyper\AdsBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Hyper\AdsBundle\Entity\Banner;
 use Hyper\AdsBundle\Entity\BannerZoneReference;
 use Hyper\AdsBundle\Helper\ReferencesUpdater;
+use Hyper\AdsBundle\Controller\Controller;
 
 class BannerConfigController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyper\AdsBundle\Controller;
+namespace Hyper\AdsBundle\Controller\Admin;
 
 use \Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,10 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Hyper\AdsBundle\Entity\Page;
 use Hyper\AdsBundle\Form\PageType;
+use Hyper\AdsBundle\Controller\Controller;
 
-/**
- * Page controller.
- */
 class PageController extends Controller
 {
     /**
@@ -78,7 +76,7 @@ class PageController extends Controller
      *
      * @Route   ("/create", name="admin_page_create")
      * @Method  ("POST")
-     * @Template("HyperAdsBundle:Page:new.html.twig")
+     * @Template("HyperAdsBundle:Admin:Page/new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -129,7 +127,7 @@ class PageController extends Controller
     /**
      * @Route("/{id}/update-handler", name="admin_page_update_handler")
      * @Method("POST")
-     * @Template("HyperAdsBundle:Page:edit.html.twig")
+     * @Template("HyperAdsBundle:Admin:Page/edit.html.twig")
      */
     public function updateHandlerAction(Request $request, Page $page)
     {
@@ -179,7 +177,7 @@ class PageController extends Controller
      *
      * @Route   ("/{id}/update", name="admin_page_update")
      * @Method  ("POST")
-     * @Template("HyperAdsBundle:Page:edit.html.twig")
+     * @Template("HyperAdsBundle:Admin:Page/edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
