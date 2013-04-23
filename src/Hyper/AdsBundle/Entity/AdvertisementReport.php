@@ -18,7 +18,7 @@ class AdvertisementReport
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Hyper\AdsBundle\Entity\Advertisement")
+     * @ORM\ManyToOne(targetEntity="Hyper\AdsBundle\Entity\Advertisement", inversedBy="reports")
      * @ORM\JoinColumn(name="advertisement_id", referencedColumnName="id")
      * @var Advertisement
      */

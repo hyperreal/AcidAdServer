@@ -36,6 +36,9 @@
         "trsteel/ckeditor-bundle": "dev-master",
         "wikp/payment-mtgox-bundle": "dev-master"
     },
+	"require-dev": {
+		"phake/phake": "2.0.*@dev"
+	},
     "scripts": {
         "post-install-cmd": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",

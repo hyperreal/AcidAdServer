@@ -34,3 +34,7 @@ parameters:
     application_memcache_prefix: "acid_"
 
     max_one_banner_days: 365
+
+    announcement_flow_mail_recipients:
+        - "mail@example.com"
+        - "another-mail@example.com"
