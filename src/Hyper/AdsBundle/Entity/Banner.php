@@ -90,6 +90,7 @@ class Banner extends Advertisement
 
     public function __construct()
     {
+        parent::__construct();
         $this->zones = new ArrayCollection();
         $this->announcementPaymentType = AnnouncementPaymentType::ANNOUNCEMENT_PAYMENT_TYPE_PREMIUM;
         $this->type = BannerType::BANNER_TYPE_TEXT;
