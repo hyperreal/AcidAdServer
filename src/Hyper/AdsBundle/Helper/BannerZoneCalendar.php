@@ -83,10 +83,15 @@ class BannerZoneCalendar
      */
     private function getNumberOfBannersOfAllZonesInGivenDay(\DateTime $date, $zones)
     {
+        static $warmUpZones = array();
         $formattedDate = $date->format(self::DATE_FORMAT);
         $zonesNumberMap = array();
+
         foreach ($zones as $zone) {
-            $this->warmUp($zone);
+            if (!isset($warmUpZones[$zone->getId()])) {
+                $this->warmUp($zone);
+                $warmUpZones[$zone->getId()] = true;
+            }
             $cacheId = self::CACHE_PREFIX . $zone->getId() . '_' . $formattedDate;
             $zonesNumberMap[$zone->getId() . '_' . $zone->getName()] = intval($this->cache->fetch($cacheId));
         }
