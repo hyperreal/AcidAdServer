@@ -41,12 +41,10 @@ class BannerZoneCalendar
             $this->warmUp($zone);
         //}
 
-        $oneDayInterval = new \DateInterval('P1D');
-        $to->add($oneDayInterval);
-        $period = new \DatePeriod($from, $oneDayInterval, $to);
-
+        $period = $this->getPeriodBetweenTwoDates($from, $to);
         $zoneId = $zone->getId();
         $commonDays = array();
+
         foreach ($period as $date) {
             $dateString = $date->format(self::DATE_FORMAT);
             $cacheId = self::CACHE_PREFIX . $zoneId . '_' . $dateString;
@@ -62,6 +60,38 @@ class BannerZoneCalendar
         $datePeriodCreator = new DatePeriodCreator($commonDays, $oneDayInterval);
 
         return $datePeriodCreator->getPeriods();
+    }
+
+    public function createOccupancyReport(\DateTime $from, \DateTime $to)
+    {
+        $period = $this->getPeriodBetweenTwoDates($from, $to);
+        $zones = $this->em->getRepository('HyperAdsBundle:Zone')->findAll();
+        $occupancy = array();
+
+        foreach ($period as $date) {
+            /** @var $date \DateTime */
+            $occupancy[$date->format('Y-m-d')] = $this->getNumberOfBannersOfAllZonesInGivenDay($date, $zones);
+        }
+
+        return $occupancy;
+    }
+
+    /**
+     * @param \DateTime $date
+     * @param \Hyper\AdsBundle\Entity\Zone[] $zones
+     * @return array
+     */
+    private function getNumberOfBannersOfAllZonesInGivenDay(\DateTime $date, $zones)
+    {
+        $formattedDate = $date->format(self::DATE_FORMAT);
+        $zonesNumberMap = array();
+        foreach ($zones as $zone) {
+            $this->warmUp($zone);
+            $cacheId = self::CACHE_PREFIX . $zone->getId() . '_' . $formattedDate;
+            $zonesNumberMap[$zone->getId() . '_' . $zone->getName()] = intval($this->cache->fetch($cacheId));
+        }
+
+        return $zonesNumberMap;
     }
 
     private function warmUp(Zone $zone)
@@ -99,5 +129,18 @@ class BannerZoneCalendar
                 $days[$dateString]++;
             }
         }
+    }
+
+    /**
+     * @param \DateTime $from
+     * @param \DateTime $to
+     * @return \DatePeriod
+     */
+    private function getPeriodBetweenTwoDates(\DateTime $from, \DateTime $to)
+    {
+        $oneDayInterval = new \DateInterval('P1D');
+        $to->add($oneDayInterval);
+        $period = new \DatePeriod($from, $oneDayInterval, $to);
+        return $period;
     }
 }

@@ -69,6 +69,23 @@ class ApiController extends RestController
         );
     }
 
+    /**
+     * @Route("/occupancy/{year}-{month}", name="api_zones_occupancy", requirements={"year": "\d{4}", "month": "\d{2}"})
+     * @Method("GET")
+     * @Api\Json()
+     */
+    public function zonesOccupancyAction($year, $month)
+    {
+        /** @var $calendar \Hyper\AdsBundle\Helper\BannerZoneCalendar */
+        $calendar = $this->get('hyper_ads.banner_zone_calendar');
+
+        $date = mktime(0, 0, 0, ltrim($month, '0'), 1, $year);
+        $from = new \DateTime(date('Y-m-d', $date));
+        $to = new \DateTime(date('Y-m-t', $date));
+
+        return $calendar->createOccupancyReport($from, $to);
+    }
+
     private function getInvalidTokenResponse()
     {
         return $this->getJsonErrorResponse('Invalid token', 401);
