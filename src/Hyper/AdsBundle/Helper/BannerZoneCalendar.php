@@ -44,6 +44,7 @@ class BannerZoneCalendar
         $period = $this->getPeriodBetweenTwoDates($from, $to);
         $zoneId = $zone->getId();
         $commonDays = array();
+        $oneDayInterval = new \DateInterval('P1D');
 
         foreach ($period as $date) {
             $dateString = $date->format(self::DATE_FORMAT);
