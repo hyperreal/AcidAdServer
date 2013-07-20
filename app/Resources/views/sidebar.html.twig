@@ -14,6 +14,9 @@
     <li{% if app.request.get('_route') == 'admin_banner' %} class="active"{% endif %}>
         <a href="{{ path('admin_banner') }}">{{ 'banners'|babel }}</a>
     </li>
+    <li{% if app.request.get('_route') == 'admin_announcement_index' %} class="active"{% endif %}>
+        <a href="{{ path('admin_announcement_index') }}">{{ 'announcements'|babel }}</a>
+    </li>
     <li class="nav-header">User</li>
     {% endif %}
     {% if is_granted("ROLE_USER") %}

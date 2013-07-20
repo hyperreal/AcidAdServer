@@ -2,23 +2,25 @@
 
 namespace Hyper\AdsBundle\Controller\Admin;
 
-use Hyper\AdsBundle\Controller\Controller;
+use Hyper\AdsBundle\Entity\Advertisement;
 use Hyper\AdsBundle\Entity\Announcement;
-use Hyper\AdsBundle\Form\AnnouncementFullType;
+use Hyper\AdsBundle\Form\AnnouncementType;
+use Hyper\AdsBundle\Controller\Controller;
+use Hyper\AdsBundle\Exception\InvalidArgumentException;
 use JMS\DiExtraBundle\Annotation as DI;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class AnnouncementController extends Controller
 {
     /**
-     * @DI\Inject("doctrine.orm.entity_manager")
      * @var \Doctrine\ORM\EntityManager
+     * @DI\Inject("doctrine.orm.entity_manager")
      */
-    private $entityManager;
+    protected $entityManager;
 
     /**
      * @Route("/", name="admin_announcement_index")
@@ -27,12 +29,50 @@ class AnnouncementController extends Controller
     public function indexAction()
     {
         return array(
-            'announcements' => $this->entityManager->getRepository('HyperAdsBundle:Announcement')->findAll()
+            'announcements' => $this->entityManager
+                ->getRepository('HyperAdsBundle:Announcement')
+				->findAll()
         );
     }
 
     /**
-     * @Route("/{announcement}", name="admin_announcement_show")
+     * @Route("/add", name="admin_announcement_new")
+     * @Template()
+     */
+    public function newAction()
+    {
+        return array(
+            'form' => $this->createForm(new AnnouncementType(), new Announcement())->createView()
+        );
+    }
+
+    /**
+     * @Route("/save", name="admin_announcement_save")
+     * @Method("POST")
+     * @Template("HyperAdsBundle:Admin:Announcement/new.html.twig")
+     */
+    public function createAction(Request $request)
+    {
+        $announcement = new Announcement();
+        $announcement->setAdvertiser($this->getUser());
+        $form = $this->createForm(new AnnouncementType(), $announcement);
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $this->entityManager->persist($announcement);
+            $this->entityManager->flush();
+
+            return $this->redirect($this->generateUrl('user_announcement_index'));
+        }
+
+        return array(
+            'form' => $form->createView(),
+        );
+    }
+
+
+    /**
+     * @Route("/{announcement}/show", name="admin_announcement_show")
      * @Template()
      */
     public function showAction(Announcement $announcement)
@@ -43,108 +83,73 @@ class AnnouncementController extends Controller
     }
 
     /**
-     * @Route("/add", name="admin_announcement_new")
-     * @Template()
-     */
-    public function addAction()
-    {
-        return array(
-            'form' => $this->createForm(new AnnouncementFullType(), new Announcement())->createView(),
-        );
-    }
-
-    /**
-     * @Route("/save", name="user_announcement_create")
-     * @Template("HyperAdsBundle:Admin:Announcement/add.html.twig")
-     * @Method("POST")
-     */
-    public function createAction(Request $request)
-    {
-        $announcement = new Announcement();
-        $form = $this->createForm(new AnnouncementFullType(), $announcement);
-        $form->bind($request);
-
-        if ($form->isValid()) {
-            $this->entityManager->persist($announcement);
-            $this->entityManager->flush($announcement);
-
-            return $this->redirect($this->generateUrl('admin_announcement_index'));
-        }
-
-        return array(
-            'form' => $form->createView(),
-        );
-    }
-
-    /**
      * @Route("/{announcement}/edit", name="admin_announcement_edit")
      * @Template()
      */
     public function editAction(Announcement $announcement)
     {
+        $form = $this->createForm(new AnnouncementType(), $announcement);
         return array(
-            'form' => $this->createForm(new AnnouncementFullType(), $announcement)->createView(),
-            'announcement' => $announcement
+            'form' => $form->createView(),
+            'announcement' => $announcement,
         );
     }
 
     /**
-     * @Route("/{announcement}/save", name="admin_announcement_save")
-     * @Method("POST")
+     * @Route("/{announcement}/update-handler", name="admin_announcement_update_handler")
      * @Template("HyperAdsBundle:Admin:Announcement/edit.html.twig")
+     * @Method("POST")
      */
-    public function saveAction(Request $request, Announcement $announcement)
+    public function announcementHandlerAction(Request $request, Announcement $announcement)
     {
         $action = $request->get('action');
-        $this->checkFormAction($action);
         $request->request->remove('action');
-        $form = $this->createForm(new AnnouncementFullType(), $announcement);
+
+        if ($this->trans('delete') === $action) {
+            return $this->updateAnnouncement($announcement, $request, 'remove');
+        } elseif ($this->trans('save') === $action) {
+            return $this->updateAnnouncement($announcement, $request, 'persist');
+        }
+
+        throw new InvalidArgumentException('Invalid action');
+    }
+
+    private function updateAnnouncement(Announcement $announcement, Request $request, $action)
+    {
+        $form = $this->createForm(new AnnouncementType(), $announcement);
         $form->bind($request);
 
         if ($form->isValid()) {
-            $this->persistOrRemoveAnnouncement($announcement, $action);
+            $this->persistOrRemoveAnnouncement($action, $announcement);
+            $this->persistOrRemoveFlash($action);
 
-            return $this->redirect($this->generateUrl('admin_announcement_index'));
+            return $this->redirect($this->generateUrl('user_announcement_index'));
         }
 
         return array(
             'form' => $form->createView(),
-            'announcement' => $announcement
+            'announcement' => $announcement,
         );
     }
 
-    private function persistOrRemoveAnnouncement(Announcement $announcement, $action)
+    private function persistOrRemoveFlash($action)
     {
-        if ('update' == $action) {
-            $this->updateAnnouncement($announcement);
-            $this->get('session')->getFlashBag()->add('success', $this->trans('announcement.updated'));
-        } else {
-            $this->deleteAnnouncement($announcement);
-            $this->get('session')->getFlashBag()->add('success', $this->trans('announcement.removed'));
+        if ('persist' === $action) {
+            $this->get('session')->getFlashBag()->add('success', $this->trans('announcement.saved'));
+        } elseif ('remove' === $action) {
+            $this->get('session')->getFlashBag()->add('success', $this->trans('announcement.deleted'));
         }
     }
 
-    private function deleteAnnouncement(Announcement $announcement)
+    private function persistOrRemoveAnnouncement($action, $announcement)
     {
-        $this->entityManager->remove($announcement);
-        $this->entityManager->flush();
-    }
-
-    private function updateAnnouncement(Announcement $announcement)
-    {
-        $this->entityManager->persist($announcement);
-        $this->entityManager->flush();
-    }
-
-    /**
-     * @param $action
-     * @throws \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
-     */
-    private function checkFormAction($action)
-    {
-        if (!in_array($action, array('update', 'delete'))) {
-            throw new BadRequestHttpException('Invalid action');
+        if ('persist' === $action) {
+            $this->entityManager->persist($announcement);
+        } elseif ('remove' === $action) {
+            $this->entityManager->remove($announcement);
         }
-    }
 
+        $this->entityManager->flush();
+    }
 }
+

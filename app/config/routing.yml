@@ -59,6 +59,11 @@ admin_banner:
     prefix: /admin/banner
     type: annotation
 
+admin_announcement:
+    resource: "@HyperAdsBundle/Controller/Admin/AnnouncementController.php"
+    prefix: /admin/announcement
+    type: annotation
+
 user_banner:
     resource: "@HyperAdsBundle/Controller/User/BannerController.php"
     prefix: /user/banner
