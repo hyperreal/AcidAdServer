@@ -1,13 +1,12 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}
-{{ 'edit.announcement'|babel({'%announcement%': announcement}) }}
+{{ 'new.announcement'|babel }}
 {% endblock %}
 
 {% block body %}
 
-<h1>{{ 'edit.announcement'|babel({'%announcement%': announcement}) }}</h1>
-<form method="POST" action="{{ url('admin_announcement_update', {'announcement': announcement.id}) }}">
+<form method="POST" action="{{ url('admin_announcement_save') }}">
     <div>
         {{ form_label(form.title) }}
         {{ form_widget(form.title) }}
@@ -18,12 +17,22 @@
         {{ form_widget(form.announcementPaymentType) }}
         {{ form_errors(form.announcementPaymentType) }}
     </div>
+    <div class="clearfix">
+        {{ form_label(form.disabled) }}
+        {{ form_widget(form.disabled) }}
+        {{ form_errors(form.disabled) }}
+    </div>
     <div>
         {{ form_widget(form.description) }}
         {{ form_errors(form.description) }}
         {{ form_rest(form) }}
     </div>
-    <input type="submit" value="{{ 'save'|babel }}">
+    <div class="form-actions">
+        <a href="{{ path('admin_announcement_index') }}" class="btn">{{ 'back.to.the.list'|babel }}</a>
+        <div class="pull-right">
+            <input type="submit" class="btn btn-primary" value="{{ 'add.announcement'|babel }}">
+        </div>
+    </div>
 </form>
 
 {% endblock %}
