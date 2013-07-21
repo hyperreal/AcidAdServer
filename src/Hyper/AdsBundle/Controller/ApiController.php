@@ -86,30 +86,4 @@ class ApiController extends RestController
         return $calendar->createOccupancyReport($from, $to);
     }
 
-    private function getInvalidTokenResponse()
-    {
-        return $this->getJsonErrorResponse('Invalid token', 401);
-    }
-
-    private function getJsonErrorResponse($message, $statusCode)
-    {
-        return $this->getJsonResponse(
-            array(
-                's' => false,
-                'm' => $message
-            ),
-            $statusCode
-        );
-    }
-
-    private function getJsonResponse($content, $statusCode = 200)
-    {
-        return new Response(
-            json_encode($content),
-            $statusCode,
-            array(
-                'Content-type' => 'application/json; charset=utf-8',
-            )
-        );
-    }
 }

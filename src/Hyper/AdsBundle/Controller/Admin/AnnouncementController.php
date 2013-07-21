@@ -2,14 +2,13 @@
 
 namespace Hyper\AdsBundle\Controller\Admin;
 
-use Hyper\AdsBundle\Entity\Advertisement;
 use Hyper\AdsBundle\Entity\Announcement;
+use Hyper\AdsBundle\Form\AnnouncementFullType;
 use Hyper\AdsBundle\Form\AnnouncementType;
 use Hyper\AdsBundle\Controller\Controller;
 use Hyper\AdsBundle\Exception\InvalidArgumentException;
 use JMS\DiExtraBundle\Annotation as DI;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -31,54 +30,7 @@ class AnnouncementController extends Controller
         return array(
             'announcements' => $this->entityManager
                 ->getRepository('HyperAdsBundle:Announcement')
-				->findAll()
-        );
-    }
-
-    /**
-     * @Route("/add", name="admin_announcement_new")
-     * @Template()
-     */
-    public function newAction()
-    {
-        return array(
-            'form' => $this->createForm(new AnnouncementType(), new Announcement())->createView()
-        );
-    }
-
-    /**
-     * @Route("/save", name="admin_announcement_save")
-     * @Method("POST")
-     * @Template("HyperAdsBundle:Admin:Announcement/new.html.twig")
-     */
-    public function createAction(Request $request)
-    {
-        $announcement = new Announcement();
-        $announcement->setAdvertiser($this->getUser());
-        $form = $this->createForm(new AnnouncementType(), $announcement);
-        $form->bind($request);
-
-        if ($form->isValid()) {
-            $this->entityManager->persist($announcement);
-            $this->entityManager->flush();
-
-            return $this->redirect($this->generateUrl('user_announcement_index'));
-        }
-
-        return array(
-            'form' => $form->createView(),
-        );
-    }
-
-
-    /**
-     * @Route("/{announcement}/show", name="admin_announcement_show")
-     * @Template()
-     */
-    public function showAction(Announcement $announcement)
-    {
-        return array(
-            'announcement' => $announcement
+                ->findAll()
         );
     }
 
@@ -88,7 +40,7 @@ class AnnouncementController extends Controller
      */
     public function editAction(Announcement $announcement)
     {
-        $form = $this->createForm(new AnnouncementType(), $announcement);
+        $form = $this->createForm(new AnnouncementFullType(), $announcement);
         return array(
             'form' => $form->createView(),
             'announcement' => $announcement,
@@ -105,9 +57,9 @@ class AnnouncementController extends Controller
         $action = $request->get('action');
         $request->request->remove('action');
 
-        if ($this->trans('delete') === $action) {
+        if ('delete' == $action) {
             return $this->updateAnnouncement($announcement, $request, 'remove');
-        } elseif ($this->trans('save') === $action) {
+        } elseif ('update' == $action) {
             return $this->updateAnnouncement($announcement, $request, 'persist');
         }
 
@@ -116,14 +68,14 @@ class AnnouncementController extends Controller
 
     private function updateAnnouncement(Announcement $announcement, Request $request, $action)
     {
-        $form = $this->createForm(new AnnouncementType(), $announcement);
+        $form = $this->createForm(new AnnouncementFullType(), $announcement);
         $form->bind($request);
 
         if ($form->isValid()) {
             $this->persistOrRemoveAnnouncement($action, $announcement);
             $this->persistOrRemoveFlash($action);
 
-            return $this->redirect($this->generateUrl('user_announcement_index'));
+            return $this->redirect($this->generateUrl('admin_announcement_index'));
         }
 
         return array(

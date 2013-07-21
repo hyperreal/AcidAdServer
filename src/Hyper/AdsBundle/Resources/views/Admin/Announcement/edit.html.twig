@@ -1,40 +1,18 @@
 {% extends "::base.html.twig" %}
-
 {% block title %}
-{{ 'edit.announcement'|babel({'%announcement%': announcement}) }}
+    {{ 'edit.announcement'|babel({'announcementTitle': announcement.title}) }}
 {% endblock %}
-
 {% block body %}
+    <h1>{{ 'edit.announcement'|babel({'announcementTitle': announcement.title}) }}</h1>
 
-<h1>{{ 'edit.announcement'|babel({'%announcement%': announcement}) }}</h1>
-<form method="post" action="{{ url('admin_announcement_update_handler', {'announcement': announcement.id}) }}">
-    <div>
-        {{ form_label(form.title) }}
-        {{ form_widget(form.title) }}
-        {{ form_errors(form.title) }}
-    </div>
-    <div>
-        {{ form_label(form.announcementPaymentType) }}
-        {{ form_widget(form.announcementPaymentType) }}
-        {{ form_errors(form.announcementPaymentType) }}
-    </div>
-    <div class="clearfix">
-        {{ form_label(form.disabled) }}
-        {{ form_widget(form.disabled) }}
-        {{ form_errors(form.disabled) }}
-    </div>
-    <div>
-        {{ form_widget(form.description) }}
-        {{ form_errors(form.description) }}
-        {{ form_rest(form) }}
-    </div>
-    <div class="form-actions">
-        <a class="btn" href="{{ path('admin_announcement_index') }}">{{ 'back.to.the.list'|babel }}</a>
-        <div class="pull-right">
-            <input type="submit" name="action" class="btn btn-danger" value="{{ 'delete'|babel }}">
-            <input type="submit" name="action" class="btn btn-primary" value="{{ 'save'|babel }}">
+    <form action="{{ path('admin_announcement_update_handler', { 'announcement': announcement.id }) }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <div class="form-actions">
+            <a href="{{ path('admin_announcement_index') }}" class="btn">{{ 'back.to.the.list'|babel }}</a>
+            <div class="pull-right">
+                <button type="submit" class="btn btn-danger" name="action" value="delete">{{ 'delete'|babel }}</button>
+                <button type="submit" class="btn btn-primary" name="action" value="update">{{ 'edit'|babel }}</button>
+            </div>
         </div>
-    </div>
-</form>
-
+    </form>
 {% endblock %}
