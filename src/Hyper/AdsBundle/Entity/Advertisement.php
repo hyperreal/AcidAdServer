@@ -43,7 +43,7 @@ class Advertisement
     protected $advertiser;
 
     /**
-     * @ORM\Column(type="smallint", name="paid")
+     * @ORM\Column(type="boolean", name="paid")
      */
     protected $paid = false;
 
@@ -160,7 +160,7 @@ class Advertisement
         return $this->paidTo;
     }
 
-    public function setPaidTo(\DateTime $paidTo)
+    public function setPaidTo(\DateTime $paidTo = null)
     {
         $this->paidTo = $paidTo;
     }

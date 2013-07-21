@@ -15,11 +15,20 @@ class AnnouncementFullType extends AbstractType
         $choices = AnnouncementPaymentType::getValidTypesWithLabels();
 
         $builder->add('title', 'text', array('label' => 'title', 'translation_domain' => 'HyperAdsBundle'));
-        $builder->add('adminDisabled', 'checkbox', array('required' => false, 'label' => 'check.to.disable', 'translation_domain' => 'HyperAdsBundle'));
-        $builder->add('advertiser', 'advertiser', array('required' => true, 'label' => 'advertiser', 'translation_domain' => 'HyperAdsBundle'));
-        $builder->add('addDate', 'date', array('required' => true, 'label' => 'add.date', 'translation_domain' => 'HyperAdsBundle'));
-        $builder->add('paid', 'checkbox', array('required' => false, 'label' => 'is.paid', 'translation_domain' => 'HyperAdsBundle'));
-        $builder->add('paidTo', 'date', array('required' => false, 'label' => 'paid.to', 'translation_domain' => 'HyperAdsBundle'));
+        $builder->add('adminDisabled', 'checkbox', $this->getStandardOptions('check.to.disable'));
+        $builder->add(
+            'advertiser',
+            'entity',
+            array(
+                'class' => 'HyperAdsBundle:Advertiser',
+                'property' => 'username',
+                'required' => true,
+                'label' => 'advertiser',
+                'translation_domain' => 'HyperAdsBundle'
+            )
+        );
+        $builder->add('paid', 'checkbox', $this->getStandardOptions('is.paid'));
+        $builder->add('paidTo', 'date', $this->getStandardOptions('paid.to'));
         $builder->add(
             'announcementPaymentType',
             'choice',
@@ -43,5 +52,10 @@ class AnnouncementFullType extends AbstractType
     public function getName()
     {
         return self::FORM_NAME;
+    }
+
+    private function getStandardOptions($label)
+    {
+        return array('required' => false, 'label' => $label, 'translation_domain' => 'HyperAdsBundle');
     }
 }

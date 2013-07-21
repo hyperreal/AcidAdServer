@@ -7947,3 +7947,7 @@ table label.table {
 .form-signin .form-signin-heading {
   margin-bottom: 10px;
 }
+#annoucement_full_type > div {
+  clear: both;
+  padding: 5px 0;
+}
