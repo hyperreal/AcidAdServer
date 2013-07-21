@@ -13,6 +13,7 @@ create.new.entry: Dodaj
 new.advertiser: 'Nowy reklamodawca'
 create: Dodaj
 show.advertiser: 'Reklamodawca advertiserName'
+advertiser: 'Reklamodawca'
 firstname: Imię
 lastname: Nazwisko
 edit.banner: 'Edytuj banner'
@@ -144,3 +145,4 @@ check.to.disable: 'Wyłącz ogłoszenie'
 hello: 'Witaj!'
 announcement.was.added.or.edited: 'Ogłoszenie %title% zostało dodane lub wyedytowane'
 announcement.edited: 'Ogłoszenie %title% zostało zmienione/dodane przez %user%'
+edit.in.admin.mode: 'Edytuj jako administrator'

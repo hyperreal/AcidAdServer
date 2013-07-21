@@ -1,5 +1,10 @@
 <p>{{ 'hello'|babel }}</p>
 
+<p>
+    {{ 'edit.in.admin.mode'|babel }}:
+    <a href="{{ url('admin_announcement_edit', {'announcement': announcement.id}) }}">{{ announcement.title }}</a>
+</p>
+
 <p>{{ 'announcement.was.added.or.edited'|babel({'%title%': announcement.title}) }}</p>
 <hr />
 <p>{{ announcement.description|raw }}</p>
