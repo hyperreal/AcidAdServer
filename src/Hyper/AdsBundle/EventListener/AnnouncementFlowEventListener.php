@@ -25,8 +25,12 @@ class AnnouncementFlowEventListener implements EventSubscriber
     /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
     private $container;
 
-    public function __construct(ContainerInterface $container, array $mailingPersonList, $mailerFromEmail, $mailerFromName)
-    {
+    public function __construct(
+        ContainerInterface $container,
+        array $mailingPersonList,
+        $mailerFromEmail,
+        $mailerFromName
+    ) {
         $this->container = $container;
         $this->mailingPersonList = $mailingPersonList;
         $this->mailerFromEmail = $mailerFromEmail;
@@ -65,13 +69,6 @@ class AnnouncementFlowEventListener implements EventSubscriber
         $this->mailer->send($this->prepareMessage($entity));
     }
 
-    private function setUpServices()
-    {
-        $this->translator = $this->container->get('translator');
-        $this->templating = $this->container->get('templating');
-        $this->mailer = $this->container->get('mailer');
-    }
-
     /**
      * @param \Hyper\AdsBundle\Entity\Advertisement $entity
      * @return \Swift_Message
@@ -103,5 +100,13 @@ class AnnouncementFlowEventListener implements EventSubscriber
         }
 
         return $message;
+    }
+
+    private function setUpServices()
+    {
+        //this way, because of circular reference problem
+        $this->translator = $this->container->get('translator');
+        $this->templating = $this->container->get('templating');
+        $this->mailer = $this->container->get('mailer');
     }
 }

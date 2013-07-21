@@ -35,7 +35,7 @@ class AnnouncementController extends Controller
     }
 
     /**
-     * @Route("/{announcement}/edit", name="admin_announcement_edit")
+     * @Route("/{announcement}/edit", name="admin_announcement_edit", requirements={"announcement": "\d+"})
      * @Template()
      */
     public function editAction(Announcement $announcement)
