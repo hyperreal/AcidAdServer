@@ -64,6 +64,11 @@ controller starting with `web` path: `http://example.com/web/admin`. If you are 
    
 instead of installing Apache or nginx.
 
+Requirement for some additional stuff like caching zones availabity calendar requires `memcache` extension.
+On Debian-based systems you can install it with
+
+	sudo apt-get install php5-memcache
+
 With `node` and `bower` installed, you can next install JS and CSS
 dependencies:
 
