@@ -19,7 +19,7 @@ parameters:
     mtgox_api_secret: "apiSecret"
 
     ads_default_currency: EUR
-    page_title: "acid.ad.server"
+    page_title: "acid.name.long"
 
     locale:            pl
     secret:            0724ebb222af8866b7d7a2524451219b

@@ -1,11 +1,11 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}
-{{ 'your.announcements'|babel }}
+{{ 'announcement.plural.yours'|babel }}
 {% endblock %}
 
 {% block body %}
-<h1>{{ 'your.announcements'|babel }}</h1>
+<h1>{{ 'announcement.plural.yours'|babel }}</h1>
 
 {% if announcements|length > 0 %}
 <table class="table table-striped">
@@ -29,7 +29,7 @@
     </tbody>
 </table>
 {% else %}
-<div class="notice message">{{ 'empty.announcements.list'|babel }}</div>
+<div class="notice message">{{ 'announcements.list.empty'|babel }}</div>
 {% endif %}
 
 <div class="additional-links">
