@@ -1,7 +1,7 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}
-{{ 'new.announcement'|babel }}
+{{ 'announcement.new'|babel }}
 {% endblock %}
 
 {% block body %}
@@ -30,7 +30,7 @@
     <div class="form-actions">
         <a href="{{ path('user_announcement_index') }}" class="btn">{{ 'back.to.the.list'|babel }}</a>
         <div class="pull-right">
-            <input type="submit" class="btn btn-primary" value="{{ 'add.announcement'|babel }}">
+            <input type="submit" class="btn btn-primary" value="{{ 'announcement.add'|babel }}">
         </div>
     </div>
 </form>

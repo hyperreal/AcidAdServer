@@ -1,8 +1,39 @@
 edit.advertiser: 'Edit advertiser advertiserName'
+list.advertiser: 'List of advertisers'
+new.advertiser: 'New advertiser'
+show.advertiser: 'Advertiser advertiserName'
+advertisers: Advertisers
+advertiser: 'Advertiser'
+
+banners: 'Banners'
+empty.banners.list: "Banners' list is empty"
+edit.banner: 'Edit banner'
+list.banner: 'List of banners'
+new.banner: 'New banner'
+show.banner: Banner
+edit.banners.in.zone: 'Banners in zone zoneName'
+banner.id: 'Banner ID'
+banner.title: 'Banner title'
+banner.size: 'Banner size'
+banner.buy: 'Buy banner'
+your.banners: 'Your banners'
+add.banner: 'Add banner'
+pay.for.banner.in.zone: 'Pay for banner %banner% in zone %zone%'
+pay.for.banner: 'Pay for banner'
+pay.for.banner.in.zone.info: 'This page allows you to pay for banner %banner% in %zone% zone'
+zones.for.banner: 'Zones for banner'
+banner.in.zone: 'Banners in zone'
+pay.banner.here: 'Pay for banner here'
+no.zones.to.add.banner: 'There are no zones where you can put this banner'
+show.banners: 'Show banners'
+banners: Banners
+add.banner.to.zone: 'Add banner to zone'
+zones.associated.with.banner: 'Zones associated with bannerName'
+
+
 edit: Edit
 back.to.the.list: 'Back to the list'
 delete: Delete
-list.advertiser: 'List of advertisers'
 id: ID
 name: Name
 email: Email
@@ -10,48 +41,39 @@ actions: Actions
 show: Show
 no.entities: 'No records found'
 create.new.entry: 'Create new'
-new.advertiser: 'New advertiser'
+
 create: Create
-show.advertiser: 'Advertiser advertiserName'
+
 firstname: Firstname
 lastname: Lastname
-edit.banner: 'Edit banner'
-list.banner: 'List of banners'
+
 file: File
 extension: Extension
 width: Width
 height: Height
 type: Type
-new.banner: 'New banner'
-show.banner: Banner
+
 title: Title
 linktitle: 'Link text'
 url: URL
 description: Description
-edit.banners.in.zone: 'Banners in zone zoneName'
 zone.name: 'Zone zoneName'
-banner.id: 'Banner ID'
-banner.title: 'Banner title'
-banner.size: 'Banner size'
+
 use.in.zone: 'Use in zone?'
 probability: Probability
 save: Save
 welcome: 'Welcome to AcidAdServer'
-banner.buy: 'Buy banner'
-announcement.buy: 'Buy announcement'
-announcement.free.add: 'Add free announcement'
+
+pages: Pages
 edit.page: 'Edit page pageName'
 list.page: 'List of pages'
 new.page: 'New page'
 show.page: 'Page pageName'
-your.banners: 'Your banners'
+
+
 enabled.in.zones: 'Enabled in zones'
 payments.list: 'List of payments'
-add.banner: 'Add banner'
 pay: 'Pay'
-pay.for.banner.in.zone: 'Pay for banner %banner% in zone %zone%'
-pay.for.banner: 'Pay for banner'
-pay.for.banner.in.zone.info: 'This page allows you to pay for banner %banner% in %zone% zone'
 next: 'Next'
 payments.for.announcement: 'Payments for announcement'
 order.number: 'Order number'
@@ -64,77 +86,97 @@ zone: 'Zone'
 yes: 'Yes'
 no: 'No'
 payments.empty: 'Payments list is empty'
-zones.for.banner: 'Zones for banner'
-banner.in.zone: 'Banners in zone'
 page: Page
 paid.to: 'Paid to'
 paid.to.date: 'Paid to date'
 not.paid: 'Not paid'
-pay.banner.here: 'Pay for banner here'
-no.zones.to.add.banner: 'There are no zones where you can put this banner'
+
 edit.zone: 'Edit zone zoneName'
 list.zone: 'List of zones'
+new.zone: 'New zone'
+show.zone: 'Zone zoneName'
+zones: Zones
+zone.not.exists: 'Zone not exists'
+zones.info: 'Zones information'
+zones.short.info: 'Below you can find a list of active pages and zones (places where you can put your banners). Maximum dimensions of them as well as daily prices are also provided.'
+
+
 enabled: Enabled
 max.width: 'Max. width'
 max.height: 'Max. height'
-show.banners: 'Show banners'
-new.zone: 'New zone'
-show.zone: 'Zone zoneName'
-date.start: 'Start date'
 date.expire: 'Expire date'
+date.start: 'Start date'
+
+
 powered.by.acid: 'Powered by AcidAdServer'
-advertisers: Advertisers
-pages: Pages
-banners: Banners
-zones: Zones
-zone.not.exists: 'Zone not exists'
-zones.associated.with.banner: 'Zones associated with bannerName'
-add.banner.to.zone: 'Add banner to zone'
-mail.expiring.subject: 'Mail subject'
-mail.expiring.content: 'Mail content'
+
+
+mail:
+    expiring:
+        subject: 'Mail subject'
+        content: 'Mail content'
+
+
 flash.movie: 'Flash movie'
 image: Image
 text: Text
 name.first: Firstname
 name.last: Lastname
 all.changes.saved: 'All changes have been saved'
-announcement-free.add: 'Add free text announcement'
+
 daily.price: 'Daily price'
 canceled.payment: 'Cancelled payment'
 payment.was.canceled: 'Order was cancelled'
 payment.info: 'Payment for order no. %orderNumber%'
-zones.info: 'Zones information'
-zones.short.info: 'Below you can find a list of active pages and zones (places where you can put your banners). Maximum dimensions of them as well as daily prices are also provided.'
-acid.ad.server: 'AcidAdServer'
-fork.on.github: 'fork on github'
+
+
+acid:
+    name:
+        long: 'AcidAdServer'
+    promo:
+        github: 'fork on github'
+
+menu:
+    guide: Guide
+
+
 edit.profile: 'Edit your profile'
 analytics.stats: 'Google Analytics stats'
-empty.banners.list: "Banners' list is empty"
+
 check.zones: 'Activation in zones'
-tutorial: Guide
 extend.the.payment: 'Extend the payment'
 payment.instruction.not.found: 'Payment instruction not found'
 max.days.error: 'You could only buy banner for %maxDays%'
 payment.type: 'Payment type'
-announcement.standard: 'Free announcement'
-edit.announcement: 'Edit announcement'
-add.announcement: 'Add announcement'
-announcement.saved: 'Announcement saved'
-your.announcements: 'Your announcements'
-new.announcement: 'New announcement'
-announcement.deleted: 'Announcement was successfully removed'
-announcement.free: 'Free announcements'
-banners: 'Banners'
-announcements: 'Announcements'
-announcement.add: 'Add announcement'
+
 default.currency: 'Default currency'
-rules.accept: 'I accept <a href="%rules_url%">the Terms of Service</a>'
+
 rules: 'Terms of Service'
+    accept: 'I accept <a href="%rules_url%">the Terms of Service</a>'
+
 register: 'Registration'
-empty.announcements.list: 'Empty announcements list'
+
 check.to.disable: 'Disable announcement'
-hello: 'Hellp!'
-announcement.was.added.or.edited: 'Announcement %title% has been added or edited'
-announcement.edited: 'Announcement %title% has been added or edited by %user%'
+hello: 'Hello!'
 edit.in.admin.mode: 'Edit in admin mode'
-advertiser: 'Advertiser'
+
+# Done ===========================================================================================
+announcement: 'Announcement'
+    plural: 'Announcements'
+        yours: 'Your announcements'
+
+    add: 'Add announcement'
+    edit: 'Edit announcement'
+    buy: 'Buy announcement'
+    new: 'New announcement'
+
+    saved: 'Announcement saved'
+    deleted: 'Announcement was successfully removed'
+    edited: 'Announcement %title% has been added or edited by %user%'
+    modified: 'Announcement %title% has been added or edited'
+
+    standard: 'Free announcement'
+    free: 'Free announcements'
+        add: 'Add free announcement'
+    list:
+        empty: 'Empty announcements list'

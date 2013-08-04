@@ -1,9 +1,9 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-    {{ 'edit.announcement'|babel({'announcementTitle': announcement.title}) }}
+    {{ 'announcement.edit'|babel({'announcementTitle': announcement.title}) }}
 {% endblock %}
 {% block body %}
-    <h1>{{ 'edit.announcement'|babel({'announcementTitle': announcement.title}) }}</h1>
+    <h1>{{ 'announcement.edit'|babel({'announcementTitle': announcement.title}) }}</h1>
 
     <form action="{{ path('admin_announcement_update_handler', { 'announcement': announcement.id }) }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}

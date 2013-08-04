@@ -15,19 +15,19 @@
         <a href="{{ path('admin_banner') }}">{{ 'banners'|babel }}</a>
     </li>
     <li{% if app.request.get('_route') == 'admin_announcement_index' %} class="active"{% endif %}>
-        <a href="{{ path('admin_announcement_index') }}">{{ 'announcements'|babel }}</a>
+        <a href="{{ path('admin_announcement_index') }}">{{ 'announcement.plural'|babel }}</a>
     </li>
     <li class="nav-header">User</li>
     {% endif %}
     {% if is_granted("ROLE_USER") %}
     <li{% if app.request.get('_route') == 'acid_tutorial' %} class="active"{% endif %}>
-        <a href="{{ url('acid_tutorial') }}">{{ 'tutorial'|babel }}</a>
+        <a href="{{ url('acid_tutorial') }}">{{ 'menu.guide'|babel }}</a>
     </li>
     <li{% if app.request.get('_route') == 'user_banner_list' %} class="active"{% endif %}>
         <a href="{{ path('user_banner_list') }}">{{ 'your.banners'|babel }}</a>
     </li>
     <li{% if app.request.get('_route') == 'user_announcement_index' %} class="active"{% endif %}>
-        <a href="{{ url('user_announcement_index') }}">{{ 'your.announcements'|babel }}</a>
+        <a href="{{ url('user_announcement_index') }}">{{ 'announcement.plural.yours'|babel }}</a>
     </li>
     <li{% if app.request.get('_route') == 'default_zones_info' %} class="active"{% endif %}>
         <a href="{{ url("default_zones_info") }}">{{ 'zones.info'|babel }}</a>
