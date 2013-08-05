@@ -54,6 +54,12 @@ class Advertisement
     protected $addDate;
 
     /**
+     * @ORM\Column(type="datetime", name="modification_date", nullable=true)
+     * @var \DateTime
+     */
+    protected $modificationDate;
+
+    /**
      * @ORM\Column(type="date", name="paid_to", nullable=true)
      * @var \DateTime
      */
@@ -138,6 +144,20 @@ class Advertisement
     {
         return $this->addDate;
     }
+
+    public function markAsModified()
+    {
+        $this->modificationDate = new \DateTime();
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getModificationDate()
+    {
+        return $this->modificationDate;
+    }
+
 
     /**
      * @return Advertiser
