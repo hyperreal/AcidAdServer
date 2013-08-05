@@ -68,6 +68,7 @@
             <argument>%mailer_from%</argument>
             <argument>%mailer_sender%</argument>
             <tag name="doctrine.event_subscriber" event="postPersist" />
+            <tag name="doctrine.event_subscriber" event="preUpdate" />
         </service>
 
         <service id="hyper_ads.payments_logger" class="Symfony\Bridge\Monolog\Logger">

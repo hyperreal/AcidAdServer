@@ -4,11 +4,14 @@ namespace Hyper\AdsBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Hyper\AdsBundle\Entity\Advertisement;
+use Hyper\AdsBundle\Entity\Advertiser;
 use Hyper\AdsBundle\Entity\Announcement;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class AnnouncementFlowEventListener implements EventSubscriber
 {
@@ -18,6 +21,9 @@ class AnnouncementFlowEventListener implements EventSubscriber
     private $templating;
     /** @var \Swift_Mailer */
     private $mailer;
+    /** @var  \Symfony\Component\Security\Core\SecurityContext */
+    private $securityContext;
+
     private $mailingPersonList;
     private $mailerFromEmail;
     private $mailerFromName;
@@ -41,7 +47,8 @@ class AnnouncementFlowEventListener implements EventSubscriber
     {
         return array(
             'postPersist',
-            'postUpdate'
+            'postUpdate',
+            'preUpdate',
         );
     }
 
@@ -53,6 +60,33 @@ class AnnouncementFlowEventListener implements EventSubscriber
     public function postUpdate(LifecycleEventArgs $args)
     {
         $this->mailing($args);
+    }
+
+    public function preUpdate(LifecycleEventArgs $args)
+    {
+        $this->setUpServices();
+        $this->markAsModified($args);
+    }
+
+    private function markAsModified(PreUpdateEventArgs $args)
+    {
+        $entity = $args->getEntity();
+        $securityToken = $this->securityContext->getToken();
+        if (!($entity instanceof Advertisement) || null == $securityToken) {
+            return;
+        }
+
+        $user = $securityToken->getUser();
+        if (($args->hasChangedField('description') || $args->hasChangedField('title'))
+            && $user instanceof Advertiser
+            && $user->getId() == $entity->getAdvertiser()->getId()
+        ) {
+            $entity->markAsModified();
+            $args->getEntityManager()->getUnitOfWork()->computeChangeSet(
+                $args->getEntityManager()->getClassMetadata(get_class($entity)),
+                $entity
+            );
+        }
     }
 
     /**
@@ -108,5 +142,6 @@ class AnnouncementFlowEventListener implements EventSubscriber
         $this->translator = $this->container->get('translator');
         $this->templating = $this->container->get('templating');
         $this->mailer = $this->container->get('mailer');
+        $this->securityContext = $this->container->get('security.context');
     }
 }
