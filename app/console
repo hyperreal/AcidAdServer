@@ -3,7 +3,7 @@
 
 // if you don't want to setup permissions the proper way, just uncomment the following PHP line
 // read http://symfony.com/doc/current/book/installation.html#configuration-and-setup for more information
-//umask(0000);
+umask(0000);
 
 set_time_limit(0);
 
@@ -12,7 +12,6 @@ require_once __DIR__.'/AppKernel.php';
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
-use Hyper\AdsBundle\Console\Command\ExpiringCampaignNotify;
 use Wikp\PaymentMtgoxBundle\Console\Command\RetrieveCurrentPrices;
 use Wikp\PaymentMtgoxBundle\Console\Command\ExchangeCalculator;
 
@@ -22,7 +21,7 @@ $debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(array('-
 
 $kernel = new AppKernel($env, $debug);
 $application = new Application($kernel);
-$application->add(new ExpiringCampaignNotify());
+$application->add(new \Hyper\AdsBundle\Console\Command\ExpireAnnouncements());
 $application->add(new RetrieveCurrentPrices());
 $application->add(new ExchangeCalculator());
 $application->run($input);
