@@ -34,6 +34,7 @@ parameters:
     application_memcache_prefix: "acid_"
 
     max_one_banner_days: 365
+    announcement_expire_days: 10 # if announcement is not edited for {announcement_expire_days}, it will be marked as expired by acid:task:expire-announcements
 
     announcement_flow_mail_recipients:
         - "mail@example.com"

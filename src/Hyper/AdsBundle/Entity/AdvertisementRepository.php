@@ -16,6 +16,19 @@ class AdvertisementRepository extends EntityRepository
         self::$maxReportsToRemoveFromApiList = abs(intval($num));
     }
 
+    public function getExpiredAnnouncements(\DateTime $expirationTime)
+    {
+        $query = $this->getEntityManager()->createQuery(
+            'SELECT a
+            FROM Hyper\AdsBundle\Entity\Announcement a
+            WHERE a.modificationDate < ?1 AND a.expired = ?2'
+        );
+        $query->setParameter(1, $expirationTime);
+        $query->setParameter(2, false);
+
+        return $query->getResult();
+    }
+
     /**
      * @return \Hyper\AdsBundle\Entity\Announcement[]
      */
@@ -29,14 +42,6 @@ class AdvertisementRepository extends EntityRepository
             ORDER BY a.announcementPaymentType ASC, a.addDate DESC
             '
         );
-
-        /*
-            LEFT JOIN a.reports r
-            GROUP BY a.id
-            HAVING COUNT(r.id) < :num
-            $query->setParameter(':num', self::$maxReportsToRemoveFromApiList);
-        */
-        $query->execute();
 
         return $query->getResult();
     }

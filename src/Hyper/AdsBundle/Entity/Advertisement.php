@@ -60,6 +60,11 @@ class Advertisement
     protected $modificationDate;
 
     /**
+     * @ORM\Column(type="boolean", name="expired")
+     */
+    protected $expired;
+
+    /**
      * @ORM\Column(type="date", name="paid_to", nullable=true)
      * @var \DateTime
      */
@@ -80,6 +85,7 @@ class Advertisement
     {
         $this->orders = new ArrayCollection();
         $this->addDate = new \DateTime();
+        $this->expired = false;
     }
 
     public function setId($id)
@@ -158,6 +164,15 @@ class Advertisement
         return $this->modificationDate;
     }
 
+    public function isExpired()
+    {
+        return $this->expired;
+    }
+
+    public function setExpired($expired)
+    {
+        $this->expired = !!$expired;
+    }
 
     /**
      * @return Advertiser
