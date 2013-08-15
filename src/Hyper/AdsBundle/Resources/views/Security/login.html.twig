@@ -1,21 +1,31 @@
 {% extends "::base.html.twig" %}
 {% block title %}
-    {{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}
+    {{ 'login-form.html-title'|babel }}
 {% endblock %}
 {% block body %}
 {% if error %}
     <div class="error">{{ error|trans({}, 'FOSUserBundle') }}</div>
 {% endif %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
-    <h2 class="form-signin-heading">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</h2>
+<h2 class="form-signin-heading">{{ 'login-form.page-title'|babel }}</h2>
+<form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin form-horizontal col-lg-6 col-offset-3" role="form">
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-    <input type="text" class="input-block-level" name="_username" placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}" value="{{ last_username }}" />
-    <input type="password" class="input-block-level" name="_password" placeholder="{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}" />
+    <div class="form-group">
+        <label for="username" class="col-lg-2 control-label">{{ 'login-form.username'|babel }}</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="username" name="_username" placeholder="{{ 'login-form.username'|babel }}" value="{{ last_username }}" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password" class="col-lg-2 control-label">{{ 'login-form.password'|babel }}</label>
+        <div class="col-lg-10">
+            <input type="password" class="form-control" name="_password" id="password" placeholder="{{ 'login-form.password'|babel }}" />
+        </div>
+    </div>
 
-    <a href="{{ path('fos_user_registration_register') }}" class="btn">{{ 'register'|babel }}</a>
-    <a href="{{ path('fos_user_resetting_request') }}" class="btn">{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}</a>
+    <a href="{{ path('fos_user_registration_register') }}" class="btn btn-link">{{ 'register'|babel }}</a>
+    <a href="{{ path('fos_user_resetting_request') }}" class="btn btn-link">{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}</a>
     <button type="submit" class="btn btn-large btn-primary pull-right" name="_submit">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
 </form>
 {% endblock body %}

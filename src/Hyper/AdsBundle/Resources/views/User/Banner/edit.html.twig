@@ -9,7 +9,7 @@
 <form action="{{ url('user_banner_save_handler', {'banner': banner.id}) }}" method="post" enctype="multipart/form-data">
     {{ form_widget(editForm) }}
     <div class="form-actions">
-        <a href="{{ url('user_banner_list') }}" class="btn">{{ 'back.to.the.list'|babel }}</a>
+        <a href="{{ url('user_banner_list') }}" class="btn btn-link">{{ 'back.to.the.list'|babel }}</a>
         <div class="pull-right">
             <button name="action" type="submit" value="remove" class="btn btn-danger">{{ 'delete'|babel }}</button>
             <button name="action" type="submit" value="update" class="btn btn-primary">{{ 'edit'|babel }}</button>

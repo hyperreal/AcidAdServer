@@ -3,11 +3,13 @@
     "main": "web/css/main.css",
     "version": "1.0.0",
     "dependencies": {
-		"ckeditor-colorbutton": "http://download.ckeditor.com/colorbutton/releases/colorbutton_4.0.1.zip",
-		"ckeditor-panelbutton": "http://download.ckeditor.com/panelbutton/releases/panelbutton_4.0.1.zip",
-		"mustache": "0.7.2",
-		"fancybox": "2.1.4",
-        "bootstrap": "2.3.1",
+        "ckeditor-colorbutton": "http://download.ckeditor.com/colorbutton/releases/colorbutton_4.0.1.zip",
+        "ckeditor-panelbutton": "http://download.ckeditor.com/panelbutton/releases/panelbutton_4.0.1.zip",
+        "mustache": "0.7.2",
+        "jquery": "1.10.2",
+        "fancybox": "2.1.4",
+        "bootstrap": "3.0.*",
+        "bootstrap-glyphicons": "*",
         "swfobject": "*"
     }
 }
