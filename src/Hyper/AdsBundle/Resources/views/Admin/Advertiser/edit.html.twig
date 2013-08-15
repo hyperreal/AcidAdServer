@@ -8,7 +8,7 @@
 <form action="{{ path('admin_advertiser_update_handler', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
     <div class="form-actions">
-        <a href="{{ path('admin_advertiser') }}" class="btn">{{ 'back.to.the.list'|babel }}</a>
+        <a href="{{ path('admin_advertiser') }}" class="btn btn-link">{{ 'back.to.the.list'|babel }}</a>
         <div class="pull-right">
             <button type="submit" class="btn btn-danger" name="action" value="delete">{{ 'delete'|babel }}</button>
             <button type="submit" class="btn btn-primary" name="action" value="update">{{ 'edit'|babel }}</button>

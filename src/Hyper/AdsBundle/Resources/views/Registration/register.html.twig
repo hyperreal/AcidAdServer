@@ -1,8 +1,58 @@
 {% extends "::base.html.twig" %}
+{% form_theme form _self %}
 
 {% block title %}{{ 'register'|babel }}{% endblock %}
 
+{% block form_row %}
+    {% spaceless %}
+        <div class="form-group">
+            {{ form_label(form) }}
+            {{ form_errors(form) }}
+            {{ form_widget(form) }}
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block form_label %}
+    {% spaceless %}
+        {% if label is defined and label is not sameas(false) %}
+            {% if not compound %}
+                {% set label_attr = label_attr|merge({'for': id}) %}
+            {% endif %}
+            {% if required %}
+                {% set label_attr = label_attr|merge({'class': (label_attr.class|default('col-lg-3 control-label') ~ ' required')|trim}) %}
+            {% endif %}
+            {% if label is empty %}
+                {% set label = form.name|humanize %}
+            {% endif %}
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain)|raw }}</label>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
+
+{% block form_widget_simple %}
+    {% spaceless %}
+        {% set type = type|default('text') %}
+        {% if type != "hidden" %}
+            {% set attr = attr|merge({'class': 'form-control'}) %}
+            <div class="col-lg-5">
+        {% endif %}
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        {% if type != "hidden" %}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_widget_simple %}
+
+
 {% block body %}
     <h2>{{ 'register'|babel }}</h2>
-    {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+
+    <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal col-lg-8 col-offset-2" role="form">
+        {{ form_widget(form) }}
+        <div class="form-actions">
+            <input type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" class="btn btn-primary" />
+        </div>
+    </form>
+
 {% endblock body %}

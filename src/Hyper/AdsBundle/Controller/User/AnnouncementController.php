@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Wikp\PaymentMtgoxBundle\Mtgox\RequestType\MtgoxTransactionUrlRequest;
 
 class AnnouncementController extends Controller
 {
@@ -72,7 +73,6 @@ class AnnouncementController extends Controller
         );
     }
 
-
     /**
      * @Route("/{announcement}/show", name="user_announcement_show")
      * @Template()
@@ -125,6 +125,9 @@ class AnnouncementController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
+
+            $this->paymentScreen($announcement);
+
             $this->persistOrRemoveAnnouncement($action, $announcement);
             $this->persistOrRemoveFlash($action);
 
@@ -165,5 +168,16 @@ class AnnouncementController extends Controller
             );
         }
     }
-}
 
+    private function paymentScreen(Announcement $announcement)
+    {
+        $request = new MtgoxTransactionUrlRequest();
+        $request->setCurrency($this->container->getParameter('announcement_edit_currency'));
+        $request->setIpnUrl($this->generateUrl('wikp_payment_mtgox_ipn'));
+        $request->setAmount($this->container->getParameter('announcement_edit_cost'));
+        $request->setAdditionalData($announcement->getId());
+
+
+
+    }
+}

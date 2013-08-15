@@ -146,3 +146,14 @@ hello: 'Witaj!'
 announcement.modified: 'Ogłoszenie %title% zostało dodane lub wyedytowane'
 announcement.edited: 'Ogłoszenie %title% zostało zmienione/dodane przez %user%'
 edit.in.admin.mode: 'Edytuj jako administrator'
+
+layout:
+    title: AcidAdServer
+    navbar:
+        login-info: Zalogowany jako <strong>%user%</strong>
+
+login-form:
+    username: Login
+    password: Hasło
+    html-title: Zaloguj się
+    page-title: Zaloguj się do AcidAdServera

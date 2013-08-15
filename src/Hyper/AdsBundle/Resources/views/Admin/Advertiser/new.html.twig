@@ -8,7 +8,7 @@
 <form action="{{ path('admin_advertiser_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <div class="form-actions">
-        <a href="{{ path('admin_advertiser') }}" class="btn">
+        <a href="{{ path('admin_advertiser') }}" class="btn btn-link">
             {{ 'back.to.the.list'|babel }}
         </a>
         <div class="pull-right">

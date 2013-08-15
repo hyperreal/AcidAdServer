@@ -1,6 +1,6 @@
-<ul class="well nav nav-list">
+<ul class="nav nav-pills nav-stacked">
     {% if is_granted('ROLE_ADMIN') %}
-    <li class="nav-header">Admin</li>
+    <li class="nav-divider"></li>
     <li{% if app.request.get('_route') == 'admin_advertiser' %} class="active"{% endif %}>
         <a href="{{ path('admin_advertiser') }}">{{ 'advertisers'|babel }}</a>
     </li>
@@ -17,7 +17,7 @@
     <li{% if app.request.get('_route') == 'admin_announcement_index' %} class="active"{% endif %}>
         <a href="{{ path('admin_announcement_index') }}">{{ 'announcement.plural'|babel }}</a>
     </li>
-    <li class="nav-header">User</li>
+    <li class="nav-divider"></li>
     {% endif %}
     {% if is_granted("ROLE_USER") %}
     <li{% if app.request.get('_route') == 'acid_tutorial' %} class="active"{% endif %}>
