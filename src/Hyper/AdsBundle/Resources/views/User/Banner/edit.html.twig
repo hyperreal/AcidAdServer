@@ -1,4 +1,5 @@
 {% extends "::base.html.twig" %}
+{% form_theme editForm "HyperAdsBundle::acidFormTheme.html.twig" %}
 {% block title %}
 {{ 'banner.buy'|babel }}
 {% endblock %}
@@ -6,7 +7,7 @@
 <div id="banner-preview" class="hide">
     <img src="{{ asset(banner.fileUrl) }}" alt="{{ banner.title }}"/>
 </div>
-<form action="{{ url('user_banner_save_handler', {'banner': banner.id}) }}" method="post" enctype="multipart/form-data">
+<form action="{{ url('user_banner_save_handler', {'banner': banner.id}) }}" method="post" enctype="multipart/form-data" class="form-horizontal col-lg-8 col-offset-2" role="form">
     {{ form_widget(editForm) }}
     <div class="form-actions">
         <a href="{{ url('user_banner_list') }}" class="btn btn-link">{{ 'back.to.the.list'|babel }}</a>

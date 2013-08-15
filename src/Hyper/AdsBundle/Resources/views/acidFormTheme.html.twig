@@ -1,0 +1,69 @@
+{% block form_row %}
+    {% spaceless %}
+        <div class="form-group">
+            {{ form_label(form) }}
+            {{ form_errors(form) }}
+            {{ form_widget(form) }}
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block form_label %}
+    {% spaceless %}
+        {% if label is defined and label is not sameas(false) %}
+            {% if not compound %}
+                {% set label_attr = label_attr|merge({'for': id, 'class': (label_attr.class|default('col-lg-3 control-label'))}) %}
+            {% endif %}
+            {% if required %}
+                {% set label_attr = label_attr|merge({'class': (label_attr.class|default('col-lg-3 control-label') ~ ' required')|trim}) %}
+            {% endif %}
+            {% if label is empty %}
+                {% set label = form.name|humanize %}
+            {% endif %}
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain)|raw }}</label>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
+
+{% block form_widget_simple %}
+    {% spaceless %}
+        {% set type = type|default('text') %}
+        {% if type != "hidden" and type != "file" %}
+            {% set attr = attr|merge({'class': 'form-control'}) %}
+            <div class="col-lg-5">
+        {% endif %}
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        {% if type != "hidden" and type != "file" %}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_widget_simple %}
+
+{% block choice_widget_collapsed %}
+    {% spaceless %}
+        <div class="col-lg-5">
+            <select class="form-control" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+                {% if empty_value is not none %}
+                    <option value=""{% if required %} disabled="disabled"{% if value is empty %} selected="selected"{% endif %}{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
+                {% endif %}
+                {% if preferred_choices|length > 0 %}
+                    {% set options = preferred_choices %}
+                    {{ block('choice_widget_options') }}
+                    {% if choices|length > 0 and separator is not none %}
+                        <option disabled="disabled">{{ separator }}</option>
+                    {% endif %}
+                {% endif %}
+                {% set options = choices %}
+                {{ block('choice_widget_options') }}
+            </select>
+        </div>
+    {% endspaceless %}
+{% endblock choice_widget_collapsed %}
+
+{% block checkbox_widget %}
+    {% spaceless %}
+        <div class="col-lg-5">
+            <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+        </div>
+    {% endspaceless %}
+{% endblock checkbox_widget %}

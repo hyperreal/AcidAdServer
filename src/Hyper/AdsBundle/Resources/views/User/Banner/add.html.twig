@@ -1,10 +1,11 @@
 {% extends "::base.html.twig" %}
+{% form_theme form "HyperAdsBundle::acidFormTheme.html.twig" %}
 
 {% block title %}
     {{ 'banner.buy'|babel }}
 {% endblock %}
 {% block body %}
-<form action="{{ url('user_banner_create') }}" method="post" enctype="multipart/form-data">
+<form action="{{ url('user_banner_create') }}" method="post" enctype="multipart/form-data" class="form-horizontal col-lg-8 col-offset-2" role="form">
     <div class="controls with-file">
         {{ form_widget(form) }}
     </div>
