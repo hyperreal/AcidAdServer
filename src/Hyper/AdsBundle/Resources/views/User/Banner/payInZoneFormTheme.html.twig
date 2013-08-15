@@ -1,6 +1,9 @@
+{% extends"HyperAdsBundle::acidFormTheme.html.twig" %}
+
 {% block choice_widget_collapsed %}
 {% spaceless %}
-<select class="input-small" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+<div class="col-lg-3">
+<select class="form-control" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
     {% if empty_value is not none %}
     <option value=""{% if required %} disabled="disabled"{% if value is empty %} selected="selected"{% endif %}{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
     {% endif %}
@@ -14,5 +17,22 @@
     {% set options = choices %}
     {{ block('choice_widget_options') }}
 </select>
+</div>
 {% endspaceless %}
 {% endblock choice_widget_collapsed %}
+
+{% block date_widget %}
+    {% spaceless %}
+        {% if widget == 'single_text' %}
+            {{ block('form_widget_simple') }}
+        {% else %}
+            <div class="input-group col-lg-9">
+                {{ date_pattern|replace({
+                '{{ year }}':  form_widget(form.year),
+                '{{ month }}': form_widget(form.month),
+                '{{ day }}':   form_widget(form.day),
+                })|raw }}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock date_widget %}

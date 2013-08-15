@@ -1,4 +1,6 @@
-<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="user-form">
+{% form_theme form "HyperAdsBundle::acidFormTheme.html.twig" %}
+
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal col-lg-12" role="form">
     {{ form_widget(form) }}
     <div class="form-actions">
         <a href="{{ path('fos_user_change_password') }}" class="btn btn-link">{{ 'change_password.submit'|trans({}, 'FOSUserBundle') }}</a>

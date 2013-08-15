@@ -4134,3 +4134,21 @@ table label.table {
   clear: both;
   padding: 5px 0;
 }
+#hyper_payment_form .input-group > .col-lg-3 {
+  padding: 0;
+}
+#hyper_payment_form .input-group > .col-lg-3:first-child {
+  padding-left: 15px;
+}
+#hyper_payment_form .input-group > .col-lg-3:last-child {
+  padding-right: 15px;
+}
+#hyper_payment_form select.form-control {
+  float: left;
+}
+.cke {
+  clear: both;
+}
+.payment-info {
+  margin-top: 15px;
+}

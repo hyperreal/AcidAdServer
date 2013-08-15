@@ -27,7 +27,7 @@
             <br /><a href="{{ url('user_banner_zones', {'banner': banner.id }) }}">{{ 'check.zones'|babel }}</a>
         </td>
         <td>
-            <a href="{{ url('user_banner_edit', {'banner': banner.id }) }}}">Edytuj</a>
+            <a href="{{ url('user_banner_edit', {'banner': banner.id }) }}">Edytuj</a>
             <br /><a href="{{ url('user_banner_payments', {'bannerId': banner.id}) }}">{{ 'payments.list'|babel }}</a>
         </td>
     </tr>
@@ -39,7 +39,7 @@
 {% endif %}
 
 <div class="additional-links">
-    <a href="{{ url('user_banner_new') }}" class="btn btn-link pull-right">{{ 'add.banner'|babel }}</a>
+    <a href="{{ url('user_banner_new') }}" class="btn btn-primary pull-right">{{ 'add.banner'|babel }}</a>
 </div>
 
 {% endblock %}
