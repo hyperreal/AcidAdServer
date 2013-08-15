@@ -1,6 +1,5 @@
 <ul class="nav nav-pills nav-stacked">
     {% if is_granted('ROLE_ADMIN') %}
-    <li class="nav-divider"></li>
     <li{% if app.request.get('_route') == 'admin_advertiser' %} class="active"{% endif %}>
         <a href="{{ path('admin_advertiser') }}">{{ 'advertisers'|babel }}</a>
     </li>

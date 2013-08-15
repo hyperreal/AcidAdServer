@@ -90,7 +90,7 @@ class PaymentType extends AbstractType
         return array(
             'label' => $label,
             'translation_domain' => 'HyperAdsBundle',
-            'property_path' => false,
+            'mapped' => false,
             'data' => $time,
         );
     }

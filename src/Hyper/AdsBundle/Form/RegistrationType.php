@@ -37,7 +37,7 @@ class RegistrationType extends RegistrationFormType
             array(
                 'label' => $label,
                 'required' => true,
-                'property_path' => false
+                'mapped' => false
             )
         );
     }

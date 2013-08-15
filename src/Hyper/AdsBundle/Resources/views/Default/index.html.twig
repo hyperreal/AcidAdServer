@@ -8,7 +8,7 @@
 
 {% if is_granted("ROLE_USER") %}
     <div class="row">
-        <div class="span3">
+        <div class="col-lg-4">
             <h2>{{ 'banners'|babel }}</h2>
             <p>Kup banner info lorem ipsum dolor sit amet</p>
             <p>
@@ -16,14 +16,14 @@
             </p>
         </div>
 
-        <div class="span3">
+        <div class="col-lg-4">
             <h2>{{ 'announcement.plural'|babel }}</h2>
             <p>
                 W przygotowaniu
             </p>
         </div>
 
-        <div class="span3">
+        <div class="col-lg-4">
             <h2>{{ 'announcement.free'|babel }}</h2>
             <p>
                 W przygotowaniu
