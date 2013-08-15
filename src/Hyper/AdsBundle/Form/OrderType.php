@@ -55,7 +55,7 @@ class OrderType extends AbstractType
                         ->setParameter(1, true);
                 },
                 'class' => 'Hyper\AdsBundle\Entity\Zone',
-                'property_path' => false,
+                'mapped' => false,
                 'label' => 'zone',
                 'translation_domain' => 'HyperAdsBundle',
             )
