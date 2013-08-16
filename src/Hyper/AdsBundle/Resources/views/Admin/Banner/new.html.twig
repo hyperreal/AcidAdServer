@@ -1,14 +1,17 @@
 {% extends "::base.html.twig" %}
+{% form_theme edit_form "HyperAdsBundle::acidFormTheme.html.twig" %}
+
 {% block title %}
 {{ 'new.banner'|babel }}
 {% endblock %}
+
 {% block body %}
 <h1>{{ 'new.banner'|babel }}</h1>
 
-<form action="{{ path('admin_banner_create') }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('admin_banner_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal col-lg-8 col-offset-2" role="form">
     {{ form_widget(form) }}
     <p>
-        <button type="submit">{{ 'create'|babel }}</button>
+        <button type="submit" class="btn btn-primary">{{ 'create'|babel }}</button>
     </p>
 </form>
 

@@ -1,11 +1,14 @@
 {% extends "::base.html.twig" %}
+{% form_theme edit_form "HyperAdsBundle::acidFormTheme.html.twig" %}
+
 {% block title %}
 {{ 'edit.page'|babel({'pageName': entity.name}) }}
 {% endblock %}
+
 {% block body %}
 <h1>{{ 'edit.page'|babel({'pageName': entity.name}) }}</h1>
 
-<form action="{{ path('admin_page_update_handler', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+<form action="{{ path('admin_page_update_handler', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} class="form-horizontal col-lg-8 col-offset-2" role="form">
     {{ form_widget(edit_form) }}
     <div class="form-actions">
         <a href="{{ path('admin_page') }}" class="btn btn-link">{{ 'back.to.the.list'|babel }}</a>

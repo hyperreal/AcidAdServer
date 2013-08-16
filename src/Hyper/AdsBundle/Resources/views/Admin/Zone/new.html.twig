@@ -1,22 +1,20 @@
 {% extends "::base.html.twig" %}
+{% form_theme form "HyperAdsBundle::acidFormTheme.html.twig" %}
+
 {% block title %}
 {{ 'new.zone'|babel }}
 {% endblock %}
 {% block body %}
 <h1>{{ 'new.zone'|babel }}</h1>
 
-<form action="{{ path('admin_zone_create') }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('admin_zone_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal col-lg-8 col-offset-2" role="form">
     {{ form_widget(form) }}
-    <p>
-        <button type="submit">{{ 'create'|babel }}</button>
-    </p>
+    <div class="form-actions">
+        <a href="{{ path('admin_zone') }}" class="btn btn-link">{{ 'back.to.the.list'|babel }}</a>
+        <div class="pull-right">
+            <button type="submit" class="btn btn-primary">{{ 'create'|babel }}</button>
+        </div>
+    </div>
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_zone') }}">
-            {{ 'back.to.the.list'|babel }}
-        </a>
-    </li>
-</ul>
 {% endblock %}
