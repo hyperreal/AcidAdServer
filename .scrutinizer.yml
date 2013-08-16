@@ -1,11 +1,11 @@
 tools:
     php_code_coverage:
         enabled: true
-            filter:
-                excluded_paths:
-                    - vendor
-                    - web
-                    - app/cache
+        filter:
+            excluded_paths:
+                - vendor
+                - web
+                - app/cache
     php_code_sniffer:
         enabled: true
         config:
