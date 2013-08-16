@@ -1,0 +1,47 @@
+tools:
+    php_code_coverage:
+        enabled: true
+            filter:
+                excluded_paths:
+                    - vendor
+                    - web
+                    - app/cache
+    php_code_sniffer:
+        enabled: true
+        config:
+            standard: PSR2
+        filter:
+            excluded_paths:
+                - vendor
+                - web
+                - app/cache
+    php_cpd:
+        enabled: true
+        excluded_dirs:
+            - vendor
+            - web
+            - app/cache
+    php_loc:
+        enabled: true
+        excluded_dirs:
+            - vendor
+            - web
+            - app/cache
+    php_mess_detector:
+        enabled: true
+        filter:
+            excluded_paths:
+                - vendor
+                - web
+                - app/cache
+
+    php_pdepend:
+        enabled: true
+    php_analyzer:
+        enabled: true
+        filter:
+            excluded_paths:
+                - vendor
+                - web
+                - app/cache
+    sensiolabs_security_checker: true
