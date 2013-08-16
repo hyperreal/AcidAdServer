@@ -1,11 +1,13 @@
 {% extends "::base.html.twig" %}
+{% form_theme form "HyperAdsBundle::acidFormTheme.html.twig" %}
+
 {% block title %}
 {{ 'new.page'|babel }}
 {% endblock %}
 {% block body %}
 <h1>{{ 'new.page'|babel }}</h1>
 
-<form action="{{ path('admin_page_create') }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('admin_page_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal col-lg-8 col-offset-2" role="form">
     {{ form_widget(form) }}
     <div class="form-actions">
         <a href="{{ path('admin_page') }}" class="btn btn-link">{{ 'back.to.the.list'|babel }}</a>

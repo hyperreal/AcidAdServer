@@ -1,4 +1,5 @@
 {% extends "::base.html.twig" %}
+{% form_theme form "HyperAdsBundle::acidFormTheme.html.twig" %}
 
 {% block title %}
 {{ 'announcement.new'|babel }}
@@ -6,27 +7,8 @@
 
 {% block body %}
 
-<form method="POST" action="{{ url('admin_announcement_save') }}">
-    <div>
-        {{ form_label(form.title) }}
-        {{ form_widget(form.title) }}
-        {{ form_errors(form.title) }}
-    </div>
-    <div>
-        {{ form_label(form.announcementPaymentType) }}
-        {{ form_widget(form.announcementPaymentType) }}
-        {{ form_errors(form.announcementPaymentType) }}
-    </div>
-    <div class="clearfix">
-        {{ form_label(form.disabled) }}
-        {{ form_widget(form.disabled) }}
-        {{ form_errors(form.disabled) }}
-    </div>
-    <div>
-        {{ form_widget(form.description) }}
-        {{ form_errors(form.description) }}
-        {{ form_rest(form) }}
-    </div>
+<form method="POST" action="{{ url('admin_announcement_save') }}" class="form-horizontal col-lg-8 col-offset-2" role="form">
+    {{ form_widget(form) }}
     <div class="form-actions">
         <a href="{{ path('admin_announcement_index') }}" class="btn btn-link">{{ 'back.to.the.list'|babel }}</a>
         <div class="pull-right">

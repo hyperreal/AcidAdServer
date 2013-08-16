@@ -1,11 +1,13 @@
 {% extends "::base.html.twig" %}
+{% form_theme form "HyperAdsBundle::acidFormTheme.html.twig" %}
+
 {% block title %}
     {{ 'announcement.edit'|babel({'announcementTitle': announcement.title}) }}
 {% endblock %}
 {% block body %}
     <h1>{{ 'announcement.edit'|babel({'announcementTitle': announcement.title}) }}</h1>
 
-    <form action="{{ path('admin_announcement_update_handler', { 'announcement': announcement.id }) }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('admin_announcement_update_handler', { 'announcement': announcement.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal col-lg-8 col-offset-2" role="form">
         {{ form_widget(form) }}
         <div class="form-actions">
             <a href="{{ path('admin_announcement_index') }}" class="btn btn-link">{{ 'back.to.the.list'|babel }}</a>

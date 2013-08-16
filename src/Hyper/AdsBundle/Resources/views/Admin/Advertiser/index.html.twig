@@ -43,10 +43,8 @@
 <div class="message">{{ 'no.entities'|babel }}</div>
 {% endif %}
 
-<div class="additional-links">
-    <a href="{{ path('admin_advertiser_new') }}" class="btn btn-link pull-right">
-        {{ 'create.new.entry'|babel }}
-    </a>
+<div class="pull-right">
+    <a href="{{ path('admin_advertiser_new') }}" class="btn btn-primary">{{ 'create.new.entry'|babel }}</a>
 </div>
 
 {% endblock %}
