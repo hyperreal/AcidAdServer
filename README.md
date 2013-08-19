@@ -1,4 +1,6 @@
-There are still work to do with Acid. Please use carefully.
+There are still work to do with Acid. Please use carefully. If you have questions about using Acid on your own,
+feel free to write questions on `fajka [at] hyperreal [dot] info`. This is possibly the fastest method. You can use
+[this GPG key][1] if you need some privacy.
 
 # AcidAdServer
 
