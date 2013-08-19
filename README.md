@@ -83,3 +83,4 @@ install `nodejs` (we recommend source distribution and `./configure && make && s
 (`npm install grunt-cli -g`) and in project's root perform `npm install`. Next you can edit bundle's stylesheet(s) in
 LESS format and with `grunt watch` command check results immediately.
 
+[1]: http://pgp.mit.edu:11371/pks/lookup?op=get&search=0xB9EFA35464089E7E
