@@ -148,7 +148,7 @@ check.to.disable: 'Wyłącz ogłoszenie'
 hello: 'Witaj!'
 announcement.modified: 'Ogłoszenie %title% zostało dodane lub wyedytowane'
 announcement.edited: 'Ogłoszenie %title% zostało zmienione/dodane przez %user%'
-edit.in.admin.mode: 'Edytuj jako administrator'
+<<<<<<< HEAD
 
 layout:
     title: AcidAdServer
