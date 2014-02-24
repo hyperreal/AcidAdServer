@@ -4,9 +4,14 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <imports>
+        <import resource="./payments/payments.xml"/>
+    </imports>
+
     <parameters>
         <parameter key="hyper_ads.prices_calculator.class">Hyper\AdsBundle\Helper\PricesCalculator</parameter>
         <parameter key="hyper_ads.order_number_generator.class">Hyper\AdsBundle\Helper\OrderNumberGenerator</parameter>
+        <parameter key="hyper_ads.payment_gateway_factory.class">Hyper\AdsBundle\Payment\OmnipayGatewayFactory</parameter>
     </parameters>
 
     <services>
