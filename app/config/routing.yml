@@ -83,3 +83,8 @@ payments:
     resource: "@HyperAdsBundle/Controller/PaymentsController.php"
     prefix: /payments
     type: annotation
+
+omnipay:
+    resource: "@HyperAdsBundle/Controller/OmnipayController.php"
+    prefix: /omnipay
+    type: annotation

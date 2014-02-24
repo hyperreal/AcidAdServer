@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="hyper_ads.payment_gateway_factory.class">Hyper\AdsBundle\Payment\OmnipayGatewayFactory</parameter>
+        <parameter key="hyper_ads.payment_gateway_builder.bitpay.class">Hyper\AdsBundle\Payment\GatewayBuilders\BitpayGatewayBuilder</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="hyper_ads.payment_gateways" class="stdClass" factory-service="hyper_ads.payment_gateway_factory" factory-method="createGateway" />
+        <service id="hyper_ads.payment_gateway_factory" class="%hyper_ads.payment_gateway_factory.class%"  />
+
+        <service id="hyper_ads.payment_gateway_builder.bitpay" class="%hyper_ads.payment_gateway_builder.bitpay.class%">
+            <tag name="hyper_ads.payment_gateway_builder" gateway="BitPay" />
+        </service>
+
+    </services>
+
+</container>

@@ -123,3 +123,9 @@ services:
     session.handler.memcache:
         class: Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcacheSessionHandler
         arguments: [ @session.memcache, { prefix: %session_memcache_prefix%, expiretime: %session_memcache_expire% } ]
+
+hyper_ads:
+    payment_gateways:
+        bitpay:
+            name: BitPay
+            api_key: %bitpay_api_key%

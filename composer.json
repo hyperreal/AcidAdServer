@@ -35,7 +35,9 @@
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "exercise/htmlpurifier-bundle": "dev-master",
         "trsteel/ckeditor-bundle": "dev-master",
-        "wikp/payment-mtgox-bundle": "dev-master"
+        "wikp/payment-mtgox-bundle": "dev-master",
+        "omnipay/omnipay": "2.0.*@dev",
+        "omnipay/bitpay": "2.0.*@dev"
     },
 	"require-dev": {
 		"phake/phake": "2.0.*@dev"
