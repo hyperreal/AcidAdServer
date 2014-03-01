@@ -26,7 +26,7 @@ class HyperAdsExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         foreach ($config['payment_gateways'] as $gateway => $values) {
-            $definitionId = sprintf('hyper_ads.payment_gateway.' . $gateway);
+            $definitionId = sprintf('hyper_ads.payment.gateway.' . $gateway);
             $container->setDefinition(
                 $definitionId,
                 new DefinitionDecorator('hyper_ads.payment_gateways')

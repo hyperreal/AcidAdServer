@@ -10,11 +10,11 @@ class PaymentGatewayCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('hyper_ads.payment_gateway_factory')) {
+        if (!$container->hasDefinition('hyper_ads.payment.gateway_factory')) {
             return;
         }
 
-        $definition = $container->getDefinition('hyper_ads.payment_gateway_factory');
+        $definition = $container->getDefinition('hyper_ads.payment.gateway_factory');
         $taggedServices = $container->findTaggedServiceIds('hyper_ads.payment_gateway_builder');
 
         foreach ($taggedServices as $id => $tagAttributes) {

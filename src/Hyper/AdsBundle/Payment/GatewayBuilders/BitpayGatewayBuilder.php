@@ -6,13 +6,13 @@ use Hyper\AdsBundle\Payment\PaymentGatewayBuilderInterface;
 use Omnipay\BitPay\Gateway;
 use Omnipay\Common\AbstractGateway;
 
-class BitpayGatewayBuilder implements PaymentGatewayBuilderInterface
+class BitPayGatewayBuilder implements PaymentGatewayBuilderInterface
 {
     function build(AbstractGateway $gateway, array $parameters)
     {
         if (!($gateway instanceof Gateway)) {
             throw new \InvalidArgumentException(
-                'BitpayGatewayBuilder is responsible for set-up Omnipay\Bitpay\Gateway classes only'
+                'BitPayGatewayBuilder is responsible for set-up Omnipay\Bitpay\Gateway classes only'
             );
         }
 

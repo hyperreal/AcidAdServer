@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="./bitpay.xml"/>
+    </imports>
+
+    <parameters>
+        <parameter key="hyper_ads.payment_gateway_factory.class">Hyper\AdsBundle\Payment\OmnipayGatewayFactory</parameter>
+        <parameter key="hyper_ads.payments_logger.class">Symfony\Bridge\Monolog\Logger</parameter>
+        <parameter key="hyper_ads.payments_logger.handler.class">Monolog\Handler\StreamHandler</parameter>
+        <parameter key="hyper_ads.payment.util.stdin_reader.class.class">Hyper\AdsBundle\Util\StandardInputReader</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="hyper_ads.payment.gateways" class="stdClass" factory-service="hyper_ads.payment.gateway_factory" factory-method="createGateway" />
+
+        <service id="hyper_ads.payment.gateway_factory" class="%hyper_ads.payment.gateway_factory.class%"  />
+
+        <service id="hyper_ads.payments_logger" class="hyper_ads.payments_logger.class">
+            <argument>pay</argument>
+            <call method="pushHandler">
+                <argument type="service" id="hyper_ads.payments_logger.handler" />
+            </call>
+        </service>
+
+        <service id="hyper_ads.payments_logger.handler" class="hyper_ads.payments_logger.handler.class">
+            <argument>%kernel.logs_dir%/%kernel.environment%.payments.log</argument>
+            <argument>200</argument>
+        </service>
+
+        <service id="hyper_ads.payment.util.stdin_reader" class="%hyper_ads.payment.util.stdin_reader.class%" />
+
+    </services>
+
+</container>
