@@ -36,7 +36,7 @@
             <argument id="payment.plugin_controller" />
             <argument id="hyper_ads.payment.approval_determiner.bitpay" />
             <argument id="logger" />
-            <argument>%hyper_ads.payment_gateways.bitpay.api_key%</argument>
+            <argument id="hyper_ads.payment_gateways.bitpay.api_key" />
         </service>
 
     </services>
