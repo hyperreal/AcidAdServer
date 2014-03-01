@@ -5,13 +5,12 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <imports>
-        <import resource="./payments/payments.xml"/>
+        <import resource="./payments/services.xml"/>
     </imports>
 
     <parameters>
         <parameter key="hyper_ads.prices_calculator.class">Hyper\AdsBundle\Helper\PricesCalculator</parameter>
         <parameter key="hyper_ads.order_number_generator.class">Hyper\AdsBundle\Helper\OrderNumberGenerator</parameter>
-        <parameter key="hyper_ads.payment_gateway_factory.class">Hyper\AdsBundle\Payment\OmnipayGatewayFactory</parameter>
     </parameters>
 
     <services>
@@ -74,18 +73,6 @@
             <argument>%mailer_sender%</argument>
             <tag name="doctrine.event_subscriber" event="postPersist" />
             <tag name="doctrine.event_subscriber" event="preUpdate" />
-        </service>
-
-        <service id="hyper_ads.payments_logger" class="Symfony\Bridge\Monolog\Logger">
-            <argument>pay</argument>
-            <call method="pushHandler">
-                <argument type="service" id="hyper_ads.payments_logger.handler" />
-            </call>
-        </service>
-
-        <service id="hyper_ads.payments_logger.handler" class="Monolog\Handler\StreamHandler">
-            <argument>%kernel.logs_dir%/%kernel.environment%.payments.log</argument>
-            <argument>200</argument>
         </service>
 
         <service id="hyper_ads.form.type.purified_ckeditor" class="Hyper\AdsBundle\Form\Type\PurifiedCkeditorType">

@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="hyper_ads.payment.gateway_builder.bitpay.class">Hyper\AdsBundle\Payment\GatewayBuilders\BitPayGatewayBuilder</parameter>
+        <parameter key="hyper_ads.payment.plugin.bitpay.class">Hyper\AdsBundle\Payment\OmnipayBitPayPaymentPlugin</parameter>
+        <parameter key="hyper_ads.payment.processor.bitpay.class">Hyper\AdsBundle\Payment\Processors\BitPayIpnRequestProcessor</parameter>
+        <parameter key="hyper_ads.payment.approval_determiner.bitpay.class">Hyper\AdsBundle\Payment\BitPayOrderApprovalDeterminer</parameter>
+        <parameter key="hyper_ads.payment.request.bitpay.class">Hyper\AdsBundle\Payment\Requests\BitPayIpnRequest</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="hyper_ads.payment.gateway_builder.bitpay" class="%hyper_ads.payment.gateway_builder.bitpay.class%">
+            <tag name="hyper_ads.payment_gateway_builder" gateway="BitPay" />
+        </service>
+
+        <service id="hyper_ads.payment.plugin.bitpay" class="%hyper_ads.payment.plugin.bitpay.class%">
+            <tag name="payment.plugin" />
+        </service>
+
+        <service id="hyper_ads.payment.approval_determiner.bitpay" class="%hyper_ads.payment.approval_determiner.bitpay.class%" />
+
+        <service id="hyper_ads.payment.request.bitpay" class="%hyper_ads.payment.request.bitpay.class%">
+            <argument id="hyper_ads.payment.util.stdin_reader" />
+        </service>
+
+        <service id="hyper_ads.payment.processor.bitpay" class="%hyper_ads.payment.processor.bitpay.class%">
+            <argument id="hyper_ads.payment.request.bitpay" />
+            <argument id="hyper_ads.payment.gateway.bitpay" />
+            <argument id="doctrine.orm.entity_manager" />
+            <argument id="hyper_ads.payment.plugin.bitpay" />
+            <argument id="payment.plugin_controller" />
+            <argument id="hyper_ads.payment.approval_determiner.bitpay" />
+            <argument id="logger" />
+            <argument>%hyper_ads.payment_gateways.bitpay.api_key%</argument>
+        </service>
+
+    </services>
+
+</container>

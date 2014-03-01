@@ -2,6 +2,7 @@
 
 namespace Hyper\AdsBundle\Controller;
 
+use Hyper\AdsBundle\Exception\InvalidIpnRequestException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,22 @@ class OmnipayController extends Controller
      */
     public function bitPayIpnAction(Request $request)
     {
-        return new Response(get_class($this->get('hyper_ads.payment_gateway.bitpay')));
+        try {
+            $this->get('hyper_ads.payment_processor.bitpay')->process();
+        } catch (InvalidIpnRequestException $e) {
+            return new Response($this->getErrorMessage(), 400);
+        }
+
+        return new Response('OK');
+    }
+
+    private function getErrorMessage()
+    {
+        return json_encode(
+            array(
+                'status' => 'FAILED',
+                'message' => 'Invalid IPN request'
+            )
+        );
     }
 } 
