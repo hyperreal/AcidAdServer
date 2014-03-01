@@ -9,10 +9,10 @@
     </imports>
 
     <parameters>
-        <parameter key="hyper_ads.payment_gateway_factory.class">Hyper\AdsBundle\Payment\OmnipayGatewayFactory</parameter>
+        <parameter key="hyper_ads.payment.gateway_factory.class">Hyper\AdsBundle\Payment\OmnipayGatewayFactory</parameter>
         <parameter key="hyper_ads.payments_logger.class">Symfony\Bridge\Monolog\Logger</parameter>
         <parameter key="hyper_ads.payments_logger.handler.class">Monolog\Handler\StreamHandler</parameter>
-        <parameter key="hyper_ads.payment.util.stdin_reader.class.class">Hyper\AdsBundle\Util\StandardInputReader</parameter>
+        <parameter key="hyper_ads.payment.util.stdin_reader.class">Hyper\AdsBundle\Util\StandardInputReader</parameter>
     </parameters>
 
     <services>
@@ -21,14 +21,14 @@
 
         <service id="hyper_ads.payment.gateway_factory" class="%hyper_ads.payment.gateway_factory.class%"  />
 
-        <service id="hyper_ads.payments_logger" class="hyper_ads.payments_logger.class">
+        <service id="hyper_ads.payments_logger" class="%hyper_ads.payments_logger.class%">
             <argument>pay</argument>
             <call method="pushHandler">
                 <argument type="service" id="hyper_ads.payments_logger.handler" />
             </call>
         </service>
 
-        <service id="hyper_ads.payments_logger.handler" class="hyper_ads.payments_logger.handler.class">
+        <service id="hyper_ads.payments_logger.handler" class="%hyper_ads.payments_logger.handler.class%">
             <argument>%kernel.logs_dir%/%kernel.environment%.payments.log</argument>
             <argument>200</argument>
         </service>

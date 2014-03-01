@@ -29,7 +29,7 @@ class HyperAdsExtension extends Extension
             $definitionId = sprintf('hyper_ads.payment.gateway.' . $gateway);
             $container->setDefinition(
                 $definitionId,
-                new DefinitionDecorator('hyper_ads.payment_gateways')
+                new DefinitionDecorator('hyper_ads.payment.gateways')
             )->setArguments(array($values));
         }
 
