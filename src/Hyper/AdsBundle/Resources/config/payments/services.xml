@@ -13,6 +13,8 @@
         <parameter key="hyper_ads.payments_logger.class">Symfony\Bridge\Monolog\Logger</parameter>
         <parameter key="hyper_ads.payments_logger.handler.class">Monolog\Handler\StreamHandler</parameter>
         <parameter key="hyper_ads.payment.util.stdin_reader.class">Hyper\AdsBundle\Util\StandardInputReader</parameter>
+        <parameter key="hyper_ads.payment.invoice_address_retriever.class">Hyper\AdsBundle\Payment\InvoiceAddressRetriever</parameter>
+        <parameter key="hyper_ads.payment.params_providers.class">Hyper\AdsBundle\Payment\ParamsProviders</parameter>
     </parameters>
 
     <services>
@@ -32,6 +34,12 @@
             <argument>%kernel.logs_dir%/%kernel.environment%.payments.log</argument>
             <argument>200</argument>
         </service>
+
+        <service id="hyper_ads.payment.invoice_address_retriever" class="%hyper_ads.payment.invoice_address_retriever.class%">
+            <argument id="service_container" type="service" />
+        </service>
+
+        <service id="hyper_ads.payment.params_providers" class="%hyper_ads.payment.params_providers.class%"/>
 
         <service id="hyper_ads.payment.util.stdin_reader" class="%hyper_ads.payment.util.stdin_reader.class%" />
 

@@ -6,22 +6,17 @@ use Doctrine\ORM\EntityManager;
 use Hyper\AdsBundle\Exception\InvalidIpnRequestException;
 use Hyper\AdsBundle\Exception\PaymentException;
 use Hyper\AdsBundle\Payment\OmnipayBitPayPaymentPlugin;
+use Hyper\AdsBundle\Payment\OrderInterface;
 use Hyper\AdsBundle\Payment\Requests\BitPayIpnRequest;
 use Hyper\AdsBundle\Payment\Util\BitPayOrderApprovalDeterminer;
-use JMS\Payment\CoreBundle\Plugin\Exception\Action\VisitUrl;
 use JMS\Payment\CoreBundle\PluginController\PluginControllerInterface;
 use JMS\Payment\CoreBundle\PluginController\Result;
-use Omnipay\BitPay\Gateway;
 use Psr\Log\LoggerInterface;
-use Wikp\PaymentMtgoxBundle\Plugin\OrderInterface;
 
 class BitPayIpnRequestProcessor
 {
     /** @var \Hyper\AdsBundle\Payment\Requests\BitPayIpnRequest */
     private $request;
-
-    /** @var \Omnipay\BitPay\Gateway */
-    private $gateway;
 
     /** @var \Psr\Log\LoggerInterface */
     private $logger;
@@ -39,7 +34,6 @@ class BitPayIpnRequestProcessor
 
     public function __construct(
         BitPayIpnRequest $request,
-        Gateway $gateway,
         EntityManager $entityManager,
         OmnipayBitPayPaymentPlugin $paymentPlugin,
         PluginControllerInterface $paymentController,
@@ -48,7 +42,6 @@ class BitPayIpnRequestProcessor
         $bitPayApiKey
     ) {
         $this->request = $request;
-        $this->gateway = $gateway;
         $this->logger = $logger;
         $this->bitPayApiKey = $bitPayApiKey;
         $this->entityManager = $entityManager;
@@ -149,7 +142,7 @@ class BitPayIpnRequestProcessor
                 $order->getPaymentInstruction()->getAmount() - $order->getPaymentInstruction()->getDepositedAmount()
             );
         } else {
-            $payment = $$pendingTransaction->getPayment();
+            $payment = $pendingTransaction->getPayment();
         }
 
         return $payment;

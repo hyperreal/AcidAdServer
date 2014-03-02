@@ -3,10 +3,9 @@
 namespace Hyper\AdsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Hyper\AdsBundle\Payment\OrderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Payment\CoreBundle\Model\PaymentInstructionInterface;
-use Hyper\AdsBundle\Entity\Advertisement;
-use Wikp\PaymentMtgoxBundle\Plugin\OrderInterface;
 
 /**
  * @ORM\Entity(repositoryClass="Hyper\AdsBundle\Entity\OrderRepository")

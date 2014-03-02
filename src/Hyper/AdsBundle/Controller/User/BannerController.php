@@ -359,7 +359,6 @@ class BannerController extends Controller
 
             /** @var $ppc \JMS\Payment\CoreBundle\PluginController\PluginController */
             $ppc = $this->get('payment.plugin_controller');
-            $ppc->addPlugin($this->get('wikp_payment_mtgox.plugin'));
 
             /** @var $calc \Hyper\AdsBundle\Helper\PricesCalculator */
             $calc = $this->get('hyper_ads.prices_calculator');
@@ -377,12 +376,13 @@ class BannerController extends Controller
             $currencyAmount = $calc->getDayPriceForZone($zone) * $days;
 
             $systemCurrency = $this->container->getParameter('ads_default_currency');
+            $paymentMethods = $this->container->getParameter('banner_payment_methods');
 
             $ppc->createPaymentInstruction(
                 $instruction = new PaymentInstruction(
                     $currencyAmount,
                     $systemCurrency,
-                    MtgoxPaymentPlugin::SYSTEM_NAME
+                    $paymentMethods[0]
                 )
             );
 
@@ -397,23 +397,9 @@ class BannerController extends Controller
             $em->flush();
 
             if (FinancialTransactionInterface::STATE_PENDING == $instruction->getState()) {
-                $urlRequest = new MtgoxTransactionUrlRequest();
-                $urlRequest->setAmount($currencyAmount);
-                $urlRequest->setSendEmail(1);
-                $urlRequest->setIpnUrl($this->generateUrl('wikp_payment_mtgox_ipn', array(), true));
-                $urlRequest->setDescription(
-                    $this->trans('payment.info', array('%orderNumber%' => $order->getOrderNumber()))
-                );
-                $urlRequest->setAdditionalData($order->getId());
-                $urlRequest->setCurrency($systemCurrency);
-                $urlRequest->setReturnSuccess(
-                    $this->generateUrl('payment_successful', array('order' => $order->getId()), true)
-                );
-                $urlRequest->setReturnFailure(
-                    $this->generateUrl('payment_canceled', array('order' => $order->getId()), true)
-                );
-
-                $url = $this->get('wikp_payment_mtgox.plugin')->getMtgoxTransactionUrl($urlRequest);
+                /** @var $invoiceAddressRetriever \Hyper\AdsBundle\Payment\InvoiceAddressRetriever */
+                $invoiceAddressRetriever = $this->get('hyper_ads.payment.invoice_address_retriever');
+                $url = $invoiceAddressRetriever->retrieveUrlForOrder($order);
 
                 $order->setPaymentUrl($url);
                 $em->flush();
@@ -426,12 +412,6 @@ class BannerController extends Controller
                 ->warn('what is going on? instruction has not state PENDING but' . $instruction->getState());
 
             $em->flush();
-
-            return array(
-                'form' => $form->createView(),
-                'banner' => $banner,
-                'zone' => $zone
-            );
         }
 
         return array(
@@ -641,10 +621,11 @@ class BannerController extends Controller
             $order->setOrderNumber($orderNumberGenerator->getBannerPaymentOrderNumber($banner, $this->getUser()));
             $order->setZone($zone);
 
+            $paymentMethods = $this->container->getParameter('banner_payment_methods');
             $paymentInstruction = new PaymentInstruction(
                 $amount,
                 MtgoxPaymentPlugin::CURRENCY_NAME,
-                MtgoxPaymentPlugin::SYSTEM_NAME
+                $paymentMethods[0]
             );
 
             $order->setPaymentInstruction($paymentInstruction);
