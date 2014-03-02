@@ -11,7 +11,7 @@ interface PaymentGatewayBuilderInterface
      * Example of this could be invoke setApiKey() method on one gateway type and setApiKey() and setApiSecret() on
      * another.
      *
-     * Implementations of this interface should be registered as services tagged with hyper_ads.payment_gateway_builder
+     * Implementations of this interface should be registered as services tagged with hyper_ads.payment.gateway_builder
      *
      * @param AbstractGateway $gateway
      * @param array $parameters parameters provided in config.yml (section hyper_ads.payment_gateways).

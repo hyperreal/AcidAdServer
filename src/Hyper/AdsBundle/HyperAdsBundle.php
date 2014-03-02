@@ -3,6 +3,7 @@
 namespace Hyper\AdsBundle;
 
 use Hyper\AdsBundle\DependencyInjection\CompilerPass\PaymentGatewayCompilerPass;
+use Hyper\AdsBundle\DependencyInjection\CompilerPass\PaymentParamsProviderCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -19,6 +20,7 @@ class HyperAdsBundle extends Bundle
     {
         parent::build($container);
         $container->addCompilerPass(new PaymentGatewayCompilerPass());
+        $container->addCompilerPass(new PaymentParamsProviderCompilerPass());
     }
 
 

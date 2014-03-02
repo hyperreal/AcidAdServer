@@ -3,8 +3,7 @@
 namespace Hyper\AdsBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Hyper\AdsBundle\Entity\Zone;
-use Wikp\PaymentMtgoxBundle\Plugin\OrderRepositoryInterface;
+use Hyper\AdsBundle\Payment\OrderRepositoryInterface;
 
 class OrderRepository extends EntityRepository implements OrderRepositoryInterface
 {
