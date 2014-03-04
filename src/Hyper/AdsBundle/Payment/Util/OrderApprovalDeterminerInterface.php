@@ -6,6 +6,6 @@ use Hyper\AdsBundle\Payment\Requests\AbstractOmnipayRequest;
 
 interface OrderApprovalDeterminerInterface
 {
-    function shouldApprove(AbstractOmnipayRequest $request);
-    function shouldCancel(AbstractOmnipayRequest $request);
+    public function shouldApprove(AbstractOmnipayRequest $request);
+    public function shouldCancel(AbstractOmnipayRequest $request);
 } 

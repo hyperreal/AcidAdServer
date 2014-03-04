@@ -8,7 +8,7 @@ use Omnipay\Common\AbstractGateway;
 
 class BitPayGatewayBuilder implements PaymentGatewayBuilderInterface
 {
-    function build(AbstractGateway $gateway, array $parameters)
+    public function build(AbstractGateway $gateway, array $parameters)
     {
         if (!($gateway instanceof Gateway)) {
             throw new \InvalidArgumentException(

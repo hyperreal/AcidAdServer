@@ -10,9 +10,9 @@ use Symfony\Component\HttpFoundation\Response;
 class OmnipayController extends Controller
 {
     /**
-     * @Route("/bitpay/ipn", name="hyper_ads.omnipay.bitpay.ipn")
+     * @Route("/bitpay/ipn", name="hyper_ads.omnipay.ipn.bitpay")
      */
-    public function bitPayIpnAction(Request $request)
+    public function bitPayIpnAction()
     {
         try {
             $this->get('hyper_ads.payment_processor.bitpay')->process();
