@@ -17,5 +17,5 @@ interface PaymentGatewayBuilderInterface
      * @param array $parameters parameters provided in config.yml (section hyper_ads.payment_gateways).
      * @return AbstractGateway
      */
-    function build(AbstractGateway $gateway, array $parameters);
+    public function build(AbstractGateway $gateway, array $parameters);
 } 

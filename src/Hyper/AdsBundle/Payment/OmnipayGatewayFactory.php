@@ -12,7 +12,7 @@ class OmnipayGatewayFactory implements PaymentGatewayFactoryInterface
     /** @var \Omnipay\Common\AbstractGateway[] */
     private $gateways;
 
-    function __construct()
+    public function __construct()
     {
         $this->gatewayBuilders = array();
         $this->gateways = array();
