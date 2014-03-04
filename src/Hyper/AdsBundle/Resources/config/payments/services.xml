@@ -15,6 +15,7 @@
         <parameter key="hyper_ads.payment.util.stdin_reader.class">Hyper\AdsBundle\Util\StandardInputReader</parameter>
         <parameter key="hyper_ads.payment.invoice_address_retriever.class">Hyper\AdsBundle\Payment\InvoiceAddressRetriever</parameter>
         <parameter key="hyper_ads.payment.params_providers.class">Hyper\AdsBundle\Payment\ParamsProviders</parameter>
+        <parameter key="hyper_ads.payment.util.hash_generator.class">Hyper\AdsBundle\Payment\Util\HmacOrderHashGenerator</parameter>
     </parameters>
 
     <services>
@@ -42,6 +43,11 @@
         <service id="hyper_ads.payment.params_providers" class="%hyper_ads.payment.params_providers.class%"/>
 
         <service id="hyper_ads.payment.util.stdin_reader" class="%hyper_ads.payment.util.stdin_reader.class%" />
+
+        <service id="hyper_ads.payment.util.hash_generator" class="%hyper_ads.payment.util.hash_generator.class%">
+            <argument>%hyper_ads.payment_hash_algorithm%</argument>
+            <argument>%hyper_ads.payment_hash_key%</argument>
+        </service>
 
     </services>
 

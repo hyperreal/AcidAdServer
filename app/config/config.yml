@@ -129,3 +129,8 @@ hyper_ads:
         bitpay:
             name: BitPay
             api_key: %bitpay_api_key%
+            full_notifications: %bitpay_full_notifications%
+            notifications_email: %bitpay_notifications_email%
+            transaction_speed: "low"
+    order_hash_key: %payment_hash_key%
+    order_hash_algorithm: %payment_hash_algorithm%
