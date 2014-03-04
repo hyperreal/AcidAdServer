@@ -30,7 +30,7 @@ class BitPayIpnRequest extends AbstractOmnipayRequest
 
     public function getOrderId()
     {
-        return $this->decodedInput['posData']['order_id'];
+        return $this->decodedInput['posData']['order'];
     }
 
     public function getKey()
@@ -51,5 +51,11 @@ class BitPayIpnRequest extends AbstractOmnipayRequest
     public function getId()
     {
         return $this->decodedInput['id'];
+    }
+
+    public function hasOrderId()
+    {
+        return array_key_exists('posData', $this->decodedInput)
+            && array_key_exists('order', $this->decodedInput['posData']);
     }
 }

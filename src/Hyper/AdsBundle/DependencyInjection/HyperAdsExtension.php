@@ -33,6 +33,15 @@ class HyperAdsExtension extends Extension
             )->setArguments(array($values));
         }
 
+        if (isset($config['payment_gateways']['bitpay'])) {
+            $bitpay = &$config['payment_gateways']['bitpay'];
+            $container->setParameter('hyper_ads.bitpay_transaction_speed', $bitpay['transaction_speed']);
+            $container->setParameter('hyper_ads.bitpay_full_notifications', $bitpay['full_notifications']);
+            $container->setParameter('hyper_ads.bitpay_notifications_email', $bitpay['notifications_email']);
+        }
+        $container->setParameter('hyper_ads.payment_hash_algorithm', $config['order_hash_algorithm']);
+        $container->setParameter('hyper_ads.payment_hash_key', $config['order_hash_key']);
+
         $loader->load('services.xml');
     }
 }

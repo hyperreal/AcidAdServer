@@ -4,6 +4,9 @@ namespace Hyper\AdsBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\EmailValidator;
+use Symfony\Component\Validator\ExecutionContext;
 
 /**
  * This is the class that validates and merges configuration from your app/config files
@@ -22,11 +25,39 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('order_hash_key')->isRequired()->cannotBeEmpty()->cannotBeOverwritten()->end()
+                ->scalarNode('order_hash_algorithm')->isRequired()
+                    ->validate()
+                        ->ifTrue(
+                            function($algorithm) {
+                                return !in_array($algorithm, hash_algos());
+                            }
+                        )
+                        ->thenInvalid('Invalid hash algorithm. Should be one of those provided by hash_algos()')
+                    ->end()
+                ->end()
                 ->arrayNode('payment_gateways')
                     ->prototype('array')
                         ->children()
                             ->scalarNode('name')->isRequired()->end()
                             ->scalarNode('api_key')->cannotBeEmpty()->isRequired()->end()
+                            ->scalarNode('transaction_speed')->isRequired()->defaultValue('medium')
+                                ->validate()
+                                    ->ifNotInArray(array('low', 'medium', 'high'))
+                                    ->thenInvalid('transaction_speed should be one of: low, medium, high')
+                                ->end()
+                            ->end()
+                            ->booleanNode('full_notifications')->isRequired()->defaultFalse()->treatNullLike(false)->end()
+                            ->scalarNode('notifications_email')
+                                ->validate()
+                                    ->ifTrue(
+                                        function($e) {
+                                            return !filter_var($e, FILTER_VALIDATE_EMAIL) && !empty($e);
+                                        }
+                                    )
+                                    ->thenInvalid('Email invalid in bitpay_notification_email parameter. It could be empty (~)')
+                                ->end()
+                            ->end()
                         ->end()
                     ->end()
                 ->end();

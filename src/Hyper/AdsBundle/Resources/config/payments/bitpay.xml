@@ -35,12 +35,16 @@
             <argument id="hyper_ads.payment.plugin.bitpay" type="service" />
             <argument id="payment.plugin_controller" type="service" />
             <argument id="hyper_ads.payment.approval_determiner.bitpay" type="service" />
-            <argument id="logger" type="service" />
-            <argument id="hyper_ads.payment_gateways.bitpay.api_key" />
+            <argument id="hyper_ads.payments_logger" type="service" />
         </service>
 
         <service id="hyper_ads.payment.params_provider.bitpay" class="%hyper_ads.payment.params_provider.bitpay.class%">
             <tag name="hyper_ads.payment.params_provider" system_name="omnipay_bitpay" />
+            <argument id="router" type="service" />
+            <argument id="hyper_ads.payment.util.hash_generator" type="service" />
+            <argument>%hyper_ads.bitpay_transaction_speed%</argument>
+            <argument>%hyper_ads.bitpay_full_notifications%</argument>
+            <argument>%hyper_ads.bitpay_notifications_email%</argument>
         </service>
 
     </services>
