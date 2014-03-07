@@ -13,9 +13,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
 use JMS\Payment\CoreBundle\Model\FinancialTransactionInterface;
-use Wikp\PaymentMtgoxBundle\Plugin\MtgoxPaymentPlugin;
-use Wikp\PaymentMtgoxBundle\Entity\Currency;
-use Wikp\PaymentMtgoxBundle\Mtgox\RequestType\MtgoxTransactionUrlRequest;
 use Hyper\AdsBundle\Entity\Advertisement;
 use Hyper\AdsBundle\DBAL\PayModelType;
 use Hyper\AdsBundle\Entity\Banner;
@@ -247,8 +244,6 @@ class BannerController extends Controller
         $calendar = $this->get('hyper_ads.banner_zone_calendar');
         $invalidDaysPeriods = $calendar->getCommonDaysForZone($zone, $from, $to);
 
-        $bannerZoneReference = $banner->getReferenceInZone($zone->getId());
-
         $days = $from->diff($to)->days;
 
         $days = $days - $this->getNumberOfCommonDaysFromPeriodsArray($invalidDaysPeriods);
@@ -257,19 +252,6 @@ class BannerController extends Controller
         $dailyPrice = $pricesCalculator->getDayPriceForZone($zone);
 
         $currencyAmount = $days * $dailyPrice;
-        /** @var $user \Hyper\AdsBundle\Entity\Advertiser */
-        $user = $this->getUser();
-        $userCurrency = $user->getDefaultCurrency();
-        $exchange = $this->get('wikp_payment_mtgox.exchange');
-        if ($userCurrency instanceof Currency) {
-            $userCurrency = $userCurrency->getCode();
-        }
-        $btcAmount = $exchange->convertToBitcoins(
-            $currencyAmount,
-            $this->container->getParameter('ads_default_currency')
-        );
-
-        $userAmount = $exchange->convertFromBitcoins($btcAmount, $userCurrency);
 
         $commonDaysArray = $this->constructCommonDaysArray($invalidDaysPeriods);
         $response = new Response(
@@ -277,8 +259,8 @@ class BannerController extends Controller
                 array(
                     'days' => $days,
                     'dailyPrice' => $dailyPrice,
-                    'price' => sprintf("%.2f", $userAmount),
-                    'currency' => $userCurrency,
+                    'price' => sprintf("%.2f", $currencyAmount),
+                    'currency' => $this->container->getParameter('ads_default_currency'),
                     'commonDays' => $commonDaysArray,
                 )
             )
@@ -624,7 +606,7 @@ class BannerController extends Controller
             $paymentMethods = $this->container->getParameter('banner_payment_methods');
             $paymentInstruction = new PaymentInstruction(
                 $amount,
-                MtgoxPaymentPlugin::CURRENCY_NAME,
+                $this->container->getParameter('ads_default_currency'),
                 $paymentMethods[0]
             );
 

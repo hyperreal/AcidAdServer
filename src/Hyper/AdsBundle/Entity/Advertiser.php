@@ -17,8 +17,6 @@ use FOS\UserBundle\Entity\User as BaseUser;
  */
 class Advertiser extends BaseUser
 {
-    const DEFAULT_CURRENCY = 'EUR';
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -42,12 +40,6 @@ class Advertiser extends BaseUser
      * @ORM\OneToMany(targetEntity="Advertisement", mappedBy="advertiser", cascade={"persist", "remove"})
      */
     protected $advertisements;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Wikp\PaymentMtgoxBundle\Entity\Currency")
-     * @ORM\JoinColumn(name="default_currency", referencedColumnName="id")
-     */
-    private $defaultCurrency;
 
     public function __construct()
     {
@@ -113,20 +105,6 @@ class Advertiser extends BaseUser
     public function addAdvertisement(Advertisement $announcement)
     {
         $this->advertisements->add($announcement);
-    }
-
-    public function getDefaultCurrency($default = self::DEFAULT_CURRENCY)
-    {
-        if (empty($this->defaultCurrency)) {
-            return $default;
-        }
-
-        return $this->defaultCurrency;
-    }
-
-    public function setDefaultCurrency($currency)
-    {
-        $this->defaultCurrency = $currency;
     }
 
     public function __toString()

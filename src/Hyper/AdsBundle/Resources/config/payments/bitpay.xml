@@ -42,6 +42,7 @@
             <tag name="hyper_ads.payment.params_provider" system_name="omnipay_bitpay" />
             <argument id="router" type="service" />
             <argument id="hyper_ads.payment.util.hash_generator" type="service" />
+            <argument id="translator" type="service" />
             <argument>%hyper_ads.bitpay_transaction_speed%</argument>
             <argument>%hyper_ads.bitpay_full_notifications%</argument>
             <argument>%hyper_ads.bitpay_notifications_email%</argument>
