@@ -10,16 +10,6 @@ class EditProfileType extends BaseType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
-
-        $builder->add(
-            'default_currency',
-            'entity',
-            array(
-                'class' => 'WikpPaymentMtgoxBundle:Currency',
-                'translation_domain' => 'HyperAdsBundle',
-                'label' => 'default.currency',
-            )
-        );
     }
 
     public function getName()

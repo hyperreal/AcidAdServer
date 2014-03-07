@@ -3,7 +3,6 @@
         $("select").change(getPrices);
         getPrices();
     });
-
 })(jQuery);
 
 function getPrices() {
