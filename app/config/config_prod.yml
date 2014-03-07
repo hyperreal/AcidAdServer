@@ -8,7 +8,7 @@ monolog:
             action_level: error
             handler:      nested
             channels: ["!security"]
-            exclude_404s:
+            excluded_404s:
                 - ^/frame
         security:
             type: stream
