@@ -8,7 +8,7 @@
         <parameter key="hyper_ads.payment.gateway_builder.bitpay.class">Hyper\AdsBundle\Payment\GatewayBuilders\BitPayGatewayBuilder</parameter>
         <parameter key="hyper_ads.payment.plugin.bitpay.class">Hyper\AdsBundle\Payment\OmnipayBitPayPaymentPlugin</parameter>
         <parameter key="hyper_ads.payment.processor.bitpay.class">Hyper\AdsBundle\Payment\Processors\BitPayIpnRequestProcessor</parameter>
-        <parameter key="hyper_ads.payment.approval_determiner.bitpay.class">Hyper\AdsBundle\Payment\BitPayOrderApprovalDeterminer</parameter>
+        <parameter key="hyper_ads.payment.approval_determiner.bitpay.class">Hyper\AdsBundle\Payment\Util\BitPayOrderApprovalDeterminer</parameter>
         <parameter key="hyper_ads.payment.request.bitpay.class">Hyper\AdsBundle\Payment\Requests\BitPayIpnRequest</parameter>
         <parameter key="hyper_ads.payment.params_provider.bitpay.class">Hyper\AdsBundle\Payment\BitPay\BitPayParamsProvider</parameter>
     </parameters>
@@ -36,6 +36,7 @@
             <argument id="payment.plugin_controller" type="service" />
             <argument id="hyper_ads.payment.approval_determiner.bitpay" type="service" />
             <argument id="hyper_ads.payments_logger" type="service" />
+            <argument id="hyper_ads.payment.util.hash_generator" type="service" />
         </service>
 
         <service id="hyper_ads.payment.params_provider.bitpay" class="%hyper_ads.payment.params_provider.bitpay.class%">
