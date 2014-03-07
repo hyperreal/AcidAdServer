@@ -663,6 +663,16 @@ class SymfonyRequirements extends RequirementCollection
             'Install and enable a <strong>PHP accelerator</strong> like APC (highly recommended).'
         );
 
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $this->addPhpIniRecommendation(
+                'realpath_cache_size',
+                create_function('$cfgValue', 'return (int) $cfgValue > 1000;'),
+                false,
+                'realpath_cache_size should be above 1024 in php.ini',
+                'Set "<strong>realpath_cache_size</strong>" to e.g. "<strong>1024</strong>" in php.ini<a href="#phpini">*</a> to improve performance on windows.'
+            );
+        }
+
         $this->addPhpIniRecommendation('short_open_tag', false);
 
         $this->addPhpIniRecommendation('magic_quotes_gpc', false, true);
@@ -680,7 +690,7 @@ class SymfonyRequirements extends RequirementCollection
         if (class_exists('PDO')) {
             $drivers = PDO::getAvailableDrivers();
             $this->addRecommendation(
-                count($drivers),
+                count($drivers) > 0,
                 sprintf('PDO should have some drivers installed (currently available: %s)', count($drivers) ? implode(', ', $drivers) : 'none'),
                 'Install <strong>PDO drivers</strong> (mandatory for Doctrine).'
             );

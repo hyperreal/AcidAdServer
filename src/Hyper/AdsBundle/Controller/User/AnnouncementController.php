@@ -18,19 +18,13 @@ use Wikp\PaymentMtgoxBundle\Mtgox\RequestType\MtgoxTransactionUrlRequest;
 class AnnouncementController extends Controller
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
-     * @DI\Inject("doctrine.orm.entity_manager")
-     */
-    protected $entityManager;
-
-    /**
      * @Route("/", name="user_announcement_index")
      * @Template()
      */
     public function indexAction()
     {
         return array(
-            'announcements' => $this->entityManager
+            'announcements' => $this->get('doctrine.orm.entity_manager')
                 ->getRepository('HyperAdsBundle:Announcement')
                 ->getAnnouncementsForUser(
                     $this->getUser()
@@ -62,8 +56,8 @@ class AnnouncementController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $this->entityManager->persist($announcement);
-            $this->entityManager->flush();
+            $this->get('doctrine.orm.entity_manager')->persist($announcement);
+            $this->get('doctrine.orm.entity_manager')->flush();
 
             return $this->redirect($this->generateUrl('user_announcement_index'));
         }
@@ -152,12 +146,12 @@ class AnnouncementController extends Controller
     private function persistOrRemoveAnnouncement($action, $announcement)
     {
         if ('persist' === $action) {
-            $this->entityManager->persist($announcement);
+            $this->get('doctrine.orm.entity_manager')->persist($announcement);
         } elseif ('remove' === $action) {
-            $this->entityManager->remove($announcement);
+            $this->get('doctrine.orm.entity_manager')->remove($announcement);
         }
 
-        $this->entityManager->flush();
+        $this->get('doctrine.orm.entity_manager')->flush();
     }
 
     private function throwUnlessValidUser(Advertisement $advertisement)
