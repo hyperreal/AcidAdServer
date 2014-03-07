@@ -16,19 +16,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class AnnouncementController extends Controller
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
-     * @DI\Inject("doctrine.orm.entity_manager")
-     */
-    protected $entityManager;
-
-    /**
      * @Route("/", name="admin_announcement_index")
      * @Template()
      */
     public function indexAction()
     {
         return array(
-            'announcements' => $this->entityManager
+            'announcements' => $this->get('doctrine.orm.entity_manager')
                 ->getRepository('HyperAdsBundle:Announcement')
                 ->findAll()
         );
@@ -96,12 +90,12 @@ class AnnouncementController extends Controller
     private function persistOrRemoveAnnouncement($action, $announcement)
     {
         if ('persist' === $action) {
-            $this->entityManager->persist($announcement);
+            $this->get('doctrine.orm.entity_manager')->persist($announcement);
         } elseif ('remove' === $action) {
-            $this->entityManager->remove($announcement);
+            $this->get('doctrine.orm.entity_manager')->remove($announcement);
         }
 
-        $this->entityManager->flush();
+        $this->get('doctrine.orm.entity_manager')->flush();
     }
 }
 

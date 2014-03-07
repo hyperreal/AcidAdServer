@@ -15,6 +15,14 @@ monolog:
             type:  stream
             path:  %kernel.logs_dir%/%kernel.environment%.log
             level: debug
+            channels: ["!security"]
+            excluded_404s:
+                - ^/frame
+        security:
+            type: stream
+            path: %kernel.logs_dir%/%kernel.environment%.security.log
+            level: warning
+            channels: ["security"]
         firephp:
             type:  firephp
             level: info

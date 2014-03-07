@@ -28,28 +28,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param \Hyper\AdsBundle\Entity\Zone $zone
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/kurwa/{zone}")
-     * @Template()
-     */
-    public function kurwaAction(Zone $zone)
-    {
-        /** @var $repo \Hyper\AdsBundle\Entity\ZoneRepository */
-        $repo = $this->get('doctrine.orm.entity_manager')->getRepository('HyperAdsBundle:Zone');
-
-        $start = new \DateTime('now');
-        $end = new \DateTime('now +4 month');
-        $repo->checkZoneAvailabilityInDays($zone, $start, $end);
-
-        return array(
-            'content' => 'olala'
-        );
-    }
-
-    /**
-     * @Route("/frame/{id}")
+     * @Route("/frame/{id}", name="hyper_ads_default_frame")
      * @Template()
      */
     public function frameAction($id)
