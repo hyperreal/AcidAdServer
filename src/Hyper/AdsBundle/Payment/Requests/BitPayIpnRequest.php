@@ -16,6 +16,9 @@ class BitPayIpnRequest extends AbstractOmnipayRequest
     {
         $this->inputReader = $inputReader;
         $this->decodedInput = json_decode($inputReader->getStandardInput(), true);
+        if (isset($this->decodedInput['posData'])) {
+            $this->decodedInput['posData'] = json_decode($this->decodedInput['posData'], true);
+        }
     }
 
     public function isNew()
@@ -30,12 +33,7 @@ class BitPayIpnRequest extends AbstractOmnipayRequest
 
     public function getOrderId()
     {
-        return $this->decodedInput['posData']['order'];
-    }
-
-    public function getKey()
-    {
-        return $this->decodedInput['posData']['key'];
+        return $this->decodedInput['posData']['posData']['order'];
     }
 
     public function getStatus()
@@ -56,6 +54,7 @@ class BitPayIpnRequest extends AbstractOmnipayRequest
     public function hasOrderId()
     {
         return array_key_exists('posData', $this->decodedInput)
-            && array_key_exists('order', $this->decodedInput['posData']);
+            && array_key_exists('posData', $this->decodedInput['posData'])
+            && array_key_exists('order', $this->decodedInput['posData']['posData']);
     }
 }

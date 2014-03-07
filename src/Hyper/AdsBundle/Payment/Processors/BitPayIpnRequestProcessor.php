@@ -61,7 +61,7 @@ class BitPayIpnRequestProcessor
 
         if ($this->request->isNew()) {
             $this->logger->info(
-                'Bitpay ipn request of id {id} is not yet confirmed (status: new)',
+                'Bitpay ipn request is not yet confirmed',
                 array(
                     'id' => $this->request->getId(),
                     'status' => $this->request->getStatus(),
@@ -80,10 +80,15 @@ class BitPayIpnRequestProcessor
 
     private function checkHash(OrderInterface $order)
     {
-        if ($this->request->getHash() != $this->hashOrderGenerator->hashOrder($order)) {
+        if ($this->request->getHash() != ($hashOrder = $this->hashOrderGenerator->hashOrder($order))) {
             $this->logger->info(
-                'Bitpay ipn request of id {id} (order: {orderId}) is invalid due to invalid hash',
-                array('id' => $this->request->getId(), 'orderId' => $this->request->getOrderId())
+                'Bitpay ipn request is invalid due to invalid hash',
+                array(
+                    'id' => $this->request->getId(),
+                    'orderId' => $this->request->getOrderId(),
+                    'requestHash' => $this->request->getHash(),
+                    'orderHash' => $hashOrder,
+                )
             );
             throw new InvalidIpnRequestException();
         }
@@ -95,7 +100,7 @@ class BitPayIpnRequestProcessor
         $result = $this->pluginController->approveAndDeposit($payment->getId(), $this->request->getPrice());
         if (Result::STATUS_PENDING === $result->getStatus()) {
             $this->logger->info(
-                'Payment for order {orderId} is pending (request id: {requestId})',
+                'Payment for order is pending',
                 array('orderId' => $order->getId(), 'requestId' => $this->request->getId())
             );
             throw $result->getPluginException();
@@ -107,7 +112,7 @@ class BitPayIpnRequestProcessor
     private function acceptOrder(OrderInterface $order)
     {
         $this->logger->info(
-            'Payment for order {orderId} was successful (request id: {requestId})',
+            'Payment for order was successful',
             array('orderId' => $order->getId(), 'requestId' => $this->request->getId())
         );
         $order->approve();
@@ -117,7 +122,7 @@ class BitPayIpnRequestProcessor
     private function cancelOrder(OrderInterface $order)
     {
         $this->logger->info(
-            'Payment for order {orderId} was unsuccessful (request id: {requestId})',
+            'Payment for order was unsuccessful',
             array('orderId' => $order->getId(), 'requestId' => $this->request->getId())
         );
         $order->cancel();
@@ -145,7 +150,7 @@ class BitPayIpnRequestProcessor
     {
         if (null === ($pendingTransaction = $order->getPaymentInstruction()->getPendingTransaction())) {
             $this->logger->info(
-                'Pending transaction for order {orderId} not found (request id: {requestId})',
+                'Pending transaction for order not found',
                 array(
                     'orderId' => $order->getId(),
                     'requestId' => $this->request->getId(),
@@ -164,7 +169,7 @@ class BitPayIpnRequestProcessor
 
     private function requestDebugInfo()
     {
-        $this->logger->debug("Full request (id: {requestId}):\n\nSERVER:\n{server}\n\nPOST:\n{post}\n\nCOOKIE:\n{cookie}",
+        $this->logger->debug("Full request",
             array(
                 'server' => var_export($_SERVER, true),
                 'post' => var_export($_POST, true),
@@ -178,7 +183,7 @@ class BitPayIpnRequestProcessor
     {
         if (!$this->request->hasOrderId()) {
             $this->logger->info(
-                'Request of ID: {requestId} does not have orderId',
+                'Request does not have orderId',
                 array(
                     'requestId' => $this->request->getId(),
                 )
