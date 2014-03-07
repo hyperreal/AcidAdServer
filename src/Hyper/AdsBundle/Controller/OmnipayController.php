@@ -16,7 +16,7 @@ class OmnipayController extends Controller
     {
         try {
             $this->get('hyper_ads.payment.processor.bitpay')->process();
-            $response = new Response($this->getSuccessMessage(), 400, array('Content-type' => 'application/json'));
+            $response = new Response($this->getSuccessMessage(), 200, array('Content-type' => 'application/json'));
         } catch (PaymentException $e) {
             $response = $this->getBadRequestResponse();
         } catch (\InvalidArgumentException $e) {
