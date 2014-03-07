@@ -16,6 +16,7 @@ class OmnipayController extends Controller
     {
         try {
             $this->get('hyper_ads.payment.processor.bitpay')->process();
+            $this->logSuccess();
             $response = new Response($this->getSuccessMessage(), 200, array('Content-type' => 'application/json'));
         } catch (PaymentException $e) {
             $response = $this->getBadRequestResponse();
@@ -86,6 +87,18 @@ class OmnipayController extends Controller
             array(
                 'orderId' => $this->get('hyper_ads.payment.request.bitpay')->getOrderId(),
                 'requestId' => $this->get('hyper_ads.payment.request.bitpay')->getId(),
+            )
+        );
+    }
+
+    private function logSuccess()
+    {
+        $this->get('hyper_ads.payments_logger')->error( //temporary
+            'Payment successful',
+            array(
+                'orderId' => $this->get('hyper_ads.payment.request.bitpay')->getOrderId(),
+                'requestId' => $this->get('hyper_ads.payment.request.bitpay')->getId(),
+                'amount' => $this->get('hyper_ads.payment.request.bitpay')->getPrice(),
             )
         );
     }
