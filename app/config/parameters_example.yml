@@ -38,6 +38,20 @@ parameters:
     announcement_edit_cost: 0.01
     announcement_edit_currency: PLN
 
+    payment_hash_algorithm: sha512
+    payment_hash_key: sAf3HaShK3Y
+
+    bitpay_api_key: sAf3Ap1K3Y
+    bitpay_transaction_speed: medium
+    bitpay_full_notifications: false #if true bitpay will inform about every status change
+    bitpay_notifications_email: name@example.com
+
+    # currently valid value is "omnipay_bitpay" only
+    banner_payment_methods:
+        - omnipay_bitpay
+
+    announcement_payment_methods: ~
+
     announcement_flow_mail_recipients:
         - "mail@example.com"
         - "another-mail@example.com"
