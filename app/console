@@ -12,8 +12,6 @@ require_once __DIR__.'/AppKernel.php';
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
-use Wikp\PaymentMtgoxBundle\Console\Command\RetrieveCurrentPrices;
-use Wikp\PaymentMtgoxBundle\Console\Command\ExchangeCalculator;
 
 $input = new ArgvInput();
 $env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'dev');
@@ -22,6 +20,4 @@ $debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(array('-
 $kernel = new AppKernel($env, $debug);
 $application = new Application($kernel);
 $application->add(new \Hyper\AdsBundle\Console\Command\ExpireAnnouncements());
-$application->add(new RetrieveCurrentPrices());
-$application->add(new ExchangeCalculator());
 $application->run($input);

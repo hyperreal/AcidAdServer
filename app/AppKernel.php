@@ -21,7 +21,6 @@ class AppKernel extends Kernel
             new Hyper\AdsBundle\HyperAdsBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new JMS\Payment\CoreBundle\JMSPaymentCoreBundle(),
-            new Wikp\PaymentMtgoxBundle\WikpPaymentMtgoxBundle(),
             new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
             new Trsteel\CkeditorBundle\TrsteelCkeditorBundle(),
         );
