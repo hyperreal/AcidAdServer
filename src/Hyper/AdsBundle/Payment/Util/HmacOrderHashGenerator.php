@@ -17,17 +17,11 @@ class HmacOrderHashGenerator implements OrderHashGeneratorInterface
 
     public function hashOrder(OrderInterface $order)
     {
-        return base64_encode(hash_hmac($this->hashAlgorithm, $this->getHash($order), $this->hashKey));
+        return hash_hmac($this->hashAlgorithm, $this->getHash($order), $this->hashKey);
     }
 
     private function getHash(OrderInterface $order)
     {
-        return json_encode(
-            array(
-                'id' => $order->getId(),
-                'pii' => $order->getPaymentInstruction()->getId(),
-            )
-        );
+        return $order->getId() . '_' . $order->getPaymentInstruction()->getId();
     }
-
 }
