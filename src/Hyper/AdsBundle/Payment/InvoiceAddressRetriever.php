@@ -38,7 +38,7 @@ class InvoiceAddressRetriever
         $paramsProvider = $this->container->get('hyper_ads.payment.params_providers');
         $params = $paramsProvider->getParametersFromOrder($order);
 
-        $this->container->get('hyper_ads.payments_logger')->debug(var_export($params, true));
+        $this->container->get('hyper_ads.payments_logger')->error(var_export($params, true));
 
         return $params;
     }

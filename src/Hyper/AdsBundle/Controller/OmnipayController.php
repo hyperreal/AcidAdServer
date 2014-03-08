@@ -4,13 +4,14 @@ namespace Hyper\AdsBundle\Controller;
 
 use Hyper\AdsBundle\Exception\PaymentException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
 
 class OmnipayController extends Controller
 {
     /**
      * @Route("/bitpay/ipn", name="hyper_ads.omnipay.ipn.bitpay")
+     * @Method("POST")
      */
     public function bitPayIpnAction()
     {
@@ -82,7 +83,7 @@ class OmnipayController extends Controller
 
     private function logPaymentAlreadyProvided()
     {
-        $this->get('hyper_ads.payments_logger')->info(
+        $this->get('hyper_ads.payments_logger')->error(
             'Payment already provided for request',
             array(
                 'orderId' => $this->get('hyper_ads.payment.request.bitpay')->getOrderId(),
@@ -105,7 +106,7 @@ class OmnipayController extends Controller
 
     private function logException(\Exception $e)
     {
-        $this->get('hyper_ads.payments_logger')->info(
+        $this->get('hyper_ads.payments_logger')->error(
             'Exception during processing request',
             array(
                 'class' => get_class($e),
