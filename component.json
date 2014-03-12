@@ -8,8 +8,7 @@
         "mustache": "0.7.2",
         "jquery": "1.10.2",
         "fancybox": "2.1.4",
-        "bootstrap": "3.0.*",
-        "bootstrap-glyphicons": "*",
+        "bootstrap": "3.*",
         "swfobject": "*"
     }
 }
