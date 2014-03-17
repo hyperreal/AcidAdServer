@@ -1,0 +1,6 @@
+[submodule "master"]
+	path = master
+	url = https://github.com/Stereobit/dragend.git
+[submodule "web/git/dragend"]
+	path = web/git/dragend
+	url = https://github.com/Stereobit/dragend.git
