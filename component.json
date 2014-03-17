@@ -9,6 +9,11 @@
         "jquery": "1.10.2",
         "fancybox": "2.1.4",
         "bootstrap": "3.*",
-        "swfobject": "*"
+        "swfobject": "*",
+		"bootstrap-datepicker": "*",
+		"angular-ui": "*",
+		"font-awesome": "*",
+		"icomoon": "*",
+		"ionicons": "*"
     }
 }

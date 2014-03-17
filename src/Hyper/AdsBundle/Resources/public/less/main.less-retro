@@ -1,6 +1,6 @@
 
 @import "web/components/bootstrap/less/bootstrap.less";
 @import "web/components/font-awesome/less/font-awesome.less";
-@import "src/Hyper/AdsBundle/Resources/public/less/variables-flatly.less";
-@import "src/Hyper/AdsBundle/Resources/public/less/bootswatch-flatly.less";
+@import "src/Hyper/AdsBundle/Resources/public/less/variables-retro.less";
+@import "src/Hyper/AdsBundle/Resources/public/less/bootswatch-retro.less";
 @import "src/Hyper/AdsBundle/Resources/public/less/global.less";

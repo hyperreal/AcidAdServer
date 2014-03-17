@@ -1,6 +1,4 @@
-
-@icon-font-path:          "/components/bootstrap/fonts/";
-@fa-font-path:            "/components/font-awesome/fonts/";
+@icon-font-path:          "/fonts/";
 
 body {
   padding: 60px 0 20px 0;
@@ -8,13 +6,6 @@ body {
 
 ul.nav {
   padding-right: 15px;
-}
-
-li.nav-header {
-	padding-top:1px;
-	padding-bottom:5px;
-	padding-right:0px;
-	padding-left:0px;
 }
 
 ul.no-buttons {
@@ -100,15 +91,4 @@ table label.table {
 
 .payment-info {
   margin-top: 15px;
-}
-.panel-heading .accordion-toggle:after {
-    /* symbol for "opening" panels */
-	    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
-	    content: "\e114";    /* adjust as needed, taken from bootstrap.css */
-	    float: right;        /* adjust as needed */
-	    color: grey;         /* adjust as needed */
-}
-.panel-heading .accordion-toggle.collapsed:after {
-    /* symbol for "collapsed" panels */
-	    content: "\e080";    /* adjust as needed, taken from bootstrap.css */
 }

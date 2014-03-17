@@ -39,6 +39,7 @@ name: Name
 email: Email
 actions: Actions
 show: Show
+help: Help
 no.entities: 'No records found'
 create.new.entry: 'Create new'
 

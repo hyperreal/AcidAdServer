@@ -1,0 +1,610 @@
+section {
+	margin-top: 20px;
+	padding-top: 20px;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-weight:200;
+}
+/* index */
+
+
+
+.tooltip-inner {
+	max-width: 500px;
+}
+
+.hero-unit {
+	padding-bottom: 5px;
+	text-align: center;
+	border-width:5px;
+	box-shadow:none;
+}
+
+.hero-unit h1,
+.hero-unit p {
+	margin-bottom: 15px;
+}
+
+#social {
+	display: inline-block;
+	margin-top: 45px;
+	text-align: center;
+}
+
+#gh-star {
+	margin-right: 10px;
+}
+
+.twitter-share-button  {
+	margin-right: 15px;
+}
+
+.rss-button {
+	width: 40px;
+	height: 14px;
+	font-size: 11px;
+	line-height: 14px;
+	font-weight: bold;
+	margin: 0 0 10px;
+	padding: 2px 5px 2px 4px;
+}
+
+
+#ticker {
+	margin-top: 40px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	line-height: 1.4;
+}
+
+.about {
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.about > div {
+	margin-bottom: 20px;
+}
+
+.about h3 {
+	margin: 0;
+	text-align: left;
+}
+
+.about i {
+	margin-right: 8px;
+	font-size: 1.3em;
+}
+
+#gallery {
+	padding-top: 60px;
+}
+
+.thumbnail {
+	margin-bottom: 20px;
+	background-color: #f3f3f3;
+	background-color: rgba(0, 0, 0, 0.05);
+}
+
+.thumbnail img {
+	width: 100%;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+}
+
+.thumbnail .caption {
+	color: inherit;
+}
+
+.thumbnail .caption p {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.thumbnail h3 {
+	text-align: left;
+	margin-bottom: 0;
+}
+
+.thumbnail .btn-toolbar {
+	margin-top: 15px;
+	text-align: right;
+}
+
+.more {
+	margin-top: 40px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.links {
+	margin-bottom: 20px;
+}
+
+.links > a {
+	margin-right: 10px;
+}
+
+.bsa {
+	float: right;
+	max-width: 400px;
+	padding: 0;
+}
+.alert, .alert h4 {
+	text-shadow: none;
+	border:none;
+	color:@white;
+}
+.alert-danger, .alert-error {
+	text-shadow: 0 1px 0  darken(spin(@errorBackground, -10), 3%);
+}
+.alert-success {
+	text-shadow: 0 1px 0  darken(spin(@successBackground, -10), 3%);
+}
+.alert-info {
+	text-shadow: 0 1px 0  darken(spin(@infoBackground, -10), 3%);
+}
+.progress {
+	box-shadow: 0 0px -2px 0px rgba(0,0,0,0.1);
+}
+.progress .bar, .progress-success .bar, .progress .bar-success, .progress-warning .bar, .progress .bar-warning, .progress-danger .bar, .progress .bar-danger, .progress-info .bar, .progress .bar-info {
+	background-image: none;
+}
+.progress .bar, .progress.progress-striped .bar, .progress-striped .bar {
+	background-color: @blue;
+
+}
+.progress.progress-striped .bar {
+background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  -webkit-background-size: 40px 40px;
+     -moz-background-size: 40px 40px;
+       -o-background-size: 40px 40px;
+          background-size: 40px 40px;
+      }
+.progress-info.progress-striped .bar, .progress-striped .bar-info, .progress-info .bar, .progress .bar-info {
+	background-color: @blueLight;
+}
+.progress-danger.progress-striped .bar, .progress-striped .bar-danger, .progress-danger .bar, .progress .bar-danger {
+	background-color: @red;
+}
+.progress-warning.progress-striped .bar, .progress-striped .bar-warning, .progress-warning .bar, .progress .bar-warning {
+	background-color: @yellow;
+}
+.progress-success.progress-striped .bar, .progress-striped .bar-success, .progress-success .bar, .progress .bar-success {
+	background-color: @green;
+}
+.label-inverse, .badge-inverse {
+	background-color:@blue;
+}	
+.page-header {
+	/*border-color:@yellow;*/
+}
+.pager li>a, .pager li>span, .nav-tabs>li>a, .nav-pills>li>a {
+	border-radius:0;
+}
+.nav-tabs>.active>a, .nav-tabs>.active>a:hover, .nav-tabs>.active>a:focus {
+	background-color:@blue;
+	color:@white;
+}
+body .one .bsa_it_ad {
+	margin-bottom: -10px;
+	padding: 25px;
+	background: none;
+	border: none;
+	font-family: inherit;
+	color: inherit;
+}
+
+body .one .bsa_it_ad .bsa_it_t,
+body .one .bsa_it_ad .bsa_it_d {
+	color: inherit;
+	font-size: inherit;
+}
+
+body .one .bsa_it_p {
+	display: none;
+}
+
+.bsap img {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+
+#footer {
+	margin-bottom: 20px;
+}
+
+#footer .links a {
+	margin-right: 10px;
+}
+
+.form-actions {
+	background:@yellowLight;
+}
+.progress {
+	background:@yellowDark;
+}
+.navbar .nav>.active>a, .navbar .nav>.active>a:hover, .navbar .nav>.active>a:focus, .navbar .nav>li>a:focus, .navbar .nav>li>a:hover {
+	box-shadow:none;
+	background:rgba(0,0,0,0.05);
+}
+.dropdown-menu {
+	background:@yellowDark;
+	border:solid 3px darken(@yellowDark, 5%);
+	box-shadow:none;
+	border-radius:none;
+}
+.navbar .nav>li>.dropdown-menu:after, .navbar .nav>li>.dropdown-menu:before {
+	border-bottom-color: darken(@yellowDark, 5%);
+}
+.navbar .nav>li>.dropdown-menu:before {
+	top:-10px;
+}
+.nav-tabs .open .dropdown-toggle, .nav-pills .open .dropdown-toggle, .nav>li.dropdown.open.active>a:hover, .nav>li.dropdown.open.active>a:focus {
+	background:@blue;
+}
+.breadcrumb {
+	background:@yellowDark;
+	color:@white;
+}
+.pagination ul>.active>a, .pagination ul>.active>span {
+	color:@white;
+}
+
+.pager li>a, .pager li>span {
+	background:@yellowLight;
+}
+.pagination ul>li>a:hover, .pagination ul>li>a:focus, .pager li>a:hover, .pager li>a:focus, .pager .disabled>a, .pager .disabled>a:hover, .pager .disabled>a:focus, .pager .disabled>span {
+	background:@yellowDark;
+}
+.pagination ul>li.active>a:hover {
+	background:@yellow;
+} 
+.nav-list .divider {
+	border-bottom-color:@yellowLight;
+}
+.navbar-search .search-query, .navbar-inverse .navbar-search .search-query {
+	line-height:16px;
+	border-radius:0;
+	box-shadow:none;
+}
+.well {
+	border-width:5px;
+	box-shadow:none;
+}
+.nav>li>a:hover, .nav>li>a:focus, .nav>li>a:hover, .nav>li>a:focus {
+	background:darken(@yellowDark, 5%);
+}
+.btn {
+	border:none;
+	box-shadow:none;
+	padding:5px 12px;
+}
+.btn-large {
+	padding:12px 19px;
+}
+.btn-small {
+	padding:3px 10px;
+}
+.btn-small {
+	padding: 0 6px;
+}
+
+.btn:active {
+	background:darken(@yellowDark, 5%);
+	box-shadow:none;
+}
+.btn.btn-primary:active {
+	background:darken(@blue, 5%);
+}
+.btn.btn-success:active {
+	background:darken(@green, 5%);
+}
+.btn.btn-warning:active {
+	background:darken(@yellow, 5%);
+}
+.btn.btn-danger:active {
+	background:darken(@red, 5%);
+}
+.btn.btn-info:active {
+	background:darken(@blueLight, 5%);
+}
+.btn.btn-inverse:active {
+	background:darken(@blueDark, 5%);
+}
+
+.btn:hover {
+	background:lighten(@yellowDark, 5%);
+}
+.btn.btn-primary:hover {
+	background:lighten(@blue, 5%);
+}
+.btn.btn-success:hover {
+	background:lighten(@green, 5%);
+}
+.btn.btn-warning:hover {
+	background:lighten(@yellow, 5%);
+}
+.btn.btn-danger:hover {
+	background:lighten(@red, 5%);
+}
+.btn.btn-info:hover {
+	background:lighten(@blueLight, 5%);
+}
+.btn.btn-inverse:hover {
+	background:lighten(@blueDark, 5%);
+}
+.input-append .add-on, .input-prepend .add-on {
+	background: @yellowDark;
+}
+.close {
+	text-shadow:none;
+	opacity:0.3;
+}
+.close:hover {
+	opacity:0.5;
+}
+.pre {
+	background: @yellowDark;
+}
+.table tbody tr.success>td, .table tbody tr.error>td, .table tbody tr.info>td {
+	color:@white;
+}
+@media (max-width: 480px) {
+
+	.hero-unit {
+		padding: 20px 20px 0;
+		margin: 0 0 20px;
+	}
+
+	.hero-unit h1 {
+		font-size: 36px;
+	}
+
+	.hero-unit iframe {
+		margin-right: 0 !important;
+	}
+
+	#social {
+		margin-top: 0px;
+		margin-bottom: 20px;
+	}
+
+	#social > span {
+		display: block;
+	}
+
+	#ticker {
+		margin-top: 0;
+	}
+
+	.about {
+		margin-top: 0;
+	}
+
+	.about h3 {
+		margin-top: 30px;
+	}
+
+	.about p {
+		margin-bottom: 0;
+	}
+
+	.thumbnail .btn {
+		font-size: 15px;
+	}
+
+	.modal {
+		position: fixed !important;
+		top: 25% !important;
+	}
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+	.hero-unit {
+		margin-top: 0;
+		padding: 30px;
+	}
+
+	.about {
+		margin-top: 0;
+	}
+}
+
+@media (max-width: 767px) {
+
+
+	section {
+		padding-top: 20px;
+	}
+
+	.bsa {
+		float: none;
+	}
+}
+
+@media (max-width: 979px) and (min-width: 768px) {
+
+	.index .navbar {
+		margin-bottom: 0;
+	}
+
+	.hero-unit {
+		border-radius: 0;
+	}
+
+	section {
+		padding-top: 20px;
+	}
+
+	.thumbnail .btn {
+		padding: 6px 10px;
+		font-size: 14px;
+	}
+}
+
+@media (min-width: 980px) {
+
+	.index {
+		padding-top: 60px;
+	}
+
+	.preview {
+		padding-top: 100px;
+	}
+}
+
+/* preview */
+
+.subhead {
+	padding-bottom: 0;
+	margin-bottom: 9px;
+	margin-top:20px;
+}
+
+.subhead h1 {
+	font-size: 54px;
+}
+
+/*.subhead > div:first-child {
+	min-height: 200px;
+}*/
+
+/* subnav */
+ 
+.subnav {
+	width: 100%;
+	height: 36px;
+	background-color:@yellowDark;
+	background:@yellowDark;
+	border: 1px solid @yellowDark;
+	box-shadow: none;
+}
+ 
+.subnav .nav {
+	margin-bottom: 0;
+}
+ 
+.subnav .nav > li > a {
+	margin: 0;
+	padding-top:    11px;
+	padding-bottom: 11px;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+ 
+.subnav .nav > .active > a,
+.subnav .nav > .active > a:hover {
+	padding-left: 13px;
+	color: #777;
+	background-color: darken(@yellowDark, 5%);
+	border-right-color: #ddd;
+	border-left: 0;	
+}
+ 
+.subnav .nav > .active > a .caret,
+.subnav .nav > .active > a:hover .caret {
+	border-top-color: #777;
+}
+ 
+.subnav .nav > li:first-child > a,
+.subnav .nav > li:first-child > a:hover {
+	border-left: 0;
+	padding-left: 12px;
+	-webkit-border-radius: 4px 0 0 4px;
+	-moz-border-radius: 4px 0 0 4px;
+	border-radius: 4px 0 0 4px;
+}
+ 
+.subnav .nav > li:last-child > a {
+	border-right: 0;
+}
+ 
+.subnav .dropdown-menu {
+	-webkit-border-radius: 0 0 4px 4px;
+	-moz-border-radius: 0 0 4px 4px;
+	border-radius: 0 0 4px 4px;
+}
+blockquote, blockquote.pull-right {
+	border-color:@yellowDark;
+}
+
+@media (max-width: 767px) {
+ 
+	.subnav {
+		position: static;
+		top: auto;
+		z-index: auto;
+		width: auto;
+		height: auto;
+		background:@yellowLight; /* whole background property since we use a background-image for gradient */
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+	}
+ 
+	.subnav .nav > li {
+		float: none;
+	}
+ 
+	.subnav .nav > li > a {
+		border: 0;
+	}
+ 
+	.subnav .nav > li + li > a {
+		border-top: 1px solid #e5e5e5;
+	}
+ 
+	.subnav .nav > li:first-child > a,
+	.subnav .nav > li:first-child > a:hover {
+		-webkit-border-radius: 4px 4px 0 0;
+		-moz-border-radius: 4px 4px 0 0;
+		border-radius: 4px 4px 0 0;
+	}
+}
+ 
+@media (min-width: 980px) {
+  
+	.subnav-fixed {
+		position: fixed;
+		top: 60px;
+		left: 0;
+		right: 0;
+		z-index: 1020; /* 10 less than .navbar-fixed to prevent any overlap */
+		border-color: @yellowDarker;
+		border-width: 0 0 1px; /* drop the border on the fixed edges */
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		border-radius: 0;
+		filter: none; /* IE6-9 */
+	}
+  
+	.subnav-fixed .nav {
+		width: 938px;
+		margin: 0 auto;
+		padding: 0 1px;
+	}
+  
+	.subnav .nav > li:first-child > a,
+	.subnav .nav > li:first-child > a:hover {
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		border-radius: 0;
+	}
+}
+ 
+@media (min-width: 1210px) {
+ 
+	.subnav-fixed .nav {
+		width: 1168px; /* 2px less to account for left/right borders being removed when in fixed mode */
+	}
+}

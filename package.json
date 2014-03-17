@@ -21,5 +21,8 @@
     "grunt": "~0.4.3",
     "grunt-contrib-less": "~0.10.0",
     "grunt-contrib-watch": "~0.6.0"
+  },
+  "dependencies": {
+    "clean-css": "~2.1.6"
   }
 }
