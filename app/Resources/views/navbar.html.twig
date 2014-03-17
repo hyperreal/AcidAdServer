@@ -1,31 +1,41 @@
 <nav class="navbar navbar-fixed-top" role="navigation">
 
     <div class="navbar-header">
-        <a class="navbar-brand" href="{{ url('_welcome') }}">{{ 'layout.title'|babel }}</a>
+        <a class="navbar-brand" href="{{ url('_welcome') }}">
+			<span class="glyphicon glyphicon-home"></span>
+			 {{ 'layout.title'|babel }}</a>
     </div>
 
     <div class="container">
         <ul class="nav navbar-nav">
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <li>
-                    <a href="{{ url('fos_user_profile_edit') }}">{{ 'edit.profile'|babel|lower }}</a>
+                    <a href="{{ url('fos_user_profile_edit') }}">
+						<span class="glyphicon glyphicon-wrench"></span>
+						 {{ 'edit.profile'|babel|lower }}</a>
                 </li>
                 <li>
                     <a href="{{ path('fos_user_security_logout') }}">
-                        {{ 'layout.logout'|trans({}, 'FOSUserBundle')|lower }}
+						<span class="glyphicon glyphicon-log-out"></span>
+                         {{ 'layout.logout'|trans({}, 'FOSUserBundle')|lower }}
                     </a>
                 </li>
             {% else %}
                 <li>
-                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                    <a href="{{ path('fos_user_security_login') }}">
+						<span class="glyphicon glyphicon-log-in"></span>
+						 {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
                 </li>
                 <li>
-                    <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+                    <a href="{{ path('fos_user_registration_register') }}">
+						<span class="glyphicon glyphicon-user"></span>
+						 {{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
                 </li>
             {% endif %}
         </ul>
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <p class="pull-right navbar-text">{{ 'layout.navbar.login-info'|babel({'%user%': app.user.username})|raw }}</p>
+            <p class="pull-right navbar-text"><span class="glyphicon glyphicon-user"></span>
+			{{ 'layout.navbar.login-info'|babel({'%user%': app.user.username})|raw }}</p>
         {% endif %}
     </div>
 </nav>

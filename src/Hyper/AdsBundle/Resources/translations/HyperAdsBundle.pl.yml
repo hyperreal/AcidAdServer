@@ -6,6 +6,7 @@ list.advertiser: 'Lista reklamodawców'
 id: ID
 name: Nazwa
 email: E-mail
+help: Pomoc
 actions: Akcje
 show: Pokaż
 no.entities: 'Brak wpisów'
@@ -28,6 +29,7 @@ show.banner: Banner
 title: Tytuł
 linktitle: 'Treść linku'
 url: URL
+webshop: Zakupy
 description: Opis
 edit.banners.in.zone: 'Bannery w strefie zoneName'
 zone.name: 'Strefa zoneName'
@@ -104,7 +106,7 @@ daily.price: 'Cena/dzień emisji'
 canceled.payment: 'Anulowano zamówienie'
 payment.was.canceled: 'Zamówienie zostało anulowane'
 payment.info: 'Płatność za zamówienie nr %orderNumber%'
-zones.info: 'Informacje o strefach'
+zones.info: 'Strefy i cennik'
 zones.short.info: 'Poniżej znajduje się lista aktywnych stron i stref (miejsc, w których umieszczać można bannery) wraz z dostępnymi maksymalnymi rozmiarami'
 acid.name.long: 'AcidAdServer'
 acid.promo.github: github

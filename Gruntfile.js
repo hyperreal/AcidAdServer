@@ -13,7 +13,7 @@ module.exports = function(grunt) {
             production: {
                 options: {
                     paths: ["src/Hyper/AdsBundle/Resources/public/css"],
-                    yuicompress: true
+                    cleancss: true
                 },
                 files: {
                     "src/Hyper/AdsBundle/Resources/public/css/main.min.css": "src/Hyper/AdsBundle/Resources/public/less/main.less"
