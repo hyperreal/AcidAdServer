@@ -17,25 +17,26 @@ show.advertiser: 'Reklamodawca advertiserName'
 advertiser: 'Reklamodawca'
 firstname: Imię
 lastname: Nazwisko
-edit.banner: 'Edytuj banner'
-list.banner: 'Lista bannerów'
+edit.banner: 'Edytuj baner'
+list.banner: 'Lista banerów'
 file: Plik
 extension: Rozszerzenie
 width: Szerokość
 height: Wysokość
 type: Typ
-new.banner: 'Nowy banner'
-show.banner: Banner
+new.banner: 'Nowy baner'
+show.banner: Baner
 title: Tytuł
 linktitle: 'Treść linku'
 url: URL
 webshop: Zakupy
 description: Opis
-edit.banners.in.zone: 'Bannery w strefie zoneName'
+edit.banners.in.zone: 'Banery w strefie zoneName'
 zone.name: 'Strefa zoneName'
-banner.id: 'ID bannera'
-banner.title: 'Tytuł bannera'
+banner.id: 'ID banera'
+banner.title: 'Tytuł banera'
 banner.size: Wymiary
+banner.removed: "Baner został pomyślnie usunięty z systemu."
 use.in.zone: 'Użyć w strefie?'
 probability: Prawdopodobieństwo
 save: Zapisz
@@ -116,7 +117,7 @@ analytics.stats: 'Google Analytics'
 quantcast.stats: 'Quantcast Live'
 empty.banners.list: 'Lista bannerów jest pusta'
 check.zones: 'Aktywacja w strefach'
-menu.guide: Tutorial
+menu.guide: 'Podręcznik obsługi'
 successful.payment: 'Dziękujemy za płatność'
 transaction.was.queued: 'Płatność została zakolejkowana w systemie płatności, sprawdź listę bannerów za jakiś czas. Jeśli dokonałeś płatności za pomocą klienta Bitcoin, będziesz musiał chwilkę poczekać :)'
 extend.the.payment: 'Przedłuż płatność'
