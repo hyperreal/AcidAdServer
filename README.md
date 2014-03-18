@@ -1,8 +1,8 @@
 There are still work to do with Acid. Please use carefully. If you have questions about using Acid on your own,
-feel free to write questions on `fajka [at] hyperreal [dot] info`. This is possibly the fastest method. You can use
-[this GPG key][1] if you need some privacy.
+feel free to write questions on `fajka [at] hyperreal [dot] info`. This is possibly the fastest method.
 
-# AcidAdServer
+
+# AcidAdServer [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/hyperreal/AcidAdServer/badges/quality-score.png?s=f8fb9bd71a00e6b5da406c79390edfaf1f473ce9)](https://scrutinizer-ci.com/g/hyperreal/AcidAdServer/)
 
 AcidAdServer is ad serving web application based on Symfony 2 framework.
 
@@ -27,11 +27,11 @@ If you have questions, feel free to e-mail me at *fajka at hyperreal dot info*
 
 These features are sorted by planned implementation-done time.
 
- * Text banners (advertisements)
- * API to retrieve text advertisements
+ * Text banners (advertisements) (in progress)
+ * API to retrieve text advertisements (in progress)
  * Nagios monitoring URL
  * E-mail notifications
- * UI improvements
+ * UI improvements (in progress)
  * Multiple banners in one zone at once (e.g. you can place 
    four small boxes in scyscrapper)
  * Performance improvements
@@ -79,8 +79,9 @@ dependencies:
 # Development
 
 Acid is based on Symfony2 but does not utilize Assetic. We prefer Grunt so if you want to develop some UI-related tasks
-install `nodejs` (we recommend source distribution and `./configure && make && sudo make install`), `grunt-cli`
+install `nodejs` (if you're using Ubuntu, visit [this site][2]; on Mac use you can use `brew`), `grunt-cli`
 (`npm install grunt-cli -g`) and in project's root perform `npm install`. Next you can edit bundle's stylesheet(s) in
 LESS format and with `grunt watch` command check results immediately.
 
 [1]: http://pgp.mit.edu:11371/pks/lookup?op=get&search=0xB9EFA35464089E7E
+[2]: https://launchpad.net/~chris-lea/+archive/node.js/
