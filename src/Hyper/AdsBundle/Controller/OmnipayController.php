@@ -94,7 +94,7 @@ class OmnipayController extends Controller
 
     private function logSuccess()
     {
-        $this->get('hyper_ads.payments_logger')->error( //temporary
+        $this->get('hyper_ads.payments_logger')->info(
             'Payment successful',
             array(
                 'orderId' => $this->get('hyper_ads.payment.request.bitpay')->getOrderId(),
