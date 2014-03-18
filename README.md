@@ -80,7 +80,7 @@ dependencies:
 # Development
 
 Acid is based on Symfony2 but does not utilize Assetic. We prefer Grunt so if you want to develop some UI-related tasks
-install `nodejs` (if you're using Ubuntu, visit [this site][2]; on Mac use you can use `brew`), `grunt-cli`
+install `nodejs` (if you're using Ubuntu, visit [this site][2]; on Mac you can use `brew`), `grunt-cli`
 (`npm install grunt-cli -g`) and in project's root perform `npm install`. Next you can edit bundle's stylesheet(s) in
 LESS format and with `grunt watch` command check results immediately.
 
