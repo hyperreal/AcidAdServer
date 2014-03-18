@@ -75,6 +75,7 @@ With `node` and `bower` installed, you can next install JS and CSS
 dependencies:
 
     bower install
+    git submodule update --init
 
 # Development
 
