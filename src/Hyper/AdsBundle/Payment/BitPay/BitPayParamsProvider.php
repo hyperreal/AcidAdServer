@@ -45,19 +45,19 @@ class BitPayParamsProvider implements ParamsProviderInterface
         $params = array(
             'amount' => $order->getPaymentInstruction()->getAmount(),
             'currency' => $order->getPaymentInstruction()->getCurrency(),
-            'redirectURL' => $this->router->generate(
+            'returnUrl' => $this->router->generate(
                     'payment_successful',
                     array('order' => $order->getId()),
                     RouterInterface::ABSOLUTE_URL
                 ),
-            'notificationURL' => $this->router->generate(
+            'notifyUrl' => $this->router->generate(
                     "hyper_ads.omnipay.ipn.bitpay",
                     array(),
                     RouterInterface::ABSOLUTE_URL
                 ),
             'transactionSpeed' => $this->transactionSpeed,
             'fullNotifications' => $this->fullNotifications,
-            'orderID' => $order->getOrderNumber(),
+            'orderId' => $order->getOrderNumber(),
             'description' => $this->translator->trans(
                     'payment.info',
                     array('%orderNumber%' => $order->getOrderNumber()),
@@ -66,13 +66,13 @@ class BitPayParamsProvider implements ParamsProviderInterface
         );
 
         if (!empty($this->notificationEmail)) {
-            $params['notificationEmail'] = $this->notificationEmail;
+            $params['notifyEmail'] = $this->notificationEmail;
         }
 
-        $params['posData'] = array(
+        $params['transactionId'] = json_encode(array(
             'hash' => $this->hashGenerator->hashOrder($order),
             'posData' => $this->getPosData($order),
-        );
+        ));
 
         return $params;
     }
