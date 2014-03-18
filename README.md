@@ -10,7 +10,7 @@ With Acid you can:
 
  * Manage banners and advertisements of your customers
  * Allow users to manage their banners and advertisements
- * Pay for banners in Bitcoins (via MtGox)
+ * Pay for banners in Bitcoins (via BitPay)
  * Create zones in your sites' profiles (`zone` is a place on your site, where you probably want to put some banner(s))
  * Upload banners like images and swf's
  * Assign banners to zones (one banner can be assigned to multiple zones and one zone can contain multiple banners)
