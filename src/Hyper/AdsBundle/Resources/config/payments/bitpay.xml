@@ -16,7 +16,7 @@
     <services>
 
         <service id="hyper_ads.payment.gateway_builder.bitpay" class="%hyper_ads.payment.gateway_builder.bitpay.class%">
-            <tag name="hyper_ads.payment_gateway_builder" gateway="BitPay" />
+            <tag name="hyper_ads.payment_gateway_builder" gateway="\Hyper\AdsBundle\Payment\BitPay\Gateway" />
         </service>
 
         <service id="hyper_ads.payment.plugin.bitpay" class="%hyper_ads.payment.plugin.bitpay.class%">
