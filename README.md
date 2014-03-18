@@ -77,6 +77,12 @@ dependencies:
     bower install
     git submodule update --init
 
+And install assets:
+
+    ./app/console assets:install --symlink --relative
+
+TADA!
+
 # Development
 
 Acid is based on Symfony2 but does not utilize Assetic. We prefer Grunt so if you want to develop some UI-related tasks
