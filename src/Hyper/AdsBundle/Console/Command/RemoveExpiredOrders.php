@@ -14,8 +14,11 @@ class RemoveExpiredOrders extends ContainerAwareCommand
         $this->setName('acid:task:remove-expired-orders')
             ->setDescription('Removes orders that have not been paid within specific amount of time')
             ->addOption(
-                'time', null, InputOption::VALUE_REQUIRED,
-                'Time in minutes. Non-paid orders created earlier than NOW - {time} will be removed.', 1440
+                'time',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Time in minutes. Non-paid orders created earlier than NOW - {time} will be removed.',
+                1440
             );
     }
 
