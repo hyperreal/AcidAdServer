@@ -31,4 +31,15 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
 
         return $query->getResult();
     }
+
+    public function removeExpiredOrders($time)
+    {
+        $query = $this->getEntityManager()->createQuery(
+            'DELETE FROM Hyper\AdsBundle\Entity\Order o
+            WHERE o.status = 0 AND o.creationDate < ?1'
+        );
+        $query->setParameter(1, new \DateTime("now - $time minutes"));
+
+        return $query->execute();
+    }
 }
