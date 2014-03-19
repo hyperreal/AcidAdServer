@@ -20,4 +20,5 @@ $debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(array('-
 $kernel = new AppKernel($env, $debug);
 $application = new Application($kernel);
 $application->add(new \Hyper\AdsBundle\Console\Command\ExpireAnnouncements());
+$application->add(new \Hyper\AdsBundle\Console\Command\RemoveExpiredOrders());
 $application->run($input);
