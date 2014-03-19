@@ -28,7 +28,7 @@ class PaymentDaysCalculatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \Hyper\AdsBundle\Helper\PaymentDaysCalculator::getNumberOfDaysToPay
-     * @expectedException Hyper\AdsBundle\Exception\InvalidArgumentException
+     * @expectedException \Hyper\AdsBundle\Exception\InvalidArgumentException
      * @expectedExceptionMessage {from} must be lower than or equal {to}
      */
     public function testGetNumbersOfDaysToPayWithFromLessThanTo()
