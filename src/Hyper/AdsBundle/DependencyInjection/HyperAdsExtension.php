@@ -41,6 +41,7 @@ class HyperAdsExtension extends Extension
         }
         $container->setParameter('hyper_ads.payment_hash_algorithm', $config['order_hash_algorithm']);
         $container->setParameter('hyper_ads.payment_hash_key', $config['order_hash_key']);
+        $container->setParameter('hyper_ads.large_price_factor', $config['large_price_factor']);
 
         $loader->load('services.xml');
     }
