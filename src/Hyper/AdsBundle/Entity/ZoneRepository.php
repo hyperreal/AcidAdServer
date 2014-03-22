@@ -77,4 +77,19 @@ class ZoneRepository extends EntityRepository
 
         return $mapping;
     }
+
+    public function getCurrentNumberOfActiveBannersInZone(Zone $zone)
+    {
+        $query = $this->getEntityManager()->createQuery(
+            'SELECT COUNT(DISTINCT bz.id)
+            FROM Hyper\AdsBundle\Entity\Order AS o
+                JOIN o.bannerZone bz
+            WHERE o.paymentFrom < ?1 AND o.paymentTo > ?1 AND o.status = 1 AND bz.zone = ?2'
+        );
+
+        $query->setParameter(1, new \DateTime());
+        $query->setParameter(2, $zone);
+
+        return intval($query->getSingleScalarResult());
+    }
 }

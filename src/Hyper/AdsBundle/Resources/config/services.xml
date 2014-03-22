@@ -17,6 +17,7 @@
 
         <service id="hyper_ads.prices_calculator" class="%hyper_ads.prices_calculator.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%hyper_ads.large_price_factor%</argument>
         </service>
 
         <service id="hyper_ads.order_number_generator" class="%hyper_ads.order_number_generator.class%">

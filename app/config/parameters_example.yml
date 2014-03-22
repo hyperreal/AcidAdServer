@@ -55,3 +55,5 @@ parameters:
     announcement_flow_mail_recipients:
         - "mail@example.com"
         - "another-mail@example.com"
+
+     banner_price_factor: 10 # %
