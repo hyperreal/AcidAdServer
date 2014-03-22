@@ -14,10 +14,12 @@ class PricesCalculator
     const ROUND_PRECISION = 2;
 
     private $entityManager;
+    private $factor;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager, $factor)
     {
         $this->entityManager = $entityManager;
+        $this->factor = $factor;
     }
 
     public function getAmountToPayForAnnouncementInZone(Advertisement $announcement, Zone $zone)
@@ -65,7 +67,18 @@ class PricesCalculator
 
     public function getDayPriceForZone(Zone $zone)
     {
-        return $zone->getDailyPrice();
+        /** @var $zoneRepository \Hyper\AdsBundle\Entity\ZoneRepository */
+        $zoneRepository = $this->entityManager->getRepository('HyperAdsBundle:Zone');
+        return $this->getCompoundPrice($zone->getDailyPrice(), $zoneRepository->getCurrentNumberOfActiveBannersInZone($zone));
+    }
+
+    public function getCompoundPrice($price, $times)
+    {
+        for ($i = 0; $i < $times; $i++) {
+            $price = $price + ($price * ($this->factor / 100));
+        }
+
+        return floatval($price);
     }
 
     public function getPercentageDiscountForUser(Advertiser $advertiser)
