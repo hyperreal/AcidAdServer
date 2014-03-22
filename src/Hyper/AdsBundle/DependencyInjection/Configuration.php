@@ -26,6 +26,16 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('order_hash_key')->isRequired()->cannotBeEmpty()->cannotBeOverwritten()->end()
+                ->scalarNode('large_price_factor')->isRequired()
+                    ->validate()
+                        ->ifTrue(
+                            function ($factor) {
+                                return floatval($factor) != $factor;
+                            }
+                        )
+                        ->thenInvalid('large_price_factor should be a number')
+                    ->end()
+                ->end()
                 ->scalarNode('order_hash_algorithm')->isRequired()
                     ->validate()
                         ->ifTrue(
