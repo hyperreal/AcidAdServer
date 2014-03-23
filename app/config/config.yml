@@ -117,6 +117,7 @@ services:
 
 hyper_ads:
     large_price_factor: %banner_price_factor%
+    max_banners_in_zone: %max_banners_in_zone%
     payment_gateways:
         bitpay:
             name: \Hyper\AdsBundle\Payment\BitPay\Gateway

@@ -211,6 +211,7 @@ class BannerController extends Controller
             'zone' => $zone,
             'form' => $form->createView(),
             'paidTo' => $paidTo,
+            'maxBannersInZone' => $this->container->getParameter('hyper_ads.max_banners_in_zone'),
         );
     }
 

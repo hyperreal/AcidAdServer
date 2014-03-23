@@ -52,8 +52,9 @@ parameters:
 
     announcement_payment_methods: ~
 
+    banner_price_factor: 10 # %
+    max_banners_in_zone: 5
+
     announcement_flow_mail_recipients:
         - "mail@example.com"
         - "another-mail@example.com"
-
-     banner_price_factor: 10 # %

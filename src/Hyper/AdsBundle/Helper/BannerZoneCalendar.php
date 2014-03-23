@@ -20,11 +20,13 @@ class BannerZoneCalendar
 
     /** @var \Doctrine\ORM\EntityManager */
     private $em;
+    private $maxBannersInZone;
 
-    public function __construct(CacheProvider $cache, EntityManager $em)
+    public function __construct(CacheProvider $cache, EntityManager $em, $maxBannersInZone = self::MAX_BANNERS)
     {
         $this->cache = $cache;
         $this->em = $em;
+        $this->maxBannersInZone = $maxBannersInZone;
     }
 
     /**
@@ -50,7 +52,7 @@ class BannerZoneCalendar
             $dateString = $date->format(self::DATE_FORMAT);
             $cacheId = self::CACHE_PREFIX . $zoneId . '_' . $dateString;
             $value = $this->cache->fetch($cacheId);
-            if (false !== $value && $value >= self::MAX_BANNERS) {
+            if (false !== $value && $value >= $this->maxBannersInZone) {
                 $commonDays[$dateString] = $date;
             }
         }

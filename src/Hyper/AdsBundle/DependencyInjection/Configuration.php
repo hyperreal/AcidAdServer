@@ -31,6 +31,16 @@ class Configuration implements ConfigurationInterface
                         ->thenInvalid('large_price_factor should be a number')
                     ->end()
                 ->end()
+                ->integerNode('max_banners_in_zone')->isRequired()->cannotBeEmpty()
+                    ->validate()
+                        ->ifTrue(
+                            function ($value) {
+                                return $value < 0;
+                            }
+                        )
+                        ->thenInvalid('max_banner_in_zone should be a positive integer')
+                    ->end()
+                ->end()
                 ->scalarNode('order_hash_algorithm')->isRequired()
                     ->validate()
                         ->ifTrue(
