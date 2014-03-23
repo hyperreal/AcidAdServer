@@ -81,6 +81,21 @@ class PricesCalculator
         return floatval($price);
     }
 
+    /**
+     * @param \Hyper\AdsBundle\Entity\Page[] $pages
+     * @return array|\Hyper\AdsBundle\Entity\Page[]
+     */
+    public function updateDailyPricesInPages(array $pages)
+    {
+        foreach ($pages as &$page) {
+            foreach ($page->getZones() as &$zone) {
+                $zone->setDailyPrice($this->getDayPriceForZone($zone));
+            }
+        }
+
+        return $pages;
+    }
+
     public function getPercentageDiscountForUser(Advertiser $advertiser)
     {
         return 0;

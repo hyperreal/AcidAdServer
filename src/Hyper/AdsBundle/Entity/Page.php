@@ -77,6 +77,9 @@ class Page
         $this->zones = $zones;
     }
 
+    /**
+     * @return Zone[]
+     */
     public function getZones()
     {
         return $this->zones;
