@@ -10,4 +10,4 @@ class StandardInputReader
         return file_get_contents('php://input');
     }
     // @codeCoverageIgnoreEnd
-} 
+}

@@ -18,4 +18,4 @@ interface PaymentGatewayBuilderInterface
      * @return AbstractGateway
      */
     public function build(AbstractGateway $gateway, array $parameters);
-} 
+}

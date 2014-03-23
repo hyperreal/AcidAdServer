@@ -42,5 +42,4 @@ class StatsCollector
         $this->getEntityManager()->persist($bannerZone);
         $this->getEntityManager()->flush();
     }
-
 }

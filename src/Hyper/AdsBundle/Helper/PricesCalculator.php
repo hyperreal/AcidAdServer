@@ -69,7 +69,10 @@ class PricesCalculator
     {
         /** @var $zoneRepository \Hyper\AdsBundle\Entity\ZoneRepository */
         $zoneRepository = $this->entityManager->getRepository('HyperAdsBundle:Zone');
-        return $this->getCompoundPrice($zone->getDailyPrice(), $zoneRepository->getCurrentNumberOfActiveBannersInZone($zone));
+        return $this->getCompoundPrice(
+            $zone->getDailyPrice(),
+            $zoneRepository->getCurrentNumberOfActiveBannersInZone($zone)
+        );
     }
 
     public function getCompoundPrice($price, $times)

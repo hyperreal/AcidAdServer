@@ -44,7 +44,7 @@ class ZoneType extends AbstractType
                 'entity',
                 array(
                     'class' => 'HyperAdsBundle:Page',
-                    'query_builder' => function(EntityRepository $er) {
+                    'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('p')
                             ->orderBy('p.name', 'ASC');
                     },

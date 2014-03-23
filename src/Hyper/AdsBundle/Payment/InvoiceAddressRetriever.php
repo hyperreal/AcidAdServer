@@ -51,4 +51,4 @@ class InvoiceAddressRetriever
 
         return substr($paymentSystemName, 8);
     }
-} 
+}

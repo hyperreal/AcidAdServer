@@ -7,12 +7,12 @@ use Hyper\AdsBundle\Payment\Requests\AbstractOmnipayRequest;
 
 class BitPayOrderApprovalDeterminer implements OrderApprovalDeterminerInterface
 {
-    function shouldApprove(AbstractOmnipayRequest $request)
+    public function shouldApprove(AbstractOmnipayRequest $request)
     {
         return in_array($request->getStatus(), BitPayStatus::getCompletedStatuses());
     }
 
-    function shouldCancel(AbstractOmnipayRequest $request)
+    public function shouldCancel(AbstractOmnipayRequest $request)
     {
         return in_array($request->getStatus(), BitPayStatus::getNonCompletedStatuses());
     }

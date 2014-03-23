@@ -8,11 +8,6 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\EmailValidator;
 use Symfony\Component\Validator\ExecutionContext;
 
-/**
- * This is the class that validates and merges configuration from your app/config files
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
- */
 class Configuration implements ConfigurationInterface
 {
     /**
@@ -39,7 +34,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('order_hash_algorithm')->isRequired()
                     ->validate()
                         ->ifTrue(
-                            function($algorithm) {
+                            function ($algorithm) {
                                 return !in_array($algorithm, hash_algos());
                             }
                         )
@@ -57,15 +52,21 @@ class Configuration implements ConfigurationInterface
                                     ->thenInvalid('transaction_speed should be one of: low, medium, high')
                                 ->end()
                             ->end()
-                            ->booleanNode('full_notifications')->isRequired()->defaultFalse()->treatNullLike(false)->end()
+                            ->booleanNode('full_notifications')
+                                ->isRequired()
+                                ->defaultFalse()
+                                ->treatNullLike(false)
+                            ->end()
                             ->scalarNode('notifications_email')
                                 ->validate()
                                     ->ifTrue(
-                                        function($e) {
+                                        function ($e) {
                                             return !filter_var($e, FILTER_VALIDATE_EMAIL) && !empty($e);
                                         }
                                     )
-                                    ->thenInvalid('Email invalid in bitpay_notification_email parameter. It could be empty (~)')
+                                    ->thenInvalid(
+                                        'Email invalid in bitpay_notification_email parameter. It could be empty (~)'
+                                    )
                                 ->end()
                             ->end()
                         ->end()

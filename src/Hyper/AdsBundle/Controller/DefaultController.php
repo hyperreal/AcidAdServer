@@ -114,10 +114,10 @@ class DefaultController extends Controller
     {
         return array(
             'pages' => $this->get('hyper_ads.prices_calculator')->updateDailyPricesInPages(
-                    $this->get('doctrine.orm.entity_manager')
-                        ->getRepository('HyperAdsBundle:Zone')
-                        ->getPagesWithActiveZones()
-                )
+                $this->get('doctrine.orm.entity_manager')
+                    ->getRepository('HyperAdsBundle:Zone')
+                    ->getPagesWithActiveZones()
+            )
         );
     }
 
