@@ -8,7 +8,22 @@
 
 {% if pages|length > 0 %}
 <div class="alert alert-info">
-    {{ 'zones.short.info'|babel }}
+    <p> {{ 'zones.short.info'|babel }} </p>
+</div>
+
+<div>
+   <p> {{ 'zones.long.info'|babel }} </p>
+</div>
+
+<div class="alert alert-warning">
+	<div class="row">
+		<div class="col-md-1">
+			<p><i class="fa fa-btc fa-3x"></i></p>
+		</div>
+		<div class="col-md-11">
+   			<p> {{ 'zones.price.info'|babel }} </p>
+		</div>
+	</div>
 </div>
 
 <table class="table table-striped">

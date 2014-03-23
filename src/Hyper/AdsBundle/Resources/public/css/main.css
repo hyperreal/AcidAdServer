@@ -7326,11 +7326,8 @@ html > body > nav.navbar.navbar-fixed-top > div.container > ul.nav.navbar-nav > 
 html > body > nav.navbar.navbar-fixed-top > div.navbar-header > a.navbar-brand {
   color: white;
 }
-.fancybox > img {
-  padding-top-width: 5px;
-  padding-right-width-value: 5px;
-  padding-bottom-width: 5px;
-  padding-left-width-value: 5px;
+a.fancybox img {
+  border: 5px solid transparent;
 }
 ul.no-buttons {
   list-style-type: none;

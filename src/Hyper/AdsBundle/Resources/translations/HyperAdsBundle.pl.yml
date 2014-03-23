@@ -109,6 +109,8 @@ payment.was.canceled: 'Zamówienie zostało anulowane'
 payment.info: 'Płatność za zamówienie nr %orderNumber%'
 zones.info: 'Strefy i cennik'
 zones.short.info: 'Poniżej znajduje się lista aktywnych stron i stref (miejsc, w których umieszczać można bannery) wraz z dostępnymi maksymalnymi rozmiarami'
+zones.long.info: 'W każdej strefie wyświetlamy maksymalnie 5 bannerów, które pojawiają się losowo (ale sprawiedliwie po równo) naprzemian. Jeśli chcesz, aby w określonej strefie znajdował się tylko twój banner albo bannery, powinieneś wykupić je 5 razy, zapełniając w całości określoną strefę.'
+zones.price.info: 'Cena w strefie wzrasta wraz z ilością zapełnionych bannerów, podobnie jak to ma się w liniach lotniczych! Aby kupić taniej, wykup baner wcześniej niż konkurencja.'
 acid.name.long: 'AcidAdServer'
 acid.promo.github: github
 edit.profile: 'edytuj swój profil'
