@@ -88,7 +88,7 @@ class PricesCalculator
     public function updateDailyPricesInPages(array $pages)
     {
         foreach ($pages as &$page) {
-            foreach ($page->getZones() as &$zone) {
+            foreach ($page->getZones() as $zone) {
                 $zone->setDailyPrice($this->getDayPriceForZone($zone));
             }
         }
