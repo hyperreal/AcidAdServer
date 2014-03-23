@@ -160,7 +160,7 @@ class BannerController extends Controller
 
         $em->flush();
         $em->commit();
-        $this->get('session')->setFlash(
+        $this->get('session')->getFlashBag()->set(
             'success',
             $this->trans('all.changes.saved')
         );
