@@ -122,15 +122,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/demo")
-     * @Template()
-     */
-    public function demoAction()
-    {
-        return array();
-    }
-
-    /**
      * @Route("/rules", name="default_rules")
      * @Template()
      */
