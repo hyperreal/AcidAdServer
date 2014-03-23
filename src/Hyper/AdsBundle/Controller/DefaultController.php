@@ -113,10 +113,11 @@ class DefaultController extends Controller
     public function zonesInfoAction()
     {
         return array(
-            'pages' => $this
-                ->get('doctrine.orm.entity_manager')
-                ->getRepository('HyperAdsBundle:Zone')
-                ->getPagesWithActiveZones()
+            'pages' => $this->get('hyper_ads.prices_calculator')->updateDailyPricesInPages(
+                    $this->get('doctrine.orm.entity_manager')
+                        ->getRepository('HyperAdsBundle:Zone')
+                        ->getPagesWithActiveZones()
+                )
         );
     }
 
