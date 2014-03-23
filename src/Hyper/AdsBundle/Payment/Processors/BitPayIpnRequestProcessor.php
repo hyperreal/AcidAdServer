@@ -54,7 +54,6 @@ class BitPayIpnRequestProcessor
 
     public function process()
     {
-        $this->requestDebugInfo();
         $this->preValidate();
         $order = $this->getOrder();
         $this->checkHash($order);
@@ -167,18 +166,6 @@ class BitPayIpnRequestProcessor
         return $payment;
     }
 
-    private function requestDebugInfo()
-    {
-        $this->logger->debug("Full request",
-            array(
-                'server' => var_export($_SERVER, true),
-                'post' => var_export($_POST, true),
-                'cookie' => var_export($_COOKIE, true),
-                'requestId' => $this->request->getId(),
-            )
-        );
-    }
-
     private function preValidate()
     {
         if (!$this->request->hasOrderId()) {
@@ -191,4 +178,4 @@ class BitPayIpnRequestProcessor
             throw new PaymentException('Malformed request');
         }
     }
-} 
+}

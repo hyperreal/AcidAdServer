@@ -4,6 +4,6 @@ namespace Hyper\AdsBundle\Payment;
 
 interface PaymentGatewayFactoryInterface
 {
-    function createGateway(array $parameters);
-    function addGatewayBuilder(PaymentGatewayBuilderInterface $builder, $gatewayName);
+    public function createGateway(array $parameters);
+    public function addGatewayBuilder(PaymentGatewayBuilderInterface $builder, $gatewayName);
 }

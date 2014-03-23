@@ -204,5 +204,4 @@ class BannerZoneReference
             self::FIXED_BY_ADMIN_USER_DECIDES,
         );
     }
-
 }

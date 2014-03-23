@@ -7,4 +7,4 @@ use Hyper\AdsBundle\Payment\OrderInterface;
 interface OrderHashGeneratorInterface
 {
     public function hashOrder(OrderInterface $order);
-} 
+}

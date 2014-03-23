@@ -16,13 +16,12 @@ class BitPayParamsProvider implements ParamsProviderInterface
     /** @var \Hyper\AdsBundle\Payment\Util\OrderHashGeneratorInterface */
     private $hashGenerator;
 
+    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    private $translator;
+
     private $transactionSpeed;
     private $fullNotifications;
     private $notificationEmail;
-    /**
-     * @var \Symfony\Component\Translation\TranslatorInterface
-     */
-    private $translator;
 
     public function __construct(
         RouterInterface $router,
@@ -46,33 +45,35 @@ class BitPayParamsProvider implements ParamsProviderInterface
             'amount' => $order->getPaymentInstruction()->getAmount(),
             'currency' => $order->getPaymentInstruction()->getCurrency(),
             'returnUrl' => $this->router->generate(
-                    'payment_successful',
-                    array('order' => $order->getId()),
-                    RouterInterface::ABSOLUTE_URL
-                ),
+                'payment_successful',
+                array('order' => $order->getId()),
+                RouterInterface::ABSOLUTE_URL
+            ),
             'notifyUrl' => $this->router->generate(
-                    "hyper_ads.omnipay.ipn.bitpay",
-                    array(),
-                    RouterInterface::ABSOLUTE_URL
-                ),
+                "hyper_ads.omnipay.ipn.bitpay",
+                array(),
+                RouterInterface::ABSOLUTE_URL
+            ),
             'transactionSpeed' => $this->transactionSpeed,
             'fullNotifications' => $this->fullNotifications,
             'orderId' => $order->getOrderNumber(),
             'description' => $this->translator->trans(
-                    'payment.info',
-                    array('%orderNumber%' => $order->getOrderNumber()),
-                    'HyperAdsBundle'
-                ),
+                'payment.info',
+                array('%orderNumber%' => $order->getOrderNumber()),
+                'HyperAdsBundle'
+            ),
         );
 
         if (!empty($this->notificationEmail)) {
             $params['notifyEmail'] = $this->notificationEmail;
         }
 
-        $params['transactionId'] = json_encode(array(
-            'hash' => $this->hashGenerator->hashOrder($order),
-            'posData' => $this->getPosData($order),
-        ));
+        $params['transactionId'] = json_encode(
+            array(
+                'hash' => $this->hashGenerator->hashOrder($order),
+                'posData' => $this->getPosData($order),
+            )
+        );
 
         return $params;
     }

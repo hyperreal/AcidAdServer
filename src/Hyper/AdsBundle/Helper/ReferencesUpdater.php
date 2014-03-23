@@ -133,4 +133,3 @@ class ReferencesUpdater
         return $ref;
     }
 }
-

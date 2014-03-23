@@ -10,7 +10,7 @@ class OmnipayBitPayPaymentPlugin extends AbstractPlugin
 {
     const SYSTEM_NAME = 'omnipay_bitpay';
 
-    function processes($paymentSystemName)
+    public function processes($paymentSystemName)
     {
         return self::SYSTEM_NAME == $paymentSystemName;
     }

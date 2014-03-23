@@ -9,4 +9,4 @@ interface ParamsProviderInterface
      * @return array
      */
     public function getParametersFromOrder(OrderInterface $order);
-} 
+}
