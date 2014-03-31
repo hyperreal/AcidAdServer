@@ -13,8 +13,10 @@ use JMS\Payment\CoreBundle\Model\PaymentInstructionInterface;
  */
 class Order implements OrderInterface
 {
+    const STATUS_NEW = 1;
     const STATUS_FINISHED = 1;
     const STATUS_CANCELLED = 2;
+    const STATUS_NOT_PAID = 3;
 
     /**
      * @ORM\Id
@@ -228,6 +230,26 @@ class Order implements OrderInterface
         return $this->status;
     }
 
+    public function isFinished()
+    {
+        return $this->status == self::STATUS_FINISHED;
+    }
+
+    public function isNew()
+    {
+        return $this->status == self::STATUS_NEW;
+    }
+
+    public function isCancelled()
+    {
+        return $this->status == self::STATUS_CANCELLED;
+    }
+
+    public function isNotPaid()
+    {
+        return $this->status == self::STATUS_NOT_PAID;
+    }
+
     /**
      * @return \DateTime
      */
@@ -244,6 +266,11 @@ class Order implements OrderInterface
     public function approve()
     {
         $this->status = self::STATUS_FINISHED;
+    }
+
+    public function markAsNotPaid()
+    {
+        $this->status = self::STATUS_NOT_PAID;
     }
 
     public function cancel()
