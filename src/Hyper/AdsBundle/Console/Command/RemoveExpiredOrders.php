@@ -35,6 +35,7 @@ class RemoveExpiredOrders extends ContainerAwareCommand
             ->getRepository('HyperAdsBundle:Order')
             ->removeExpiredOrders(intval($time));
 
-        $output->writeln("<info>$count orders removed</info>");
+        $output->writeln("<info>$count was marked as not paid</info>");
+        $this->getContainer()->get('hyper_ads.payments_logger')->info("$count orders was marked as not paid");
     }
 }
