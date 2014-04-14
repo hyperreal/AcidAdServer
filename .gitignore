@@ -9,7 +9,7 @@ web/components/*
 node_modules/
 !web/components/.gitkeep
 !web/uploads/.gitkeep
-app/config/parameters.*
+app/config/parameters.yml
 *.iml
 *.ipr
 *.iws
