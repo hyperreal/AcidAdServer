@@ -81,7 +81,7 @@ class PricesCalculator
             $price = $price + ($price * ($this->factor / 100));
         }
 
-        return floatval($price);
+        return round($price, 2);
     }
 
     /**
