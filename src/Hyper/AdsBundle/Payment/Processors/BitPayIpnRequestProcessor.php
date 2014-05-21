@@ -55,6 +55,7 @@ class BitPayIpnRequestProcessor
     public function process()
     {
         $this->preValidate();
+		$this->logger->info('IPN request: ', array(var_export($this->request, true)));
         $order = $this->getOrder();
         $this->checkHash($order);
 
