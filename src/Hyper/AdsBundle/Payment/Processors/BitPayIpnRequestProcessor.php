@@ -158,7 +158,7 @@ class BitPayIpnRequestProcessor
             );
             $payment = $this->pluginController->createPayment(
                 $order->getPaymentInstruction()->getId(),
-                $order->getPaymentInstruction()->getAmount() - $order->getPaymentInstruction()->getDepositedAmount()
+                round($order->getPaymentInstruction()->getAmount() - $order->getPaymentInstruction()->getDepositedAmount(), 2)
             );
         } else {
             $payment = $pendingTransaction->getPayment();
