@@ -26,7 +26,7 @@ class Order implements OrderInterface
     private $id;
 
     /**
-     * @var \BannerZone
+     * @var \Hyper\AdsBundle\Entity\BannerZoneReference
      *
      * @ORM\ManyToOne(targetEntity="BannerZoneReference", inversedBy="orders")
      * @ORM\JoinColumns({
