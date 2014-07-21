@@ -103,7 +103,9 @@ name.first: Imię
 name.last: Nazwisko
 all.changes.saved: 'Wszystkie zmiany zostały zapisane'
 announcement.free.add: 'Dodaj ogłoszenie bezpłatne'
-daily.price: 'Cena/dzień emisji'
+daily.price: 'Dzisiejsza cena/dzień emisji'
+base.price: 'Cena wyjściowa/dzień emisji'
+sizes: 'Rozmiary'
 canceled.payment: 'Anulowano zamówienie'
 payment.was.canceled: 'Zamówienie zostało anulowane'
 payment.info: 'Płatność za zamówienie nr %orderNumber%'

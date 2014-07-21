@@ -32,6 +32,7 @@
         <th>{{ 'page'|babel }}</th>
         <th>{{ 'zone'|babel }}</th>
         <th>{{ 'sizes'|babel }}</th>
+        <th>{{ 'base.price'|babel }}</th>
         <th>{{ 'daily.price'|babel }}</th>
     </tr>
     </thead>
@@ -45,6 +46,7 @@
             {% endif %}
             <td>{{ zone.name }}</td>
             <td>{{ zone.maxWidth }} x {{ zone.maxHeight }}</td>
+            <td>{{ zone.dailyPrice|number_format(2, ',', '.') }} {{ default_currency }}</td>
             <td>{{ zone.dailyPrice|number_format(2, ',', '.') }} {{ default_currency }}</td>
         </tr>
         {% endfor %}
