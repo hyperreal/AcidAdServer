@@ -92,6 +92,7 @@ class PricesCalculator
     {
         foreach ($pages as &$page) {
             foreach ($page->getZones() as $zone) {
+                $zone->updateDailyRegularPriceWithCurrentDailyPrice();
                 $zone->setDailyPrice($this->getDayPriceForZone($zone));
             }
         }
