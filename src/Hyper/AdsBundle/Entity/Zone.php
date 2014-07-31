@@ -72,6 +72,8 @@ class Zone
      */
     private $dailyPrice;
 
+    private $dailyRegularPrice;
+
     /**
      * @ORM\Column(type="decimal", name="view_price", scale=8, precision=14, nullable=true)
      */
@@ -175,6 +177,21 @@ class Zone
     public function setDailyPrice($dailyPrice)
     {
         $this->dailyPrice = $dailyPrice;
+    }
+
+    public function getDailyRegularPrice()
+    {
+        return $this->dailyRegularPrice;
+    }
+
+    public function setDailyRegularPrice($dailyRegularPrice)
+    {
+        $this->dailyRegularPrice = $dailyRegularPrice;
+    }
+
+    public function updateDailyRegularPriceWithCurrentDailyPrice()
+    {
+        $this->dailyRegularPrice = $this->dailyPrice;
     }
 
     public function setViewPrice($viewPrice)
