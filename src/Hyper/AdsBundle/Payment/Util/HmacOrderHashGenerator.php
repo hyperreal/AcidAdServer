@@ -22,6 +22,6 @@ class HmacOrderHashGenerator implements OrderHashGeneratorInterface
 
     private function getHash(OrderInterface $order)
     {
-        return $order->getId() . '_' . $order->getPaymentInstruction()->getId();
+        return $order->getOrderNumber();
     }
 }

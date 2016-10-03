@@ -9,6 +9,31 @@ use Symfony\Component\HttpFoundation\Response;
 
 class OmnipayController extends Controller
 {
+
+    /**
+     * @Route("/electrum/ipn/{id}/{hash}", name="hyper_ads.omnipay.ipn.electrum")
+     * @Method("POST")
+     *
+     * @param $id
+     * @param $hash
+     * @return Response
+     */
+    public function electrumIpnAction($id, $hash) {
+        try {
+            $processor = $this->get('hyper_ads.payment.processor.electrum');
+            $processor->process($id, $hash);
+            $response = new Response($this->getSuccessMessage(), 200, array('Content-Type' => 'application/json'));
+        } catch (PaymentException $pe) {
+            $this->logException($e);
+            $response = $this->getBadRequestResponse();
+        } catch (\InvalidArgumentException $e) {
+            $this->logException($e);
+            $response = $this->getServerErrorResponse();
+        }
+
+        return $response;
+    }
+
     /**
      * @Route("/bitpay/ipn", name="hyper_ads.omnipay.ipn.bitpay")
      * @Method("POST")

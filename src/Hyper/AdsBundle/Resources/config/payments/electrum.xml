@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="hyper_ads.payment.gateway_builder.electrum" class="Hyper\AdsBundle\Payment\Electrum\Gateway\ElectrumGatewayBuilder">
+            <tag name="hyper_ads.payment_gateway_builder" gateway="\Hyper\AdsBundle\Payment\Electrum\Gateway\ElectrumGateway" />
+        </service>
+
+        <service id="hyper_ads.payment.plugin.electrum" class="Hyper\AdsBundle\Payment\Electrum\OmnipayElectrumPaymentPlugin">
+            <tag name="payment.plugin" />
+        </service>
+
+        <service id="hyper_ads.payment.approval_determiner.electrum" class="Hyper\AdsBundle\Payment\Electrum\ElectrumOrderApprovalDeterminer" />
+
+        <service id="hyper_ads.payment.processor.electrum" class="Hyper\AdsBundle\Payment\Electrum\Processor\ElectrumProcessor">
+            <argument id="hyper_ads.payment.util.hash_generator" type="service" />
+            <argument id="doctrine.orm.entity_manager" type="service" />
+            <argument id="hyper_ads.payments_logger" type="service" />
+            <argument id="hyper_ads.payment.approval_determiner.electrum" type="service" />
+            <argument id="payment.plugin_controller" type="service" />
+            <argument id="hyper_ads.payment.plugin.electrum" type="service" />
+            <argument id="hyper_ads.payment.request.electrum" type="service" />
+        </service>
+
+        <service id="hyper_ads.payment.params_provider.electrum" class="Hyper\AdsBundle\Payment\Electrum\Parameters\ElectrumParamsProvider">
+            <tag name="hyper_ads.payment.params_provider" system_name="omnipay_electrum" />
+            <argument>%hyper_ads.electrum_transaction_speed%</argument>
+            <argument>%hyper_ads.electrum_full_notifications%</argument>
+            <argument id="translator" type="service" />
+        </service>
+
+    </services>
+
+</container>

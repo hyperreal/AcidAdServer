@@ -13,6 +13,14 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     }
 
     /**
+     * @param $orderNumber
+     * @return null|\Hyper\AdsBundle\Entity\Order
+     */
+    public function findOneByOrderNumber($orderNumber) {
+        return $this->findOneBy(array('orderNumber' => $orderNumber));
+    }
+
+    /**
      * @param Zone $zone
      *
      * @return \Hyper\AdsBundle\Entity\Order[]

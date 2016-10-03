@@ -50,6 +50,9 @@ parameters:
     banner_payment_methods:
         - omnipay_bitpay
 
+    electrum_endpoint: test
+    electrum_expiration: 86400
+
     announcement_payment_methods: ~
 
     banner_price_factor: 10 # %

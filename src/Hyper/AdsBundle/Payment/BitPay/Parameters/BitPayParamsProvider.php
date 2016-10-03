@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyper\AdsBundle\Payment\BitPay;
+namespace Hyper\AdsBundle\Payment\BitPay\Parameters;
 
 use Hyper\AdsBundle\Payment\OrderInterface;
 use Hyper\AdsBundle\Payment\ParamsProviderInterface;

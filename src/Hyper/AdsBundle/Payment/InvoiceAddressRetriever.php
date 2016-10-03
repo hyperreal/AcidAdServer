@@ -15,16 +15,21 @@ class InvoiceAddressRetriever
         $this->container = $container;
     }
 
+    /**
+     * @param OrderInterface $order
+     * @return Electrum\Gateway\Message\PurchaseResponse
+     * @throws PaymentException
+     */
     public function retrieveUrlForOrder(OrderInterface $order)
     {
         $paymentMethod = $this->getPaymentMethodFromSystemName($order->getPaymentInstruction()->getPaymentSystemName());
         /** @var $gateway \Omnipay\Common\AbstractGateway */
         $gateway = $this->container->get('hyper_ads.payment.gateway.' . $paymentMethod);
 
-        /** @var $response \Omnipay\BitPay\Message\PurchaseResponse */
+        /** @var $response \Hyper\AdsBundle\Payment\Electrum\Gateway\Message\PurchaseResponse */
         $response = $gateway->purchase($this->getParameters($order))->send();
         if ($response->isRedirect()) {
-            return $response->getRedirectUrl();
+            return $response;
         } elseif (!$response->isSuccessful()) {
             throw new PaymentException('Problem with getting payment URL. Cause: ' . $response->getMessage());
         } else {

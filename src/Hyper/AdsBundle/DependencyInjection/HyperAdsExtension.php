@@ -39,6 +39,12 @@ class HyperAdsExtension extends Extension
             $container->setParameter('hyper_ads.bitpay_full_notifications', $bitpay['full_notifications']);
             $container->setParameter('hyper_ads.bitpay_notifications_email', $bitpay['notifications_email']);
         }
+
+        if (isset($config['payment_gateways']['electrum'])) {
+            $electrum = &$config['payment_gateways']['electrum'];
+            $container->setParameter('hyper_ads.electrum_endpoint', $electrum['endpoint']);
+            $container->setParameter('hyper_ads.electrum_expiration', $electrum['expiration']);
+        }
         $container->setParameter('hyper_ads.payment_hash_algorithm', $config['order_hash_algorithm']);
         $container->setParameter('hyper_ads.payment_hash_key', $config['order_hash_key']);
         $container->setParameter('hyper_ads.large_price_factor', $config['large_price_factor']);

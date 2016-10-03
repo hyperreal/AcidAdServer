@@ -1,9 +1,10 @@
 <?php
 
-namespace Hyper\AdsBundle\Payment\Util;
+namespace Hyper\AdsBundle\Payment\BitPay;
 
-use Hyper\AdsBundle\Payment\BitPayStatus;
+use Hyper\AdsBundle\Payment\BitPay\Parameters\BitPayStatus;
 use Hyper\AdsBundle\Payment\Requests\AbstractOmnipayRequest;
+use Hyper\AdsBundle\Payment\Util\OrderApprovalDeterminerInterface;
 
 class BitPayOrderApprovalDeterminer implements OrderApprovalDeterminerInterface
 {

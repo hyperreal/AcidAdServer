@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyper\AdsBundle\Payment\GatewayBuilders;
+namespace Hyper\AdsBundle\Payment\BitPay\Gateway;
 
 use Hyper\AdsBundle\Payment\PaymentGatewayBuilderInterface;
 use Omnipay\BitPay\Gateway;

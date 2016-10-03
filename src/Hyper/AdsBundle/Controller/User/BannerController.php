@@ -324,13 +324,13 @@ class BannerController extends Controller
         $order = null;
         if (null === $order) {
             $order = new Order();
-            $order->setOrderNumber(
-                $this->get('hyper_ads.order_number_generator')->getBannerPaymentOrderNumber(
-                    $banner,
-                    $this->getUser(),
-                    $zone
-                )
-            );
+//            $order->setOrderNumber(
+//                $this->get('hyper_ads.order_number_generator')->getBannerPaymentOrderNumber(
+//                    $banner,
+//                    $this->getUser(),
+//                    $zone
+//                )
+//            );
             //$order->setAnnouncement($banner);
             $order->setBannerZoneReference($bannerZoneReference);
         }
@@ -382,12 +382,12 @@ class BannerController extends Controller
             if (FinancialTransactionInterface::STATE_PENDING == $instruction->getState()) {
                 /** @var $invoiceAddressRetriever \Hyper\AdsBundle\Payment\InvoiceAddressRetriever */
                 $invoiceAddressRetriever = $this->get('hyper_ads.payment.invoice_address_retriever');
-                $url = $invoiceAddressRetriever->retrieveUrlForOrder($order);
-
-                $order->setPaymentUrl($url);
+                $response = $invoiceAddressRetriever->retrieveUrlForOrder($order);
+                $order->setOrderNumber($response->getId());
+                $order->setPaymentUrl($response->getRedirectUrl());
                 $em->flush();
 
-                return $this->redirect($url);
+                return $this->redirect($response->getRedirectUrl());
             }
 
             //what is going on?

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyper\AdsBundle\Payment;
+namespace Hyper\AdsBundle\Payment\BitPay;
 
 use JMS\Payment\CoreBundle\Model\FinancialTransactionInterface;
 use JMS\Payment\CoreBundle\Plugin\AbstractPlugin;

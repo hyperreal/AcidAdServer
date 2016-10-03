@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyper\AdsBundle\Payment;
+namespace Hyper\AdsBundle\Payment\BitPay\Parameters;
 
 final class BitPayStatus
 {

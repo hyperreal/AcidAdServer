@@ -4,7 +4,7 @@ namespace Hyper\AdsBundle\Payment\BitPay;
 
 use Omnipay\BitPay\Message\PurchaseRequest;
 
-class InvoiceRequest extends PurchaseRequest
+class BitPayPurchaseRequest extends PurchaseRequest
 {
     public function getTransactionSpeed()
     {

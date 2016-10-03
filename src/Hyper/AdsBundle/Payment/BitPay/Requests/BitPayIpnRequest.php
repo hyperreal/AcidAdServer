@@ -1,8 +1,9 @@
 <?php
 
-namespace Hyper\AdsBundle\Payment\Requests;
+namespace Hyper\AdsBundle\Payment\BitPay\Requests;
 
-use Hyper\AdsBundle\Payment\BitPayStatus;
+use Hyper\AdsBundle\Payment\BitPay\Parameters\BitPayStatus;
+use Hyper\AdsBundle\Payment\Requests\AbstractOmnipayRequest;
 use Hyper\AdsBundle\Util\StandardInputReader;
 
 class BitPayIpnRequest extends AbstractOmnipayRequest

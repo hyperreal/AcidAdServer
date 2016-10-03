@@ -1,22 +1,22 @@
 <?php
 
-namespace Hyper\AdsBundle\Payment\Processors;
+namespace Hyper\AdsBundle\Payment\BitPay\Processor;
 
 use Doctrine\ORM\EntityManager;
 use Hyper\AdsBundle\Exception\InvalidIpnRequestException;
 use Hyper\AdsBundle\Exception\PaymentException;
-use Hyper\AdsBundle\Payment\OmnipayBitPayPaymentPlugin;
+use Hyper\AdsBundle\Payment\BitPay\BitPayOrderApprovalDeterminer;
+use Hyper\AdsBundle\Payment\BitPay\OmnipayBitPayPaymentPlugin;
+use Hyper\AdsBundle\Payment\BitPay\Requests\BitPayIpnRequest;
 use Hyper\AdsBundle\Payment\OrderInterface;
-use Hyper\AdsBundle\Payment\Requests\BitPayIpnRequest;
-use Hyper\AdsBundle\Payment\Util\BitPayOrderApprovalDeterminer;
 use Hyper\AdsBundle\Payment\Util\OrderHashGeneratorInterface;
-use JMS\Payment\CoreBundle\PluginController\PluginControllerInterface;
+use JMS\Payment\CoreBundle\PluginController\PluginController;
 use JMS\Payment\CoreBundle\PluginController\Result;
 use Psr\Log\LoggerInterface;
 
 class BitPayIpnRequestProcessor
 {
-    /** @var \Hyper\AdsBundle\Payment\Requests\BitPayIpnRequest */
+    /** @var \Hyper\AdsBundle\Payment\BitPay\Requests\BitPayIpnRequest */
     private $request;
 
     /** @var \Psr\Log\LoggerInterface */
@@ -25,10 +25,10 @@ class BitPayIpnRequestProcessor
     /** @var \Doctrine\ORM\EntityManager */
     private $entityManager;
 
-    /** @var \Hyper\AdsBundle\Payment\Util\BitPayOrderApprovalDeterminer */
+    /** @var \Hyper\AdsBundle\Payment\BitPay\BitPayOrderApprovalDeterminer */
     private $approvalDeterminer;
 
-    /** @var \JMS\Payment\CoreBundle\PluginController\PluginControllerInterface */
+    /** @var \JMS\Payment\CoreBundle\PluginController\PluginController */
     private $pluginController;
 
     /** @var \Hyper\AdsBundle\Payment\Util\OrderHashGeneratorInterface */
@@ -38,7 +38,7 @@ class BitPayIpnRequestProcessor
         BitPayIpnRequest $request,
         EntityManager $entityManager,
         OmnipayBitPayPaymentPlugin $paymentPlugin,
-        PluginControllerInterface $paymentController,
+        PluginController $pluginController,
         BitPayOrderApprovalDeterminer $approvalDeterminer,
         LoggerInterface $logger,
         OrderHashGeneratorInterface $hashOrderGenerator
@@ -47,7 +47,7 @@ class BitPayIpnRequestProcessor
         $this->logger = $logger;
         $this->entityManager = $entityManager;
         $this->approvalDeterminer = $approvalDeterminer;
-        $this->pluginController = $paymentController;
+        $this->pluginController = $pluginController;
         $this->pluginController->addPlugin($paymentPlugin);
         $this->hashOrderGenerator = $hashOrderGenerator;
     }
