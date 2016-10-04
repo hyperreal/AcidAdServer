@@ -42,7 +42,7 @@ class CoinbaseExchange extends BitcoinCurrencyExchange
   protected function exchange($amount, $fromCurrency, $toCurrency) {
 
     $uri = $this->buildUri();
-    $options = ['query' => ['currency' => $toCurrency]];
+    $options = ['query' => ['currency' => $fromCurrency]];
     $headers = ['CB-VERSION' => 2];
     if (!empty($this->accessKey)) {
       $this->addAuthenticationHeaders($uri, $headers);
