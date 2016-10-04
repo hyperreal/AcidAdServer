@@ -5,7 +5,6 @@ namespace Hyper\AdsBundle\Payment\Exchange;
 use Guzzle\Http\Client;
 use Guzzle\Http\Message\MessageInterface;
 use Guzzle\Http\Message\RequestInterface;
-use Hyper\AdsBundle\Payment\BitcoinCurrencyExchange;
 
 class CoinbaseExchange extends BitcoinCurrencyExchange
 {
@@ -31,7 +30,7 @@ class CoinbaseExchange extends BitcoinCurrencyExchange
 
   public function __construct($endpoint, $accessKey, $secret) {
     $this->guzzleClient = new Client();
-    $this->endpoint = rtrim($this->endpoint, '/');
+    $this->endpoint = rtrim($endpoint, '/');
     $this->accessKey = $accessKey;
     $this->secret = $secret;
   }
