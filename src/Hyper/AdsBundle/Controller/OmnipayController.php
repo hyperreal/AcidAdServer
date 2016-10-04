@@ -24,7 +24,7 @@ class OmnipayController extends Controller
             $processor->process($id, $hash);
             $response = new Response($this->getSuccessMessage(), 200, array('Content-Type' => 'application/json'));
         } catch (PaymentException $pe) {
-            $this->logException($e);
+            $this->logException($pe);
             $response = $this->getBadRequestResponse();
         } catch (\InvalidArgumentException $e) {
             $this->logException($e);
