@@ -46,7 +46,7 @@ class PurchaseRequest extends AbstractRequest
       "id" => "curltext",
       "method" => 'addrequest',
       "params" => array(
-        'amount' => $this->getAmount(),
+        'amount' => $this->getParameter('amount'),//$this->getAmount(),
         'expiration' => $this->getExpirationTime(),
         'memo' => $this->getMemo(),
       ),
