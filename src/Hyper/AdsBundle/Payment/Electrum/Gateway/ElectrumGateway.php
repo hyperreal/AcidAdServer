@@ -34,7 +34,7 @@ class ElectrumGateway extends AbstractGateway
     }
 
     public function purchase(array $parameters = array()) {
-$this->httpRequest->setFormat('json', 'application/json');
+        $this->httpRequest->setFormat('json', 'application/json');
         return $this->createRequest('\Hyper\AdsBundle\Payment\Electrum\Gateway\Message\PurchaseRequest', $parameters);
     }
 }

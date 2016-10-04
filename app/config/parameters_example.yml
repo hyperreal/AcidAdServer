@@ -53,6 +53,10 @@ parameters:
     electrum_endpoint: test
     electrum_expiration: 86400
 
+    coinbase_endpoint: 'https://api.coinbase.com'
+    coinbase_access_key: ~
+    coinbase_secret: ~
+
     announcement_payment_methods: ~
 
     banner_price_factor: 10 # %

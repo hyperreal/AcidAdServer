@@ -50,6 +50,11 @@
             <argument>%hyper_ads.payment_hash_key%</argument>
         </service>
 
+        <service class="Hyper\AdsBundle\Payment\Exchange\CoinbaseExchange" id="hyper_ads.payment.coinbase_exchange">
+            <argument>%coinbase_endpoint%</argument>
+            <argument>%coinbase_access_key%</argument>
+            <argument>%coinbase_secret%</argument>
+        </service>
     </services>
 
 </container>

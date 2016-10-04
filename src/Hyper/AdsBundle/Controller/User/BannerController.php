@@ -363,6 +363,9 @@ class BannerController extends Controller
             $systemCurrency = $this->container->getParameter('ads_default_currency');
             $paymentMethods = $this->container->getParameter('banner_payment_methods');
 
+            $currencyAmount = $this->container->get('hyper_ads.payment.coinbase_exchange')
+              ->toBTC($currencyAmount, $systemCurrency);
+
             $ppc->createPaymentInstruction(
                 $instruction = new PaymentInstruction(
                     $currencyAmount,
