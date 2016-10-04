@@ -16,7 +16,7 @@ framework:
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
     default_locale:  %locale%
     session:
-        handler_id: session.handler.memcache
+        handler_id: session.handler.memcached
 
 # Twig Configuration
 twig:
@@ -111,9 +111,20 @@ services:
         calls:
             - [ addServer, [ %session_memcache_host%, %session_memcache_port% ]]
 
+    session.memcached:
+        class: Memcached
+        arguments:
+            persistent_id: "%session_memcache_prefix%"
+        calls:
+            - [ addServer, [ "%session_memcache_host%", "%session_memcache_port%" ]]
+
     session.handler.memcache:
         class: Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcacheSessionHandler
         arguments: [ @session.memcache, { prefix: %session_memcache_prefix%, expiretime: %session_memcache_expire% } ]
+
+    session.handler.memcached:
+        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler
+        arguments: ["@session.memcached", { prefix: "%session_memcache_prefix%", expiretime: "%session_memcache_expire%" }]
 
 hyper_ads:
     large_price_factor: %banner_price_factor%

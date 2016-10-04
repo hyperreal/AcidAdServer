@@ -29,8 +29,8 @@ class PurchaseResponse extends AbstractResponse {
    */
 
 
-  public function getRequestUrl() {
-    return $this->data['result']['request_url'];
+ public function getRequestUrl() {
+    return $this->data['result']['index_url'];
   }
 
   public function getRedirectUrl() {
@@ -50,6 +50,7 @@ class PurchaseResponse extends AbstractResponse {
   }
 
   public function getId() {
+    error_log(var_export($this->data, true));
     return $this->data['result']['id'];
   }
 
@@ -61,4 +62,8 @@ class PurchaseResponse extends AbstractResponse {
   public function isSuccessful() {
     return true;
   }
+
+  public function isRedirect() {
+	return true;
+}
 }

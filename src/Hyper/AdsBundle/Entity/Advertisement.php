@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\DiscriminatorColumn("announcement_type", type="string")
  * @ORM\DiscriminatorMap({"announcement" = "Announcement", "banner" = "Banner"})
  */
-class Advertisement
+abstract class Advertisement
 {
     const TYPE_ANNOUNCEMENT = 'announcement';
     const TYPE_BANNER = 'banner';

@@ -27,8 +27,8 @@
 
         <service id="hyper_ads.payment.params_provider.electrum" class="Hyper\AdsBundle\Payment\Electrum\Parameters\ElectrumParamsProvider">
             <tag name="hyper_ads.payment.params_provider" system_name="omnipay_electrum" />
-            <argument>%hyper_ads.electrum_expiration%%</argument>
-            <argument>%hyper_ads.electrum_endpoint%%</argument>
+            <argument>%hyper_ads.electrum_expiration%</argument>
+            <argument>%hyper_ads.electrum_endpoint%</argument>
             <argument id="translator" type="service" />
         </service>
 

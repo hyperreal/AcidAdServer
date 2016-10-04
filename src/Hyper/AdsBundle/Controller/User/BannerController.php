@@ -24,6 +24,7 @@ use Hyper\AdsBundle\Form\OrderType;
 use Hyper\AdsBundle\Form\PaymentType;
 use Hyper\AdsBundle\Controller\Controller;
 use Hyper\AdsBundle\Exception\NoReferenceException;
+use Hyper\AdsBundle\Payment\Electrum\Gateway\Message\PurchaseRequest;
 
 class BannerController extends Controller
 {
@@ -324,6 +325,7 @@ class BannerController extends Controller
         $order = null;
         if (null === $order) {
             $order = new Order();
+            $order->setOrderNumber("");
 //            $order->setOrderNumber(
 //                $this->get('hyper_ads.order_number_generator')->getBannerPaymentOrderNumber(
 //                    $banner,

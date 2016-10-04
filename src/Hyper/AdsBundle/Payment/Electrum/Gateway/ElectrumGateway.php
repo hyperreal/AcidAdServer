@@ -3,6 +3,7 @@
 namespace Hyper\AdsBundle\Payment\Electrum\Gateway;
 
 use Omnipay\Common\AbstractGateway;
+use Hyper\AdsBundle\Payment\Electrum\Gateway\Message\PurchaseRequest;
 
 /**
  * Skeleton Gateway
@@ -33,6 +34,7 @@ class ElectrumGateway extends AbstractGateway
     }
 
     public function purchase(array $parameters = array()) {
-        return $this->createRequest('\Hyper\AdsBundle\Payment\Electrum\Gateway\PurchaseRequest', $parameters);
+$this->httpRequest->setFormat('json', 'application/json');
+        return $this->createRequest('\Hyper\AdsBundle\Payment\Electrum\Gateway\Message\PurchaseRequest', $parameters);
     }
 }
