@@ -146,7 +146,7 @@ class Order implements OrderInterface
 
     public function setAmount($amount)
     {
-        $this->amount = round($amount, 2);
+        $this->amount = round($amount, 5);
     }
 
     public function setPaymentTo(\DateTime $to)

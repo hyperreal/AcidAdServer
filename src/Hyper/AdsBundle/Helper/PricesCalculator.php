@@ -11,7 +11,7 @@ use Hyper\AdsBundle\Exception\InvalidArgumentException;
 
 class PricesCalculator
 {
-    const ROUND_PRECISION = 2;
+    const ROUND_PRECISION = 5;
 
     private $entityManager;
     private $factor;
@@ -81,7 +81,7 @@ class PricesCalculator
             $price = $price + ($price * ($this->factor / 100));
         }
 
-        return round($price, 2);
+        return round($price, self::ROUND_PRECISION);
     }
 
     /**

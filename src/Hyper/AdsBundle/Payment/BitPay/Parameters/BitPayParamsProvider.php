@@ -42,7 +42,7 @@ class BitPayParamsProvider implements ParamsProviderInterface
     public function getParametersFromOrder(OrderInterface $order)
     {
         $params = array(
-            'amount' => round($order->getPaymentInstruction()->getAmount(), 2),
+            'amount' => round($order->getPaymentInstruction()->getAmount(), 5),
             'currency' => $order->getPaymentInstruction()->getCurrency(),
             'returnUrl' => $this->router->generate(
                 'payment_successful',
